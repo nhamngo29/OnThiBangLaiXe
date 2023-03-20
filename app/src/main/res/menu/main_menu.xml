@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="Trang chủ"
+            android:icon="@drawable/ic_nav_home"
+            android:id="@+id/item_Home"/>
+        <item
+            android:title="Ôn thi lý thuyết"
+            android:icon="@drawable/ic_nav_onthi"
+            android:id="@+id/item_OnThiLyThuyet"/>
+
+    </group>
+    <item android:title="Ứng dụng">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:title="Hộ trợ"
+                    android:icon="@drawable/ic_nav_hotro"
+                    android:id="@+id/item_HoTro"/>
+                <item
+                    android:title="Thông tin về ứng dụng"
+                    android:icon="@drawable/ic_nav_thongtin"
+                    android:id="@+id/item_ThongTin"/>
+            </group>
+        </menu>
+    </item>
+</menu>
