@@ -9,7 +9,6 @@
     tools:context=".MainActivity"
     tools:ignore="SpeakableTextPresentCheck"
     tools:openDrawer="start">
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_Main"
         android:layout_width="wrap_content"
@@ -20,13 +19,14 @@
         app:itemTextColor="#2E7D32"
         app:menu="@menu/main_menu"/>
     <ScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="0dp"
@@ -39,6 +39,545 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:navigationIcon="@drawable/ic_menu"
                 app:title="ÔN THI GPLX HẠNG A1" />
+
+            <LinearLayout
+                android:id="@+id/ln_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/border_layout"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button"
+                            android:padding="10dp"
+                            android:src="@drawable/ico" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="thi thử"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="18 đề"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button_green"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_fav" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Lưu"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="1 câu"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button_red"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_close" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Câu sai"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="21 câu"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button_yellow"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_wrongs" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Câu hay sai"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="50 câu"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:weightSum="4"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_sahinh" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Sa hình"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button_green"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_tips" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="mẹo"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button_red"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_traffic_signs" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="biển báo"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/custom_button_fb"
+                            android:padding="10dp"
+                            android:src="@drawable/ico_fb" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="hỏi đáp"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_tienDoOnTap"
+                android:padding="10dp"
+                android:background="@drawable/border_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintTop_toBottomOf="@+id/ln_header">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" Tiến độ ôn tập"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+                   <ProgressBar
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                       android:background="@drawable/border_layout"
+                       />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"></LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+                    <TextView
+                        android:textAlignment="center"
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chỉ số
+                        an toàn"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:textColor="@color/red"
+                        android:textAlignment="center"
+                        android:id="@+id/txtSafety"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="45%"
+                        android:textStyle="bold"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:padding="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout_tienDoOnTap"
+                android:id="@+id/txtTitleTopic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ôn tập theo chủ đề"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints" />
+            <LinearLayout
+
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleTopic">
+                <LinearLayout
+                    android:id="@+id/layout_CauHoiDiemLiet"
+                    android:padding="10dp"
+                    android:background="@drawable/border_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:src="@drawable/ico_fire"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/txtTitleCauHoiDiemLiet"
+                            android:layout_width="308dp"
+                            android:layout_height="match_parent"
+                            android:text="Câu hỏi điểm liệt"
+                            android:gravity="center_vertical"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <ProgressBar
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                        android:background="@drawable/border_layout"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+                    android:padding="10dp"
+                    android:background="@drawable/border_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_CauHoiDiemLiet">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ico_trafficligh" />
+
+                        <TextView
+                            android:id="@+id/txtTitleKhaiNiemVaQuyTat"
+                            android:layout_width="308dp"
+                            android:layout_height="match_parent"
+                            android:text="Khái niệm và quy tắt"
+                            android:gravity="center_vertical"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <ProgressBar
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                        android:background="@drawable/border_layout"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+                    android:padding="10dp"
+                    android:background="@drawable/border_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_CauHoiDiemLiet">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ico_truck" />
+
+                        <TextView
+                            android:layout_width="308dp"
+                            android:layout_height="match_parent"
+                            android:text="Nghiệp vụ vận tải"
+                            android:gravity="center_vertical"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <ProgressBar
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                        android:background="@drawable/border_layout"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+                    android:padding="10dp"
+                    android:background="@drawable/border_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_CauHoiDiemLiet">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ico_account" />
+
+                        <TextView
+                            android:layout_width="308dp"
+                            android:layout_height="match_parent"
+                            android:text="Văn hóa và đạo đức"
+                            android:gravity="center_vertical"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <ProgressBar
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                        android:background="@drawable/border_layout"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+                    android:padding="10dp"
+                    android:background="@drawable/border_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_CauHoiDiemLiet">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ico_car" />
+
+                        <TextView
+
+                            android:layout_width="308dp"
+                            android:layout_height="match_parent"
+                            android:text="Kỹ thuật lái xe"
+                            android:gravity="center_vertical"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <ProgressBar
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                        android:background="@drawable/border_layout"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>

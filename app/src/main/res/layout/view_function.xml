@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/iewFunction"
+    android:layout_gravity="center"
+    android:background="@drawable/custom_button"
+    android:backgroundTint="@color/white"
+    >
+    <ImageView
+        android:layout_gravity="center"
+        android:src="@drawable/ico_exam"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imgFunction"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="6sp"
+        android:textAlignment="center"
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+    <TextView
+        android:textAlignment="center"
+        android:textSize="5sp"
+        android:id="@+id/txtTatol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+
+</LinearLayout>
