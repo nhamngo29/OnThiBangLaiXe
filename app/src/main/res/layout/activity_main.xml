@@ -432,7 +432,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="10dp"
-                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+
                     android:padding="10dp"
                     android:background="@drawable/border_layout"
                     android:layout_width="match_parent"
@@ -469,7 +469,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="10dp"
-                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+
                     android:padding="10dp"
                     android:background="@drawable/border_layout"
                     android:layout_width="match_parent"
@@ -505,7 +505,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="10dp"
-                    android:id="@+id/layout_KhaiNiemVaQuyTat"
+
                     android:padding="10dp"
                     android:background="@drawable/border_layout"
                     android:layout_width="match_parent"
