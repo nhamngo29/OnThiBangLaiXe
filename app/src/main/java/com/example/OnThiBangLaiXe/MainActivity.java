@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,14 +17,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.function.Function;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView nav_view;
+    LinearLayout lo_BienBao;
+    LinearLayout lo_fb;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     GridView gvFuntion;
@@ -42,6 +47,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         nav_view.setCheckedItem(R.id.item_Home);
         Menu menu = nav_view.getMenu();
+        event();
+    }
+    private void event()
+    {
+        lo_BienBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent init=new Intent(MainActivity.this,BienBaoActivity.class);
+                startActivity(init);
+
+            }
+        });
+        lo_fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.facebook.com/nhamngoo.29/"));
+                startActivity(intent);
+            }
+        });
     }
     private void init()
     {
@@ -49,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_view=(NavigationView) findViewById(R.id.nav_Main);
         toolbar =(Toolbar) findViewById(R.id.toolbar);
         arrayList=new ArrayList<>();
-
-
+        lo_BienBao=(LinearLayout) findViewById(R.id.lo_BienBao);
+        lo_fb=(LinearLayout) findViewById(R.id.lo_fb);
 
     }
     @Override

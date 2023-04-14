@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    style="@style/TEXT"
+    tools:context=".DetailsBienBaoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="36dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ico_back" />
+
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Biển báo"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:padding="15dp"
+        android:id="@+id/imgDetailsBienBao"
+        android:layout_width="match_parent"
+        android:layout_height="405dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:srcCompat="@drawable/p101" />
+
+    <TextView
+        android:paddingTop="20dp"
+        android:id="@+id/txtTitleIDlBB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="P.101"
+        android:textColor="#078CF6"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/txtTitleDetailBB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitleIDlBB"
+        android:text="Đường cấm"
+        android:textColor="@color/TEXT"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtContentDetailBB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitleDetailBB"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:text="a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định\nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"
+        android:textColor="@color/TEXT"
+        android:textSize="18sp" />
+</LinearLayout>

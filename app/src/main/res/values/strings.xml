@@ -2,4 +2,8 @@
     <string name="app_name">Ôn Thi Bằng Lái Xe</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="bb_cam_fragment">BIỂN BÁO CẤM</string>
+    <string name="bb_nguy_hiem_fragment">BIỂN BÁO NGUY HIỂM</string>
+    <string name="bb_hieu_lenh_fragment">BIỂN BÁO HIỆU LỆNH</string>
 </resources>

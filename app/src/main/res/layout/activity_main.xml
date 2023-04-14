@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
+
     tools:ignore="SpeakableTextPresentCheck"
     tools:openDrawer="start">
     <com.google.android.material.navigation.NavigationView
@@ -24,14 +25,14 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/SCREEN"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:layout_height="match_parent">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#E1F5FE"
+                style="@style/Toolbar"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -255,6 +256,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lo_BienBao"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -282,6 +284,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/lo_fb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -312,6 +315,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:id="@+id/layout_tienDoOnTap"
                 android:padding="10dp"
                 android:background="@drawable/border_layout"
