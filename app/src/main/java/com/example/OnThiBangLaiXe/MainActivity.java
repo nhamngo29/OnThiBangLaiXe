@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void init()
     {
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawerlayout);
-        nav_view=(NavigationView) findViewById(R.id.nav_Main);
-        toolbar =(Toolbar) findViewById(R.id.toolbar);
-        arrayList=new ArrayList<>();
+        drawerLayout = findViewById(R.id.drawerlayout);
+        nav_view = findViewById(R.id.nav_Main);
+        toolbar = findViewById(R.id.toolbar);
+        arrayList = new ArrayList<>();
 
 
 
