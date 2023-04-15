@@ -43,9 +43,9 @@ public class BBCamFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         listView=view.findViewById(R.id.lvBB);
         arrayList=new ArrayList<>();
-        arrayList.add(new BienBao(R.drawable.signp101,"P.101","Đường cấm","a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định \nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"));
-        arrayList.add(new BienBao(R.drawable.signp102,"P.102","Cấm đi ngược chiều","a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định \nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"));
-        arrayList.add(new BienBao(R.drawable.signp103a,"P.102","Cấm xe ô tô","a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định \nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"));
+        arrayList.add(new BienBao(R.drawable.signp101,"P.101","Đường cấm","a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định \n\nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"));
+        arrayList.add(new BienBao(R.drawable.signp102,"P.102","Cấm đi ngược chiều","a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định \n\nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"));
+        arrayList.add(new BienBao(R.drawable.signp103a,"P.102","Cấm xe ô tô","a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định \n\nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"));
         // Inflate the layout for this fragment
         adapter=new BienBaoAdapter(getActivity(),R.layout.layout_bien_bao,arrayList);
         listView.setAdapter(adapter);

@@ -1,58 +1,70 @@
 package com.example.OnThiBangLaiXe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class BBHieuLenhFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import com.example.OnThiBangLaiXe.Adapter.BienBaoAdapter;
+import com.example.OnThiBangLaiXe.Model.BienBao;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+public class BBHieuLenhFragment extends Fragment {
+
+
+    ListView listView;
+    ArrayList<BienBao> arrayList;
+    BienBaoAdapter adapter;
 
     public BBHieuLenhFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BBCamFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static BBHieuLenhFragment newInstance(String param1, String param2) {
-        BBHieuLenhFragment fragment = new BBHieuLenhFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_b_b_hieu_lenh, container, false);
+        View view=inflater.inflate(R.layout.fragment_b_b_hieu_lenh,container,false);
+
+        return view;
+
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        listView=view.findViewById(R.id.lvBB);
+        arrayList=new ArrayList<>();
+
+
+
+        arrayList.add(new BienBao(R.drawable.signr122,"R.122","Dường lại","Dừng lại|Biển báo hiệu buộc các xe cơ giới và thô sơ kể cả xe được ưu tiên theo quy định phải dừng lại. Chỉ được phép đi nếu có người điều khiển giao thông hoặc đèn cờ cho phép đi. Nếu không thì chỉ được phép đi khi trên đường không còn nguy cơ gây mất an toàn giao thông."));
+        arrayList.add(new BienBao(R.drawable.signr301a,"R.301a","Các xe chỉ được đi thẳng","Được đặt trước ngã ba, ngã tư. Các xe chỉ được đi thẳng ở khu vực ngã ba, ngã tư."));
+        arrayList.add(new BienBao(R.drawable.signr301b,"R.301b","Các xe chỉ được rẽ phải","Được đặt sau ngã ba, ngã tư. Các xe chỉ được rẽ phải ở khu vực trước mặt biển."));
+        // Inflate the layout for this fragment
+        adapter=new BienBaoAdapter(getActivity(),R.layout.layout_bien_bao,arrayList);
+        listView.setAdapter(adapter);
+        event();
+    }
+    void event()
+    {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(getActivity(),DetailsBienBaoActivity.class);
+                BienBao bb=arrayList.get(i);
+                intent.putExtra("bienbao", bb);
+                startActivity(intent);
+            }
+        });
     }
 
 }

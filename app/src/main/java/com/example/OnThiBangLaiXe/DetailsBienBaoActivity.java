@@ -1,9 +1,11 @@
 package com.example.OnThiBangLaiXe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,5 +32,12 @@ public class DetailsBienBaoActivity extends AppCompatActivity {
         txtTitleDetailBB=(TextView) findViewById(R.id.txtTitleDetailBB);
         txtIDlBB=(TextView) findViewById(R.id.txtTitleIDlBB);
         txtContentDetailBB=(TextView) findViewById(R.id.txtContentDetailBB);
+        Toolbar toolbarBienBao = (Toolbar) findViewById(R.id.toolbarBienBao);
+        toolbarBienBao.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }

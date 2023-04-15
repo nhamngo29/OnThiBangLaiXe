@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ÔnThiBằngLáiXe"
         tools:targetApi="31">
         <activity
+            android:name=".MeoActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailsBienBaoActivity"
             android:exported="false" />
         <activity

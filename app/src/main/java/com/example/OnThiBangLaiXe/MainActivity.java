@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView nav_view;
     LinearLayout lo_BienBao;
     LinearLayout lo_fb;
+    LinearLayout lo_sahinh;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     GridView gvFuntion;
@@ -68,6 +69,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
+        lo_sahinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://hoclaixe12h.com/meo-thi-sa-hinh-bang-lai-xe-may-a1/"));
+                startActivity(intent);
+            }
+        });
     }
     private void init()
     {
@@ -77,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         arrayList=new ArrayList<>();
         lo_BienBao=(LinearLayout) findViewById(R.id.lo_BienBao);
         lo_fb=(LinearLayout) findViewById(R.id.lo_fb);
-
+        lo_sahinh=(LinearLayout) findViewById(R.id.lo_sahinh);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
