@@ -27,9 +27,8 @@ import java.util.function.Function;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView nav_view;
-    LinearLayout lo_BienBao;
-    LinearLayout lo_fb;
-    LinearLayout lo_sahinh;
+    LinearLayout lo_BienBao,lo_fb,lo_sahinh,lo_meo;
+
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     GridView gvFuntion;
@@ -72,10 +71,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lo_sahinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://hoclaixe12h.com/meo-thi-sa-hinh-bang-lai-xe-may-a1/"));
-                startActivity(intent);
+//                Intent intent=new Intent();
+//                intent.setAction(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse("https://hoclaixe12h.com/meo-thi-sa-hinh-bang-lai-xe-may-a1/"));
+//                startActivity(intent);
+                Intent init=new Intent(MainActivity.this,SaHinhActivity.class);
+                startActivity(init);
+            }
+        });
+        lo_meo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent init=new Intent(MainActivity.this,MeoActivity.class);
+                startActivity(init);
             }
         });
     }
@@ -88,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         lo_BienBao=(LinearLayout) findViewById(R.id.lo_BienBao);
         lo_fb=(LinearLayout) findViewById(R.id.lo_fb);
         lo_sahinh=(LinearLayout) findViewById(R.id.lo_sahinh);
+        lo_meo=(LinearLayout) findViewById(R.id.lo_meo);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

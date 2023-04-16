@@ -26,7 +26,7 @@
             <TextView
                 android:textSize="19sp"
                 android:textStyle="bold"
-                android:text="Mẹo lý thuyết"
+                android:text="Sa hình"
                 android:textColor="@color/TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <WebView
-        android:id="@+id/wbMeo"
+        android:id="@+id/wbSaHinh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias="1.0" />
