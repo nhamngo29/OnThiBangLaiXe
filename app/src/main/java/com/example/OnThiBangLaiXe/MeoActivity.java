@@ -1,12 +1,11 @@
 package com.example.OnThiBangLaiXe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MeoActivity extends AppCompatActivity {
@@ -24,12 +23,7 @@ public class MeoActivity extends AppCompatActivity {
         wb.loadUrl("file:///android_asset/html/tips600.html");
         wb.setWebViewClient(new WebViewClient());
         toolbarBack=(Toolbar) findViewById(R.id.toolbarBack);
-        toolbarBack.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
 
     }
 }

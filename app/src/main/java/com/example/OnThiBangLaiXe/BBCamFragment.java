@@ -1,24 +1,19 @@
 package com.example.OnThiBangLaiXe;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import com.example.OnThiBangLaiXe.Adapter.BienBaoAdapter;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BBCamFragment extends Fragment {
@@ -33,9 +28,7 @@ public class BBCamFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_b_b_cam,container,false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_b_b_cam,container,false);
     }
 
     @Override
@@ -53,14 +46,11 @@ public class BBCamFragment extends Fragment {
     }
     void event()
     {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent(getActivity(),DetailsBienBaoActivity.class);
-                BienBao bb=arrayList.get(i);
-                intent.putExtra("bienbao", bb);
-                startActivity(intent);
-            }
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent=new Intent(getActivity(),DetailsBienBaoActivity.class);
+            BienBao bb=arrayList.get(i);
+            intent.putExtra("bienbao", bb);
+            startActivity(intent);
         });
     }
 }

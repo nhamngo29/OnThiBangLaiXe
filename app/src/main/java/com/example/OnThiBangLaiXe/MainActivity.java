@@ -1,29 +1,23 @@
 package com.example.OnThiBangLaiXe;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView nav_view;
@@ -37,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//      getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         init();
         setSupportActionBar(toolbar);
@@ -51,52 +45,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void event()
     {
-        lo_BienBao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent init=new Intent(MainActivity.this,BienBaoActivity.class);
-                startActivity(init);
+        lo_BienBao.setOnClickListener(view -> {
+            Intent init=new Intent(MainActivity.this,BienBaoActivity.class);
+            startActivity(init);
 
-            }
         });
-        lo_fb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.facebook.com/nhamngoo.29/"));
-                startActivity(intent);
-            }
+        lo_fb.setOnClickListener(view -> {
+            Intent intent=new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://www.facebook.com/nhamngoo.29/"));
+            startActivity(intent);
         });
-        lo_sahinh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        lo_sahinh.setOnClickListener(view -> {
 //                Intent intent=new Intent();
 //                intent.setAction(Intent.ACTION_VIEW);
 //                intent.setData(Uri.parse("https://hoclaixe12h.com/meo-thi-sa-hinh-bang-lai-xe-may-a1/"));
 //                startActivity(intent);
-                Intent init=new Intent(MainActivity.this,SaHinhActivity.class);
-                startActivity(init);
-            }
+            Intent init=new Intent(MainActivity.this,SaHinhActivity.class);
+            startActivity(init);
         });
-        lo_meo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent init=new Intent(MainActivity.this,MeoActivity.class);
-                startActivity(init);
-            }
+        lo_meo.setOnClickListener(view -> {
+            Intent init=new Intent(MainActivity.this,MeoActivity.class);
+            startActivity(init);
         });
     }
     private void init()
     {
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawerlayout);
-        nav_view=(NavigationView) findViewById(R.id.nav_Main);
-        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawerlayout);
+        nav_view = findViewById(R.id.nav_Main);
+        toolbar = findViewById(R.id.toolbar);
         arrayList=new ArrayList<>();
-        lo_BienBao=(LinearLayout) findViewById(R.id.lo_BienBao);
-        lo_fb=(LinearLayout) findViewById(R.id.lo_fb);
-        lo_sahinh=(LinearLayout) findViewById(R.id.lo_sahinh);
-        lo_meo=(LinearLayout) findViewById(R.id.lo_meo);
+        lo_BienBao= findViewById(R.id.lo_BienBao);
+        lo_fb= findViewById(R.id.lo_fb);
+        lo_sahinh= findViewById(R.id.lo_sahinh);
+        lo_meo= findViewById(R.id.lo_meo);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

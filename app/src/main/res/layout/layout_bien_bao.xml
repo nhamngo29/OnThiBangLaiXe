@@ -2,30 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:paddingVertical="15dp"
+    android:layout_marginHorizontal="10dp"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgBB"
-        android:layout_width="186dp"
-        android:layout_height="151dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="0dp"
-        app:srcCompat="@drawable/p101" />
+        android:layout_marginEnd="15dp"
+        app:srcCompat="@drawable/p101"
+        android:background="@android:color/transparent"/>
 
     <TextView
         android:id="@+id/txtIDBB"
-        android:layout_width="96dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="135dp"
         android:layout_toEndOf="@+id/imgBB"
+        android:layout_marginTop="10dp"
         android:text="P.101"
         android:textColor="#078CF6"
         android:textSize="17sp"
@@ -37,9 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtIDBB"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="102dp"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/imgBB"
         android:text="Đường cấm"
         style="@style/TEXT"
@@ -53,9 +49,7 @@
         android:layout_height="35dp"
         android:layout_below="@+id/txtTitleBB"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="7dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="0dp"
         android:layout_toEndOf="@+id/imgBB"
         android:text="a) Cấm các loại phương tiện đi lại cả hai hướng, Trừ các xe đi dafdskf" />
 </RelativeLayout>

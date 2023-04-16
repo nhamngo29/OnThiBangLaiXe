@@ -11,14 +11,14 @@ import android.widget.TextView;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BienBaoAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private ArrayList<BienBao> lBienBao;
+    private List<BienBao> lBienBao;
 
-    public BienBaoAdapter(Context context, int layout, ArrayList<BienBao> lBienBao) {
+    public BienBaoAdapter(Context context, int layout, List<BienBao> lBienBao) {
         this.context = context;
         this.layout = layout;
         this.lBienBao = lBienBao;
@@ -42,7 +42,7 @@ public class BienBaoAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view=inflater.inflate(layout,null);
+        view = inflater.inflate(layout,null);
         BienBao bb=lBienBao.get(i);
         ImageView imgBB=view.findViewById(R.id.imgBB);
         TextView txtID=view.findViewById(R.id.txtIDBB);

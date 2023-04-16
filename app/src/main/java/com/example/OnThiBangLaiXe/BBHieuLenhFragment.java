@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.example.OnThiBangLaiXe.Adapter.BienBaoAdapter;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class BBHieuLenhFragment extends Fragment {
@@ -33,9 +31,7 @@ public class BBHieuLenhFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_b_b_hieu_lenh,container,false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_b_b_hieu_lenh,container,false);
 
     }
     @Override
@@ -56,14 +52,11 @@ public class BBHieuLenhFragment extends Fragment {
     }
     void event()
     {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent(getActivity(),DetailsBienBaoActivity.class);
-                BienBao bb=arrayList.get(i);
-                intent.putExtra("bienbao", bb);
-                startActivity(intent);
-            }
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(getActivity(),DetailsBienBaoActivity.class);
+            BienBao bb = arrayList.get(i);
+            intent.putExtra("bienbao", bb);
+            startActivity(intent);
         });
     }
 

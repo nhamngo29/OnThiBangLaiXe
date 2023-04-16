@@ -1,13 +1,12 @@
 package com.example.OnThiBangLaiXe;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.OnThiBangLaiXe.Model.BienBao;
 
@@ -28,16 +27,11 @@ public class DetailsBienBaoActivity extends AppCompatActivity {
     }
     void addControl()
     {
-        imgDetailBB=(ImageView) findViewById(R.id.imgDetailsBienBao);
-        txtTitleDetailBB=(TextView) findViewById(R.id.txtTitleDetailBB);
-        txtIDlBB=(TextView) findViewById(R.id.txtTitleIDlBB);
-        txtContentDetailBB=(TextView) findViewById(R.id.txtContentDetailBB);
-        Toolbar toolbarBienBao = (Toolbar) findViewById(R.id.toolbarBienBao);
-        toolbarBienBao.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        imgDetailBB = findViewById(R.id.imgDetailsBienBao);
+        txtTitleDetailBB = findViewById(R.id.txtTitleDetailBB);
+        txtIDlBB = findViewById(R.id.txtTitleIDlBB);
+        txtContentDetailBB = findViewById(R.id.txtContentDetailBB);
+        Toolbar toolbarBienBao = findViewById(R.id.toolbarBienBao);
+        toolbarBienBao.setNavigationOnClickListener(view -> onBackPressed());
     }
 }

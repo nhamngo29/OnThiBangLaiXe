@@ -1,14 +1,12 @@
 package com.example.OnThiBangLaiXe;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SaHinhActivity extends AppCompatActivity {
 
@@ -26,12 +24,7 @@ public class SaHinhActivity extends AppCompatActivity {
         myWebSettings.setDomStorageEnabled(true);
         wb.loadUrl("file:///android_asset/html/practice_exam.html");
         wb.setWebViewClient(new WebViewClient());
-        toolbarBack=(Toolbar) findViewById(R.id.toolbarBack);
-        toolbarBack.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        toolbarBack = findViewById(R.id.toolbarBack);
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
     }
 }

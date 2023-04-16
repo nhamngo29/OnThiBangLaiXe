@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
-
     tools:ignore="SpeakableTextPresentCheck"
     tools:openDrawer="start">
     <com.google.android.material.navigation.NavigationView
@@ -46,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:padding="10dp"
                 android:background="@drawable/border_layout"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -55,11 +55,9 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="4"
-                    android:paddingTop="10dp">
+                    android:weightSum="4">
 
                     <LinearLayout
-
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -79,7 +77,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="thi thử"
+                            android:text="Thi thử"
                             android:textAllCaps="true"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -181,7 +179,7 @@
                             android:layout_gravity="center"
                             android:text="Câu hay sai"
                             android:textAllCaps="true"
-                            android:textSize="16sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -189,7 +187,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="50 câu"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -371,8 +369,7 @@
                         android:id="@+id/textView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Chỉ số
-                        an toàn"
+                        android:text="Chỉ số an toàn"
                         android:textSize="15sp" />
                     <TextView
                         android:textColor="@color/red"
