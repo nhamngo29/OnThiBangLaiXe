@@ -41,17 +41,37 @@ public class BienBaoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(layout,null);
+        ViewHolder viewHolder;
+
+        if(view==null)
+        {
+
+            LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(layout,null);
+            viewHolder=new ViewHolder();
+
+            viewHolder.imgBB=view.findViewById(R.id.imgBB);
+            viewHolder.txtID=view.findViewById(R.id.txtIDBB);
+            viewHolder.txtTitleBB=view.findViewById(R.id.txtTitleBB);
+            viewHolder.txtContentBB=view.findViewById(R.id.txtContentBB);
+            view.setTag(viewHolder);
+        }
+        else {
+            viewHolder= (ViewHolder) view.getTag();
+
+        }
         BienBao bb=lBienBao.get(i);
-        ImageView imgBB=view.findViewById(R.id.imgBB);
-        TextView txtID=view.findViewById(R.id.txtIDBB);
-        TextView txtTitleBB=view.findViewById(R.id.txtTitleBB);
-        TextView txtContentBB=view.findViewById(R.id.txtContentBB);
-        imgBB.setImageResource(bb.getImg());
-        txtID.setText(bb.getiD());
-        txtTitleBB.setText(bb.getTitle());
-        txtContentBB.setText(bb.getContent());
+        viewHolder.imgBB.setImageResource(bb.getImg());
+        viewHolder.txtID.setText(bb.getiD());
+        viewHolder.txtTitleBB.setText(bb.getTitle());
+        viewHolder.txtContentBB.setText(bb.getContent());
         return view;
+    }
+    private class ViewHolder
+    {
+        ImageView imgBB;
+        TextView txtID;
+        TextView txtTitleBB;
+        TextView txtContentBB;
     }
 }

@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
                     TheLoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(TheLoaiCauHoi.class);
-
                     if (tlch != null)
                     {
                         boolean existed = false;
