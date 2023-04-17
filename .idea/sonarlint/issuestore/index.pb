@@ -1,8 +1,4 @@
 
-Å
-Q.idea/sonarlint/securityhotspotstore/b/2/b27892a5f2665ac8b7b54db4683d171602fd8699,3\d\3dd17c9f40dfeb04f3fc9f1d08f0f6b7820a2f34
-Å
-Q.idea/sonarlint/securityhotspotstore/2/9/29c6c53859e5bd7f23494ddb57a8fd7325a3f7f1,4\2\42ec36738a9bc941ebb7851ab9655ffdbbb2946c
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 Å
@@ -15,8 +11,6 @@ Q.idea/sonarlint/securityhotspotstore/0/0/0055eae5223e640d90bdb8522654cf39b4846e
 Q.idea/sonarlint/securityhotspotstore/2/d/2df849582199ed189ce53b0b6ae61c86ecda0e93,6\b\6b4913ac52c315f3ac07c55d8729de04da3987c5
 H
 app/google-services.json,f\d\fd8d34b142d02ec743a8efefefd2c097961666e9
-w
-G.idea/sonarlint/issuestore/8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e,3\2\32813322c99a6c8a141ab2dc12bc10af3425f1b4
 Å
 Q.idea/sonarlint/securityhotspotstore/8/8/88a9255124c95bdc913197c120a8d560edc59c8e,9\0\909762385fc6eb20f922a91c6865741308b57f2c
 Å
@@ -31,17 +25,13 @@ w
 G.idea/sonarlint/issuestore/8/8/88a9255124c95bdc913197c120a8d560edc59c8e,a\e\ae9ddf453f55affea2d6b9e3973cac1eb2efb4e1
 Å
 Q.idea/sonarlint/securityhotspotstore/6/7/677fb92e1aac78acb2bb11fd9e36f1bcb5155dd0,8\6\86e587236f2ad3abc12edaf6d07d82c4752f375d
-Å
-Q.idea/sonarlint/securityhotspotstore/f/3/f3000ccb66568456fc396d5635305444cffb3e4d,6\8\685b2111554198f274ce45d773a8a405c60a054a
-Å
-Q.idea/sonarlint/securityhotspotstore/8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e,1\f\1fe398aa86b382486ed27d0a69bf92f68bd5edaa
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 w
 G.idea/sonarlint/issuestore/b/4/b4a0b63ce8560bbc5de0f9995c20cc861dc2adb3,b\0\b04578cffb47b1e57970601a0cacef6081245859
-Å
-Q.idea/sonarlint/securityhotspotstore/7/6/761e26557a57150080385c019c4512d4b37d9ba1,d\1\d147a8fbfab678560098cb50c97245aa9daec1c7
-Å
-Q.idea/sonarlint/securityhotspotstore/3/e/3ef875ccd6713512e2ceccfcaae2e042f2288e1e,8\d\8dcb12f692c5ae2b0b50688d561fe3adda078a4a
 w
 G.idea/sonarlint/issuestore/1/0/10a03f31c4dce92cb371e761ce9429428bb6c176,0\3\030ed2ccb712537825891dfda283154162e458a8
+k
+;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d
+r
+Bapp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiCauHoi.java,d\1\d1cd715bfd10baae99ef00c00d23eed7ccb7bc5f

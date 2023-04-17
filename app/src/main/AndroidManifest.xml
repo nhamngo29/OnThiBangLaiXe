@@ -16,10 +16,7 @@
         android:theme="@style/Theme.ÔnThiBằngLáiXe"
         tools:targetApi="31">
         <activity
-            android:name=".SaHinhActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MeoActivity"
+            android:name=".WebActivity"
             android:exported="false" />
         <activity
             android:name=".ChiTietBienBaoActivity"

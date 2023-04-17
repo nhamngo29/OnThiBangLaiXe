@@ -124,9 +124,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void event()
     {
         loBienBao.setOnClickListener(view -> {
-            Intent init=new Intent(MainActivity.this,BienBaoActivity.class);
+            Intent init = new Intent(this, BienBaoActivity.class);
             startActivity(init);
-
         });
         loFb.setOnClickListener(view -> {
             Intent intent=new Intent();
@@ -135,11 +134,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         });
         loSaHinh.setOnClickListener(view -> {
-            Intent init=new Intent(MainActivity.this,SaHinhActivity.class);
+            Intent init = new Intent(this, WebActivity.class);
+            init.putExtra("URL", "file:///android_asset/html/practice_exam.html");
             startActivity(init);
         });
         loMeo.setOnClickListener(view -> {
-            Intent init=new Intent(MainActivity.this,MeoActivity.class);
+            Intent init=new Intent(this, WebActivity.class);
+            init.putExtra("URL", "file:///android_asset/html/tips600.html");
             startActivity(init);
         });
     }
