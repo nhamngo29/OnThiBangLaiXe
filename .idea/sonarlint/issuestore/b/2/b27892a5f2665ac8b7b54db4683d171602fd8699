@@ -1,10 +1,0 @@
-
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(í•Ä
-t
-java:S1450"YRemove the "mTabLayout" field and declare it as a local variable in the relevant methods.(Ú‰ÜÇûÿÿÿÿ
-t
-java:S1450"YRemove the "mViewPager" field and declare it as a local variable in the relevant methods.(Õîµıúÿÿÿÿ
-s
-java:S1450"]Remove the "toolbarBienBao" field and declare it as a local variable in the relevant methods.(èÃ©œ
-\
-java:S1874"ARemove this use of "FragmentStatePagerAdapter"; it is deprecated.(ÈË¼ÿÿÿÿÿ

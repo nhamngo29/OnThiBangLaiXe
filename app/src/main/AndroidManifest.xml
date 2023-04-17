@@ -22,7 +22,7 @@
             android:name=".MeoActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailsBienBaoActivity"
+            android:name=".ChiTietBienBaoActivity"
             android:exported="false" />
         <activity
             android:name=".BienBaoActivity"

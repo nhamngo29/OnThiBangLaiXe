@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
-import com.example.OnThiBangLaiXe.Model.TheLoaiCauHoi;
+import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,14 +56,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         event();
 
         // Setup RecycleView
-        List<TheLoaiCauHoi> dsTheLoaiCauHoi = new ArrayList<>();
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(4,"ico_account", "Văn hóa và đạo đức"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
+        List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
+        dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(4,"ico_account", "Văn hóa và đạo đức"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
 
-        TheLoaiCauHoiAdapter tlchAdapter = new TheLoaiCauHoiAdapter(dsTheLoaiCauHoi, this);
+        TheLoaiCauHoiAdapter tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this);
 
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
@@ -90,13 +89,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
-                    TheLoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(TheLoaiCauHoi.class);
+                    LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
 
                     if (tlch != null)
                     {
                         boolean existed = false;
 
-                        for (TheLoaiCauHoi check : dsTheLoaiCauHoi)
+                        for (LoaiCauHoi check : dsLoaiCauHoi)
                         {
                             if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
                             {
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (!existed)
                         {
-                            dsTheLoaiCauHoi.add(tlch);
+                            dsLoaiCauHoi.add(tlch);
                             tlchAdapter.notifyDataSetChanged();
                         }
                     }

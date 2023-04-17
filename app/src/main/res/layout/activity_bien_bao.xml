@@ -7,33 +7,28 @@
     android:orientation="vertical"
     tools:context=".BienBaoActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarBienBao"
+        style="@style/Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarBienBao"
-            style="@style/Toolbar"
-            android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ico_backkk">
+        <TextView
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:text="Biển báo giao thông"
+            android:textColor="@color/TEXT"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ico_backkk">
-            <TextView
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:text="Biển báo giao thông"
-                android:textColor="@color/TEXT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </androidx.appcompat.widget.Toolbar>
+            android:layout_gravity="center" />
+    </androidx.appcompat.widget.Toolbar>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.tabs.TabLayout
         app:tabMode="scrollable"
         android:id="@+id/tab_layout"
@@ -42,8 +37,9 @@
         app:tabSelectedTextColor="@color/TEXT"
         app:tabIndicatorColor="#0268BA"
         android:layout_height="wrap_content"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
