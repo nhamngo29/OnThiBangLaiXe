@@ -2,10 +2,12 @@ package com.example.OnThiBangLaiXe.Model;
 
 public class TheLoaiCauHoi {
     private String hinh;
-    private String ten;
-    private int soCauHoi;
-    private int soCauHoiDaTraLoi;
-    private int soCauDung;
+    private int MaLoaiCH;
+    private String TenLoaiCauHoi;
+    private int SoCau;
+
+    private int SoCauHoiDaTraLoi;
+    private int SoCauDung;
 
     public String getHinh() {
         return hinh;
@@ -15,40 +17,55 @@ public class TheLoaiCauHoi {
         this.hinh = hinh;
     }
 
-    public String getTen() {
-        return ten;
+    public int getMaLoaiCH() {
+        return MaLoaiCH;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setMaLoaiCH(int maLoaiCH) {
+        MaLoaiCH = maLoaiCH;
     }
 
-    public int getSoCauHoi() {
-        return soCauHoi;
+    public String getTenLoaiCauHoi() {
+        return TenLoaiCauHoi;
     }
 
-    public void setSoCauHoi(int soCauHoi) {
-        this.soCauHoi = soCauHoi;
+    public void setTenLoaiCauHoi(String tenLoaiCauHoi) {
+        this.TenLoaiCauHoi = tenLoaiCauHoi;
+    }
+
+    public int getSoCau() {
+        return SoCau;
+    }
+
+    public void setSoCau(int soCau) {
+        this.SoCau = soCau;
     }
 
     public int getSoCauHoiDaTraLoi() {
-        return soCauHoiDaTraLoi;
+        return SoCauHoiDaTraLoi;
     }
 
     public void setSoCauHoiDaTraLoi(int soCauHoiDaTraLoi) {
-        this.soCauHoiDaTraLoi = soCauHoiDaTraLoi;
+        this.SoCauHoiDaTraLoi = soCauHoiDaTraLoi;
     }
 
     public int getSoCauDung() {
-        return soCauDung;
+        return SoCauDung;
     }
 
     public void setSoCauDung(int soCauDung) {
-        this.soCauDung = soCauDung;
+        this.SoCauDung = soCauDung;
     }
 
-    public TheLoaiCauHoi(String hinh, String ten) {
+    public TheLoaiCauHoi() {
+    }
+
+    public TheLoaiCauHoi(int maLoaiCH, String hinh, String TenLoaiCauHoi) {
+        this.MaLoaiCH = maLoaiCH;
         this.hinh = hinh;
-        this.ten = ten;
+        this.TenLoaiCauHoi = TenLoaiCauHoi;
+        this.SoCau = 100;
+        this.SoCauHoiDaTraLoi = 80;
+        this.SoCauDung = 45;
     }
 }

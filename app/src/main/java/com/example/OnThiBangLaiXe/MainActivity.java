@@ -3,6 +3,7 @@ package com.example.OnThiBangLaiXe;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
@@ -20,6 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.TheLoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
+    DatabaseReference csdlVersion = database.getReference("Version");
+    DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +56,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView.setCheckedItem(R.id.item_Home);
         event();
 
+        // Setup RecycleView
         List<TheLoaiCauHoi> dsTheLoaiCauHoi = new ArrayList<>();
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi("ico_fire", "Câu hỏi điểm liệt"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi("ico_car", "Kỹ thuật lái xe"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi("ico_trafficligh", "Khái niệm và quy tăc"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi("ico_account", "Văn hóa và đạo đức"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi("ico_truck", "Nghiệp vụ vận tải"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(4,"ico_account", "Văn hóa và đạo đức"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
+
+        TheLoaiCauHoiAdapter tlchAdapter = new TheLoaiCauHoiAdapter(dsTheLoaiCauHoi, this);
 
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new TheLoaiCauHoiAdapter(dsTheLoaiCauHoi, this));
+        rv.setAdapter(tlchAdapter);
+
+        csdlVersion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dbHandler = new DBHandler(MainActivity.this, snapshot.getValue(int.class));
+                dbHandler.checkVersion();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Đọc loại câu hỏi
+        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+                {
+                    TheLoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(TheLoaiCauHoi.class);
+
+                    if (tlch != null)
+                    {
+                        boolean existed = false;
+
+                        for (TheLoaiCauHoi check : dsTheLoaiCauHoi)
+                        {
+                            if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
+                            {
+                                check.setTenLoaiCauHoi(tlch.getTenLoaiCauHoi());
+                                Log.d("Firebase", "Value is existed: " + tlch.getMaLoaiCH());
+                                existed = true;
+                                break;
+                            }
+                        }
+
+                        if (!existed)
+                        {
+                            dsTheLoaiCauHoi.add(tlch);
+                            tlchAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     private void event()
     {

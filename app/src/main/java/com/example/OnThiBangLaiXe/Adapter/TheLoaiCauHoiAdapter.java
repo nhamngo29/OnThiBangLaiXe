@@ -1,15 +1,14 @@
 package com.example.OnThiBangLaiXe.Adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Model.TheLoaiCauHoi;
@@ -37,9 +36,21 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TheLoaiCauHoi tlch = dsTheLoaiCauHoi.get(position);
-        holder.ivTheLoaiCauHoi.setImageResource(context.getResources().getIdentifier(
-                tlch.getHinh(), "drawable", context.getPackageName()));
-        holder.ten.setText(tlch.getTen());
+
+        try {
+            holder.ivTheLoaiCauHoi.setImageResource(context.getResources().getIdentifier(
+                    tlch.getHinh(), "drawable", context.getPackageName()));
+        } catch (Exception e)
+        {
+            holder.ivTheLoaiCauHoi.setImageResource(R.drawable.ico_exam);
+        }
+
+        holder.ten.setText(tlch.getTenLoaiCauHoi());
+        holder.soCauHoi.setText(tlch.getSoCauHoiDaTraLoi() + "/" + tlch.getSoCau() + " câu");
+        holder.ketQua.setText(tlch.getSoCauDung() + " câu đúng, "
+                + (tlch.getSoCau() - tlch.getSoCauDung()) + " câu sai");
+        holder.pbKetQua.setMax(tlch.getSoCau());
+        holder.pbKetQua.setProgress(tlch.getSoCauHoiDaTraLoi());
     }
 
     @Override
@@ -53,11 +64,15 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         private TextView ten;
         private TextView soCauHoi;
         private TextView ketQua;
+        private ProgressBar pbKetQua;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ivTheLoaiCauHoi = itemView.findViewById(R.id.ivTheLoaiCauHoi);
             ten = itemView.findViewById(R.id.txtTheLoaiCauHoi);
+            soCauHoi = itemView.findViewById(R.id.txtSoCau);
+            ketQua = itemView.findViewById(R.id.txtKetQua);
+            pbKetQua = itemView.findViewById(R.id.pbTheLoaiCauHoi);
         }
     }
 }
