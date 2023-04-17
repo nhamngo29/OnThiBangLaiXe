@@ -1,6 +1,8 @@
 package com.example.OnThiBangLaiXe;
 
 import static com.example.OnThiBangLaiXe.Model.DanhSach.getDsBienBao;
+import static com.example.OnThiBangLaiXe.Model.DanhSach.setDsBienBao;
+import static com.example.OnThiBangLaiXe.Model.DanhSach.setDsLoaiBienBao;
 
 import android.os.Bundle;
 import android.util.Log;

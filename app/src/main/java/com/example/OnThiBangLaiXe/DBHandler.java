@@ -49,7 +49,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return pb == version;
     }
+    void UpdateVersion(int version)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
 
+        contentValues.put("GiaTri",version+"");
+        Log.e("VEr up",version+"");
+        mDatabase.update("ThongTin",contentValues,"TenThongTin=?",new String[]{"PB"});
+        mDatabase.close();
+    }
     public void ghiLoaiBienBao(List<LoaiBienBao> dsLoaiBienBao)
     {
         for (LoaiBienBao lbb : dsLoaiBienBao)
@@ -64,6 +73,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public List<LoaiBienBao> docLoaiBienBao()
     {
+        mDatabase=this.getWritableDatabase();
         List<LoaiBienBao> dsLoaiBienBao = new ArrayList<>();
         Cursor cursor = mDatabase.rawQuery("select * from LoaiBienBao", null);
         if (cursor.moveToFirst()) {
@@ -76,6 +86,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     public List<BienBao> docBienBao()
     {
+        mDatabase=this.getWritableDatabase();
         List<BienBao> dsLoaiBienBao = new ArrayList<>();
         Cursor cursor=mDatabase.rawQuery("select * from BienBao",null);
         while (cursor.moveToNext())
