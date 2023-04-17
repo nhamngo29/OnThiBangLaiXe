@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference csdlVersion = database.getReference("Version");
     ValueEventListener vel;
     String DB_PATH_SUFFIX="/databases/";
-    SQLiteDatabase databaseSQL=null;
+
     String DATABASE_NAME= "db.db";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,7 +237,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String getDatabasePath() {
         return getApplicationInfo().dataDir + DB_PATH_SUFFIX+ DATABASE_NAME;
     }
+    private void loadBienBaoFromFirebase()
+    {
 
+    }
     public void CopyDataBaseFromAsset() {
 
         try {

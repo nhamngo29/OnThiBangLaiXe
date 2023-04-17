@@ -23,11 +23,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class BienBaoActivity extends AppCompatActivity {
+    DBHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Toolbar toolbarBienBao;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bien_bao);
+        db=new DBHandler(this);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         toolbarBienBao = findViewById(R.id.toolbarBienBao);
         toolbarBienBao.setNavigationOnClickListener(view -> onBackPressed());
@@ -71,6 +73,15 @@ public class BienBaoActivity extends AppCompatActivity {
 
                         if (!existed)
                         {
+
+                            if(db.findBBByID(bb.getMaBB().trim()))
+                            {
+                                db.updateBB(bb);
+                            }
+                            else
+                            {
+                                db.insertBB(bb);
+                            }
                             dsBienBao.add(bb);
                             lbbAdapter.notifyDataSetChanged();
                         }
