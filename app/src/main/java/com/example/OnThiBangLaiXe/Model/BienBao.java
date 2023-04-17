@@ -3,7 +3,7 @@ package com.example.OnThiBangLaiXe.Model;
 public class BienBao{
     private String MaBB;
     private String TieuDe;
-    private String NoiDung;
+    private String Noidung;
     private String HinhAnh;
     private int MaLoaiBB;
     public String getHinhAnh() {
@@ -30,12 +30,12 @@ public class BienBao{
         this.TieuDe = tieuDe;
     }
 
-    public String getNoiDung() {
-        return NoiDung;
+    public String getNoidung() {
+        return Noidung;
     }
 
-    public void setNoiDung(String noiDung) {
-        NoiDung = noiDung;
+    public void setNoidung(String noidung) {
+        Noidung = noidung;
     }
 
     public int getMaLoaiBB() {
@@ -48,11 +48,11 @@ public class BienBao{
 
     public BienBao() {
     }
-    public BienBao(String HinhAnh, String MaBB, String TieuDe, String noiDung, int maLoaiBB) {
+    public BienBao(String HinhAnh, String MaBB, String TieuDe, String noidung, int maLoaiBB) {
         this.HinhAnh = HinhAnh;
         this.MaBB = MaBB;
         this.TieuDe = TieuDe;
-        this.NoiDung = noiDung;
+        this.Noidung = noidung;
         this.MaLoaiBB = maLoaiBB;
     }
 }

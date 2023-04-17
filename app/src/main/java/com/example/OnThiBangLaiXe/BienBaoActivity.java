@@ -6,15 +6,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.OnThiBangLaiXe.Adapter.BienBaoAdapter;
 import com.example.OnThiBangLaiXe.Adapter.LoaiBienBaoAdapter;
 import com.example.OnThiBangLaiXe.Model.BienBao;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
-import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -40,17 +37,12 @@ public class BienBaoActivity extends AppCompatActivity {
 
         List<BienBao> dsBienBao = new ArrayList<>();
 
-        List<LoaiBienBao> dsLoaiBienBao = new ArrayList<>();
-        dsLoaiBienBao.add(new LoaiBienBao(1, "Biển báo cấm"));
-        dsLoaiBienBao.add(new LoaiBienBao(2, "Biển báo nguy hiểm"));
-        dsLoaiBienBao.add(new LoaiBienBao(3, "Biển báo hiệu lệnh"));
-
         ViewPager2 vp = findViewById(R.id.vp);
-        LoaiBienBaoAdapter lbbAdapter = new LoaiBienBaoAdapter(dsLoaiBienBao, this, dsBienBao);
+        LoaiBienBaoAdapter lbbAdapter = new LoaiBienBaoAdapter(DanhSach.getDsLoaiBienBao(), this, dsBienBao);
         vp.setAdapter(lbbAdapter);
 
         new TabLayoutMediator(tabLayout, vp, (tab, position)
-                -> tab.setText(dsLoaiBienBao.get(position).getTenLoaiBB())).attach();
+                -> tab.setText(DanhSach.getDsLoaiBienBao().get(position).getTenLoaiBB())).attach();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference csdlLoaiCauHoi = database.getReference("BienBao");
@@ -72,7 +64,7 @@ public class BienBaoActivity extends AppCompatActivity {
                             {
                                 check.setTieuDe(bb.getTieuDe());
                                 check.setHinhAnh(bb.getHinhAnh());
-                                check.setNoiDung(bb.getNoiDung());
+                                check.setNoidung(bb.getNoidung());
                                 Log.d("Firebase", "Value is existed: " + bb.getMaBB());
                                 existed = true;
                                 break;

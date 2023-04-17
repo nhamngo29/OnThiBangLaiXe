@@ -48,13 +48,13 @@ public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHold
 
         holder.txtMaBienBao.setText(bb.getMaBB());
         holder.txtTieuDeBienBao.setText(bb.getTieuDe());
-        holder.txtNoiDungBienBao.setText(bb.getNoiDung());
+        holder.txtNoiDungBienBao.setText(bb.getNoidung());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChiTietBienBaoActivity.class);
             intent.putExtra("MaBB", bb.getMaBB());
             intent.putExtra("TieuDe", bb.getTieuDe());
-            intent.putExtra("NoiDung", bb.getNoiDung());
+            intent.putExtra("NoiDung", bb.getNoidung());
             intent.putExtra("HinhAnh", bb.getHinhAnh());
             context.startActivity(intent);
         });
