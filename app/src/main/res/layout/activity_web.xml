@@ -23,7 +23,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ico_backkk">
+
             <TextView
+                android:id="@+id/txtWeb"
                 android:textSize="19sp"
                 android:textStyle="bold"
                 android:text="Mẹo lý thuyết"

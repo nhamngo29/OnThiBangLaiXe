@@ -136,11 +136,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loSaHinh.setOnClickListener(view -> {
             Intent init = new Intent(this, WebActivity.class);
             init.putExtra("URL", "file:///android_asset/html/practice_exam.html");
+            init.putExtra("Name", "Sa hình");
             startActivity(init);
         });
         loMeo.setOnClickListener(view -> {
             Intent init=new Intent(this, WebActivity.class);
             init.putExtra("URL", "file:///android_asset/html/tips600.html");
+            init.putExtra("Name", "Mẹo ôn thi");
             startActivity(init);
         });
     }

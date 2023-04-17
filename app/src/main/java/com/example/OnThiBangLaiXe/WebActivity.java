@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,14 +16,16 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meo);
+        setContentView(R.layout.activity_web);
         wb = findViewById(R.id.wbMeo);
-        myWebSettings=wb.getSettings();
+        myWebSettings = wb.getSettings();
         myWebSettings.setJavaScriptEnabled(true);
         myWebSettings.setDomStorageEnabled(true);
         wb.loadUrl(getIntent().getStringExtra("URL"));
         wb.setWebViewClient(new WebViewClient());
-        toolbarBack=(Toolbar) findViewById(R.id.toolbarBack);
+        toolbarBack = findViewById(R.id.toolbarBack);
+        TextView txtWeb = findViewById(R.id.txtWeb);
+        txtWeb.setText(getIntent().getStringExtra("Name"));
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
 
     }

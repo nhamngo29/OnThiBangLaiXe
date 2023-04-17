@@ -31,7 +31,5 @@ w
 G.idea/sonarlint/issuestore/b/4/b4a0b63ce8560bbc5de0f9995c20cc861dc2adb3,b\0\b04578cffb47b1e57970601a0cacef6081245859
 w
 G.idea/sonarlint/issuestore/1/0/10a03f31c4dce92cb371e761ce9429428bb6c176,0\3\030ed2ccb712537825891dfda283154162e458a8
-k
-;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d
 r
 Bapp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiCauHoi.java,d\1\d1cd715bfd10baae99ef00c00d23eed7ccb7bc5f
