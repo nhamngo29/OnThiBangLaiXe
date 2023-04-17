@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
     private SQLiteDatabase mDatabase;
-    private static final String DB_NAME = "db.sqlite";
+    private static final String DB_NAME = "db.db";
 
     public DBHandler(Context context) {
         super(context, DB_NAME, null, 1);
