@@ -11,18 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.OnThiBangLaiXe.Model.TheLoaiCauHoi;
+import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.example.OnThiBangLaiXe.R;
 
 import java.util.List;
 
 public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdapter.ViewHolder>
 {
-    private List<TheLoaiCauHoi> dsTheLoaiCauHoi;
+    private List<LoaiCauHoi> dsLoaiCauHoi;
     private Context context;
 
-    public TheLoaiCauHoiAdapter(List<TheLoaiCauHoi> dsTheLoaiCauHoi, Context context) {
-        this.dsTheLoaiCauHoi = dsTheLoaiCauHoi;
+    public TheLoaiCauHoiAdapter(List<LoaiCauHoi> dsLoaiCauHoi, Context context) {
+        this.dsLoaiCauHoi = dsLoaiCauHoi;
         this.context = context;
     }
 
@@ -35,7 +35,7 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TheLoaiCauHoi tlch = dsTheLoaiCauHoi.get(position);
+        LoaiCauHoi tlch = dsLoaiCauHoi.get(position);
 
         try {
             holder.ivTheLoaiCauHoi.setImageResource(context.getResources().getIdentifier(
@@ -55,7 +55,7 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
 
     @Override
     public int getItemCount() {
-        return dsTheLoaiCauHoi.size();
+        return dsLoaiCauHoi.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder

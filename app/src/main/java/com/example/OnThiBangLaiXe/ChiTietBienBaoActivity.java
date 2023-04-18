@@ -8,22 +8,29 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.OnThiBangLaiXe.Model.BienBao;
-
-public class DetailsBienBaoActivity extends AppCompatActivity {
+public class ChiTietBienBaoActivity extends AppCompatActivity {
     ImageView imgDetailBB;
-    TextView txtIDlBB,txtTitleDetailBB,txtContentDetailBB;
+    TextView txtIDlBB;
+    TextView txtTitleDetailBB;
+    TextView txtContentDetailBB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_bien_bao);
         addControl();
-        Intent intent=getIntent();
-        BienBao bb= (BienBao) intent.getSerializableExtra("bienbao");
-        imgDetailBB.setImageResource(bb.getImg());
-        txtTitleDetailBB.setText(bb.getTitle());
-        txtIDlBB.setText(bb.getiD());
-        txtContentDetailBB.setText(bb.getContent());
+        Intent intent = getIntent();
+
+        try {
+            imgDetailBB.setImageResource(getResources().getIdentifier(
+                    intent.getStringExtra("HinhAnh"), "drawable", getPackageName()));
+        } catch (Exception e)
+        {
+            imgDetailBB.setImageResource(R.drawable.ico_exam);
+        }
+
+        txtTitleDetailBB.setText(intent.getStringExtra("TieuDe"));
+        txtIDlBB.setText(intent.getStringExtra("MaBB"));
+        txtContentDetailBB.setText(intent.getStringExtra("NoiDung"));
     }
     void addControl()
     {

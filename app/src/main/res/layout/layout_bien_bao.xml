@@ -8,7 +8,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/imgBB"
+        android:id="@+id/ivBienBao"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentStart="true"
@@ -22,7 +22,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtIDBB"
+            android:id="@+id/txtMaBienBao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#078CF6"
@@ -30,7 +30,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txtTitleBB"
+            android:id="@+id/txtTieuDeBienBao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -40,10 +40,11 @@
 
         <TextView
             style="@style/TEXT"
-            android:id="@+id/txtContentBB"
+            android:id="@+id/txtNoiDungBienBao"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginTop="5dp"/>
 
     </LinearLayout>
+
 </LinearLayout>

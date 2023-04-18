@@ -1,77 +1,83 @@
 package com.example.OnThiBangLaiXe.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.OnThiBangLaiXe.ChiTietBienBaoActivity;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.R;
 
 import java.util.List;
 
-public class BienBaoAdapter extends BaseAdapter {
+public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHolder>
+{
+    private List<BienBao> dsBienBao;
     private Context context;
-    private int layout;
-    private List<BienBao> lBienBao;
 
-    public BienBaoAdapter(Context context, int layout, List<BienBao> lBienBao) {
+    public BienBaoAdapter(List<BienBao> dsBienBao, Context context) {
+        this.dsBienBao = dsBienBao;
         this.context = context;
-        this.layout = layout;
-        this.lBienBao = lBienBao;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.layout_bien_bao, parent, false));
     }
 
     @Override
-    public int getCount() {
-        return lBienBao.size();
-    }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        BienBao bb = dsBienBao.get(position);
 
-    @Override
-    public Object getItem(int i) {
-        return lBienBao.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder;
-
-        if(view==null)
+        try {
+            holder.ivBienBao.setImageResource(context.getResources().getIdentifier(
+                    bb.getHinhAnh(), "drawable", context.getPackageName()));
+        } catch (Exception e)
         {
-
-            LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(layout,null);
-            viewHolder=new ViewHolder();
-
-            viewHolder.imgBB=view.findViewById(R.id.imgBB);
-            viewHolder.txtID=view.findViewById(R.id.txtIDBB);
-            viewHolder.txtTitleBB=view.findViewById(R.id.txtTitleBB);
-            viewHolder.txtContentBB=view.findViewById(R.id.txtContentBB);
-            view.setTag(viewHolder);
+            holder.ivBienBao.setImageResource(R.drawable.ico_exam);
         }
-        else {
-            viewHolder= (ViewHolder) view.getTag();
 
-        }
-        BienBao bb=lBienBao.get(i);
-        viewHolder.imgBB.setImageResource(bb.getImg());
-        viewHolder.txtID.setText(bb.getiD());
-        viewHolder.txtTitleBB.setText(bb.getTitle());
-        viewHolder.txtContentBB.setText(bb.getContent());
-        return view;
+        holder.txtMaBienBao.setText(bb.getMaBB());
+        holder.txtTieuDeBienBao.setText(bb.getTieuDe());
+        holder.txtNoiDungBienBao.setText(bb.getNoidung());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ChiTietBienBaoActivity.class);
+            intent.putExtra("MaBB", bb.getMaBB());
+            intent.putExtra("TieuDe", bb.getTieuDe());
+            intent.putExtra("NoiDung", bb.getNoidung());
+            intent.putExtra("HinhAnh", bb.getHinhAnh());
+            context.startActivity(intent);
+        });
     }
-    private class ViewHolder
+
+    @Override
+    public int getItemCount() {
+        return dsBienBao.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder
     {
-        ImageView imgBB;
-        TextView txtID;
-        TextView txtTitleBB;
-        TextView txtContentBB;
+        private final ImageView ivBienBao;
+        private final TextView txtMaBienBao;
+        private final TextView txtTieuDeBienBao;
+        private final TextView txtNoiDungBienBao;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            ivBienBao = itemView.findViewById(R.id.ivBienBao);
+            txtMaBienBao = itemView.findViewById(R.id.txtMaBienBao);
+            txtTieuDeBienBao = itemView.findViewById(R.id.txtTieuDeBienBao);
+            txtNoiDungBienBao = itemView.findViewById(R.id.txtNoiDungBienBao);
+        }
     }
 }

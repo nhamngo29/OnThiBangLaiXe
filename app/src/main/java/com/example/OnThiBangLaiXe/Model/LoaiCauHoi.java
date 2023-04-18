@@ -1,6 +1,6 @@
 package com.example.OnThiBangLaiXe.Model;
 
-public class TheLoaiCauHoi {
+public class LoaiCauHoi {
     private String hinh;
     private int MaLoaiCH;
     private String TenLoaiCauHoi;
@@ -57,10 +57,10 @@ public class TheLoaiCauHoi {
         this.SoCauDung = soCauDung;
     }
 
-    public TheLoaiCauHoi() {
+    public LoaiCauHoi() {
     }
 
-    public TheLoaiCauHoi(int maLoaiCH, String hinh, String TenLoaiCauHoi) {
+    public LoaiCauHoi(int maLoaiCH, String hinh, String TenLoaiCauHoi) {
         this.MaLoaiCH = maLoaiCH;
         this.hinh = hinh;
         this.TenLoaiCauHoi = TenLoaiCauHoi;

@@ -1,59 +1,58 @@
 package com.example.OnThiBangLaiXe.Model;
 
-import java.io.Serializable;
-
-public class BienBao implements Serializable {
-    private int img;
-
-    public int getImg() {
-        return img;
+public class BienBao{
+    private String MaBB;
+    private String TieuDe;
+    private String Noidung;
+    private String HinhAnh;
+    private int MaLoaiBB;
+    public String getHinhAnh() {
+        return HinhAnh;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setHinhAnh(String hinhAnh) {
+        this.HinhAnh = hinhAnh;
     }
 
-    public BienBao(int img, String iD, String title, String content) {
-        this.img = img;
-        this.iD = iD;
-        this.title = title;
-        Content = content;
+    public String getMaBB() {
+        return MaBB;
     }
 
-    private String iD;
-    private String title;
-    private String Content;
-
-    public String getiD() {
-        return iD;
+    public void setMaBB(String maBB) {
+        this.MaBB = maBB;
     }
 
-    public void setiD(String iD) {
-        this.iD = iD;
+    public String getTieuDe() {
+        return TieuDe;
     }
 
-    public String getTitle() {
-        return title;
+    public void setTieuDe(String tieuDe) {
+        this.TieuDe = tieuDe;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getNoidung() {
+        return Noidung;
     }
 
-    public String getContent() {
-        return Content;
+    public void setNoidung(String noidung) {
+        Noidung = noidung;
     }
 
-    public void setContent(String content) {
-        Content = content;
+    public int getMaLoaiBB() {
+        return MaLoaiBB;
+    }
+
+    public void setMaLoaiBB(int maLoaiBB) {
+        MaLoaiBB = maLoaiBB;
     }
 
     public BienBao() {
     }
-
-    public BienBao(String iD, String title, String content) {
-        this.iD = iD;
-        this.title = title;
-        Content = content;
+    public BienBao(String HinhAnh, String MaBB, String TieuDe, String noidung, int maLoaiBB) {
+        this.HinhAnh = HinhAnh;
+        this.MaBB = MaBB;
+        this.TieuDe = TieuDe;
+        this.Noidung = noidung;
+        this.MaLoaiBB = maLoaiBB;
     }
 }

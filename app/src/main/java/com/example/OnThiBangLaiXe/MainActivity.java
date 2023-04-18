@@ -1,12 +1,13 @@
 package com.example.OnThiBangLaiXe;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
-import com.example.OnThiBangLaiXe.Model.TheLoaiCauHoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
+import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
+import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,62 +44,108 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     ArrayList<function> arrayList;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
-    DatabaseReference csdlVersion = database.getReference("Version");
     DBHandler dbHandler;
+    List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
+    TheLoaiCauHoiAdapter tlchAdapter;
+    DatabaseReference csdlVersion = database.getReference("Version");
+    ValueEventListener vel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        khoiTaoControl();
         setSupportActionBar(toolbar);
         navView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navView.setCheckedItem(R.id.item_Home);
-        event();
-
+        khoiTaoSuKien();
+        dbHandler = new DBHandler(this);
         // Setup RecycleView
-        List<TheLoaiCauHoi> dsTheLoaiCauHoi = new ArrayList<>();
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(4,"ico_account", "Văn hóa và đạo đức"));
-        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
 
-        TheLoaiCauHoiAdapter tlchAdapter = new TheLoaiCauHoiAdapter(dsTheLoaiCauHoi, this);
+        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this);
 
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
 
-        csdlVersion.addValueEventListener(new ValueEventListener() {
+        if (isNetworkConnected())
+        {
+            kiemTraPhienBan();
+        }
+        else
+        {
+            DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+            Log.d("Nam", "No Internet");
+        }
+    }
+    private boolean isNetworkConnected() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    private boolean kiemTraPhienBan()
+    {
+        final boolean[] isLastestVersion = {true};
+
+        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dbHandler = new DBHandler(MainActivity.this, snapshot.getValue(int.class));
-                dbHandler.checkVersion();
+                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+                if (isLastestVersion[0])
+                {
+                    DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+                    Log.d("Firebase", "Is the lastest version");
+                }
+                else {
+                    capNhatDatabase();
+                    Log.d("Firebase", "Not is the lastest version");
+                }
+                stop();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                isLastestVersion[0] = true;
             }
         });
 
+        return isLastestVersion[0];
+    }
+
+    private void stop()
+    {
+        csdlVersion.removeEventListener(vel);
+    }
+
+    private void capNhatDatabase()
+    {
+        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
         //Đọc loại câu hỏi
         csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
-                    TheLoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(TheLoaiCauHoi.class);
+                    LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
+
                     if (tlch != null)
                     {
                         boolean existed = false;
 
-                        for (TheLoaiCauHoi check : dsTheLoaiCauHoi)
+                        for (LoaiCauHoi check : dsLoaiCauHoi)
                         {
                             if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
                             {
@@ -108,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (!existed)
                         {
-                            dsTheLoaiCauHoi.add(tlch);
+                            dsLoaiCauHoi.add(tlch);
                             tlchAdapter.notifyDataSetChanged();
                         }
                     }
@@ -121,12 +171,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-    private void event()
+
+    private void khoiTaoSuKien()
     {
         loBienBao.setOnClickListener(view -> {
-            Intent init=new Intent(MainActivity.this,BienBaoActivity.class);
+            Intent init = new Intent(this, BienBaoActivity.class);
             startActivity(init);
-
         });
         loFb.setOnClickListener(view -> {
             Intent intent=new Intent();
@@ -135,15 +185,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         });
         loSaHinh.setOnClickListener(view -> {
-            Intent init=new Intent(MainActivity.this,SaHinhActivity.class);
+            Intent init = new Intent(this, WebActivity.class);
+            init.putExtra("URL", "file:///android_asset/html/practice_exam.html");
+            init.putExtra("Name", "Sa hình");
             startActivity(init);
         });
         loMeo.setOnClickListener(view -> {
-            Intent init=new Intent(MainActivity.this,MeoActivity.class);
+            Intent init=new Intent(this, WebActivity.class);
+            init.putExtra("URL", "file:///android_asset/html/tips600.html");
+            init.putExtra("Name", "Mẹo ôn thi");
             startActivity(init);
         });
     }
-    private void init()
+    private void khoiTaoControl()
     {
         drawerLayout = findViewById(R.id.drawerlayout);
         navView = findViewById(R.id.nav_Main);
