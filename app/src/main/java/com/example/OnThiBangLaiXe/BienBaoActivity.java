@@ -7,11 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.example.OnThiBangLaiXe.Adapter.LoaiBienBaoAdapter;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
-import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -25,18 +23,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class BienBaoActivity extends AppCompatActivity {
+    DBHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Toolbar toolbarBienBao;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bien_bao);
+        db=new DBHandler(this);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-
         toolbarBienBao = findViewById(R.id.toolbarBienBao);
         toolbarBienBao.setNavigationOnClickListener(view -> onBackPressed());
-
         List<BienBao> dsBienBao = new ArrayList<>();
-
         ViewPager2 vp = findViewById(R.id.vp);
         LoaiBienBaoAdapter lbbAdapter = new LoaiBienBaoAdapter(DanhSach.getDsLoaiBienBao(), this, dsBienBao);
         vp.setAdapter(lbbAdapter);
@@ -47,9 +44,12 @@ public class BienBaoActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference csdlLoaiCauHoi = database.getReference("BienBao");
 
+
         csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("Firebase", "No internet" );
                 for (int i = 0; i < snapshot.getChildrenCount(); i++)
                 {
                     BienBao bb = snapshot.child(String.valueOf(i)).getValue(BienBao.class);
@@ -73,13 +73,21 @@ public class BienBaoActivity extends AppCompatActivity {
 
                         if (!existed)
                         {
+
+                            if(db.findBBByID(bb.getMaBB().trim()))
+                            {
+                                db.updateBB(bb);
+                            }
+                            else
+                            {
+                                db.insertBB(bb);
+                            }
                             dsBienBao.add(bb);
                             lbbAdapter.notifyDataSetChanged();
                         }
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 
 import java.util.ArrayList;
@@ -14,17 +15,18 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
     private SQLiteDatabase mDatabase;
-    private static final String DB_NAME = "db.sqlite";
 
+    private static final String DB_NAME = "db.db";
+    private static final int DB_VERSION = 1;
     public DBHandler(Context context) {
-        super(context, DB_NAME, null, 1);
+        super(context, DB_NAME, null, 2);
+        context.openOrCreateDatabase(DB_NAME, context.MODE_PRIVATE, null);
         this.mDatabase = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
-        Log.d("SQLite", "Database được tạo hoặc mở");
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+        mDatabase=this.getWritableDatabase();
     }
 
     @Override
@@ -63,16 +65,59 @@ public class DBHandler extends SQLiteOpenHelper {
     public List<LoaiBienBao> docLoaiBienBao()
     {
         List<LoaiBienBao> dsLoaiBienBao = new ArrayList<>();
-
         Cursor cursor = mDatabase.rawQuery("select * from LoaiBienBao", null);
-
         if (cursor.moveToFirst()) {
             do {
                 dsLoaiBienBao.add(new LoaiBienBao(cursor.getInt(0), cursor.getString(1)));
             } while (cursor.moveToNext());
         }
-
         cursor.close();
         return dsLoaiBienBao;
+    }
+    public void insertBB(BienBao bb)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaBB",bb.getMaBB());
+        contentValues.put("MaLoaiBB",bb.getMaLoaiBB());
+        contentValues.put("TieuDe",bb.getTieuDe());
+        contentValues.put("NoiDung",bb.getNoidung());
+        contentValues.put("HinhAnh",bb.getHinhAnh());
+        mDatabase.insert("BienBao",null,contentValues);
+        mDatabase.close();
+    }
+    Boolean findBBByID(String MaBB)
+    {
+        mDatabase=this.getWritableDatabase();
+        Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE TRIM(MaBB) = '"+MaBB+"'",null);
+        cursor3.moveToFirst();
+        if(cursor3==null)
+        {
+            if(MaBB==cursor3.getString(0))
+            {
+                cursor3.close();
+                return true;
+            }
+        }
+        cursor3.close();
+        return false;
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onDowngrade(db, oldVersion, newVersion);
+        db.setVersion(newVersion);
+    }
+
+    public void updateBB(BienBao bb)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaBB",bb.getMaBB());
+        contentValues.put("MaLoaiBB",bb.getMaLoaiBB());
+        contentValues.put("TieuDe",bb.getTieuDe());
+        contentValues.put("NoiDung",bb.getNoidung());
+        contentValues.put("HinhAnh",bb.getHinhAnh());
+        mDatabase.update("BienBao",contentValues,"MaBB=?", new String[]{"MaBB"});
     }
 }
