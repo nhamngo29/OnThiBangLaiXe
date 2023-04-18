@@ -13,4 +13,13 @@ public class DanhSach {
     public static void setDsLoaiBienBao(List<LoaiBienBao> dsLoaiBienBao) {
         DanhSach.dsLoaiBienBao = dsLoaiBienBao;
     }
+    private  static List<BienBao> dsBienBao=new ArrayList<>();
+
+    public static List<BienBao> getDsBienBao() {
+        return dsBienBao;
+    }
+
+    public static void setDsBienBao(List<BienBao> dsBienBao) {
+        DanhSach.dsBienBao = dsBienBao;
+    }
 }

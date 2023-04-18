@@ -1,7 +1,9 @@
 package com.example.OnThiBangLaiXe;
 
+import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
+import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
@@ -49,8 +52,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DBHandler dbHandler;
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
+    List<BienBao> dsBienBao = new ArrayList<>();
     TheLoaiCauHoiAdapter tlchAdapter;
     DatabaseReference csdlVersion = database.getReference("Version");
+
+
     ValueEventListener vel;
     String DB_PATH_SUFFIX="/databases/";
 
@@ -82,42 +88,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
-
-        if (isNetworkConnected())
-        {
+        if(isNetworkConnected()) {
             kiemTraPhienBan();
+            Log.d("Nam", "Connect Internet");
         }
-        else
-        {
+        else {
             DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+            DanhSach.setDsBienBao(dbHandler.docBienBao());
             Log.d("Nam", "No Internet");
         }
+
     }
     private boolean isNetworkConnected() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if(ni != null && ni.isConnected()) {
+            return true;
+        }
+        else {
             return false;
         }
     }
     private boolean kiemTraPhienBan()
     {
         final boolean[] isLastestVersion = {true};
-
+        final int[] ver = {0};
         vel = csdlVersion.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
-                if (isLastestVersion[0])
+                if (!isLastestVersion[0])
                 {
-                    DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
                     Log.d("Firebase", "Is the lastest version");
+                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
+                    capNhatDatabase();
+
                 }
                 else {
-                    capNhatDatabase();
+                    DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+                    DanhSach.setDsBienBao(dbHandler.docBienBao());
                     Log.d("Firebase", "Not is the lastest version");
                 }
                 stop();
@@ -146,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
+                    Log.e("Loai",i+"");
                     LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
 
                     if (tlch != null)
@@ -165,11 +175,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (!existed)
                         {
-                            dsLoaiCauHoi.add(tlch);
+                            DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
                             tlchAdapter.notifyDataSetChanged();
                         }
                     }
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference csdlBienBao = database.getReference("BienBao");
+        //Đọc loại câu hỏi
+        csdlBienBao.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+                {
+                    BienBao tlbb = dataSnapshot.child(String.valueOf(i)).getValue(BienBao.class);
+
+                    if (tlbb != null)
+                    {
+                        if(dbHandler.findBBByID(tlbb.getMaBB()))
+                        {
+                            dbHandler.updateBB(tlbb);
+                        }
+                        else
+                        {
+                            dbHandler.insertBB(tlbb);
+                        }
+                        dsBienBao.add(tlbb);
+                    }
+                }
+                DanhSach.setDsBienBao(dbHandler.docBienBao());
             }
 
             @Override
@@ -225,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (!dbFile.exists())
         {
             try{CopyDataBaseFromAsset();
-                Log.e("SQL","Coppy");
+                Log.e("SQL","Đã Coppy đến database");
             }
             catch (Exception e){
                 Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
@@ -236,10 +276,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private String getDatabasePath() {
         return getApplicationInfo().dataDir + DB_PATH_SUFFIX+ DATABASE_NAME;
-    }
-    private void loadBienBaoFromFirebase()
-    {
-
     }
     public void CopyDataBaseFromAsset() {
 

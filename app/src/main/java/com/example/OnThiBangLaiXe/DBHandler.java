@@ -49,7 +49,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return pb == version;
     }
+    void UpdateVersion(int version)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
 
+        contentValues.put("GiaTri",version+"");
+        Log.e("VEr up",version+"");
+        mDatabase.update("ThongTin",contentValues,"TenThongTin=?",new String[]{"PB"});
+        mDatabase.close();
+    }
     public void ghiLoaiBienBao(List<LoaiBienBao> dsLoaiBienBao)
     {
         for (LoaiBienBao lbb : dsLoaiBienBao)
@@ -64,12 +73,25 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public List<LoaiBienBao> docLoaiBienBao()
     {
+        mDatabase=this.getWritableDatabase();
         List<LoaiBienBao> dsLoaiBienBao = new ArrayList<>();
         Cursor cursor = mDatabase.rawQuery("select * from LoaiBienBao", null);
         if (cursor.moveToFirst()) {
             do {
                 dsLoaiBienBao.add(new LoaiBienBao(cursor.getInt(0), cursor.getString(1)));
             } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return dsLoaiBienBao;
+    }
+    public List<BienBao> docBienBao()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<BienBao> dsLoaiBienBao = new ArrayList<>();
+        Cursor cursor=mDatabase.rawQuery("select * from BienBao",null);
+        while (cursor.moveToNext())
+        {
+            dsLoaiBienBao.add(new BienBao(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)));
         }
         cursor.close();
         return dsLoaiBienBao;
@@ -85,6 +107,10 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("HinhAnh",bb.getHinhAnh());
         mDatabase.insert("BienBao",null,contentValues);
         mDatabase.close();
+    }
+    public void getListBB()
+    {
+
     }
     Boolean findBBByID(String MaBB)
     {
