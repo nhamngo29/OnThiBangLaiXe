@@ -48,7 +48,8 @@ public class BienBao{
 
     public BienBao() {
     }
-    public BienBao(String HinhAnh, String MaBB, String TieuDe, String noidung, int maLoaiBB) {
+
+    public BienBao( String MaBB, int maLoaiBB,String TieuDe, String noidung, String HinhAnh) {
         this.HinhAnh = HinhAnh;
         this.MaBB = MaBB;
         this.TieuDe = TieuDe;

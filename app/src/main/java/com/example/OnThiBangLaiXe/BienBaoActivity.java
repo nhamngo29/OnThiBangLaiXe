@@ -1,5 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
+import static com.example.OnThiBangLaiXe.Model.DanhSach.getDsBienBao;
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -33,65 +35,10 @@ public class BienBaoActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         toolbarBienBao = findViewById(R.id.toolbarBienBao);
         toolbarBienBao.setNavigationOnClickListener(view -> onBackPressed());
-        List<BienBao> dsBienBao = new ArrayList<>();
         ViewPager2 vp = findViewById(R.id.vp);
-        LoaiBienBaoAdapter lbbAdapter = new LoaiBienBaoAdapter(DanhSach.getDsLoaiBienBao(), this, dsBienBao);
+        LoaiBienBaoAdapter lbbAdapter = new LoaiBienBaoAdapter(DanhSach.getDsLoaiBienBao(), this, getDsBienBao());
         vp.setAdapter(lbbAdapter);
-
         new TabLayoutMediator(tabLayout, vp, (tab, position)
                 -> tab.setText(DanhSach.getDsLoaiBienBao().get(position).getTenLoaiBB())).attach();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference csdlLoaiCauHoi = database.getReference("BienBao");
-
-
-        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("Firebase", "No internet" );
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
-                    BienBao bb = snapshot.child(String.valueOf(i)).getValue(BienBao.class);
-
-                    if (bb != null)
-                    {
-                        boolean existed = false;
-
-                        for (BienBao check : dsBienBao)
-                        {
-                            if (Objects.equals(bb.getMaBB(), check.getMaBB()))
-                            {
-                                check.setTieuDe(bb.getTieuDe());
-                                check.setHinhAnh(bb.getHinhAnh());
-                                check.setNoidung(bb.getNoidung());
-                                Log.d("Firebase", "Value is existed: " + bb.getMaBB());
-                                existed = true;
-                                break;
-                            }
-                        }
-
-                        if (!existed)
-                        {
-
-                            if(db.findBBByID(bb.getMaBB().trim()))
-                            {
-                                db.updateBB(bb);
-                            }
-                            else
-                            {
-                                db.insertBB(bb);
-                            }
-                            dsBienBao.add(bb);
-                            lbbAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 }

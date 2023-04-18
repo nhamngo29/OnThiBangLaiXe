@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
+import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DBHandler dbHandler;
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
+    List<BienBao> dsBienBao = new ArrayList<>();
     TheLoaiCauHoiAdapter tlchAdapter;
     DatabaseReference csdlVersion = database.getReference("Version");
     ValueEventListener vel;
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else
         {
             DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+            DanhSach.setDsBienBao(dbHandler.docBienBao());
             Log.d("Nam", "No Internet");
         }
     }
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
+                    Log.e("Loai",i+"");
                     LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
 
                     if (tlch != null)
@@ -167,6 +171,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         {
                             dsLoaiCauHoi.add(tlch);
                             tlchAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference csdlBienBao = database.getReference("BienBao");
+        //Đọc loại câu hỏi
+        csdlBienBao.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+                {
+                    Log.e("Loai",i+"");
+                    BienBao tlbb = dataSnapshot.child(String.valueOf(i)).getValue(BienBao.class);
+
+                    if (tlbb != null)
+                    {
+                        if(dbHandler.findBBByID(tlbb.getMaBB()))
+                        {
+                            dbHandler.updateBB(tlbb);
+                        }
+                        else
+                        {
+                            dbHandler.insertBB(tlbb);
                         }
                     }
                 }

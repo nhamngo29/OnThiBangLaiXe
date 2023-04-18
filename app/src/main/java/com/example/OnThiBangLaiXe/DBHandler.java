@@ -74,6 +74,17 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return dsLoaiBienBao;
     }
+    public List<BienBao> docBienBao()
+    {
+        List<BienBao> dsLoaiBienBao = new ArrayList<>();
+        Cursor cursor=mDatabase.rawQuery("select * from BienBao",null);
+        while (cursor.moveToNext())
+        {
+            dsLoaiBienBao.add(new BienBao(cursor.getString(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4)));
+        }
+        cursor.close();
+        return dsLoaiBienBao;
+    }
     public void insertBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
@@ -85,6 +96,10 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("HinhAnh",bb.getHinhAnh());
         mDatabase.insert("BienBao",null,contentValues);
         mDatabase.close();
+    }
+    public void getListBB()
+    {
+
     }
     Boolean findBBByID(String MaBB)
     {
