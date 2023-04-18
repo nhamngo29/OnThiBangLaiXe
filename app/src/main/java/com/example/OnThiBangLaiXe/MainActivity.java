@@ -3,6 +3,7 @@ package com.example.OnThiBangLaiXe;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
@@ -14,57 +15,130 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
+import com.example.OnThiBangLaiXe.Model.TheLoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    NavigationView nav_view;
-    LinearLayout lo_BienBao,lo_fb,lo_sahinh,lo_meo;
-
+    NavigationView navView;
+    LinearLayout loBienBao;
+    LinearLayout loFb;
+    LinearLayout loSaHinh;
+    LinearLayout loMeo;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-    GridView gvFuntion;
     ArrayList<function> arrayList;
-    FunctionAdapter adapter;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
+    DatabaseReference csdlVersion = database.getReference("Version");
+    DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//      getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         init();
         setSupportActionBar(toolbar);
-        nav_view.bringToFront();
+        navView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        nav_view.setCheckedItem(R.id.item_Home);
-        Menu menu = nav_view.getMenu();
+        navView.setCheckedItem(R.id.item_Home);
         event();
+
+        // Setup RecycleView
+        List<TheLoaiCauHoi> dsTheLoaiCauHoi = new ArrayList<>();
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(4,"ico_account", "Văn hóa và đạo đức"));
+        dsTheLoaiCauHoi.add(new TheLoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
+
+        TheLoaiCauHoiAdapter tlchAdapter = new TheLoaiCauHoiAdapter(dsTheLoaiCauHoi, this);
+
+        RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
+
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(tlchAdapter);
+
+        csdlVersion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dbHandler = new DBHandler(MainActivity.this, snapshot.getValue(int.class));
+                dbHandler.checkVersion();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Đọc loại câu hỏi
+        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+                {
+                    TheLoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(TheLoaiCauHoi.class);
+                    if (tlch != null)
+                    {
+                        boolean existed = false;
+
+                        for (TheLoaiCauHoi check : dsTheLoaiCauHoi)
+                        {
+                            if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
+                            {
+                                check.setTenLoaiCauHoi(tlch.getTenLoaiCauHoi());
+                                Log.d("Firebase", "Value is existed: " + tlch.getMaLoaiCH());
+                                existed = true;
+                                break;
+                            }
+                        }
+
+                        if (!existed)
+                        {
+                            dsTheLoaiCauHoi.add(tlch);
+                            tlchAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     private void event()
     {
-        lo_BienBao.setOnClickListener(view -> {
+        loBienBao.setOnClickListener(view -> {
             Intent init=new Intent(MainActivity.this,BienBaoActivity.class);
             startActivity(init);
 
         });
-        lo_fb.setOnClickListener(view -> {
+        loFb.setOnClickListener(view -> {
             Intent intent=new Intent();
             intent.setAction(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://www.facebook.com/nhamngoo.29/"));
             startActivity(intent);
         });
-        lo_sahinh.setOnClickListener(view -> {
-//                Intent intent=new Intent();
-//                intent.setAction(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse("https://hoclaixe12h.com/meo-thi-sa-hinh-bang-lai-xe-may-a1/"));
-//                startActivity(intent);
+        loSaHinh.setOnClickListener(view -> {
             Intent init=new Intent(MainActivity.this,SaHinhActivity.class);
             startActivity(init);
         });
-        lo_meo.setOnClickListener(view -> {
+        loMeo.setOnClickListener(view -> {
             Intent init=new Intent(MainActivity.this,MeoActivity.class);
             startActivity(init);
         });
@@ -72,17 +146,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void init()
     {
         drawerLayout = findViewById(R.id.drawerlayout);
-        nav_view = findViewById(R.id.nav_Main);
+        navView = findViewById(R.id.nav_Main);
         toolbar = findViewById(R.id.toolbar);
         arrayList=new ArrayList<>();
-        lo_BienBao= findViewById(R.id.lo_BienBao);
-        lo_fb= findViewById(R.id.lo_fb);
-        lo_sahinh= findViewById(R.id.lo_sahinh);
-        lo_meo= findViewById(R.id.lo_meo);
+        loBienBao = findViewById(R.id.lo_BienBao);
+        loFb = findViewById(R.id.lo_fb);
+        loSaHinh = findViewById(R.id.lo_sahinh);
+        loMeo = findViewById(R.id.lo_meo);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Menu menu = nav_view.getMenu();
+        Menu menu = navView.getMenu();
         Intent intent;
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
