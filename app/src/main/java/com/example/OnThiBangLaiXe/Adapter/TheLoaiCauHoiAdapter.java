@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.OnThiBangLaiXe.CauHoiActivity;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.example.OnThiBangLaiXe.R;
 
@@ -51,6 +53,12 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
                 + (tlch.getSoCau() - tlch.getSoCauDung()) + " câu sai");
         holder.pbKetQua.setMax(tlch.getSoCau());
         holder.pbKetQua.setProgress(tlch.getSoCauHoiDaTraLoi());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CauHoiActivity.class);
+            intent.putExtra("MaLoaiCH", tlch.getMaLoaiCH());
+            context.startActivity(intent);
+        });
     }
 
     @Override

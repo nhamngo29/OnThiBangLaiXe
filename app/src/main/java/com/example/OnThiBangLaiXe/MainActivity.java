@@ -36,12 +36,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView navView;
+    LinearLayout loThiThu;
     LinearLayout loBienBao;
     LinearLayout loFb;
     LinearLayout loSaHinh;
@@ -221,9 +221,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void khoiTaoSuKien()
     {
+        loThiThu.setOnClickListener(view -> {
+            startActivity(new Intent(this, DeThiActivity.class));
+        });
         loBienBao.setOnClickListener(view -> {
-            Intent init = new Intent(this, BienBaoActivity.class);
-            startActivity(init);
+            startActivity(new Intent(this, BienBaoActivity.class));
         });
         loFb.setOnClickListener(view -> {
             Intent intent=new Intent();
@@ -250,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView = findViewById(R.id.nav_Main);
         toolbar = findViewById(R.id.toolbar);
         arrayList=new ArrayList<>();
+        loThiThu = findViewById(R.id.loThiThu);
         loBienBao = findViewById(R.id.lo_BienBao);
         loFb = findViewById(R.id.lo_fb);
         loSaHinh = findViewById(R.id.lo_sahinh);

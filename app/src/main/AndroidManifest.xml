@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ÔnThiBằngLáiXe"
         tools:targetApi="31">
+        <activity
+            android:name=".CauTraLoiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeThiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CauHoiActivity"
+            android:exported="false" />
         <activity
             android:name=".WebActivity"
             android:exported="false" />

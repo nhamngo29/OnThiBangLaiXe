@@ -3,7 +3,7 @@ package com.example.OnThiBangLaiXe.Model;
 public class CauHoi {
     int MaCH,MaLoaiCH,MaLoaiBang;
     String NoiDung,HinhAnh,DapAnA,DapAnB,DapAnC,DapAnD,DapAnDung,GiaiThich;
-    Boolean Luu,HaySai;
+    Boolean Luu, HaySai, DungSai;
 
     public int getMaCH() {
         return MaCH;
@@ -106,6 +106,14 @@ public class CauHoi {
 
     public void setHaySai(Boolean haySai) {
         HaySai = haySai;
+    }
+
+    public Boolean getDungSai() {
+        return DungSai;
+    }
+
+    public void setDungSai(Boolean dungSai) {
+        DungSai = dungSai;
     }
 
     public CauHoi(int maCH, int maLoaiCH, int maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, Boolean haySai) {

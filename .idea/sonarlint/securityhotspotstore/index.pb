@@ -25,7 +25,3 @@ r
 Bapp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiCauHoi.java,d\1\d1cd715bfd10baae99ef00c00d23eed7ccb7bc5f
 s
 Capp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiBienBao.java,c\6\c68e9baeee73326052ce98f30e3015627b96518d
-~
-Napp/src/main/java/com/example/OnThiBangLaiXe/Adapter/TheLoaiCauHoiAdapter.java,7\b\7b6ad34e5226d759fa173d7a654df0d7270055d7
-j
-:app/src/main/java/com/example/OnThiBangLaiXe/function.java,f\6\f6d4e5b28be9bd7fab7a9737037a5249d6991b1a
