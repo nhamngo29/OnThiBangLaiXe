@@ -105,11 +105,11 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 
         if (Boolean.TRUE.equals(ch.getDungSai()))
         {
-            holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_16);
+            holder.ivDungSai.setImageResource(R.drawable.ico_true);
         }
         else
         {
-            holder.ivDungSai.setImageResource(R.drawable.baseline_cancel_16);
+            holder.ivDungSai.setImageResource(R.drawable.ico_false);
         }
     }
 

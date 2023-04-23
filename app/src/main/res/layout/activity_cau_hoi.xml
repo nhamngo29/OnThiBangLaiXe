@@ -13,7 +13,7 @@
         tools:context=".CauHoiActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarBienBao"
+            android:id="@+id/toolbarBack"
             style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -4,17 +4,20 @@
         android:id="@+id/tiBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_arrow_back_ios_new_24"/>
+        android:icon="@drawable/baseline_arrow_back_ios_new_24"
+        android:title="" />
 
     <item
         android:id="@+id/tiSummit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_keyboard_double_arrow_up_24"/>
+        android:icon="@drawable/baseline_keyboard_double_arrow_up_24"
+        android:title="" />
 
     <item
         android:id="@+id/tiForward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/baseline_arrow_forward_ios_24"/>
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="" />
 </menu>

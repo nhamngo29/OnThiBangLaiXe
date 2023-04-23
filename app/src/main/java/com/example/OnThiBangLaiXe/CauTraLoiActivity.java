@@ -34,17 +34,21 @@ public class CauTraLoiActivity extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.txtTitle);
         txtTitle.setText("Đề thi thử");
-
+        bnv=findViewById(R.id.bottomNavigationView);
         // Mã loại câu hỏi
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
 
         vp = findViewById(R.id.vp);
 
         List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
+        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
+        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
+        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
+        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
 
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
 
-        vp.setAdapter(new CauTraLoiAdapter(null, this));
+        vp.setAdapter(new CauTraLoiAdapter(dsCauTraLoi, this));
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setVisibility(View.VISIBLE);
 

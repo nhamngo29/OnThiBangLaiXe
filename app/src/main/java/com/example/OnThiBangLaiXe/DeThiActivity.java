@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import java.util.List;
 public class DeThiActivity extends AppCompatActivity {
     List<DeThi> dsDeThi;
     DeThiAdapter dtAdapter;
+    Toolbar toolbarBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +33,22 @@ public class DeThiActivity extends AppCompatActivity {
 
         dtAdapter = new DeThiAdapter(dsDeThi, this);
 
-        RecyclerView rv = findViewById(R.id.rvDeThi);
 
+        RecyclerView rv = findViewById(R.id.rvDeThi);
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.setAdapter(dtAdapter);
+        init();
+        event();
+
     }
+    void event()
+    {
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
+    }
+    void init()
+    {
+
+        toolbarBack =findViewById(R.id.toolbarBack);
+    }
+
 }

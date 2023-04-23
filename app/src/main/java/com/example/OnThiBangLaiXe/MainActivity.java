@@ -2,6 +2,8 @@ package com.example.OnThiBangLaiXe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -22,30 +24,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.BienBao;
+import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView navView;
-    LinearLayout loThiThu;
     LinearLayout loBienBao;
     LinearLayout loFb;
     LinearLayout loSaHinh;
     LinearLayout loMeo;
+    LinearLayout loThiThu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
@@ -53,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DBHandler dbHandler;
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
     List<BienBao> dsBienBao = new ArrayList<>();
+    List<CauHoi> dsCauHoi=new ArrayList<>();
     TheLoaiCauHoiAdapter tlchAdapter;
     DatabaseReference csdlVersion = database.getReference("Version");
 
@@ -61,10 +70,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String DB_PATH_SUFFIX="/databases/";
 
     String DATABASE_NAME= "db.db";
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageReference=storage.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        downloadWithBytes();
         processCopy();
         khoiTaoControl();
         setSupportActionBar(toolbar);
@@ -206,10 +219,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         {
                             dbHandler.insertBB(tlbb);
                         }
-                        dsBienBao.add(tlbb);
+                        DanhSach.getDsBienBao().add(tlbb);
                     }
                 }
-                DanhSach.setDsBienBao(dbHandler.docBienBao());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference csdlCauHoi = database.getReference("CauHoi");
+        csdlCauHoi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (int i = 0; i < snapshot.getChildrenCount(); i++)
+                {
+                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
+                    if(tlbb != null)
+                    {
+                        Log.e("CauHoi",tlbb.getMaCH()+"");
+                        if(dbHandler.findCHByID(tlbb.getMaCH()))
+                            dbHandler.updateCauHoi(tlbb);
+                        else
+                            dbHandler.insertCauHoi(tlbb);
+                        DanhSach.getDsCauHoi().add(tlbb);
+                    }
+                }
             }
 
             @Override
@@ -218,14 +254,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+    public void downloadWithBytes(){
+        StorageReference imageRefl=storageReference.child("BienBao");
+        imageRefl.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult) {
+                List<StorageReference> srtList=listResult.getItems();
+                for (StorageReference sr:srtList)
+                {
+                    long SIZE=120*120;
+                    sr.getBytes(SIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);//lấy được hình ảnh từ Storage về rồi,chưa lưu vào được drawable
+                            Toast.makeText(MainActivity.this,bitmap.toString(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+        });
 
+    }
     private void khoiTaoSuKien()
     {
-        loThiThu.setOnClickListener(view -> {
-            startActivity(new Intent(this, DeThiActivity.class));
-        });
         loBienBao.setOnClickListener(view -> {
-            startActivity(new Intent(this, BienBaoActivity.class));
+            Intent init = new Intent(this, BienBaoActivity.class);
+            startActivity(init);
         });
         loFb.setOnClickListener(view -> {
             Intent intent=new Intent();
@@ -245,6 +299,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             init.putExtra("Name", "Mẹo ôn thi");
             startActivity(init);
         });
+        loThiThu.setOnClickListener(view -> {
+            Intent init=new Intent(this, DeThiActivity.class);
+            startActivity(init);
+        });
     }
     private void khoiTaoControl()
     {
@@ -252,11 +310,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView = findViewById(R.id.nav_Main);
         toolbar = findViewById(R.id.toolbar);
         arrayList=new ArrayList<>();
-        loThiThu = findViewById(R.id.loThiThu);
         loBienBao = findViewById(R.id.lo_BienBao);
         loFb = findViewById(R.id.lo_fb);
         loSaHinh = findViewById(R.id.lo_sahinh);
         loMeo = findViewById(R.id.lo_meo);
+        loThiThu=findViewById(R.id.loThiThu);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

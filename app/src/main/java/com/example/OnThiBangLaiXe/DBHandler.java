@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.OnThiBangLaiXe.Model.BienBao;
+import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 
 import java.util.ArrayList;
@@ -108,6 +109,25 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.insert("BienBao",null,contentValues);
         mDatabase.close();
     }
+    public void insertCauHoi(CauHoi ch)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaCH",ch.getMaCH());
+        contentValues.put("MaLoaiCH",ch.getMaLoaiCH());
+        contentValues.put("MaLoaiBang",ch.getMaLoaiBang());
+        contentValues.put("NoiDung",ch.getNoiDung());
+        contentValues.put("HinhAnh",ch.getHinhAnh());
+        contentValues.put("DapAnA",ch.getDapAnA());
+        contentValues.put("DapAnB",ch.getDapAnB());
+        contentValues.put("DapAnC",ch.getDapAnC());
+        contentValues.put("DapAnC",ch.getDapAnD());
+        contentValues.put("DapAnDung",ch.getDapAnDung());
+        contentValues.put("GiaiThich",ch.getGiaiThich());
+        contentValues.put("HaySai",ch.getHaySai());
+        mDatabase.insert("CauHoi",null,contentValues);
+        mDatabase.close();
+    }
     public void getListBB()
     {
 
@@ -117,7 +137,7 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase=this.getWritableDatabase();
         Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE TRIM(MaBB) = '"+MaBB+"'",null);
         cursor3.moveToFirst();
-        if(cursor3==null)
+        if(cursor3!=null)
         {
             if(MaBB==cursor3.getString(0))
             {
@@ -128,7 +148,27 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor3.close();
         return false;
     }
+    Boolean findCHByID(int ID)
+    {
+        mDatabase=this.getWritableDatabase();
+//        Cursor cursor3= mDatabase.rawQuery("select MaCH FROM CauHoi where MaCH="+1 ,null);
+        String selection = "MaCH="+ID;
+        String[] columns ={"MaCH"};
+        Cursor cursor3=mDatabase.query("CauHoi",columns,selection,null,null,null,null);
+        cursor3.moveToFirst();
+        if(cursor3!=null&&cursor3.getCount()>0)
+        {
 
+            Log.e("MaCH","");
+            if(ID==cursor3.getInt(0))
+            {
+
+                return true;
+            }
+        }
+        cursor3.close();
+        return false;
+    }
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
@@ -145,5 +185,23 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("NoiDung",bb.getNoidung());
         contentValues.put("HinhAnh",bb.getHinhAnh());
         mDatabase.update("BienBao",contentValues,"MaBB=?", new String[]{"MaBB"});
+    }
+    public void updateCauHoi(CauHoi ch)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaCH",ch.getMaCH());
+        contentValues.put("MaLoaiCH",ch.getMaLoaiCH());
+        contentValues.put("MaLoaiBang",ch.getMaLoaiBang());
+        contentValues.put("NoiDung",ch.getNoiDung());
+        contentValues.put("HinhAnh",ch.getHinhAnh());
+        contentValues.put("DapAnA",ch.getDapAnA());
+        contentValues.put("DapAnB",ch.getDapAnB());
+        contentValues.put("DapAnC",ch.getDapAnC());
+        contentValues.put("DapAnC",ch.getDapAnD());
+        contentValues.put("DapAnDung",ch.getDapAnDung());
+        contentValues.put("GiaiThich",ch.getGiaiThich());
+        contentValues.put("HaySai",ch.getHaySai());
+        mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{"MaCH"});
     }
 }

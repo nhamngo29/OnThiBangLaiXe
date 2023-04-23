@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
 {
     private List<CauHoi> dsCauHoi;
     private Context context;
+
 
     public CauHoiAdapter(List<CauHoi> dsCauHoi, Context context) {
         this.context = context;
@@ -49,11 +51,11 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
 
             if (Boolean.TRUE.equals(ch.getDungSai()))
             {
-                holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_12);
+                holder.ivDungSai.setImageResource(R.drawable.ico_true);
             }
             else
             {
-                holder.ivDungSai.setImageResource(R.drawable.baseline_cancel_12);
+                holder.ivDungSai.setImageResource(R.drawable.ico_false);
             }
         }
 
@@ -106,11 +108,11 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
 
         if (Boolean.TRUE.equals(ch.getDungSai()))
         {
-            holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_16);
+            holder.ivDungSai.setImageResource(R.drawable.ico_true);
         }
         else
         {
-            holder.ivDungSai.setImageResource(R.drawable.baseline_cancel_16);
+            holder.ivDungSai.setImageResource(R.drawable.ico_false);
         }
     }
 

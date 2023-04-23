@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
@@ -21,6 +22,7 @@ public class CauHoiActivity extends AppCompatActivity {
     ViewPager2 vp;
     TextView txtTitle;
     BottomNavigationView bnv;
+    Toolbar toolbarBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,8 @@ public class CauHoiActivity extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.txtTitle);
         txtTitle.setText("Câu hỏi ôn thi");
-
+        toolbarBack =findViewById(R.id.toolbarBack);
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
         // Mã loại câu hỏi
         int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 0);
 
