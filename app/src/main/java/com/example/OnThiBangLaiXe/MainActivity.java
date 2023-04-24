@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -255,26 +257,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
     public void downloadWithBytes(){
-        StorageReference imageRefl=storageReference.child("BienBao");
-        imageRefl.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-            @Override
-            public void onSuccess(ListResult listResult) {
-                List<StorageReference> srtList=listResult.getItems();
-                for (StorageReference sr:srtList)
-                {
-                    long SIZE=120*120;
-                    sr.getBytes(SIZE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);//lấy được hình ảnh từ Storage về rồi,chưa lưu vào được drawable
-                            Toast.makeText(MainActivity.this,bitmap.toString(),Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
+        StorageReference imageRefl = storageReference.child("BienBao");
+        imageRefl.listAll().addOnSuccessListener(listResult -> {
+            List<StorageReference> srtList=listResult.getItems();
+            for (StorageReference sr : srtList)
+            {
+                long SIZE=120*120;
+                sr.getBytes(SIZE).addOnSuccessListener(bytes -> {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    storeImage(bitmap, sr.getName());
+                });
             }
         });
 
     }
+    private void storeImage(Bitmap bitmap, String name) {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        File file = new File(directory, name);
+        if (!file.exists()) {
+            Log.d("path", file.toString());
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.flush();
+                fos.close();
+            } catch (java.io.IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void khoiTaoSuKien()
     {
         loBienBao.setOnClickListener(view -> {

@@ -2,6 +2,9 @@ package com.example.OnThiBangLaiXe.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,9 @@ import com.example.OnThiBangLaiXe.ChiTietBienBaoActivity;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHolder>
@@ -39,9 +45,12 @@ public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHold
         BienBao bb = dsBienBao.get(position);
 
         try {
-            holder.ivBienBao.setImageResource(context.getResources().getIdentifier(
-                    bb.getHinhAnh(), "drawable", context.getPackageName()));
-        } catch (Exception e)
+            File f = new File(context.getDataDir() + "/app_images", bb.getHinhAnh());
+            Log.d("path", f.getAbsolutePath());
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            holder.ivBienBao.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
         {
             holder.ivBienBao.setImageResource(R.drawable.ico_exam);
         }
