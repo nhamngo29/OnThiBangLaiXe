@@ -2,6 +2,7 @@ package com.example.OnThiBangLaiXe.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.CauHoiActivity;
+import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.example.OnThiBangLaiXe.R;
 
@@ -20,19 +22,21 @@ import java.util.List;
 
 public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdapter.ViewHolder>
 {
+    private final RecyclerViewInterface recyclerViewInterface;
     private List<LoaiCauHoi> dsLoaiCauHoi;
     private Context context;
 
-    public TheLoaiCauHoiAdapter(List<LoaiCauHoi> dsLoaiCauHoi, Context context) {
+    public TheLoaiCauHoiAdapter(List<LoaiCauHoi> dsLoaiCauHoi, Context context,RecyclerViewInterface recyclerViewInterface) {
         this.dsLoaiCauHoi = dsLoaiCauHoi;
         this.context = context;
+        this.recyclerViewInterface=recyclerViewInterface;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_theloaicauhoi, parent, false));
+                .inflate(R.layout.item_theloaicauhoi, parent, false),recyclerViewInterface);
     }
 
     @Override
@@ -73,7 +77,7 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         private TextView soCauHoi;
         private TextView ketQua;
         private ProgressBar pbKetQua;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             ivTheLoaiCauHoi = itemView.findViewById(R.id.ivTheLoaiCauHoi);
@@ -81,6 +85,19 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
             soCauHoi = itemView.findViewById(R.id.txtSoCau);
             ketQua = itemView.findViewById(R.id.txtKetQua);
             pbKetQua = itemView.findViewById(R.id.pbTheLoaiCauHoi);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recyclerViewInterface!=null)
+                    {
+                        int pos=getAdapterPosition();
+                        if(pos!=RecyclerView.NO_POSITION)
+                        {
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }

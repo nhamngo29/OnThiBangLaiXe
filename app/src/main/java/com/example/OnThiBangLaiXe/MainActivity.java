@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
+import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -49,7 +50,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
     LinearLayout loBienBao;
     LinearLayout loFb;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
         dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
 
-        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this);
+        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
 
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
             DanhSach.setDsBienBao(dbHandler.docBienBao());
+            DanhSach.setDsCauHoi(dbHandler.docCauHoi());
         }
 
     }
@@ -140,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 else {
                     DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
                     DanhSach.setDsBienBao(dbHandler.docBienBao());
+                    DanhSach.setDsCauHoi(dbHandler.docCauHoi());
+
+
                 }
                 stop();
             }
@@ -167,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
-                    Log.e("Loai",i+"");
+
                     LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
 
                     if (tlch != null)
@@ -234,14 +239,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (int i = 0; i < snapshot.getChildrenCount(); i++)
                 {
+
                     CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
+
                     if(tlbb != null)
                     {
 
                         if(dbHandler.findCHByID(tlbb.getMaCH()))
+                        {
                             dbHandler.updateCauHoi(tlbb);
+
+                        }
                         else
+                        {
                             dbHandler.insertCauHoi(tlbb);
+
+                        }
                         DanhSach.getDsCauHoi().add(tlbb);
                     }
                 }
@@ -266,7 +279,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
             }
         });
+//        StorageReference imageReflCauHoi = storageReference;
+//        imageReflCauHoi.listAll().addOnSuccessListener(listResult -> {
+//            List<StorageReference> srtList=listResult.getItems();
+//            for (StorageReference sr : srtList)
+//            {
+//                long SIZE=120*120;
+//                sr.getBytes(SIZE).addOnSuccessListener(bytes -> {
+//                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+//                    storeImage(bitmap, sr.getName());
+//                });
+//            }
+//        });
 
+    }
+    private void removeAllImage()
+    {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("images", Context.MODE_PRIVATE);
+        if (directory.exists()) {
+            if (directory.delete()) {
+                Log.e("-->", "file Deleted :");
+            } else {
+                Log.e("-->", "file not Deleted :");
+            }
+        }
     }
     private void storeImage(Bitmap bitmap, String name) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -372,4 +409,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @Override
+    public void onItemClick(int postion) {
+
+    }
 }

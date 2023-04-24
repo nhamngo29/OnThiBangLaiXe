@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -27,31 +29,27 @@ public class CauHoiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cau_hoi);
-
         txtTitle = findViewById(R.id.txtTitle);
         txtTitle.setText("Câu hỏi ôn thi");
         toolbarBack =findViewById(R.id.toolbarBack);
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
         // Mã loại câu hỏi
-        int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 0);
-
+        int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 1);
         bnv = findViewById(R.id.bottomNavigationView);
 
         vp = findViewById(R.id.vp);
-
+        DBHandler db=new DBHandler(this);
         List<CauHoi> dsCauHoi = new ArrayList<>();
 
-        CauHoi ch = new CauHoi();
-        ch.setNoiDung("Đây là nội dung");
-        ch.setDapAnA("Đây là đáp án A");
-        ch.setDapAnB("Đây là đáp án B");
-        ch.setDapAnC("Đây là đáp án C");
-        ch.setDapAnDung("B");
-        ch.setGiaiThich("Đây là giải thich");
+        for(CauHoi a:db.docCauHoi())
+        {
 
-        dsCauHoi.add(ch);
-        dsCauHoi.add(ch);
-        dsCauHoi.add(ch);
+            if(a.getMaLoaiCH()==maLoaiCH)
+            {
+                dsCauHoi.add(a);
+            }
+        }
+
 
         vp.setAdapter(new CauHoiAdapter(dsCauHoi, this));
 

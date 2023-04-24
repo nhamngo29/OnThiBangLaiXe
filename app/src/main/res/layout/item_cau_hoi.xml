@@ -64,6 +64,7 @@
         android:textSize="14sp"/>
     <ImageView
         android:id="@+id/ivCauHoi"
+        android:visibility="gone"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
@@ -85,6 +86,7 @@
 
         <RadioButton
             android:id="@+id/rbB"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"

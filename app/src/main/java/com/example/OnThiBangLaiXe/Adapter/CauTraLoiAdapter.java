@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.OnThiBangLaiXe.CauHoiActivity;
+import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -22,10 +24,12 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 {
     private List<CauTraLoi> dsCauTraLoi;
     private Context context;
+    private DBHandler db;
 
     public CauTraLoiAdapter(List<CauTraLoi> dsCauTraLoi, Context context) {
         this.context = context;
         this.dsCauTraLoi = dsCauTraLoi;
+        db=new DBHandler(context);
     }
 
     @NonNull
@@ -86,7 +90,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
         }
     }
 
-    private void setDapAn(CauTraLoiAdapter.ViewHolder holder, int position, boolean value)
+    private void setDapAn(CauTraLoiAdapter.ViewHolder holder, int position, Boolean value)
     {
         CauHoi ch = null;
 
@@ -94,16 +98,19 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
         {
             if (cauHoi.getMaCH() == dsCauTraLoi.get(position).getMaCH())
             {
-                ch = cauHoi;
+
             }
         }
 
         holder.txtGiaiThichCauHoi.setText(ch.getGiaiThich());
-        ch.setDungSai(value);
+        int s=2;
+        if(value)
+            s=1;
+        ch.setDaTraLoiDung(s);
 
         holder.txtDungSai.setText(" Đã học");
 
-        if (Boolean.TRUE.equals(ch.getDungSai()))
+        if (Boolean.TRUE.equals(ch.getGiaiThich()))
         {
             holder.ivDungSai.setImageResource(R.drawable.ico_true);
         }

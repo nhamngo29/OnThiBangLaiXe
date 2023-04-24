@@ -1,10 +1,9 @@
 package com.example.OnThiBangLaiXe.Model;
 
 public class CauHoi {
-    int MaCH,MaLoaiCH,MaLoaiBang,HaySai,Luu;
-
+    int MaCH,MaLoaiCH,MaLoaiBang,HaySai,Luu, DaTraLoiDung;
     String NoiDung,HinhAnh,DapAnA,DapAnB,DapAnC,DapAnD,DapAnDung,GiaiThich;
-    boolean DungSai;
+
 
     public int getMaCH() {
         return MaCH;
@@ -30,6 +29,22 @@ public class CauHoi {
         MaLoaiBang = maLoaiBang;
     }
 
+    public int getHaySai() {
+        return HaySai;
+    }
+
+    public void setHaySai(int haySai) {
+        HaySai = haySai;
+    }
+
+    public int getLuu() {
+        return Luu;
+    }
+
+    public void setLuu(int luu) {
+        Luu = luu;
+    }
+
     public String getNoiDung() {
         return NoiDung;
     }
@@ -53,6 +68,7 @@ public class CauHoi {
     public void setDapAnA(String dapAnA) {
         DapAnA = dapAnA;
     }
+
     public String getDapAnB() {
         return DapAnB;
     }
@@ -93,31 +109,15 @@ public class CauHoi {
         GiaiThich = giaiThich;
     }
 
-    public Integer getLuu() {
-        return Luu;
+    public int getDaTraLoiDung() {
+        return DaTraLoiDung;
     }
 
-    public void setLuu(Integer luu) {
-        Luu = luu;
+    public void setDaTraLoiDung(int daTraLoiDung) {
+        DaTraLoiDung = daTraLoiDung;
     }
 
-    public Integer getHaySai() {
-        return HaySai;
-    }
-
-    public void setHaySai(Integer haySai) {
-        HaySai = haySai;
-    }
-
-    public Boolean getDungSai() {
-        return DungSai;
-    }
-
-    public void setDungSai(Boolean dungSai) {
-        DungSai = dungSai;
-    }
-
-    public CauHoi(int maCH, int maLoaiCH, int maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, int haySai) {
+    public CauHoi(int maCH, int maLoaiCH, int maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, int luu, int haySai, int daTraLoi) {
         MaCH = maCH;
         MaLoaiCH = maLoaiCH;
         MaLoaiBang = maLoaiBang;
@@ -130,6 +130,8 @@ public class CauHoi {
         DapAnDung = dapAnDung;
         GiaiThich = giaiThich;
         HaySai = haySai;
+        Luu=luu;
+        DaTraLoiDung=daTraLoi;
     }
 
     public CauHoi() {

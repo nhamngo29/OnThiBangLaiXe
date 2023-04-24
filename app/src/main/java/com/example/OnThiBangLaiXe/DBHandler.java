@@ -56,21 +56,10 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues contentValues  = new ContentValues();
 
         contentValues.put("GiaTri",version+"");
-        Log.e("VEr up",version+"");
         mDatabase.update("ThongTin",contentValues,"TenThongTin=?",new String[]{"PB"});
         mDatabase.close();
     }
-    public void ghiLoaiBienBao(List<LoaiBienBao> dsLoaiBienBao)
-    {
-        for (LoaiBienBao lbb : dsLoaiBienBao)
-        {
-            ContentValues cv = new ContentValues();
-            cv.put("MaLoaiBB", lbb.getMaLoaiBB());
-            cv.put("TenLoaiBB", lbb.getTenLoaiBB());
 
-            mDatabase.insert("LoaiBienBao", null, cv);
-        }
-    }
 
     public List<LoaiBienBao> docLoaiBienBao()
     {
@@ -97,6 +86,23 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return dsLoaiBienBao;
     }
+    public List<CauHoi> docCauHoi()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauHoi> dsCauHoi = new ArrayList<>();
+        Cursor cursor=mDatabase.rawQuery("select * from CauHoi",null);
+        while (cursor.moveToNext())
+        {
+            Boolean s=true;
+            if(cursor.getInt(13)==0)
+                s=false;
+
+            dsCauHoi.add(new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13)));
+        }
+        cursor.close();
+
+        return dsCauHoi;
+    }
     public void insertBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
@@ -106,7 +112,6 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("TieuDe",bb.getTieuDe());
         contentValues.put("NoiDung",bb.getNoidung());
         contentValues.put("HinhAnh",bb.getHinhAnh());
-        Log.e("Insert hình ảnh trong sqlite",bb.getHinhAnh());
         mDatabase.insert("BienBao",null,contentValues);
         mDatabase.close();
     }
@@ -133,12 +138,29 @@ public class DBHandler extends SQLiteOpenHelper {
     {
 
     }
+    public void updateLuuCauHoi(int MaCH,int DaTraLoiDung)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("DaTraLoiDung",DaTraLoiDung);
+        Log.e("123",DaTraLoiDung+"");
+        mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(MaCH)});
+
+    }
+    public void updateLuuLaiCauHoi(int MaCH,int Luu)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("Luu",Luu);
+        mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(MaCH)});
+
+    }
     Boolean findBBByID(String MaBB)
     {
         mDatabase=this.getWritableDatabase();
         Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE TRIM(MaBB) = '"+MaBB+"'",null);
         cursor3.moveToFirst();
-        if(cursor3!=null)
+        if(cursor3!=null&&cursor3.getCount()>0)
         {
             if(MaBB==cursor3.getString(0))
             {
@@ -160,7 +182,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if(cursor3!=null&&cursor3.getCount()>0)
         {
 
-            Log.e("MaCH","");
+
             if(ID==cursor3.getInt(0))
             {
 
@@ -179,15 +201,17 @@ public class DBHandler extends SQLiteOpenHelper {
     public void updateBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
-        Log.e("Update hình ảnh trong sqlite",bb.getHinhAnh());
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaBB",bb.getMaBB());
         contentValues.put("MaLoaiBB",bb.getMaLoaiBB());
         contentValues.put("TieuDe",bb.getTieuDe());
         contentValues.put("NoiDung",bb.getNoidung());
         contentValues.put("HinhAnh",bb.getHinhAnh());
-        mDatabase.update("BienBao",contentValues,"MaBB=?", new String[]{"MaBB"});
+        mDatabase.update("BienBao",contentValues,"MaBB=?", new String[]{String.valueOf(bb.getMaBB())});
+        mDatabase.close();
     }
+
+
     public void updateCauHoi(CauHoi ch)
     {
         mDatabase=this.getWritableDatabase();
@@ -200,10 +224,11 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("DapAnA",ch.getDapAnA());
         contentValues.put("DapAnB",ch.getDapAnB());
         contentValues.put("DapAnC",ch.getDapAnC());
-        contentValues.put("DapAnC",ch.getDapAnD());
+        contentValues.put("DapAnD",ch.getDapAnD());
         contentValues.put("DapAnDung",ch.getDapAnDung());
         contentValues.put("GiaiThich",ch.getGiaiThich());
         contentValues.put("HaySai",ch.getHaySai());
-        mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{"MaCH"});
+        mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(ch.getMaCH())});
+        mDatabase.close();
     }
 }
