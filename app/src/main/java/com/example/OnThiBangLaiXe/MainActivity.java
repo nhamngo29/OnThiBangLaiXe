@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        downloadWithBytes();
+
         processCopy();
         khoiTaoControl();
         setSupportActionBar(toolbar);
@@ -105,12 +105,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rv.setAdapter(tlchAdapter);
         if(isNetworkConnected()) {
             kiemTraPhienBan();
-            Log.d("Nam", "Connect Internet");
         }
         else {
             DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
             DanhSach.setDsBienBao(dbHandler.docBienBao());
-            Log.d("Nam", "No Internet");
         }
 
     }
@@ -134,15 +132,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
                 if (!isLastestVersion[0])
                 {
-                    Log.d("Firebase", "Is the lastest version");
                     dbHandler.UpdateVersion(snapshot.getValue(int.class));
                     capNhatDatabase();
+                    downloadWithBytes();
 
                 }
                 else {
                     DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
                     DanhSach.setDsBienBao(dbHandler.docBienBao());
-                    Log.d("Firebase", "Not is the lastest version");
                 }
                 stop();
             }
@@ -240,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
                     if(tlbb != null)
                     {
-                        Log.e("CauHoi",tlbb.getMaCH()+"");
+
                         if(dbHandler.findCHByID(tlbb.getMaCH()))
                             dbHandler.updateCauHoi(tlbb);
                         else

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Locale;
 
 public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHolder>
 {
@@ -45,7 +46,7 @@ public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHold
         BienBao bb = dsBienBao.get(position);
 
         try {
-            File f = new File(context.getDataDir() + "/app_images", bb.getHinhAnh());
+            File f = new File(context.getDataDir() + "/app_images/", bb.getHinhAnh());
             Log.d("path", f.getAbsolutePath());
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             holder.ivBienBao.setImageBitmap(b);

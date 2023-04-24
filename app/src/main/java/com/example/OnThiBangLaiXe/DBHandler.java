@@ -106,6 +106,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("TieuDe",bb.getTieuDe());
         contentValues.put("NoiDung",bb.getNoidung());
         contentValues.put("HinhAnh",bb.getHinhAnh());
+        Log.e("Insert hình ảnh trong sqlite",bb.getHinhAnh());
         mDatabase.insert("BienBao",null,contentValues);
         mDatabase.close();
     }
@@ -178,6 +179,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void updateBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
+        Log.e("Update hình ảnh trong sqlite",bb.getHinhAnh());
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaBB",bb.getMaBB());
         contentValues.put("MaLoaiBB",bb.getMaLoaiBB());
