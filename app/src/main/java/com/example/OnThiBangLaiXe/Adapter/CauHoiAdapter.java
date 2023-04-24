@@ -105,14 +105,15 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         });
         if(ch.getHinhAnh()!=null&&!ch.getHinhAnh().equals("null"))
         {
-            holder.ivCauHoi.setVisibility(View.INVISIBLE);
+            holder.ivCauHoi.setVisibility(View.VISIBLE);
+
             try {
                 File f = new File(context.getDataDir() + "/app_images/", ch.getHinhAnh());
                 Log.d("path", f.getAbsolutePath());
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 holder.ivCauHoi.setImageBitmap(b);
             } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+                holder.ivCauHoi.setImageResource(R.drawable.p101);
             }
         }
         if (ch.getDapAnA() != null&&!ch.getDapAnA().equals("null"))

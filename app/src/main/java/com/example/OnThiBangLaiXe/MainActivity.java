@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     dbHandler.UpdateVersion(snapshot.getValue(int.class));
                     capNhatDatabase();
-                    downloadWithBytes();
+                    downloadWithBytes("BienBao");
+                    downloadWithBytes("CauHoi");
 
                 }
                 else {
@@ -266,31 +267,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-    public void downloadWithBytes(){
-        StorageReference imageRefl = storageReference.child("BienBao");
+    public void downloadWithBytes(String type){
+        StorageReference imageRefl = storageReference.child(type);
         imageRefl.listAll().addOnSuccessListener(listResult -> {
             List<StorageReference> srtList=listResult.getItems();
             for (StorageReference sr : srtList)
             {
-                long SIZE=120*120;
+                long SIZE=500*500;
                 sr.getBytes(SIZE).addOnSuccessListener(bytes -> {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
                     storeImage(bitmap, sr.getName());
+                    Log.e("Img",sr.getName());
                 });
             }
         });
-//        StorageReference imageReflCauHoi = storageReference;
-//        imageReflCauHoi.listAll().addOnSuccessListener(listResult -> {
-//            List<StorageReference> srtList=listResult.getItems();
-//            for (StorageReference sr : srtList)
-//            {
-//                long SIZE=120*120;
-//                sr.getBytes(SIZE).addOnSuccessListener(bytes -> {
-//                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-//                    storeImage(bitmap, sr.getName());
-//                });
-//            }
-//        });
 
     }
     private void removeAllImage()
