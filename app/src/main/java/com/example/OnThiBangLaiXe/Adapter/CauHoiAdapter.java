@@ -46,11 +46,16 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull CauHoiAdapter.ViewHolder holder, int position) {
         CauHoi ch = dsCauHoi.get(position);
-        Log.e("Cau hoi",ch.getDaTraLoiDung()+"");
+        Log.e("CauHoi", String.valueOf(ch.getMaCH()));
+        Log.e("CauHoi", ch.getNoiDung());
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauHoi.size() + " câu |");
-        Log.e("Cau hoi",ch.getDaTraLoiDung()+"");
         if(ch.getLuu()==1)
         {
             holder.ivSave.setImageResource(R.drawable.ico_save_gree);
