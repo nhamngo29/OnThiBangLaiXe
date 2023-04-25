@@ -81,4 +81,10 @@ public class CauHoiActivity extends AppCompatActivity {
 
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
     }
+
+    @Override
+    public void onBackPressed() {
+        MainActivity.tlchAdapter.notifyDataSetChanged();
+        super.onBackPressed();
+    }
 }

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
 
 import java.io.File;
@@ -169,10 +170,9 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             holder.ivDungSai.setImageResource(R.drawable.ico_false);
         }
 
-        int s=2;
-        if(value)
-            s=1;
-        db.updateLuuCauHoi(ch.getMaCH(),s);
+        DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(Boolean.TRUE.equals(value) ? 1 : 2);
+        db.updateLuuCauHoi(ch.getMaCH(), Boolean.TRUE.equals(value) ? 1 : 2);
+
         enableDisableView(holder.itemView.findViewById(R.id.rbA),false);
         enableDisableView(holder.itemView.findViewById(R.id.rbB),false);
         enableDisableView(holder.itemView.findViewById(R.id.rbC),false);

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
     List<BienBao> dsBienBao = new ArrayList<>();
     List<CauHoi> dsCauHoi=new ArrayList<>();
-    TheLoaiCauHoiAdapter tlchAdapter;
+    static TheLoaiCauHoiAdapter tlchAdapter;
     DatabaseReference csdlVersion = database.getReference("Version");
 
 
