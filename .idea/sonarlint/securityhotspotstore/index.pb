@@ -29,8 +29,6 @@ q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/FunctionAdapter.java,6\7\677fb92e1aac78acb2bb11fd9e36f1bcb5155dd0
 j
 :app/src/main/java/com/example/OnThiBangLaiXe/function.java,f\6\f6d4e5b28be9bd7fab7a9737037a5249d6991b1a
-|
-Lapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/LoaiBienBaoAdapter.java,a\e\ae51b1743c0bb8eb6cc5f47ceb789118503dda1f
 m
 =app/src/main/java/com/example/OnThiBangLaiXe/Model/DeThi.java,0\b\0bb20fd6e956328cd132ab372bb2a18fe87fc6cc
 q
@@ -39,15 +37,13 @@ o
 ?app/src/main/java/com/example/OnThiBangLaiXe/DeThiActivity.java,8\f\8f7e1ceddf74703142262438939531cab4e78234
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-z
-Japp/src/main/java/com/example/OnThiBangLaiXe/Adapter/CauTraLoiAdapter.java,e\7\e717d7441a3bc7e04c0d03f150cca9d271b596f6
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
 ~
 Napp/src/main/java/com/example/OnThiBangLaiXe/Adapter/TheLoaiCauHoiAdapter.java,7\b\7b6ad34e5226d759fa173d7a654df0d7270055d7
-v
-Fapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/DeThiAdapter.java,c\0\c0f2d9ab3c6c942929a9fa7919e3f8468e180259
 n
 >app/src/main/java/com/example/OnThiBangLaiXe/Model/CauHoi.java,f\e\feb1e187d62eec967952453c6bf136a1bbd9bdf6
 k
 ;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d
+x
+Happ/src/main/java/com/example/OnThiBangLaiXe/Adapter/BienBaoAdapter.java,e\7\e7a2d83bc402d6460a24dcb838f3d904d622390f

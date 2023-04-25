@@ -34,6 +34,11 @@
                 android:layout_gravity="center" />
         </androidx.appcompat.widget.Toolbar>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCauHoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <com.google.android.material.tabs.TabLayout
             app:tabMode="scrollable"
             android:id="@+id/tab_layout"

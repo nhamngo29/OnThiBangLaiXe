@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
 import com.example.OnThiBangLaiXe.Adapter.CauTraLoiAdapter;
+import com.example.OnThiBangLaiXe.Adapter.menuCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -23,7 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CauTraLoiActivity extends AppCompatActivity {
-    ViewPager2 vp;
+    public static ViewPager2 vp;
+    public static RecyclerView rvCauHoi;
     TextView txtTitle;
     TabLayout tabLayout;
     BottomNavigationView bnv;
@@ -39,6 +42,7 @@ public class CauTraLoiActivity extends AppCompatActivity {
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
 
         vp = findViewById(R.id.vp);
+        rvCauHoi = findViewById(R.id.rvCauHoi);
 
         List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
         dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
@@ -50,7 +54,9 @@ public class CauTraLoiActivity extends AppCompatActivity {
 
         vp.setAdapter(new CauTraLoiAdapter(dsCauTraLoi, this));
         tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setVisibility(View.VISIBLE);
+
+        rvCauHoi.setAdapter(new menuCauHoiAdapter(dsCauTraLoi, this));
+        rvCauHoi.setLayoutManager(new GridLayoutManager(this, 15));
 
         Menu menu = bnv.getMenu();
 
