@@ -53,8 +53,6 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull CauHoiAdapter.ViewHolder holder, int position) {
         CauHoi ch = dsCauHoi.get(position);
-        Log.e("CauHoi", String.valueOf(ch.getMaCH()));
-        Log.e("CauHoi", ch.getNoiDung());
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauHoi.size() + " câu |");
         if(ch.getLuu()==1)
         {
@@ -114,7 +112,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
 
             try {
                 File f = new File(context.getDataDir() + "/app_images/", ch.getHinhAnh());
-                Log.d("path", f.getAbsolutePath());
+
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 holder.ivCauHoi.setImageBitmap(b);
             } catch (FileNotFoundException e) {
@@ -161,7 +159,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         holder.txtGiaiThichCauHoi.setText(ch.getGiaiThich());
         holder.txtGiaiThichCauHoi.setVisibility(View.VISIBLE);
         holder.txtDungSai.setText("Đã học");
-        Log.e("DAp an",ch.getDapAnDung()+"-- --"+value);
+
         if (value)
         {
             holder.ivDungSai.setImageResource(R.drawable.ico_true);

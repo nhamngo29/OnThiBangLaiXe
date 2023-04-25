@@ -80,9 +80,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         processCopy();
         khoiTaoControl();
+        dbHandler = new DBHandler(this);
+        if(isNetworkConnected()&&!kiemTraPhienBan()) {
+            Log.e("Con mang va co phine bang moi","");
+            kiemTraPhienBan();
+        }
+        else {
+            loadDBToDanhSach();
+        }
+
         setSupportActionBar(toolbar);
         navView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -90,28 +98,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navView.setCheckedItem(R.id.item_Home);
         khoiTaoSuKien();
-        dbHandler = new DBHandler(this);
+
+
         // Setup RecycleView
         dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
         dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
         dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
         dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
         dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
-
         tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
 
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
-        if(isNetworkConnected()) {
-            kiemTraPhienBan();
-        }
-        else {
-            DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
-            DanhSach.setDsBienBao(dbHandler.docBienBao());
-            DanhSach.setDsCauHoi(dbHandler.docCauHoi());
-        }
 
     }
     private boolean isNetworkConnected() {
@@ -138,15 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     capNhatDatabase();
                     downloadWithBytes("BienBao");
                     downloadWithBytes("CauHoi");
-
                 }
-                else {
-                    DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
-                    DanhSach.setDsBienBao(dbHandler.docBienBao());
-                    DanhSach.setDsCauHoi(dbHandler.docCauHoi());
 
-
-                }
                 stop();
             }
 
@@ -158,7 +151,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return isLastestVersion[0];
     }
-
+    //Load db vaof danh danh sach
+    private void loadDBToDanhSach()
+    {
+        DanhSach.setDsCauHoi(dbHandler.docCauHoi());
+        DanhSach.setDsBienBao(dbHandler.docBienBao());
+        DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+    }
     private void stop()
     {
         csdlVersion.removeEventListener(vel);
@@ -175,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
 
                     LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
-
                     if (tlch != null)
                     {
                         boolean existed = false;
@@ -256,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             dbHandler.insertCauHoi(tlbb);
 
                         }
-                        DanhSach.getDsCauHoi().add(tlbb);
                     }
                 }
             }
@@ -266,6 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+        loadDBToDanhSach();
     }
     public void downloadWithBytes(String type){
         StorageReference imageRefl = storageReference.child(type);
@@ -341,6 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent init=new Intent(this, DeThiActivity.class);
             startActivity(init);
         });
+
     }
     private void khoiTaoControl()
     {

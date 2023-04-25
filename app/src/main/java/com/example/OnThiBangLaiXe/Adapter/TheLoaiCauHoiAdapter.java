@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.CauHoiActivity;
 import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
+import com.example.OnThiBangLaiXe.Model.CauHoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.example.OnThiBangLaiXe.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdapter.ViewHolder>
@@ -38,11 +41,33 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         return new ViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_theloaicauhoi, parent, false),recyclerViewInterface);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LoaiCauHoi tlch = dsLoaiCauHoi.get(position);
+        List<CauHoi> cauHoiList=new ArrayList<>();
+        int soCauDaTraLoi=0,soCauDaTraLoiDung=0,soCauDaTraLoiSai=0;
+        Log.e("DsCauHoi",DanhSach.getDsCauHoi().size()+"");
+        for(CauHoi dsCauHoi: DanhSach.getDsCauHoi())
+        {
 
+            if(dsCauHoi.getMaLoaiCH()== tlch.getMaLoaiCH())
+            {
+                Log.e("for dap an dung",dsCauHoi.getDaTraLoiDung()+"");
+                cauHoiList.add(dsCauHoi);
+                if(dsCauHoi.getDaTraLoiDung()!=0)
+                {
+                    soCauDaTraLoi+=1;
+                    if(dsCauHoi.getDaTraLoiDung()==1)
+                    {
+                        soCauDaTraLoiDung+=1;
+                    }
+                    else
+                    {
+                        soCauDaTraLoiSai+=1;
+                    }
+                }
+            }
+        }
         try {
             holder.ivTheLoaiCauHoi.setImageResource(context.getResources().getIdentifier(
                     tlch.getHinh(), "drawable", context.getPackageName()));
@@ -52,11 +77,11 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         }
 
         holder.ten.setText(tlch.getTenLoaiCauHoi());
-        holder.soCauHoi.setText(tlch.getSoCauHoiDaTraLoi() + "/" + tlch.getSoCau() + " câu");
-        holder.ketQua.setText(tlch.getSoCauDung() + " câu đúng, "
-                + (tlch.getSoCau() - tlch.getSoCauDung()) + " câu sai");
-        holder.pbKetQua.setMax(tlch.getSoCau());
-        holder.pbKetQua.setProgress(tlch.getSoCauHoiDaTraLoi());
+        holder.soCauHoi.setText(soCauDaTraLoi + "/" + cauHoiList.size() + " câu");
+        holder.ketQua.setText(soCauDaTraLoiDung + " câu đúng, "
+                + soCauDaTraLoiSai + " câu sai");
+        holder.pbKetQua.setMax(cauHoiList.size());
+        holder.pbKetQua.setProgress(soCauDaTraLoi);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, CauHoiActivity.class);

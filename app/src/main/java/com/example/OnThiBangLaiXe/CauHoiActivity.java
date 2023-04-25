@@ -32,7 +32,7 @@ public class CauHoiActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         txtTitle.setText("Câu hỏi ôn thi");
         toolbarBack =findViewById(R.id.toolbarBack);
-        toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
+
         // Mã loại câu hỏi
         int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 1);
         bnv = findViewById(R.id.bottomNavigationView);
@@ -52,7 +52,7 @@ public class CauHoiActivity extends AppCompatActivity {
 
 
         vp.setAdapter(new CauHoiAdapter(dsCauHoi, this));
-
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
 
         Menu menu = bnv.getMenu();
         MenuItem menuItem = menu.findItem(R.id.tiSummit);
