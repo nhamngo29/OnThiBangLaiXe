@@ -1,11 +1,14 @@
 package com.example.OnThiBangLaiXe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,29 +30,44 @@ import java.util.List;
 public class CauTraLoiActivity extends AppCompatActivity {
     public static ViewPager2 vp;
     public static RecyclerView rvCauHoi;
-    TextView txtTitle;
+    private CountDownTimer countDownTimer;
+    private long time=1140000;//19 phút
+    TextView txtTitle,txtNopBai;
+
     TabLayout tabLayout;
+    Toolbar toolbarBack;
     BottomNavigationView bnv;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startTime();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cau_hoi);
-
         txtTitle = findViewById(R.id.txtTitle);
-        txtTitle.setText("Đề thi thử");
+        txtNopBai=findViewById(R.id.txtNopBai);
+        txtNopBai.setVisibility(View.VISIBLE);
         bnv=findViewById(R.id.bottomNavigationView);
+        toolbarBack =findViewById(R.id.toolbarBack);
         // Mã loại câu hỏi
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
 
         vp = findViewById(R.id.vp);
         rvCauHoi = findViewById(R.id.rvCauHoi);
 
-        List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
-        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
-        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
-        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
-        dsCauTraLoi.add(new CauTraLoi(1,1,"A"));
 
+        List<CauTraLoi> dsCauTraLoi=new ArrayList<>();
+        for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
+        {
+            if(ctl.getMaDeThi()==maDeThi)
+                dsCauTraLoi.add(ctl);
+        }
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
 
         vp.setAdapter(new CauTraLoiAdapter(dsCauTraLoi, this));
@@ -86,5 +104,32 @@ public class CauTraLoiActivity extends AppCompatActivity {
 
 //        new TabLayoutMediator(tabLayout, vp, (tab, position)
 //                -> tab.setText(dsCauTraLoi.get(position).getTenLoaiBB())).attach();
+    }
+    void startTime()
+    {
+        countDownTimer=new CountDownTimer(time,1000) {
+            @Override
+            public void onTick(long l) {
+                time=l;
+                updateTime();
+            }
+
+            @Override
+            public void onFinish() {
+                txtTitle.setText("Hết giờ");
+            }
+        }.start();
+    }
+    void updateTime()
+    {
+        int minutes=(int)time/60000;
+        int seconds=(int)time%60000/1000;
+        String timeText;
+        timeText=""+minutes;
+        timeText+=":";
+        if(seconds<10)
+            timeText+="0";
+        timeText+=seconds;
+        txtTitle.setText(timeText);
     }
 }

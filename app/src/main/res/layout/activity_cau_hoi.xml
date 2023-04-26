@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ico_backkk">
             <TextView
+                android:text="Tieu de"
                 android:id="@+id/txtTitle"
                 android:textSize="19sp"
                 android:textStyle="bold"
@@ -32,6 +33,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
+            <TextView
+                android:visibility="invisible"
+                android:paddingRight="10dp"
+                android:text="Nộp bài"
+                android:id="@+id/txtNopBai"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/TEXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right" />
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -52,7 +64,10 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+
+        </androidx.viewpager2.widget.ViewPager2>
 
     </LinearLayout>
 

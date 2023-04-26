@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.OnThiBangLaiXe.Adapter.DeThiAdapter;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 
 import java.util.ArrayList;
@@ -24,14 +25,12 @@ public class DeThiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_de_thi);
 
         dsDeThi = new ArrayList<>();
+        toolbarBack =findViewById(R.id.toolbarBack);
 
-        DeThi dt1 = new DeThi(0, "Đề 1");
-        DeThi dt2 = new DeThi(1, "Đề 2");
 
-        dsDeThi.add(dt1);
-        dsDeThi.add(dt2);
 
-        dtAdapter = new DeThiAdapter(dsDeThi, this);
+
+        dtAdapter = new DeThiAdapter(DanhSach.getDsDeThi(), this);
 
 
         RecyclerView rv = findViewById(R.id.rvDeThi);

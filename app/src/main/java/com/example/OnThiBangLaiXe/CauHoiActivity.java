@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CauHoiActivity extends AppCompatActivity {
-    ViewPager2 vp;
+    public ViewPager2 vp;
     TextView txtTitle;
     BottomNavigationView bnv;
     Toolbar toolbarBack;
@@ -41,7 +41,7 @@ public class CauHoiActivity extends AppCompatActivity {
         DBHandler db=new DBHandler(this);
         List<CauHoi> dsCauHoi = new ArrayList<>();
 
-        for(CauHoi a:db.docCauHoi())
+        for(CauHoi a:DanhSach.getDsCauHoi())
         {
 
             if(a.getMaLoaiCH()==maLoaiCH)

@@ -157,8 +157,11 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
     private void setDapAn(CauHoiAdapter.ViewHolder holder, int position, Boolean value)
     {
         CauHoi ch = dsCauHoi.get(position);
-        holder.txtGiaiThichCauHoi.setText(ch.getGiaiThich());
-        holder.txtGiaiThichCauHoi.setVisibility(View.VISIBLE);
+        if(ch.getGiaiThich()!=null||!ch.getGiaiThich().isEmpty()||!ch.getGiaiThich().equals("null"))
+        {
+            holder.txtGiaiThichCauHoi.setText(ch.getGiaiThich());
+            holder.txtGiaiThichCauHoi.setVisibility(View.VISIBLE);
+        }
         holder.txtDungSai.setText("Đã học");
 
         if (value)
@@ -171,7 +174,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         }
 
         DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(Boolean.TRUE.equals(value) ? 1 : 2);
-        db.updateLuuCauHoi(ch.getMaCH(), Boolean.TRUE.equals(value) ? 1 : 2);
+        db.updateDaTraLoi(ch.getMaCH(), Boolean.TRUE.equals(value) ? 1 : 2);
 
         enableDisableView(holder.itemView.findViewById(R.id.rbA),false);
         enableDisableView(holder.itemView.findViewById(R.id.rbB),false);

@@ -28,7 +28,9 @@ import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
+import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
+import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
@@ -157,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DanhSach.setDsCauHoi(dbHandler.docCauHoi());
         DanhSach.setDsBienBao(dbHandler.docBienBao());
         DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
+        DanhSach.setDsDeThi(dbHandler.docDeThi());
+        DanhSach.setDsCauTraLoi(dbHandler.docCauTraLoi());
     }
     private void stop()
     {
@@ -252,6 +256,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         else
                         {
                             dbHandler.insertCauHoi(tlbb);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference csdlDeThi= database.getReference("DeThi");
+        csdlDeThi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (int i = 0; i < snapshot.getChildrenCount(); i++)
+                {
+
+                    DeThi tlbb =snapshot.child(String.valueOf(i)).getValue(DeThi.class);
+                    Log.e("DE de thi",tlbb.getMaDeThi()+"");
+                    if(tlbb != null)
+                    {
+
+                        if(dbHandler.finDDeThiByID(tlbb.getMaDeThi()))
+                        {
+                            dbHandler.updateDeThi(tlbb);
+
+                        }
+                        else
+                        {
+                            dbHandler.insertDeThi(tlbb);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference csdlCauTraLoi= database.getReference("CauTraLoi");
+        csdlCauTraLoi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (int i = 0; i < snapshot.getChildrenCount(); i++)
+                {
+
+                    CauTraLoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauTraLoi.class);
+
+                    if(tlbb != null)
+                    {
+
+                        if(dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(),tlbb.getMaCH()))
+                        {
+                            dbHandler.updateCauTraLoi(tlbb);
+
+                        }
+                        else
+                        {
+                            dbHandler.insertCauTraLoi(tlbb);
 
                         }
                     }

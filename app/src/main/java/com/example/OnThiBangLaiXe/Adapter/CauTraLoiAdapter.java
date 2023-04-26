@@ -1,15 +1,19 @@
 package com.example.OnThiBangLaiXe.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.OnThiBangLaiXe.CauHoiActivity;
 import com.example.OnThiBangLaiXe.DBHandler;
@@ -24,6 +28,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 {
     private List<CauTraLoi> dsCauTraLoi;
     private Context context;
+
     private DBHandler db;
 
     public CauTraLoiAdapter(List<CauTraLoi> dsCauTraLoi, Context context) {
@@ -40,7 +45,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CauTraLoiAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CauTraLoiAdapter.ViewHolder holder,int position) {
         CauHoi ch = null;
 
         CauTraLoi ctl = dsCauTraLoi.get(position);
@@ -57,7 +62,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 
         holder.txtNoiDungCauHoi.setText(ch.getNoiDung());
 
-        if (ch.getDapAnA() != null)
+        if (ch.getDapAnA() != null&&!ch.getDapAnA().equals("null"))
         {
             holder.rbA.setText(ch.getDapAnA());
             holder.rbA.setVisibility(View.VISIBLE);
@@ -65,7 +70,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbA.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("A"));
         }
 
-        if (ch.getDapAnB() != null)
+        if (ch.getDapAnB() != null&&!ch.getDapAnB().equals("null"))
         {
             holder.rbB.setText(ch.getDapAnB());
             holder.rbB.setVisibility(View.VISIBLE);
@@ -73,51 +78,58 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbB.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("B"));
         }
 
-        if (ch.getDapAnC() != null)
+        if (ch.getDapAnC() != null&&!ch.getDapAnC().equals("null"))
         {
             holder.rbC.setText(ch.getDapAnC());
             holder.rbC.setVisibility(View.VISIBLE);
+            holder.rbC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b)
+                    {
 
-            holder.rbC.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("C"));
+                        ctl.setDapAnChon("C");
+                        Log.e("C","C");
+                        setDapAn(holder, position,ctl);
+                    }
+                }
+            });
         }
 
-        if (ch.getDapAnD() != null)
+        if (ch.getDapAnD() != null&&!ch.getDapAnD().equals("null"))
         {
             holder.rbD.setText(ch.getDapAnD());
             holder.rbD.setVisibility(View.VISIBLE);
-
             holder.rbD.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("D"));
+
         }
     }
 
-    private void setDapAn(CauTraLoiAdapter.ViewHolder holder, int position, Boolean value)
+    private void setDapAn(CauTraLoiAdapter.ViewHolder holder, int position, CauTraLoi value)
     {
-        CauHoi ch = null;
-
-        for (CauHoi cauHoi : DanhSach.getDsCauHoi())
-        {
-            if (cauHoi.getMaCH() == dsCauTraLoi.get(position).getMaCH())
-            {
-
-            }
-        }
-
-        holder.txtGiaiThichCauHoi.setText(ch.getGiaiThich());
-        int s=2;
-        if(value)
-            s=1;
-        ch.setDaTraLoiDung(s);
-
-        holder.txtDungSai.setText(" Đã học");
-
-        if (Boolean.TRUE.equals(ch.getGiaiThich()))
-        {
-            holder.ivDungSai.setImageResource(R.drawable.ico_true);
-        }
-        else
-        {
-            holder.ivDungSai.setImageResource(R.drawable.ico_false);
-        }
+        //Thuwjc hien doi backgroup o day
+//        CauHoi ch = null;
+//
+//        for (CauHoi cauHoi : DanhSach.getDsCauHoi())
+//        {
+//            if (cauHoi.getMaCH() == dsCauTraLoi.get(position).getMaCH())
+//            {
+//
+//            }
+//        }
+//
+//        ch.setDaTraLoiDung(s);
+//
+//        holder.txtDungSai.setText(" Đã học");
+//
+//        if (Boolean.TRUE.equals(ch.getGiaiThich()))
+//        {
+//            holder.ivDungSai.setImageResource(R.drawable.ico_true);
+//        }
+//        else
+//        {
+//            holder.ivDungSai.setImageResource(R.drawable.ico_false);
+//        }
     }
 
     @Override

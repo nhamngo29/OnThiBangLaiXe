@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
+import com.example.OnThiBangLaiXe.Model.CauTraLoi;
+import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 
 import java.util.ArrayList;
@@ -33,13 +35,13 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
-
+    //Kiêm,r tra vervsion
     public boolean isLastestVersion(int version)
     {
+        mDatabase=this.getWritableDatabase();
         Cursor cursor = mDatabase.rawQuery("select GiaTri from ThongTin where TenThongTin='PB'", null);
 
         int pb = 0;
-
         if (cursor.moveToFirst()) {
             do {
                 pb = Integer.parseInt(cursor.getString(0));
@@ -50,6 +52,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return pb == version;
     }
+    //Upodate version
     void UpdateVersion(int version)
     {
         mDatabase=this.getWritableDatabase();
@@ -59,8 +62,37 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.update("ThongTin",contentValues,"TenThongTin=?",new String[]{"PB"});
         mDatabase.close();
     }
+    //get list de thi
+    public List<DeThi> docDeThi()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<DeThi> dsDeThi = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from DeThi", null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsDeThi.add(new DeThi(cursor.getInt(0), cursor.getString(1)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsDeThi;
 
-
+    }
+    public List<CauTraLoi> docCauTraLoi()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from CauTraLoi", null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsCauTraLoi.add(new CauTraLoi(cursor.getInt(0), cursor.getInt(1)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsCauTraLoi;
+    }
+    //get list loại biển báo
     public List<LoaiBienBao> docLoaiBienBao()
     {
         mDatabase=this.getWritableDatabase();
@@ -74,6 +106,31 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return dsLoaiBienBao;
     }
+    //Get list CauTraLoi By Id ma de thi
+    public List<CauTraLoi> getListCauTraLoiByMaDeThi(int id)
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauTraLoi> dsCTL = new ArrayList<>();
+        Cursor cursor=mDatabase.rawQuery("select * from CauTraLoi where MaDeThi=?",new String[] {String.valueOf(id)});
+        if (cursor.moveToFirst()&&cursor.getCount()>0) {
+            do {
+                dsCTL.add(new CauTraLoi(cursor.getInt(0),cursor.getInt(1),cursor.getString(2)));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return dsCTL;
+    }
+    public CauHoi getCauHoiByID(int id)
+    {
+        mDatabase=this.getWritableDatabase();
+        Cursor cursor=mDatabase.rawQuery("select * from CauHoi where MaCH=?",new String[] {String.valueOf(id)});
+        cursor.moveToFirst();
+        if(cursor.getCount()>0)
+            return new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13));
+        cursor.close();
+        return null;
+    }
+    //Get list Biển báo
     public List<BienBao> docBienBao()
     {
         mDatabase=this.getWritableDatabase();
@@ -86,6 +143,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return dsLoaiBienBao;
     }
+    //Get list câu hỏi
     public List<CauHoi> docCauHoi()
     {
         mDatabase=this.getWritableDatabase();
@@ -103,21 +161,30 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return dsCauHoi;
     }
+    //Insert biển báo
     public void insertBB(BienBao bb)
     {
-        mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaBB",bb.getMaBB());
         contentValues.put("MaLoaiBB",bb.getMaLoaiBB());
         contentValues.put("TieuDe",bb.getTieuDe());
         contentValues.put("NoiDung",bb.getNoidung());
         contentValues.put("HinhAnh",bb.getHinhAnh());
-        mDatabase.insert("BienBao",null,contentValues);
-        mDatabase.close();
+        insert("BienBao",contentValues);
+
     }
+    //Insert Đề thi
+    public void insertDeThi(DeThi dt)
+    {
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaDeThi",dt.getMaDeThi());
+        contentValues.put("TenDeThi",dt.getTenDeThi());
+        insert("DeThi",contentValues);
+    }
+    //Insert câu hỏi
     public void insertCauHoi(CauHoi ch)
     {
-        mDatabase=this.getWritableDatabase();
+
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaCH",ch.getMaCH());
         contentValues.put("MaLoaiCH",ch.getMaLoaiCH());
@@ -131,14 +198,30 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("DapAnDung",ch.getDapAnDung());
         contentValues.put("GiaiThich",ch.getGiaiThich());
         contentValues.put("HaySai",ch.getHaySai());
-        mDatabase.insert("CauHoi",null,contentValues);
-        mDatabase.close();
+        insert("CauHoi",contentValues);
     }
-    public void getListBB()
+    //insert cau tra loi
+    public void insertCauTraLoi(CauTraLoi ctl)
     {
-
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaDeThi",ctl.getMaDeThi());
+        contentValues.put("MaCauHoi",ctl.getMaCH());
+        insert("CauTraLoi",contentValues);
     }
-    public void updateLuuCauHoi(int MaCH,int DaTraLoiDung)
+    private void insert(String table,ContentValues c)
+    {
+        try {
+            mDatabase=this.getWritableDatabase();
+            mDatabase.insert(table,null,c);
+            mDatabase.close();
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    //Update đã trả lời câu hỏi
+    public void updateDaTraLoi(int MaCH, int DaTraLoiDung)
     {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
@@ -147,6 +230,7 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(MaCH)});
 
     }
+    //Update câu hỏi luuw lại của user
     public void updateLuuLaiCauHoi(int MaCH,int Luu)
     {
         mDatabase=this.getWritableDatabase();
@@ -155,6 +239,7 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(MaCH)});
 
     }
+    //Tìm kiểm Biển báo theo ID
     Boolean findBBByID(String MaBB)
     {
         mDatabase=this.getWritableDatabase();
@@ -171,6 +256,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor3.close();
         return false;
     }
+    //Tìm kiếm câu hỏi theo ID
     Boolean findCHByID(int ID)
     {
         mDatabase=this.getWritableDatabase();
@@ -192,12 +278,48 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor3.close();
         return false;
     }
+    //Tìm kiếm Ccau tra loi theo ID
+    Boolean findCauTraLoiByID(int idDeThi,int idCauHoi)
+    {
+        mDatabase=this.getWritableDatabase();
+        String selection = "MaDeThi="+idDeThi+" AND "+"MaCauHoi="+idCauHoi;
+        String[] columns ={"MaDeThi","MaCauHoi"};
+        Cursor cursor3=mDatabase.query("CauTraLoi",columns,selection,null,null,null,null);
+        cursor3.moveToFirst();
+        if(cursor3!=null&&cursor3.getCount()>0)
+        {
+            if(idDeThi==cursor3.getInt(0) && idCauHoi==cursor3.getInt(1))
+            {
+                return true;
+            }
+        }
+        cursor3.close();
+        return false;
+    }
+    Boolean finDDeThiByID(int ID)
+    {
+        mDatabase=this.getWritableDatabase();
+        String selection = "MaDeThi="+ID;
+        String[] columns ={"MaDeThi"};
+        Cursor cursor3=mDatabase.query("DeThi",columns,selection,null,null,null,null);
+        cursor3.moveToFirst();
+        if(cursor3!=null&&cursor3.getCount()>0)
+        {
+            if(ID==cursor3.getInt(0))
+            {
+
+                return true;
+            }
+        }
+        cursor3.close();
+        return false;
+    }
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
         db.setVersion(newVersion);
     }
-
+    //Update biển báo
     public void updateBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
@@ -210,8 +332,16 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.update("BienBao",contentValues,"MaBB=?", new String[]{String.valueOf(bb.getMaBB())});
         mDatabase.close();
     }
-
-
+    //Update đề thi
+    public void updateDeThi(DeThi dt)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("TenDeThi",dt.getTenDeThi());
+        mDatabase.update("DeThi",contentValues,"MaDeThi=?",new String[]{String.valueOf(dt.getMaDeThi())});
+        mDatabase.close();
+    }
+    //Update câu hỏi
     public void updateCauHoi(CauHoi ch)
     {
         mDatabase=this.getWritableDatabase();
@@ -229,6 +359,25 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("GiaiThich",ch.getGiaiThich());
         contentValues.put("HaySai",ch.getHaySai());
         mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(ch.getMaCH())});
+        mDatabase.close();
+    }
+    //Update câu trả lời
+    public void updateCauTraLoi(CauTraLoi ctl)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaCauHoi",ctl.getMaCH());
+        contentValues.put("MaDeThi",ctl.getMaDeThi());
+        mDatabase.update("CauTraLoi",contentValues,"MaCauHoi=? AND MaDeThi=?", new String[]{String.valueOf(ctl.getMaCH()),String.valueOf(ctl.getMaDeThi())});
+        mDatabase.close();
+    }
+    //Update dap an da chon trong cau tra loi
+    public void updateDapAnChon(CauTraLoi ctl)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("DapAnChon",ctl.getMaCH());
+        mDatabase.update("CauTraLoi",contentValues,"MaCauHoi=? AND MaDeThi=?", new String[]{String.valueOf(ctl.getMaCH()),String.valueOf(ctl.getMaDeThi())});
         mDatabase.close();
     }
 }

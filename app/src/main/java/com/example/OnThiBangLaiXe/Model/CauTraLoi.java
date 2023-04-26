@@ -37,4 +37,8 @@ public class CauTraLoi {
         MaCH = maCH;
         DapAnChon = dapAnChon;
     }
+    public CauTraLoi(int maDeThi, int maCH) {
+        MaDeThi = maDeThi;
+        MaCH = maCH;
+    }
 }

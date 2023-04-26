@@ -65,6 +65,7 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
 
         int text = position + 1;
         holder.btnCauHoi.setOnClickListener(v -> CauTraLoiActivity.vp.setCurrentItem(position, true));
+
         Log.d("Test", String.valueOf(text));
         holder.btnCauHoi.setText(String.valueOf(text));
     }

@@ -1,23 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@drawable/border_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp"
-    style="@style/BoxDailog"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    <TextView
-        android:id="@+id/txtTenDeThi"
+    android:layout_width="wrap_content"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Đề thi"
-        android:textColor="@color/TEXT"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:padding="15dp"/>
+        android:background="@drawable/border_layout"
+        android:padding="10dp">
 
+        <TextView
+            android:id="@+id/txt_DeThi"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+
+
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Đề 01"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/ivCauDung"
+            android:layout_width="19dp"
+            android:layout_height="17dp"
+            android:layout_below="@+id/txt_DeThi"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="19dp"
+
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            app:srcCompat="@drawable/ico_true" />
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/txtSoCauDung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txt_DeThi"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="-28dp"
+            android:layout_toEndOf="@+id/ivCauDung"
+            android:text="0" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/ivSai"
+            android:layout_width="19dp"
+            android:layout_height="17dp"
+            android:layout_below="@+id/txt_DeThi"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/txtSoCauDung"
+            app:srcCompat="@drawable/ico_false" />
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/txtSoCauSai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txt_DeThi"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="-28dp"
+            android:layout_toEndOf="@+id/ivSai"
+            android:text="1" />
+    </RelativeLayout>
 </LinearLayout>

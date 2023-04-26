@@ -1,30 +1,30 @@
 package com.example.OnThiBangLaiXe.Model;
 
 public class DeThi {
-    private int maDeThi;
-    private String tenDeThi;
+    private int MaDeThi;
+    private String TenDeThi;
 
     public int getMaDeThi() {
-        return maDeThi;
+        return MaDeThi;
     }
 
     public void setMaDeThi(int maDeThi) {
-        this.maDeThi = maDeThi;
+        MaDeThi = maDeThi;
     }
 
     public String getTenDeThi() {
-        return tenDeThi;
+        return TenDeThi;
     }
 
     public void setTenDeThi(String tenDeThi) {
-        this.tenDeThi = tenDeThi;
+        TenDeThi = tenDeThi;
     }
 
     public DeThi() {
     }
 
     public DeThi(int maDeThi, String tenDeThi) {
-        this.maDeThi = maDeThi;
-        this.tenDeThi = tenDeThi;
+        MaDeThi = maDeThi;
+        TenDeThi = tenDeThi;
     }
 }

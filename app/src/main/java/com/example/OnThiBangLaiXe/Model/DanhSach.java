@@ -7,7 +7,23 @@ public class DanhSach {
     private static List<LoaiBienBao> dsLoaiBienBao = new ArrayList<>();
     private static List<BienBao> dsBienBao = new ArrayList<>();
     private static List<CauHoi> dsCauHoi = new ArrayList<>();
+    private static List<DeThi> dsDeThi = new ArrayList<>();
+    private static List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
+    public static List<DeThi> getDsDeThi() {
+        return dsDeThi;
+    }
 
+    public static void setDsDeThi(List<DeThi> dsDeThi) {
+        DanhSach.dsDeThi = dsDeThi;
+    }
+
+    public static List<CauTraLoi> getDsCauTraLoi() {
+        return dsCauTraLoi;
+    }
+
+    public static void setDsCauTraLoi(List<CauTraLoi> dsCauTraLoi) {
+        DanhSach.dsCauTraLoi = dsCauTraLoi;
+    }
     public static List<LoaiBienBao> getDsLoaiBienBao() {
         return dsLoaiBienBao;
     }
