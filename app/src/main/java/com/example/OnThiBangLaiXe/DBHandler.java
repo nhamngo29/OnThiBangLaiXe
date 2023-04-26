@@ -320,6 +320,14 @@ public class DBHandler extends SQLiteOpenHelper {
         db.setVersion(newVersion);
     }
     //Update biển báo
+    public void updateDeThi(int MaDT)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("DapAnChon","0");
+        mDatabase.update("CauTraLoi",contentValues,"MaDeThi=?", new String[]{String.valueOf(MaDT)});
+        mDatabase.close();
+    }
     public void updateBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
@@ -376,7 +384,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
-        contentValues.put("DapAnChon",ctl.getMaCH());
+        contentValues.put("DapAnChon",ctl.getDapAnChon());
         mDatabase.update("CauTraLoi",contentValues,"MaCauHoi=? AND MaDeThi=?", new String[]{String.valueOf(ctl.getMaCH()),String.valueOf(ctl.getMaDeThi())});
         mDatabase.close();
     }

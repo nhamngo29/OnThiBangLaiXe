@@ -2,6 +2,8 @@ package com.example.OnThiBangLaiXe.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,9 @@ import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.ViewHolder>
@@ -34,7 +39,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
     public CauTraLoiAdapter(List<CauTraLoi> dsCauTraLoi, Context context) {
         this.context = context;
         this.dsCauTraLoi = dsCauTraLoi;
-        db=new DBHandler(context);
+        db=new DBHandler(this.context);
     }
 
     @NonNull
@@ -42,6 +47,11 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
     public CauTraLoiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CauTraLoiAdapter.ViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cau_hoi, parent, false));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -67,15 +77,35 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbA.setText(ch.getDapAnA());
             holder.rbA.setVisibility(View.VISIBLE);
 
-            holder.rbA.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("A"));
+            holder.rbA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b)
+                    {
+                        ctl.setDapAnChon("A");
+                        setDapAn(holder, position,ctl);
+                        db.updateDapAnChon(ctl);
+                    }
+
+                }
+            });
         }
 
         if (ch.getDapAnB() != null&&!ch.getDapAnB().equals("null"))
         {
             holder.rbB.setText(ch.getDapAnB());
             holder.rbB.setVisibility(View.VISIBLE);
-
-            holder.rbB.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("B"));
+            holder.rbB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b)
+                    {
+                        ctl.setDapAnChon("B");
+                        setDapAn(holder, position,ctl);
+                        db.updateDapAnChon(ctl);
+                    }
+                }
+            });
         }
 
         if (ch.getDapAnC() != null&&!ch.getDapAnC().equals("null"))
@@ -89,8 +119,8 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                     {
 
                         ctl.setDapAnChon("C");
-                        Log.e("C","C");
                         setDapAn(holder, position,ctl);
+                        db.updateDapAnChon(ctl);
                     }
                 }
             });
@@ -100,8 +130,27 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
         {
             holder.rbD.setText(ch.getDapAnD());
             holder.rbD.setVisibility(View.VISIBLE);
-            holder.rbD.setOnCheckedChangeListener((i, v) -> ctl.setDapAnChon("D"));
+            holder.rbD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    ctl.setDapAnChon("D");
+                    setDapAn(holder, position,ctl);
+                    db.updateDapAnChon(ctl);
+                }
+            });
 
+        }
+        if(ch.getHinhAnh()!=null&&!ch.getHinhAnh().equals("null"))
+        {
+            holder.ivCauHoi.setVisibility(View.VISIBLE);
+            try {
+                File f = new File(context.getDataDir() + "/app_images/", ch.getHinhAnh());
+
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                holder.ivCauHoi.setImageBitmap(b);
+            } catch (FileNotFoundException e) {
+                holder.ivCauHoi.setImageResource(R.drawable.p101);
+            }
         }
     }
 

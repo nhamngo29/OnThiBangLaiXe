@@ -1,5 +1,6 @@
 package com.example.OnThiBangLaiXe;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
@@ -45,6 +47,8 @@ public class CauTraLoiActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +60,10 @@ public class CauTraLoiActivity extends AppCompatActivity {
         toolbarBack =findViewById(R.id.toolbarBack);
         // Mã loại câu hỏi
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
-
+        DBHandler db=new DBHandler(this);
         vp = findViewById(R.id.vp);
         rvCauHoi = findViewById(R.id.rvCauHoi);
-
+        db.updateDeThi(maDeThi);//set về 0 để biết đề thi này đã được thi
 
         List<CauTraLoi> dsCauTraLoi=new ArrayList<>();
         for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
@@ -67,7 +71,27 @@ public class CauTraLoiActivity extends AppCompatActivity {
             if(ctl.getMaDeThi()==maDeThi)
                 dsCauTraLoi.add(ctl);
         }
-        toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
+        toolbarBack.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+                alertDialog.setTitle("Thông báo");
+                alertDialog.setMessage("Dữ liệu bài thi đang làm sẽ không được lưu lại,bạn có chắc chắn muốn thoát?");
+                alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                });
+                alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+        });
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
 
         vp.setAdapter(new CauTraLoiAdapter(dsCauTraLoi, this));
