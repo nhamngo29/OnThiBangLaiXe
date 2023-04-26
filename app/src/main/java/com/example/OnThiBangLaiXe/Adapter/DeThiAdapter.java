@@ -51,13 +51,10 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
         for(CauTraLoi ctl:dsCTL)
         {
             CauHoi a=db.getCauHoiByID(ctl.getMaCH());
-
             if(a.getDapAnDung().equals(ctl.getDapAnChon()))
                 CauTraLoiDung++;
             else if(ctl.getDapAnChon()!=null)
                 CauTraLoiSai++;
-
-            Log.e("So cau tra loi sai",CauTraLoiSai+"");
         }
         if(CauTraLoiSai>=5)
         {

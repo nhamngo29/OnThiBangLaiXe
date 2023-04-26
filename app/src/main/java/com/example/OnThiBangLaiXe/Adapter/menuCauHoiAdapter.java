@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,21 +54,30 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
             }
         }
 
-        if (ch.getMaLoaiCH() == 0) // mã loại câu hỏi điểm liệt
+        if (ch.getMaLoaiCH() == 1) // mã loại câu hỏi điểm liệt
         {
-            //insert code thay đổi background cho câu điểm liệt
+            holder.btnCauHoi.setBackgroundColor(Color.RED);
+            Log.d("Ma CH", ch.getMaCH()+"");
         }
-
-        if (ctl.getDapAnChon() == "Dáp án đúng")
-        {
-            //insert code thay đổi background cho câu hỏi theo đúng sai
-        }
-
         int text = position + 1;
-        holder.btnCauHoi.setOnClickListener(v -> CauTraLoiActivity.vp.setCurrentItem(position, true));
-
+        holder.btnCauHoi.setOnClickListener(v -> CauTraLoiActivity.vp.setCurrentItem(position, false));
         Log.d("Test", String.valueOf(text));
         holder.btnCauHoi.setText(String.valueOf(text));
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    public void setColorSelected(int position)
+    {
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @Override

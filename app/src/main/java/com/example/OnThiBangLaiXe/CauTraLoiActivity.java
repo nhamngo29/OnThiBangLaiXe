@@ -33,7 +33,8 @@ public class CauTraLoiActivity extends AppCompatActivity {
     public static ViewPager2 vp;
     public static RecyclerView rvCauHoi;
     private CountDownTimer countDownTimer;
-    private long time=1140000;//19 phút
+//    private long time=1140000;//19 phút
+    private long time=10000;//19 phút
     TextView txtTitle,txtNopBai;
 
     TabLayout tabLayout;
@@ -45,10 +46,6 @@ public class CauTraLoiActivity extends AppCompatActivity {
         super.onStart();
         startTime();
     }
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +60,6 @@ public class CauTraLoiActivity extends AppCompatActivity {
         DBHandler db=new DBHandler(this);
         vp = findViewById(R.id.vp);
         rvCauHoi = findViewById(R.id.rvCauHoi);
-        db.updateDeThi(maDeThi);//set về 0 để biết đề thi này đã được thi
-
         List<CauTraLoi> dsCauTraLoi=new ArrayList<>();
         for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
         {
@@ -128,6 +123,27 @@ public class CauTraLoiActivity extends AppCompatActivity {
 
 //        new TabLayoutMediator(tabLayout, vp, (tab, position)
 //                -> tab.setText(dsCauTraLoi.get(position).getTenLoaiBB())).attach();
+        txtNopBai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+                alertDialog.setTitle("Thông báo");
+                alertDialog.setMessage("Bạn có chắn chắn muốn nộp bài không ?");
+                alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Kết quả
+                    }
+                });
+                alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+        });
     }
     void startTime()
     {
@@ -141,6 +157,7 @@ public class CauTraLoiActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 txtTitle.setText("Hết giờ");
+                //Chuyển qua kết quả luôn
             }
         }.start();
     }

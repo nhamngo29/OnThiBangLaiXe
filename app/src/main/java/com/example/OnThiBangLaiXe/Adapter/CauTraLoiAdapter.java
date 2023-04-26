@@ -56,7 +56,7 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull CauTraLoiAdapter.ViewHolder holder,int position) {
-        CauHoi ch = null;
+        CauHoi ch = new CauHoi();
 
         CauTraLoi ctl = dsCauTraLoi.get(position);
 
@@ -67,7 +67,37 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                 ch = cauHoi;
             }
         }
+        if(ch.getLuu()==1)
+        {
+            holder.ivSave.setImageResource(R.drawable.ico_save_gree);
+            holder.ivSave.setTag(R.drawable.ico_save_gree);
+        }
+        CauHoi finalCh = ch;
+        holder.ivSave.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+
+                ImageView imageView = (ImageView) view;
+                assert(R.id.ivSave == imageView.getId());
+                Integer integer = (Integer) imageView.getTag();
+                integer = integer == null ? 0 : integer;
+                switch(integer) {
+                    case R.drawable.ico_save_gree:
+                        imageView.setImageResource(R.drawable.ico_save);
+                        imageView.setTag(R.drawable.ico_save);
+                        db.updateLuuLaiCauHoi(finalCh.getMaCH(),0);
+                        break;
+                    case R.drawable.ico_save:
+                    default:
+                        imageView.setImageResource(R.drawable.ico_save_gree);
+                        imageView.setTag(R.drawable.ico_save_gree);
+                        db.updateLuuLaiCauHoi(finalCh.getMaCH(),1);
+                        break;
+                }
+
+            }
+        });
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauTraLoi.size() + " câu |");
 
         holder.txtNoiDungCauHoi.setText(ch.getNoiDung());
@@ -117,10 +147,10 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b)
                     {
-
                         ctl.setDapAnChon("C");
                         setDapAn(holder, position,ctl);
                         db.updateDapAnChon(ctl);
+
                     }
                 }
             });
@@ -188,19 +218,15 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
-        private final TextView txtNoiDungCauHoi, txtGiaiThichCauHoi, txtSoCauHoi, txtDungSai;
+        private final TextView txtNoiDungCauHoi, txtSoCauHoi;
         private final RadioButton rbA, rbB, rbC, rbD;
-        private final RecyclerView rvCauHoi;
-        private final ImageView ivDungSai, ivCauHoi;
+        private final ImageView  ivCauHoi,ivSave;;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            rvCauHoi = itemView.findViewById(R.id.rvGiaiThichBienBao);
             txtSoCauHoi = itemView.findViewById(R.id.txtSoCauHoi);
-            txtDungSai = itemView.findViewById(R.id.txtDungSai);
             txtNoiDungCauHoi = itemView.findViewById(R.id.txtNoiDungCauHoi);
-            txtGiaiThichCauHoi = itemView.findViewById(R.id.txtGiaiThichCauHoi);
-            ivDungSai = itemView.findViewById(R.id.ivDungSai);
             ivCauHoi = itemView.findViewById(R.id.ivCauHoi);
+            ivSave=itemView.findViewById(R.id.ivSave);
             rbA = itemView.findViewById(R.id.rbA);
             rbB = itemView.findViewById(R.id.rbB);
             rbC = itemView.findViewById(R.id.rbC);

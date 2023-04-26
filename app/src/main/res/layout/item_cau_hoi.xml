@@ -31,7 +31,7 @@
             android:id="@+id/txtDungSai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đã học"
+            android:text=""
             android:textSize="12sp"
 
             app:layout_constraintStart_toEndOf="@+id/txtSoCauHoi"
