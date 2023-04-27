@@ -11,9 +11,12 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
@@ -157,7 +160,18 @@ public class CauTraLoiActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 txtTitle.setText("Hết giờ");
-                //Chuyển qua kết quả luôn
+                final AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+                alertDialog.setTitle("Thông báo");
+                alertDialog.setMessage("Hết giờ");
+                alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Kết quả
+                    }
+                });
+                final AlertDialog dialog = alertDialog.create();
+                alertDialog.show();
+
             }
         }.start();
     }

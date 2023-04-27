@@ -85,13 +85,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         processCopy();
         khoiTaoControl();
         dbHandler = new DBHandler(this);
-        if(isNetworkConnected()&&!kiemTraPhienBan()) {
+        if(isNetworkConnected()) {
             Log.e("Con mang va co phine bang moi","");
             kiemTraPhienBan();
         }
-        else {
-            loadDBToDanhSach();
-        }
+        loadDBToDanhSach();
 
         setSupportActionBar(toolbar);
         navView.bringToFront();
@@ -441,6 +439,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String getDatabasePath() {
         return getApplicationInfo().dataDir + DB_PATH_SUFFIX+ DATABASE_NAME;
     }
+    //Coppy db vao database cua mays
     public void CopyDataBaseFromAsset() {
 
         try {
