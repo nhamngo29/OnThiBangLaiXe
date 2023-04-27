@@ -320,12 +320,15 @@ public class DBHandler extends SQLiteOpenHelper {
         db.setVersion(newVersion);
     }
     //Update biển báo
-    public void updateDeThi(int MaDT)
+    public void updateCauTraLoi(List<CauTraLoi> ctl)
     {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
-        contentValues.put("DapAnChon","0");
-        mDatabase.update("CauTraLoi",contentValues,"MaDeThi=?", new String[]{String.valueOf(MaDT)});
+        for (CauTraLoi tl:ctl)
+        {
+            contentValues.put("DapAnChon",tl.getDapAnChon());
+            mDatabase.update("CauTraLoi",contentValues,"MaDeThi=? AND MaCauHoi=?", new String[]{String.valueOf(tl.getMaDeThi()),String.valueOf(tl.getMaCH())});
+        }
         mDatabase.close();
     }
     public void updateBB(BienBao bb)

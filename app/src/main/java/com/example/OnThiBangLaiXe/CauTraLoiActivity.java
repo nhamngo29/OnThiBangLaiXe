@@ -37,12 +37,14 @@ public class CauTraLoiActivity extends AppCompatActivity {
     public static RecyclerView rvCauHoi;
     private CountDownTimer countDownTimer;
 //    private long time=1140000;//19 phút
-    private long time=10000;//19 phút
+    private long time=10000;//10s dung de test
     TextView txtTitle,txtNopBai;
 
     TabLayout tabLayout;
     Toolbar toolbarBack;
     BottomNavigationView bnv;
+    private DBHandler db;
+    private List<CauTraLoi> dsCauTraLoi;
 
     @Override
     protected void onStart() {
@@ -60,14 +62,14 @@ public class CauTraLoiActivity extends AppCompatActivity {
         toolbarBack =findViewById(R.id.toolbarBack);
         // Mã loại câu hỏi
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
-        DBHandler db=new DBHandler(this);
+        db=new DBHandler(this);
         vp = findViewById(R.id.vp);
         rvCauHoi = findViewById(R.id.rvCauHoi);
-        List<CauTraLoi> dsCauTraLoi=new ArrayList<>();
+        dsCauTraLoi=new ArrayList<>();
         for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
         {
             if(ctl.getMaDeThi()==maDeThi)
-                dsCauTraLoi.add(ctl);
+                dsCauTraLoi.add(new CauTraLoi(ctl.getMaDeThi(),ctl.getMaCH(),null));
         }
         toolbarBack.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +138,8 @@ public class CauTraLoiActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Kết quả
+                        db.updateCauTraLoi(dsCauTraLoi);
+                        onBackPressed();
                     }
                 });
                 alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -167,14 +171,22 @@ public class CauTraLoiActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Kết quả
+                        db.updateCauTraLoi(dsCauTraLoi);
                     }
                 });
-                final AlertDialog dialog = alertDialog.create();
                 alertDialog.show();
 
             }
         }.start();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        DeThiActivity.dtAdapter.notifyDataSetChanged();
+        countDownTimer.cancel();
+    }
+
     void updateTime()
     {
         int minutes=(int)time/60000;

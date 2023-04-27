@@ -112,9 +112,9 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b)
                     {
-                        ctl.setDapAnChon("A");
-                        setDapAn(holder, position,ctl);
-                        db.updateDapAnChon(ctl);
+
+                        dsCauTraLoi.get(position).setDapAnChon("A");
+
                     }
 
                 }
@@ -130,9 +130,8 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b)
                     {
-                        ctl.setDapAnChon("B");
-                        setDapAn(holder, position,ctl);
-                        db.updateDapAnChon(ctl);
+                        dsCauTraLoi.get(position).setDapAnChon("B");
+
                     }
                 }
             });
@@ -147,9 +146,10 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b)
                     {
-                        ctl.setDapAnChon("C");
-                        setDapAn(holder, position,ctl);
-                        db.updateDapAnChon(ctl);
+                        dsCauTraLoi.get(position).setDapAnChon("C");
+//                        ctl.setDapAnChon("C");
+//                        setDapAn(holder, position,ctl);
+//                        db.updateDapAnChon(ctl);
 
                     }
                 }
@@ -163,9 +163,10 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    ctl.setDapAnChon("D");
-                    setDapAn(holder, position,ctl);
-                    db.updateDapAnChon(ctl);
+                    dsCauTraLoi.get(position).setDapAnChon("D");
+//                    ctl.setDapAnChon("D");
+//                    setDapAn(holder, position,ctl);
+//                    db.updateDapAnChon(ctl);
                 }
             });
 

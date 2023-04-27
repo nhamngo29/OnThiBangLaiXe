@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DeThiActivity extends AppCompatActivity {
     List<DeThi> dsDeThi;
-    DeThiAdapter dtAdapter;
+    public static DeThiAdapter dtAdapter;
     Toolbar toolbarBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

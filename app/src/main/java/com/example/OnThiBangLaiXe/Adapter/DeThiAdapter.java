@@ -53,7 +53,7 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
             CauHoi a=db.getCauHoiByID(ctl.getMaCH());
             if(a.getDapAnDung().equals(ctl.getDapAnChon()))
                 CauTraLoiDung++;
-            else if(ctl.getDapAnChon()!=null)
+            else if(ctl.getDapAnChon()==null||!a.getDapAnDung().equals(ctl.getDapAnChon()))
                 CauTraLoiSai++;
         }
         if(CauTraLoiSai>=5)
