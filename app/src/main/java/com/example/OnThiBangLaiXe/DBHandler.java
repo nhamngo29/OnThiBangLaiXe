@@ -178,7 +178,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaDeThi",dt.getMaDeThi());
-        contentValues.put("TenDeThi",dt.getTenDeThi());
+        contentValues.put("TenDeThi","Đề "+dt.getMaDeThi());
         insert("DeThi",contentValues);
     }
     //Insert câu hỏi
@@ -348,7 +348,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
-        contentValues.put("TenDeThi",dt.getTenDeThi());
+        contentValues.put("TenDeThi","Đề "+dt.getMaDeThi());
         mDatabase.update("DeThi",contentValues,"MaDeThi=?",new String[]{String.valueOf(dt.getMaDeThi())});
         mDatabase.close();
     }

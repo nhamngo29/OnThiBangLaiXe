@@ -128,15 +128,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final boolean[] isLastestVersion = {true};
         final int[] ver = {0};
         vel = csdlVersion.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
                 if (!isLastestVersion[0])
                 {
-                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
+                    Log.e("Có phiên bản mới","");
+
                     capNhatDatabase();
                     downloadWithBytes("BienBao");
                     downloadWithBytes("CauHoi");
+                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
                 }
 
                 stop();
