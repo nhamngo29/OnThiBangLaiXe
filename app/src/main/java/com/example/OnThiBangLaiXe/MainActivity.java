@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         khoiTaoControl();
         dbHandler = new DBHandler(this);
         if(isNetworkConnected()) {
-            Log.e("Con mang va co phine bang moi","");
             kiemTraPhienBan();
         }
         loadDBToDanhSach();
