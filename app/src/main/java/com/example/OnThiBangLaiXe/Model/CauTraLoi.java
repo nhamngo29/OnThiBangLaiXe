@@ -5,6 +5,11 @@ public class CauTraLoi {
     private int MaCH;
     private String DapAnChon;
 
+    public CauTraLoi(int maDeThi, int maCH) {
+        MaDeThi = maDeThi;
+        MaCH = maCH;
+    }
+
     public int getMaDeThi() {
         return MaDeThi;
     }
@@ -36,9 +41,5 @@ public class CauTraLoi {
         MaDeThi = maDeThi;
         MaCH = maCH;
         DapAnChon = dapAnChon;
-    }
-    public CauTraLoi(int maDeThi, int maCH) {
-        MaDeThi = maDeThi;
-        MaCH = maCH;
     }
 }
