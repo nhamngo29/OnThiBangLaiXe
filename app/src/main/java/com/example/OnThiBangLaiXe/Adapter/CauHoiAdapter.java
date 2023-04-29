@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
+import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
 
@@ -30,13 +31,14 @@ import java.util.List;
 public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder>
 {
     private List<CauHoi> dsCauHoi;
+    private List<CauTraLoi> dsCauTraLoi;
     private Context context;
     private DBHandler db;
 
     public CauHoiAdapter(List<CauHoi> dsCauHoi, Context context) {
         this.context = context;
         this.dsCauHoi = dsCauHoi;
-        db=new DBHandler(context);
+        db = new DBHandler(context);
     }
 
     @NonNull
@@ -55,11 +57,13 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
     public void onBindViewHolder(@NonNull CauHoiAdapter.ViewHolder holder, int position) {
         CauHoi ch = dsCauHoi.get(position);
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauHoi.size() + " câu |");
+
         if(ch.getLuu()==1)
         {
             holder.ivSave.setImageResource(R.drawable.ico_save_gree);
             holder.ivSave.setTag(R.drawable.ico_save_gree);
         }
+
         if (ch.getDaTraLoiDung()!=0)
         {
             holder.txtDungSai.setText("Đã học");
@@ -124,16 +128,12 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         {
             holder.rbA.setText(ch.getDapAnA());
             holder.rbA.setVisibility(View.VISIBLE);
-
             holder.rbA.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, ch.getDapAnDung().equals("A")));
-
-
         }
         if (ch.getDapAnB() != null&&!ch.getDapAnB().equals("null"))
         {
             holder.rbB.setText(ch.getDapAnB());
             holder.rbB.setVisibility(View.VISIBLE);
-
             holder.rbB.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, ch.getDapAnDung().equals("B")));
         }
 
@@ -148,7 +148,6 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         {
             holder.rbD.setText(ch.getDapAnD());
             holder.rbD.setVisibility(View.VISIBLE);
-
             holder.rbD.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position,ch.getDapAnDung().equals("D")));
         }
 
@@ -164,7 +163,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         }
         holder.txtDungSai.setText("Đã học");
 
-        if (value)
+        if (Boolean.TRUE.equals(value))
         {
             holder.ivDungSai.setImageResource(R.drawable.ico_true);
         }
@@ -173,7 +172,15 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             holder.ivDungSai.setImageResource(R.drawable.ico_false);
         }
 
-        DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(Boolean.TRUE.equals(value) ? 1 : 2);
+        for (CauHoi cauHoi : DanhSach.getDsCauHoi())
+        {
+            if (cauHoi.getMaCH() == ch.getMaCH())
+            {
+                cauHoi.setDaTraLoiDung(Boolean.TRUE.equals(value) ? 1 : 2);
+                break;
+            }
+        }
+
         db.updateDaTraLoi(ch.getMaCH(), Boolean.TRUE.equals(value) ? 1 : 2);
 
         enableDisableView(holder.itemView.findViewById(R.id.rbA),false);
@@ -219,6 +226,5 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             rbD = itemView.findViewById(R.id.rbD);
             ivSave = itemView.findViewById(R.id.ivSave);
         }
-
     }
 }

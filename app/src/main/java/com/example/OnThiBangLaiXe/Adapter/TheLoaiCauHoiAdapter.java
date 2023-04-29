@@ -49,10 +49,8 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         Log.e("DsCauHoi",DanhSach.getDsCauHoi().size()+"");
         for(CauHoi dsCauHoi: DanhSach.getDsCauHoi())
         {
-
-            if(dsCauHoi.getMaLoaiCH()== tlch.getMaLoaiCH())
+            if(dsCauHoi.getMaLoaiCH() == tlch.getMaLoaiCH())
             {
-
                 cauHoiList.add(dsCauHoi);
                 if(dsCauHoi.getDaTraLoiDung()!=0)
                 {

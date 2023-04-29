@@ -59,6 +59,7 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
             holder.btnCauHoi.setBackgroundColor(Color.RED);
             Log.d("Ma CH", ch.getMaCH()+"");
         }
+
         int text = position + 1;
         holder.btnCauHoi.setOnClickListener(v -> CauTraLoiActivity.vp.setCurrentItem(position, false));
         Log.d("Test", String.valueOf(text));
@@ -67,7 +68,7 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
 
     @Override
     public long getItemId(int position) {
-        return super.getItemId(position);
+        return position;
     }
 
     public void setColorSelected(int position)
@@ -77,7 +78,7 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        return position;
     }
 
     @Override

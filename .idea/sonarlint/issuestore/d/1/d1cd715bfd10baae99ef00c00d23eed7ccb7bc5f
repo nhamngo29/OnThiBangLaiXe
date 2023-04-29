@@ -1,0 +1,9 @@
+
+m	java:S117?"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’â£ã8ª©åäø0
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ú¯¨Ñ8«©åäø0
+o	java:S116"SRename this field "MaLoaiCH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—¯½ò8®©åäø0
+t	java:S116"XRename this field "TenLoaiCauHoi" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷†ÇÂ8®©åäø0
+q	java:S116"PRename this field "SoCau" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°¤Æõøÿÿÿÿ8ö†÷äø0
+w	java:S116	"[Rename this field "SoCauHoiDaTraLoi" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰ÕŽ¨8¯©åäø0
+p	java:S116
+"TRename this field "SoCauDung" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ½°é8¯©åäø0

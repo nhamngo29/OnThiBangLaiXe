@@ -45,35 +45,50 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull DeThiAdapter.ViewHolder holder, int position) {
         holder.txtTenDeThi.setText(dsDeThi.get(position).getTenDeThi());
-        int CauTraLoiDung=0,CauTraLoiSai=0;
-        List<CauTraLoi> dsCTL= db.getListCauTraLoiByMaDeThi(dsDeThi.get(position).getMaDeThi());
-        Log.e("size",dsCTL.size()+"");
-        for(CauTraLoi ctl:dsCTL)
+        int SoCauDung = 0;
+        int SoCauSai = 0;
+        int maDeThi = dsDeThi.get(position).getMaDeThi();
+
+        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
         {
-            CauHoi a=db.getCauHoiByID(ctl.getMaCH());
-            if(a.getDapAnDung().equals(ctl.getDapAnChon()))
-                CauTraLoiDung++;
-            else if(ctl.getDapAnChon()==null||!a.getDapAnDung().equals(ctl.getDapAnChon()))
-                CauTraLoiSai++;
+            if (ctl.getMaDeThi() == maDeThi)
+            {
+                for (CauHoi ch : DanhSach.getDsCauHoi())
+                {
+                    if (ctl.getMaCH() == ch.getMaCH())
+                    {
+                        if (ctl.getDapAnChon() != null && ctl.getDapAnChon().equals(ch.getDapAnDung()))
+                        {
+                            SoCauDung++;
+                        }
+                        else
+                        {
+                            SoCauSai++;
+                        }
+                    }
+                }
+            }
         }
-        if(CauTraLoiSai>=5)
+
+        if(SoCauSai>=5)
         {
             holder.txtTenDeThi.setText("Rớt");
             holder.txtTenDeThi.setTextColor(Color.RED);
         }
-        else if(CauTraLoiDung>=20&&CauTraLoiSai<5)
+        else if(SoCauDung>=20 && SoCauSai<5)
         {
             holder.txtTenDeThi.setText("ĐẬU");
             holder.txtTenDeThi.setTextColor(Color.GREEN);
         }
-        if(CauTraLoiDung!=0||CauTraLoiSai!=0)
+
+        if(SoCauDung != 0 || SoCauSai != 0)
         {
             holder.ivSai.setVisibility(View.VISIBLE);
             holder.ivDung.setVisibility(View.VISIBLE);
             holder.txtSoCauDung.setVisibility(View.VISIBLE);
             holder.txtSoCauSai.setVisibility(View.VISIBLE);
-            holder.txtSoCauDung.setText(CauTraLoiDung+"");
-            holder.txtSoCauSai.setText(CauTraLoiSai+"");
+            holder.txtSoCauDung.setText(String.valueOf(SoCauDung));
+            holder.txtSoCauSai.setText(String.valueOf(SoCauSai));
         }
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, CauTraLoiActivity.class);
@@ -90,16 +105,18 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
-        private final TextView txtTenDeThi,txtSoCauDung,txtSoCauSai;
-        private final ImageView ivDung,ivSai;
+        private final TextView txtTenDeThi;
+        private final TextView txtSoCauDung;
+        private final TextView txtSoCauSai;
+        private final ImageView ivDung;
+        private final ImageView ivSai;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenDeThi = itemView.findViewById(R.id.txt_DeThi);
-            txtSoCauDung=itemView.findViewById(R.id.txtSoCauDung);
-            txtSoCauSai=itemView.findViewById(R.id.txtSoCauSai);
-            ivDung=itemView.findViewById(R.id.ivCauDung);
-            ivSai=itemView.findViewById(R.id.ivSai);
-
+            txtSoCauDung = itemView.findViewById(R.id.txtSoCauDung);
+            txtSoCauSai = itemView.findViewById(R.id.txtSoCauSai);
+            ivDung = itemView.findViewById(R.id.ivCauDung);
+            ivSai = itemView.findViewById(R.id.ivSai);
         }
     }
 }
