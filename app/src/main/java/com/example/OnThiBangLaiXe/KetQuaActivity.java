@@ -2,55 +2,135 @@ package com.example.OnThiBangLaiXe;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
-import com.example.OnThiBangLaiXe.Adapter.CauTraLoiAdapter;
-import com.example.OnThiBangLaiXe.Adapter.KetQuaAdapter;
-import com.example.OnThiBangLaiXe.Adapter.menuCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
-import com.example.OnThiBangLaiXe.Model.DanhSach;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KetQuaActivity extends AppCompatActivity {
-    public RecyclerView rvCauHoi;
-    public RecyclerView rvCauHoiChiTiet;
+    DBHandler db;
+    int type=0,MaDeThi;
+    Button btnAll,btnTrue,btnFalse,btnNull;
+    public TextView ThiLai;
+    List<CauTraLoi> dsCTL;
+    public int getType() {
+        return type;
+    }
 
+
+    @Override
+    public void onBackPressed() {
+        Intent a=new Intent(this,DeThiActivity.class);
+        startActivity(a);
+
+    }
+    void init()
+    {
+        btnAll=findViewById(R.id.btnAll);
+        btnTrue=findViewById(R.id.btnTrue);
+        btnFalse=findViewById(R.id.btnFalse);
+        btnNull=findViewById(R.id.btnNull);
+        ThiLai=findViewById(R.id.txtThiLai);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ket_qua);
-
-        int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
-
-        List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
-
-        List<CauTraLoi> check = DanhSach.getDsCauTraLoi();
-
-        for (CauTraLoi ctl: check)
+        Intent intent = getIntent();
+        MaDeThi=intent.getIntExtra("MaDeThi",1);
+        db=new DBHandler(this);
+        Toolbar toolbarBack;
+        toolbarBack = findViewById(R.id.toolbarBack);
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
+        init();
+        int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
+        dsCTL=db.getListCauTraLoiByMaDeThi(MaDeThi);
+        for (CauTraLoi ctl:dsCTL)
         {
-            if (ctl.getMaDeThi() == maDeThi)
-                dsCauTraLoi.add(ctl);
+                if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
+                    soCauChuaTraLoi++;
+                else if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())||ctl.getDapAnChon()==db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())
+                    soCauDung++;
+                else
+                    soCauSai++;
         }
+        btnTrue.setText(soCauDung+"");
+        btnFalse.setText(soCauSai+"");
+        btnNull.setText(soCauChuaTraLoi+"");
+        senDataToFrm(dsCTL);
+        btnAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                senDataToFrm(dsCTL);
+            }
+        });
+        btnTrue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        Toolbar toolbarBack = findViewById(R.id.toolbarBack);
-
-        toolbarBack.setNavigationOnClickListener(v -> onBackPressed());
-
-        rvCauHoi = findViewById(R.id.rvCauHoi);
-        rvCauHoi.setAdapter(new menuCauHoiAdapter(dsCauTraLoi, this));
-        rvCauHoi.setLayoutManager(new GridLayoutManager(this, 15));
-
-        rvCauHoiChiTiet = findViewById(R.id.rvCauHoiChiTiet);
-        rvCauHoiChiTiet.setAdapter(new KetQuaAdapter(dsCauTraLoi, this));
-        rvCauHoiChiTiet.setLayoutManager(new LinearLayoutManager(this));
+                List<CauTraLoi> a=new ArrayList<>();
+                for (CauTraLoi ctl:dsCTL)
+                {
+                    if(ctl!=null&&ctl.getDapAnChon()!=null)
+                    {
+                            if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
+                                a.add(ctl);
+                    }
+                }
+                senDataToFrm(a);
+            }
+        });
+        btnFalse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<CauTraLoi> a=new ArrayList<>();
+                for (CauTraLoi ctl:dsCTL)
+                {
+                    if(ctl!=null&&ctl.getDapAnChon()!=null)
+                    {
+                        if(!ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
+                            a.add(ctl);
+                    }
+                }
+                senDataToFrm(a);
+            }
+        });
+        btnNull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<CauTraLoi> a=new ArrayList<>();
+                for (CauTraLoi ctl:dsCTL)
+                {
+                    if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
+                        a.add(ctl);
+                }
+                senDataToFrm(a);
+            }
+        });
+        ThiLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(KetQuaActivity.this,CauTraLoiActivity.class);
+                intent.putExtra("MaDeThi",MaDeThi);
+                startActivity(intent);
+            }
+        });
+    }
+    void senDataToFrm(List<CauTraLoi> a)
+    {
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fm,new ResultFragment(a));
+        fragmentTransaction.commit();
+        init();
     }
 }

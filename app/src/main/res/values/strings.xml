@@ -6,4 +6,6 @@
     <string name="bb_cam_fragment">BIỂN BÁO CẤM</string>
     <string name="bb_nguy_hiem_fragment">BIỂN BÁO NGUY HIỂM</string>
     <string name="bb_hieu_lenh_fragment">BIỂN BÁO HIỆU LỆNH</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

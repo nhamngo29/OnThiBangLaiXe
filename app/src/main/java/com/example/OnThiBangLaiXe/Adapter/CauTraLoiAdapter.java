@@ -73,64 +73,110 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.ivSave.setTag(R.drawable.ico_save_gree);
         }
         CauHoi finalCh = ch;
-        holder.ivSave.setOnClickListener(view -> {
-            ImageView imageView = (ImageView) view;
-            assert(R.id.ivSave == imageView.getId());
-            Integer integer = (Integer) imageView.getTag();
-            integer = integer == null ? 0 : integer;
+        holder.ivSave.setOnClickListener(new View.OnClickListener() {
 
-            switch(integer) {
-                case R.drawable.ico_save_gree:
-                    imageView.setImageResource(R.drawable.ico_save);
-                    imageView.setTag(R.drawable.ico_save);
-                    db.updateLuuLaiCauHoi(finalCh.getMaCH(),0);
-                    break;
-                case R.drawable.ico_save:
-                default:
-                    imageView.setImageResource(R.drawable.ico_save_gree);
-                    imageView.setTag(R.drawable.ico_save_gree);
-                    db.updateLuuLaiCauHoi(finalCh.getMaCH(),1);
-                    break;
+            @Override
+            public void onClick(View view) {
+
+                ImageView imageView = (ImageView) view;
+                assert(R.id.ivSave == imageView.getId());
+                Integer integer = (Integer) imageView.getTag();
+                integer = integer == null ? 0 : integer;
+                switch(integer) {
+                    case R.drawable.ico_save_gree:
+                        imageView.setImageResource(R.drawable.ico_save);
+                        imageView.setTag(R.drawable.ico_save);
+                        db.updateLuuLaiCauHoi(finalCh.getMaCH(),0);
+                        break;
+                    case R.drawable.ico_save:
+                    default:
+                        imageView.setImageResource(R.drawable.ico_save_gree);
+                        imageView.setTag(R.drawable.ico_save_gree);
+                        db.updateLuuLaiCauHoi(finalCh.getMaCH(),1);
+                        break;
+                }
+
             }
-
         });
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauTraLoi.size() + " câu |");
 
         holder.txtNoiDungCauHoi.setText(ch.getNoiDung());
 
-        if (ch.getDapAnA() != null && !ch.getDapAnA().equals("null"))
+        if (ch.getDapAnA() != null&&!ch.getDapAnA().equals("null"))
         {
             holder.rbA.setText(ch.getDapAnA());
             holder.rbA.setVisibility(View.VISIBLE);
-            holder.rbA.setOnCheckedChangeListener((compoundButton, b) -> setDapAn("A", position));
+
+            holder.rbA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b)
+                    {
+
+                        dsCauTraLoi.get(position).setDapAnChon("A");
+
+                    }
+
+                }
+            });
         }
 
-        if (ch.getDapAnB() != null && !ch.getDapAnB().equals("null"))
+        if (ch.getDapAnB() != null&&!ch.getDapAnB().equals("null"))
         {
             holder.rbB.setText(ch.getDapAnB());
             holder.rbB.setVisibility(View.VISIBLE);
-            holder.rbB.setOnCheckedChangeListener((compoundButton, b) -> setDapAn("B", position));
+            holder.rbB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b)
+                    {
+                        dsCauTraLoi.get(position).setDapAnChon("B");
+
+                    }
+                }
+            });
         }
 
-        if (ch.getDapAnC() != null && !ch.getDapAnC().equals("null"))
+        if (ch.getDapAnC() != null&&!ch.getDapAnC().equals("null"))
         {
             holder.rbC.setText(ch.getDapAnC());
             holder.rbC.setVisibility(View.VISIBLE);
-            holder.rbC.setOnCheckedChangeListener((compoundButton, b) -> setDapAn("C", position));
+            holder.rbC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b)
+                    {
+                        dsCauTraLoi.get(position).setDapAnChon("C");
+//                        ctl.setDapAnChon("C");
+//                        setDapAn(holder, position,ctl);
+//                        db.updateDapAnChon(ctl);
+
+                    }
+                }
+            });
         }
 
-        if (ch.getDapAnD() != null && !ch.getDapAnD().equals("null"))
+        if (ch.getDapAnD() != null&&!ch.getDapAnD().equals("null"))
         {
             holder.rbD.setText(ch.getDapAnD());
             holder.rbD.setVisibility(View.VISIBLE);
-            holder.rbD.setOnCheckedChangeListener((compoundButton, b) -> setDapAn("D", position));
-        }
+            holder.rbD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    dsCauTraLoi.get(position).setDapAnChon("D");
+//                    ctl.setDapAnChon("D");
+//                    setDapAn(holder, position,ctl);
+//                    db.updateDapAnChon(ctl);
+                }
+            });
 
-        if(ch.getHinhAnh() != null &&! ch.getHinhAnh().equals("null"))
+        }
+        if(ch.getHinhAnh()!=null&&!ch.getHinhAnh().equals("null"))
         {
             holder.ivCauHoi.setVisibility(View.VISIBLE);
             try {
                 File f = new File(context.getDataDir() + "/app_images/", ch.getHinhAnh());
+
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 holder.ivCauHoi.setImageBitmap(b);
             } catch (FileNotFoundException e) {
@@ -139,21 +185,31 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
         }
     }
 
-    private void setDapAn(String dapAn, int position)
+    private void setDapAn(CauTraLoiAdapter.ViewHolder holder, int position, CauTraLoi value)
     {
-        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
-        {
-            if (ctl.getMaCH() == dsCauTraLoi.get(position).getMaCH()
-                    && ctl.getMaDeThi() == dsCauTraLoi.get(position).getMaDeThi())
-            {
-                ctl.setDapAnChon(dapAn);
-
-                List<CauTraLoi> check = DanhSach.getDsCauTraLoi();
-
-                db.updateDapAnChon(ctl);
-                break;
-            }
-        }
+        //Thuwjc hien doi backgroup o day
+//        CauHoi ch = null;
+//
+//        for (CauHoi cauHoi : DanhSach.getDsCauHoi())
+//        {
+//            if (cauHoi.getMaCH() == dsCauTraLoi.get(position).getMaCH())
+//            {
+//
+//            }
+//        }
+//
+//        ch.setDaTraLoiDung(s);
+//
+//        holder.txtDungSai.setText(" Đã học");
+//
+//        if (Boolean.TRUE.equals(ch.getGiaiThich()))
+//        {
+//            holder.ivDungSai.setImageResource(R.drawable.ico_true);
+//        }
+//        else
+//        {
+//            holder.ivDungSai.setImageResource(R.drawable.ico_false);
+//        }
     }
 
     @Override

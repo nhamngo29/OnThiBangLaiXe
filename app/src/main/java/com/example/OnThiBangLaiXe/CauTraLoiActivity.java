@@ -26,7 +26,6 @@ import com.example.OnThiBangLaiXe.Adapter.menuCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
-import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -39,16 +38,15 @@ public class CauTraLoiActivity extends AppCompatActivity {
     public static RecyclerView rvCauHoi;
     private CountDownTimer countDownTimer;
 //    private long time=1140000;//19 phút
-    private long time = 1200000;//10s dung de test
+    private long time=10000;//10s dung de test
     TextView txtTitle,txtNopBai;
-    private int maDeThi;
+
     TabLayout tabLayout;
     Toolbar toolbarBack;
     BottomNavigationView bnv;
     private DBHandler db;
+    int maDeThi;
     private List<CauTraLoi> dsCauTraLoi;
-
-    public static CauTraLoiAdapter ctlApdater;
 
     @Override
     protected void onStart() {
@@ -78,13 +76,27 @@ public class CauTraLoiActivity extends AppCompatActivity {
         toolbarBack.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+                alertDialog.setTitle("Thông báo");
+                alertDialog.setMessage("Dữ liệu bài thi đang làm sẽ không được lưu lại,bạn có chắc chắn muốn thoát?");
+                alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                });
+                alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                    }
+                });
+                alertDialog.show();
             }
         });
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
 
-        ctlApdater = new CauTraLoiAdapter(dsCauTraLoi, this);
-        vp.setAdapter(ctlApdater);
+        vp.setAdapter(new CauTraLoiAdapter(dsCauTraLoi, this));
         tabLayout = findViewById(R.id.tab_layout);
 
         rvCauHoi.setAdapter(new menuCauHoiAdapter(dsCauTraLoi, this));
@@ -109,39 +121,39 @@ public class CauTraLoiActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.tiSummit:
-                    nopBai();
+                    // TODO
             }
             return false;
         });
 
         menu.setGroupCheckable(0, false, true);
 
-        new TabLayoutMediator(tabLayout, vp, (tab, position)
-                -> tab.setText("Câu " + (position + 1))).attach();
+//        new TabLayoutMediator(tabLayout, vp, (tab, position)
+//                -> tab.setText(dsCauTraLoi.get(position).getTenLoaiBB())).attach();
+        txtNopBai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+                alertDialog.setTitle("Thông báo");
+                alertDialog.setMessage("Bạn có chắn chắn muốn nộp bài không ?");
+                alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Kết quả
+                        NoiBai();
 
-        txtNopBai.setOnClickListener(view -> nopBai());
+                    }
+                });
+                alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alertDialog.show();
+            }
+        });
     }
-
-    private void ketThuc()
-    {
-        db.updateCauTraLoi(dsCauTraLoi);
-        DeThiActivity.dtAdapter.notifyDataSetChanged();
-        Intent intent = new Intent(this, KetQuaActivity.class);
-        intent.putExtra("MaDeThi", maDeThi);
-        startActivity(intent);
-        finish();
-    }
-
-    private void nopBai()
-    {
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
-        alertDialog.setTitle("Thông báo");
-        alertDialog.setMessage("Bạn có chắn chắn muốn nộp bài không ?");
-        alertDialog.setPositiveButton("Có", (dialogInterface, i) -> ketThuc());
-        alertDialog.setNegativeButton("Không", (dialogInterface, i) -> {});
-        alertDialog.show();
-    }
-
     void startTime()
     {
         countDownTimer=new CountDownTimer(time,1000) {
@@ -157,26 +169,33 @@ public class CauTraLoiActivity extends AppCompatActivity {
                 final AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
                 alertDialog.setTitle("Thông báo");
                 alertDialog.setMessage("Hết giờ");
-                alertDialog.setPositiveButton("Xem kết quả", (dialogInterface, i) -> ketThuc());
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Kết quả
+                        NoiBai();
+                    }
+                });
                 alertDialog.show();
+
             }
         }.start();
     }
+    void NoiBai()
+    {
+        countDownTimer.cancel();
+        db.updateCauTraLoi(dsCauTraLoi);
+        Intent intent=new Intent(CauTraLoiActivity.this,KetQuaActivity.class);
+        intent.putExtra("MaDeThi",maDeThi);
 
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
-        alertDialog.setTitle("Thông báo");
-        alertDialog.setMessage("Dữ liệu bài thi đang làm sẽ không được lưu lại, bạn có chắc chắn muốn thoát?");
-        alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                CauTraLoiActivity.this.onBackPressed();
-                countDownTimer.cancel();
-            }
-        });
-        alertDialog.setNegativeButton("Không", (dialogInterface, i) -> {});
-        alertDialog.show();
+        super.onBackPressed();
+        DeThiActivity.dtAdapter.notifyDataSetChanged();
+        countDownTimer.cancel();
+        startActivity(new Intent(CauTraLoiActivity.this,DeThiActivity.class));
     }
 
     void updateTime()

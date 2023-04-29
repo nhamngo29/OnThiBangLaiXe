@@ -33,11 +33,13 @@ public class KetQuaAdapter extends RecyclerView.Adapter<KetQuaAdapter.ViewHolder
 {
     private List<CauHoi> dsCauHoi;
     private List<CauTraLoi> dsCauTraLoi;
+    private List<String> dsDungSai;
     private Context context;
 
-    public KetQuaAdapter(List<CauTraLoi> dsCauTraLoi, Context context) {
+    public KetQuaAdapter(List<CauTraLoi> dsCauTraLoi, Context context,List<String> dsDungSai) {
         this.context = context;
         this.dsCauTraLoi = dsCauTraLoi;
+        this.dsDungSai=dsDungSai;
         this.dsCauHoi = new ArrayList<>();
 
         for (CauTraLoi ctl : dsCauTraLoi)
@@ -142,6 +144,12 @@ public class KetQuaAdapter extends RecyclerView.Adapter<KetQuaAdapter.ViewHolder
 
         holder.txtGiaiThich.setText(ch.getGiaiThich());
         holder.txtGiaiThich.setVisibility(View.VISIBLE);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

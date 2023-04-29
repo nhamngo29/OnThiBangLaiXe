@@ -13,10 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp">
+
+
         <TextView
             android:id="@+id/txtSoCauHoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Caau 1/30 |"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivSave"
@@ -30,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="12sp"
+
             app:layout_constraintStart_toEndOf="@+id/txtSoCauHoi"
             app:layout_constraintTop_toTopOf="parent" />
         <ImageView

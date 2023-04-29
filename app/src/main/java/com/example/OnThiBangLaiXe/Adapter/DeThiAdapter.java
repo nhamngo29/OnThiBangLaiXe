@@ -1,5 +1,7 @@
 package com.example.OnThiBangLaiXe.Adapter;
 
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.CauTraLoiActivity;
 import com.example.OnThiBangLaiXe.DBHandler;
+import com.example.OnThiBangLaiXe.KetQuaActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -45,55 +48,54 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull DeThiAdapter.ViewHolder holder, int position) {
         holder.txtTenDeThi.setText(dsDeThi.get(position).getTenDeThi());
-        int SoCauDung = 0;
-        int SoCauSai = 0;
-        int maDeThi = dsDeThi.get(position).getMaDeThi();
-
-        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+        int CauTraLoiDung=0,CauTraLoiSai=0;
+        List<CauTraLoi> dsCTL= db.getListCauTraLoiByMaDeThi(dsDeThi.get(position).getMaDeThi());
+        Log.e("size",dsCTL.size()+"");
+        for(CauTraLoi ctl:dsCTL)
         {
-            if (ctl.getMaDeThi() == maDeThi)
-            {
-                for (CauHoi ch : DanhSach.getDsCauHoi())
-                {
-                    if (ctl.getMaCH() == ch.getMaCH())
-                    {
-                        if (ctl.getDapAnChon() != null && ctl.getDapAnChon().equals(ch.getDapAnDung()))
-                        {
-                            SoCauDung++;
-                        }
-                        else
-                        {
-                            SoCauSai++;
-                        }
-                    }
-                }
-            }
+            CauHoi a=db.getCauHoiByID(ctl.getMaCH());
+            if(a.getDapAnDung().equals(ctl.getDapAnChon()))
+                CauTraLoiDung++;
+            else if(ctl.getDapAnChon()==null||!a.getDapAnDung().equals(ctl.getDapAnChon()))
+                CauTraLoiSai++;
         }
-
-        if(SoCauSai>=5)
+        if(CauTraLoiSai>=5)
         {
             holder.txtTenDeThi.setText("Rớt");
             holder.txtTenDeThi.setTextColor(Color.RED);
         }
-        else if(SoCauDung>=20 && SoCauSai<5)
+        else if(CauTraLoiDung>=20&&CauTraLoiSai<5)
         {
             holder.txtTenDeThi.setText("ĐẬU");
             holder.txtTenDeThi.setTextColor(Color.GREEN);
         }
-
-        if(SoCauDung != 0 || SoCauSai != 0)
+        if(CauTraLoiDung!=0||CauTraLoiSai!=0)
         {
-            holder.ivSai.setVisibility(View.VISIBLE);
-            holder.ivDung.setVisibility(View.VISIBLE);
-            holder.txtSoCauDung.setVisibility(View.VISIBLE);
-            holder.txtSoCauSai.setVisibility(View.VISIBLE);
-            holder.txtSoCauDung.setText(String.valueOf(SoCauDung));
-            holder.txtSoCauSai.setText(String.valueOf(SoCauSai));
+            holder.ivSai.setVisibility(VISIBLE);
+            holder.ivDung.setVisibility(VISIBLE);
+            holder.txtSoCauDung.setVisibility(VISIBLE);
+            holder.txtSoCauSai.setVisibility(VISIBLE);
+            holder.txtSoCauDung.setText(CauTraLoiDung+"");
+            holder.txtSoCauSai.setText(CauTraLoiSai+"");
         }
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, CauTraLoiActivity.class);
-            intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
-            context.startActivity(intent);
+        int finalCauTraLoiDung = CauTraLoiDung;
+        int finalCauTraLoiSai = CauTraLoiSai;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(finalCauTraLoiDung !=0|| finalCauTraLoiSai !=0)
+                {
+                    Intent intent = new Intent(context, KetQuaActivity.class);
+                    intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
+                    context.startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(context, CauTraLoiActivity.class);
+                    intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
+                    context.startActivity(intent);
+                }
+            }
         });
 
     }
@@ -105,18 +107,16 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
-        private final TextView txtTenDeThi;
-        private final TextView txtSoCauDung;
-        private final TextView txtSoCauSai;
-        private final ImageView ivDung;
-        private final ImageView ivSai;
+        private final TextView txtTenDeThi,txtSoCauDung,txtSoCauSai;
+        private final ImageView ivDung,ivSai;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenDeThi = itemView.findViewById(R.id.txt_DeThi);
-            txtSoCauDung = itemView.findViewById(R.id.txtSoCauDung);
-            txtSoCauSai = itemView.findViewById(R.id.txtSoCauSai);
-            ivDung = itemView.findViewById(R.id.ivCauDung);
-            ivSai = itemView.findViewById(R.id.ivSai);
+            txtSoCauDung=itemView.findViewById(R.id.txtSoCauDung);
+            txtSoCauSai=itemView.findViewById(R.id.txtSoCauSai);
+            ivDung=itemView.findViewById(R.id.ivCauDung);
+            ivSai=itemView.findViewById(R.id.ivSai);
+
         }
     }
 }

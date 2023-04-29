@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.OnThiBangLaiXe.Adapter.DeThiAdapter;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -18,6 +19,7 @@ import java.util.List;
 public class DeThiActivity extends AppCompatActivity {
     List<DeThi> dsDeThi;
     public static DeThiAdapter dtAdapter;
+
     Toolbar toolbarBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +28,7 @@ public class DeThiActivity extends AppCompatActivity {
 
         dsDeThi = new ArrayList<>();
         toolbarBack =findViewById(R.id.toolbarBack);
-
-
-
-
         dtAdapter = new DeThiAdapter(DanhSach.getDsDeThi(), this);
-
-
         RecyclerView rv = findViewById(R.id.rvDeThi);
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.setAdapter(dtAdapter);
