@@ -19,6 +19,7 @@ import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
+import com.example.OnThiBangLaiXe.ThiThuActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -149,7 +150,8 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                                 && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
                         {
                             check.setDapAnChon("A");
-                            List<CauTraLoi> temp = DanhSach.getDsCauTraLoi();
+                            ThiThuActivity.dsCauTraLoi.get(position).setDapAnChon("A");
+                            ThiThuActivity.menuAdapter.notifyDataSetChanged();
                             break;
                         }
                     }
@@ -192,6 +194,8 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                                 && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
                         {
                             check.setDapAnChon("B");
+                            ThiThuActivity.dsCauTraLoi.get(position).setDapAnChon("B");
+                            ThiThuActivity.menuAdapter.notifyDataSetChanged();
                             break;
                         }
                     }
@@ -233,6 +237,8 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                                 && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
                         {
                             check.setDapAnChon("C");
+                            ThiThuActivity.dsCauTraLoi.get(position).setDapAnChon("C");
+                            ThiThuActivity.menuAdapter.notifyDataSetChanged();
                             break;
                         }
                     }
@@ -272,6 +278,8 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                             && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
                     {
                         check.setDapAnChon("D");
+                        ThiThuActivity.dsCauTraLoi.get(position).setDapAnChon("D");
+                        ThiThuActivity.menuAdapter.notifyDataSetChanged();
                         break;
                     }
                 }

@@ -48,41 +48,49 @@
             android:padding="20dp">
             <Button
                 android:id="@+id/btnAll"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/button_result"
                 android:text="Tất cả"
+                android:layout_weight="1"
+                android:padding="0dp"
                 android:textColor="@color/text"
                 app:backgroundTint="@color/box" />
             <Button
                 android:id="@+id/btnTrue"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/button_result"
                 android:textColor="@color/text"
                 android:drawableLeft="@drawable/baseline_check_circle_24"
                 android:text="0"
+                android:paddingHorizontal="10dp"
+                android:layout_weight="1"
                 app:backgroundTint="@color/box" />
             <Button
                 android:id="@+id/btnFalse"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/button_result"
                 android:textColor="@color/text"
                 android:drawableLeft="@drawable/baseline_cancel_24"
                 android:text="0"
+                android:paddingHorizontal="10dp"
+                android:layout_weight="1"
                 app:backgroundTint="@color/box" />
             <Button
                 android:id="@+id/btnNull"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_margin="3dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/button_result"
                 android:drawableLeft="@drawable/ico_error"
-                android:text="0"
+                android:layout_weight="1"
+                android:text="25"
                 android:textColor="@color/text"
                 app:backgroundTint="@color/box" />
         </LinearLayout>

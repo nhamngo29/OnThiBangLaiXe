@@ -55,7 +55,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauHoi.size() + " câu |");
         if(ch.getLuu()==1)
         {
-            holder.ivSave.setImageResource(R.drawable.baseline_check_circle_24);
+            holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24_green);
             holder.ivSave.setTag(1);
         }
         if (ch.getDaTraLoiDung()!=0)

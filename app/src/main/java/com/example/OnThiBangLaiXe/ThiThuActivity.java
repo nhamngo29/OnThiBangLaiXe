@@ -37,10 +37,9 @@ public class ThiThuActivity extends AppCompatActivity {
     Toolbar toolbarBack;
     BottomNavigationView bnv;
     private DBHandler db;
-    private List<CauTraLoi> dsCauTraLoi;
-
+    public static List<CauTraLoi> dsCauTraLoi;
     public static CauTraLoiAdapter ctlApdater;
-
+    public static menuCauHoiAdapter menuAdapter;
     @Override
     protected void onStart() {
         super.onStart();
@@ -74,7 +73,8 @@ public class ThiThuActivity extends AppCompatActivity {
         vp.setAdapter(ctlApdater);
         tabLayout = findViewById(R.id.tab_layout);
 
-        rvCauHoi.setAdapter(new menuCauHoiAdapter(dsCauTraLoi, this));
+        menuAdapter = new menuCauHoiAdapter(dsCauTraLoi, this);
+        rvCauHoi.setAdapter(menuAdapter);
         rvCauHoi.setLayoutManager(new GridLayoutManager(this, 15));
 
         Menu menu = bnv.getMenu();

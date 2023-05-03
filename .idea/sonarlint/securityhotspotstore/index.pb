@@ -71,8 +71,6 @@ Q.idea/sonarlint/securityhotspotstore/0/b/0bb20fd6e956328cd132ab372bb2a18fe87fc6
 Q.idea/sonarlint/securityhotspotstore/f/0/f0e0f9cec86fe4b939ae22be5264c758801eb28f,f\c\fc51aad2f1ebe72ffedf49fa3dfea24b513ff6fe
 Å
 Q.idea/sonarlint/securityhotspotstore/f/0/f07866736216be0ee2aba49e392191aeae700a35,2\5\25f6469773b9f3ebb994178c1114a60412389f58
-~
-Napp/src/main/java/com/example/OnThiBangLaiXe/Adapter/TheLoaiCauHoiAdapter.java,7\b\7b6ad34e5226d759fa173d7a654df0d7270055d7
 Å
 Q.idea/sonarlint/securityhotspotstore/0/3/030ed2ccb712537825891dfda283154162e458a8,c\9\c9b3776f6ce02f40809b5a2883142fcb439b1357
 Å
@@ -97,8 +95,6 @@ j
 :app/src/main/java/com/example/OnThiBangLaiXe/function.java,f\6\f6d4e5b28be9bd7fab7a9737037a5249d6991b1a
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/FunctionAdapter.java,6\7\677fb92e1aac78acb2bb11fd9e36f1bcb5155dd0
-{
-Kapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/menuCauHoiAdapter.java,b\1\b1959d3481220015288f7575086978630bcd09f0
 w
 Gapp/src/main/java/com/example/OnThiBangLaiXe/ChiTietKetQuaActivity.java,3\3\330ccce594b90198817304a835d8e778610241d5
 p
@@ -143,8 +139,6 @@ Q.idea/sonarlint/securityhotspotstore/2/e/2eff36c1f7e804d5ff3d50f9f26d58da278340
 Q.idea/sonarlint/securityhotspotstore/5/0/50e216b4439d2538168c3ddca9c0c2fe23bd1c02,0\c\0c0225e236baaec3a0edb17799b59bae8d233f2f
 Å
 Q.idea/sonarlint/securityhotspotstore/9/b/9b9af03329b517cdd460b1ee115f2bb0ec341883,b\b\bb08a4d420fe513e55839b8e1065bca5af7d48c1
-Å
-Q.idea/sonarlint/securityhotspotstore/a/2/a233877b2d2d2f2cecf70ebc71d38858f0913f9d,3\4\349210f36a53f11991a553e714803f2abb7f8f32
 Å
 Q.idea/sonarlint/securityhotspotstore/2/5/2599c5de6e9b9ff851e73edac6384cb784628172,a\7\a757e9c52812d8d16a6e39e676980116a9abeb64
 Å
@@ -219,5 +213,15 @@ w
 G.idea/sonarlint/issuestore/4/8/4863281891d32ef796d6f680d78cb100e7c940be,d\8\d83eba5ea733cb5c0531ef72186b1c1f282329c8
 Å
 Q.idea/sonarlint/securityhotspotstore/a/5/a5fd33cdefef73f893557e24a010c7f884013f96,1\5\155fa7ffe43d75832222c56e929851eff4342c6a
-Å
-Q.idea/sonarlint/securityhotspotstore/f/e/feb1e187d62eec967952453c6bf136a1bbd9bdf6,5\9\59d2a9b10b8b321413fa9c78586d49179dd652a0
+v
+Fapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/DeThiAdapter.java,c\0\c0f2d9ab3c6c942929a9fa7919e3f8468e180259
+}
+Mapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/CauHoiResultAdapter.java,e\5\e5ea0e99f4cb577fe77618b77854314809715a00
+w
+Gapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/KetQuaAdapter.java,b\7\b71d475827850553870c0e7e1376a5a024b4a4fb
+x
+Happ/src/main/java/com/example/OnThiBangLaiXe/Adapter/BienBaoAdapter.java,e\7\e7a2d83bc402d6460a24dcb838f3d904d622390f
+m
+=app/src/main/java/com/example/OnThiBangLaiXe/WebActivity.java,0\7\0785ab12d67a4d74058096cfdcc2977775cc43c8
+p
+@app/src/main/java/com/example/OnThiBangLaiXe/KetQuaActivity.java,c\c\cc6fd62ba04438a40aa94e5d3ed537a176acaebb

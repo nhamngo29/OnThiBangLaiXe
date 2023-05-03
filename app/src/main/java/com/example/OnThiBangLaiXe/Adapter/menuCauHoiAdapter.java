@@ -55,15 +55,16 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
             holder.btnCauHoi.setBackgroundColor(Color.RED);
             Log.d("Ma CH", ch.getMaCH()+"");
         }
+
+        if (ctl.getDapAnChon() != null) // mã loại câu hỏi điểm liệt
+        {
+            holder.btnCauHoi.setBackgroundColor(Color.BLUE);
+        }
+
         int text = position + 1;
         holder.btnCauHoi.setOnClickListener(v -> ThiThuActivity.vp.setCurrentItem(position, false));
         Log.d("Test", String.valueOf(text));
         holder.btnCauHoi.setText(String.valueOf(text));
-    }
-
-    public void setColorSelected(int position)
-    {
-
     }
 
     @Override
