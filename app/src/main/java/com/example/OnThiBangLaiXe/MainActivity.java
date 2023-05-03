@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -103,11 +105,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
         tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
 
+        List<CauHoi> temp = DanhSach.getDsCauHoi();
+
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
 
+        ProgressBar pbTienDo = findViewById(R.id.pbTheLoaiCauHoi);
+        pbTienDo.setMax(DanhSach.getDsCauHoi().size());
+
+        int progess = 0;
+        int correct = 0;
+
+        for (CauHoi ch : DanhSach.getDsCauHoi())
+        {
+            if (ch.getDaTraLoiDung() != 0)
+            {
+                if (ch.getDaTraLoiDung() == 1)
+                {
+                    correct++;
+                }
+
+                progess++;
+            }
+        }
+
+        pbTienDo.setProgress(progess);
+
+        TextView txtSoCau = findViewById(R.id.txtSoCau);
+        txtSoCau.setText(progess + "/" + DanhSach.getDsCauHoi().size() + " câu");
+
+        TextView txtKetQua = findViewById(R.id.txtKetQua);
+        txtKetQua.setText(correct + " câu đúng, " + (progess - correct) + " câu sai");
+
+        TextView txtSafety = findViewById(R.id.txtSafety);
+        if (progess == 0)
+        {
+            txtSafety.setText("0%");
+        }
+        else
+        {
+            txtSafety.setText(((correct / (float) progess) * 100) + "%");
+        }
     }
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -127,12 +167,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
                 if (!isLastestVersion[0])
                 {
                     Log.e("Có phiên bản mới","");
-
                     capNhatDatabase();
                     downloadWithBytes("BienBao");
                     downloadWithBytes("CauHoi");
@@ -239,12 +277,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (int i = 0; i < snapshot.getChildrenCount(); i++)
                 {
-
                     CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
-
                     if(tlbb != null)
                     {
-
                         if(dbHandler.findCHByID(tlbb.getMaCH()))
                         {
                             dbHandler.updateCauHoi(tlbb);

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarBack"
+    style="@style/Toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:textAlignment="center"
+    app:navigationIcon="@drawable/baseline_west_36">
+    <TextView
+        android:id="@+id/txtTitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Kết quả thi thử"
+        android:textColor="@color/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+    <TextView
+        android:visibility="gone"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_result"
+        android:backgroundTint="@color/colorExam"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="5dp"
+        android:text="Thi lại"
+        android:id="@+id/txtThiLai"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end" />
+</androidx.appcompat.widget.Toolbar>

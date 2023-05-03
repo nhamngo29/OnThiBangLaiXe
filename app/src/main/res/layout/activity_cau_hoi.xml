@@ -13,42 +13,7 @@
         android:orientation="vertical"
         tools:context=".CauHoiActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarBack"
-            style="@style/Toolbar"
-            android:background="@color/background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ico_backkk">
-
-            <TextView
-                android:text="Tieu de"
-                android:id="@+id/txtTitle"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-            <TextView
-                android:visibility="invisible"
-                android:paddingRight="10dp"
-                android:text="Nộp bài"
-                android:id="@+id/txtNopBai"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right" />
-        </androidx.appcompat.widget.Toolbar>
+        <include layout="@layout/toolbar"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCauHoi"

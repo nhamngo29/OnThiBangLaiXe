@@ -32,6 +32,7 @@ public class KetQuaActivity extends AppCompatActivity {
         btnFalse=findViewById(R.id.btnFalse);
         btnNull=findViewById(R.id.btnNull);
         ThiLai=findViewById(R.id.txtThiLai);
+        ThiLai.setVisibility(View.VISIBLE);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

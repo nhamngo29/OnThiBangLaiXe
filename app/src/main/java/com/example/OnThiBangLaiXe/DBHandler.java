@@ -194,7 +194,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("DapAnA",ch.getDapAnA());
         contentValues.put("DapAnB",ch.getDapAnB());
         contentValues.put("DapAnC",ch.getDapAnC());
-        contentValues.put("DapAnC",ch.getDapAnD());
+        contentValues.put("DapAnD",ch.getDapAnD());
         contentValues.put("DapAnDung",ch.getDapAnDung());
         contentValues.put("GiaiThich",ch.getGiaiThich());
         contentValues.put("HaySai",ch.getHaySai());

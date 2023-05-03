@@ -51,8 +51,9 @@ public class ThiThuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cau_hoi);
         txtTitle = findViewById(R.id.txtTitle);
-        txtNopBai=findViewById(R.id.txtNopBai);
+        txtNopBai=findViewById(R.id.txtThiLai);
         txtNopBai.setVisibility(View.VISIBLE);
+        txtNopBai.setText("Nộp bài");
         bnv=findViewById(R.id.bottomNavigationView);
         toolbarBack =findViewById(R.id.toolbarBack);
         // Mã loại câu hỏi
@@ -103,6 +104,7 @@ public class ThiThuActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, vp, (tab, position)
                 -> tab.setText("Câu " + (position + 1))).attach();
 
+        txtNopBai.setVisibility(View.VISIBLE);
         txtNopBai.setOnClickListener(view -> nopBai());
     }
 

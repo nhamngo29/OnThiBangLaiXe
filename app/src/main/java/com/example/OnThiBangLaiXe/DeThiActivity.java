@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,6 +30,7 @@ public class DeThiActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.rvDeThi);
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.setAdapter(dtAdapter);
+        TextView txtTilte = findViewById(R.id.txtTitle);
         init();
         event();
     }
@@ -38,7 +40,6 @@ public class DeThiActivity extends AppCompatActivity {
     }
     void init()
     {
-
         toolbarBack =findViewById(R.id.toolbarBack);
     }
 
