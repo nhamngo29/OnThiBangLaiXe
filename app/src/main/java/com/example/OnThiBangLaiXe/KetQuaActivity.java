@@ -27,13 +27,6 @@ public class KetQuaActivity extends AppCompatActivity {
         return type;
     }
 
-
-    @Override
-    public void onBackPressed() {
-        Intent a=new Intent(this,DeThiActivity.class);
-        startActivity(a);
-
-    }
     void init()
     {
         btnAll=findViewById(R.id.btnAll);
