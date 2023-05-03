@@ -79,13 +79,9 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
 
         holder.txtNoiDungCauHoi.setText(ch.getNoiDung());
 
-//        holder.ivCauHoi.setImageResource(context.getResources().getIdentifier(
-//                "Tên file hình", "drawable", context.getPackageName()));
         holder.ivSave.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-
                 ImageView imageView = (ImageView) view;
                 assert(R.id.ivSave == imageView.getId());
                 Integer integer = (Integer) imageView.getTag();
@@ -103,7 +99,6 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
                         db.updateLuuLaiCauHoi(ch.getMaCH(),1);
                         break;
                 }
-
             }
         });
 

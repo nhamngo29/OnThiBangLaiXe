@@ -113,3 +113,19 @@ G.idea/sonarlint/issuestore/9/0/909762385fc6eb20f922a91c6865741308b57f2c,c\e\ce
 Q.idea/sonarlint/securityhotspotstore/f/6/f6d4e5b28be9bd7fab7a9737037a5249d6991b1a,a\d\ad63e5c46f87259d658ce55ac133d2e37ee9ab29
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
+q
+Aapp/src/main/java/com/example/OnThiBangLaiXe/BienBaoActivity.java,b\2\b27892a5f2665ac8b7b54db4683d171602fd8699
+x
+Happ/src/main/java/com/example/OnThiBangLaiXe/Adapter/BienBaoAdapter.java,e\7\e7a2d83bc402d6460a24dcb838f3d904d622390f
+v
+Fapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/DeThiAdapter.java,c\0\c0f2d9ab3c6c942929a9fa7919e3f8468e180259
+o
+?app/src/main/java/com/example/OnThiBangLaiXe/DeThiActivity.java,8\f\8f7e1ceddf74703142262438939531cab4e78234
+{
+Kapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/menuCauHoiAdapter.java,b\1\b1959d3481220015288f7575086978630bcd09f0
+w
+Gapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/KetQuaAdapter.java,b\7\b71d475827850553870c0e7e1376a5a024b4a4fb
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+p
+@app/src/main/java/com/example/OnThiBangLaiXe/KetQuaActivity.java,c\c\cc6fd62ba04438a40aa94e5d3ed537a176acaebb
