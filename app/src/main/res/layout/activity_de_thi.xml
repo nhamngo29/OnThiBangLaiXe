@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Danh sách đề thi"
-            android:textColor="@color/TEXT"
+            android:textColor="@color/text"
             android:textSize="19sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>

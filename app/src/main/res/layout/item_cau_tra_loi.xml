@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:textColor="@color/TEXT"
+        android:textColor="@color/text"
         android:backgroundTint="@color/box"
         android:id="@+id/btnCauHoi"
         android:layout_width="20dp"

@@ -35,7 +35,7 @@
             app:srcCompat="@drawable/ico_fire" />
 
         <TextView
-            android:textColor="@color/TEXT"
+            android:textColor="@color/text"
             android:textStyle="bold"
             android:id="@+id/txtCau"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:textColor="@color/TEXT"
+        android:textColor="@color/text"
         android:maxLines="2"
         android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@+id/img"

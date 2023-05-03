@@ -23,7 +23,7 @@
             android:textSize="19sp"
             android:textStyle="bold"
             android:text="Biển báo giao thông"
-            android:textColor="@color/TEXT"
+            android:textColor="@color/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
@@ -34,7 +34,7 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         app:tabTextColor="#8A8A8A"
-        app:tabSelectedTextColor="@color/TEXT"
+        app:tabSelectedTextColor="@color/text"
         app:tabIndicatorColor="#0268BA"
         android:layout_height="wrap_content"/>
 

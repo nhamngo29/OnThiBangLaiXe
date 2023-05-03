@@ -31,7 +31,7 @@
                 android:textSize="19sp"
                 android:textStyle="bold"
                 android:text="Biển báo"
-                android:textColor="@color/TEXT"
+                android:textColor="@color/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" /></androidx.appcompat.widget.Toolbar>
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtTitleIDlBB"
         android:text="Đường cấm"
-        android:textColor="@color/TEXT"
+        android:textColor="@color/text"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -77,6 +77,6 @@
         android:layout_gravity="center"
         android:padding="10dp"
         android:text="a)Cấm các loại phương tiện đi lại cả hai hướng trừ các xe được ưu tiên theo quy định\nb)Nếu đường cấm vì lý do đường, cầu bị tắc thì biển cấm đặt ở giữa phần xxe chạy kèm theo có hàng rào chắn ngang"
-        android:textColor="@color/TEXT"
+        android:textColor="@color/text"
         android:textSize="18sp" />
 </LinearLayout>

@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorExam">#2C77F8</color>
     <color name="red">#AE0000</color>
-    <color name="TEXT">#FF000000</color>
+    <color name="text">#FF000000</color>
     <color name="box">#E2E0E0</color>
     <color name="aqua">#00FFFF</color>
     <color name="fuchsia">#FF00FF</color>
@@ -21,4 +21,5 @@
     <color name="cherry">#D2042D</color>
     <color name="celadon">#BFAFE1AF</color>
     <color name="paster_red">#BFFAA0A0</color>
+    <color name="background">#FFFFFF</color>
 </resources>

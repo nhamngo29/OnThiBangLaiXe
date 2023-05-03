@@ -66,7 +66,7 @@
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ico_save"
+            android:src="@drawable/baseline_bookmark_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -75,8 +75,11 @@
         android:id="@+id/txtNoiDungCauHoi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textSize="14sp"/>
+        android:paddingTop="15dp"
+        android:paddingBottom="25dp"
+        android:paddingHorizontal="25dp"
+        android:textSize="16sp"
+        android:textColor="@color/text"/>
 
     <ImageView
         android:id="@+id/ivCauHoi"
@@ -112,8 +115,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:padding="15dp"
-        android:textSize="14sp"/>
+        android:padding="25dp"
+        android:textSize="14sp"
+        android:textColor="@color/text"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGiaiThichBienBao"

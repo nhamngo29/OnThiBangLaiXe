@@ -91,21 +91,22 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
                 Integer integer = (Integer) imageView.getTag();
                 integer = integer == null ? 0 : integer;
                 switch(integer) {
-                    case R.drawable.ico_save_gree:
-                        imageView.setImageResource(R.drawable.ico_save);
-                        imageView.setTag(R.drawable.ico_save);
+                    case R.drawable.baseline_bookmark_24_green:
+                        imageView.setImageResource(R.drawable.baseline_bookmark_24);
+                        imageView.setTag(R.drawable.baseline_bookmark_24);
                         db.updateLuuLaiCauHoi(ch.getMaCH(),0);
                         break;
-                    case R.drawable.ico_save:
+                    case R.drawable.baseline_bookmark_24:
                     default:
-                        imageView.setImageResource(R.drawable.ico_save_gree);
-                        imageView.setTag(R.drawable.ico_save_gree);
+                        imageView.setImageResource(R.drawable.baseline_bookmark_24_green);
+                        imageView.setTag(R.drawable.baseline_bookmark_24_green);
                         db.updateLuuLaiCauHoi(ch.getMaCH(),1);
                         break;
                 }
 
             }
         });
+
         if(ch.getHinhAnh()!=null&&!ch.getHinhAnh().equals("null"))
         {
             holder.ivCauHoi.setVisibility(View.VISIBLE);
