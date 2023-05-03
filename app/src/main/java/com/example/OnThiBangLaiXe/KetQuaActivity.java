@@ -116,6 +116,7 @@ public class KetQuaActivity extends AppCompatActivity {
                 Intent intent=new Intent(KetQuaActivity.this,CauTraLoiActivity.class);
                 intent.putExtra("MaDeThi",MaDeThi);
                 startActivity(intent);
+                finish();
             }
         });
     }

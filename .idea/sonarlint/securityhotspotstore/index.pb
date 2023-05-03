@@ -89,8 +89,6 @@ w
 G.idea/sonarlint/issuestore/6/4/64876b8bea138a82803d0008198401e04ab468aa,d\3\d34c834095f0696feda374867b7919b9fc479801
 w
 G.idea/sonarlint/issuestore/6/b/6bc361fab678f74f7da63b229ace2fc9d3130980,2\e\2eff36c1f7e804d5ff3d50f9f26d58da27834004
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 Å
 Q.idea/sonarlint/securityhotspotstore/0/b/0bb20fd6e956328cd132ab372bb2a18fe87fc6cc,6\f\6fe3cede01184696db3d94dd3d5ef73b4d95a9ba
 Å

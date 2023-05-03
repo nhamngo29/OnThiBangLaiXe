@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.DBHandler;
@@ -123,7 +124,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             holder.rbA.setText(ch.getDapAnA());
             holder.rbA.setVisibility(View.VISIBLE);
 
-            holder.rbA.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, ch.getDapAnDung().equals("A")));
+            holder.rbA.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, "A"));
 
 
         }
@@ -131,65 +132,130 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         {
             holder.rbB.setText(ch.getDapAnB());
             holder.rbB.setVisibility(View.VISIBLE);
-
-            holder.rbB.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, ch.getDapAnDung().equals("B")));
+            holder.rbB.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, "B"));
         }
 
         if (ch.getDapAnC() != null&&!ch.getDapAnC().equals("null"))
         {
             holder.rbC.setText(ch.getDapAnC());
             holder.rbC.setVisibility(View.VISIBLE);
-            holder.rbC.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position,ch.getDapAnDung().equals("C")));
+            holder.rbC.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, "C"));
         }
 
         if (ch.getDapAnD() != null&&!ch.getDapAnD().equals("null"))
         {
             holder.rbD.setText(ch.getDapAnD());
             holder.rbD.setVisibility(View.VISIBLE);
-
-            holder.rbD.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position,ch.getDapAnDung().equals("D")));
+            holder.rbD.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, "D"));
         }
 
     }
 
-    private void setDapAn(CauHoiAdapter.ViewHolder holder, int position, Boolean value)
+    private void setDapAn(CauHoiAdapter.ViewHolder holder, int position, String value)
     {
         CauHoi ch = dsCauHoi.get(position);
-        if(ch.getGiaiThich()!=null||!ch.getGiaiThich().isEmpty()||!ch.getGiaiThich().equals("null"))
+
+        if(ch.getGiaiThich() != null || !ch.getGiaiThich().isEmpty() || !ch.getGiaiThich().equals("null"))
         {
             holder.txtGiaiThichCauHoi.setText(ch.getGiaiThich());
             holder.txtGiaiThichCauHoi.setVisibility(View.VISIBLE);
         }
+
+        holder.rbA.setEnabled(false);
+        holder.rbB.setEnabled(false);
+        holder.rbC.setEnabled(false);
+        holder.rbD.setEnabled(false);
+
         holder.txtDungSai.setText("Đã học");
 
-        if (value)
+
+        if (ch.getDapAnDung().equals(value))
         {
             holder.ivDungSai.setImageResource(R.drawable.ico_true);
+
+            switch (value)
+            {
+                case "A":
+                    holder.rbA.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbA.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "B":
+                    holder.rbB.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbB.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "C":
+                    holder.rbC.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbC.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "D":
+                    holder.rbD.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbA.setTextColor(context.getColor(R.color.black));
+                    break;
+            }
         }
         else
         {
             holder.ivDungSai.setImageResource(R.drawable.ico_false);
+
+            switch (value)
+            {
+                case "A":
+                    holder.rbA.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbA.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "B":
+                    holder.rbB.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbB.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "C":
+                    holder.rbC.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbC.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "D":
+                    holder.rbD.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbA.setTextColor(context.getColor(R.color.black));
+                    break;
+            }
+
+            switch (ch.getDapAnDung())
+            {
+                case "A":
+                    holder.rbA.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbA.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "B":
+                    holder.rbB.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbB.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "C":
+                    holder.rbC.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbC.setTextColor(context.getColor(R.color.black));
+                    break;
+                case "D":
+                    holder.rbD.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbA.setTextColor(context.getColor(R.color.black));
+                    break;
+            }
         }
 
         DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(Boolean.TRUE.equals(value) ? 1 : 2);
         db.updateDaTraLoi(ch.getMaCH(), Boolean.TRUE.equals(value) ? 1 : 2);
 
-        enableDisableView(holder.itemView.findViewById(R.id.rbA),false);
-        enableDisableView(holder.itemView.findViewById(R.id.rbB),false);
-        enableDisableView(holder.itemView.findViewById(R.id.rbC),false);
-        enableDisableView(holder.itemView.findViewById(R.id.rbD),false);
 
     }
-    public static void enableDisableView(View view, boolean enabled) {
-        view.setEnabled(enabled);
-        if ( view instanceof ViewGroup ) {
-            ViewGroup group = (ViewGroup)view;
 
-            for ( int idx = 0 ; idx < group.getChildCount() ; idx++ ) {
-                enableDisableView(group.getChildAt(idx), enabled);
-            }
-        }
-    }
     @Override
     public int getItemCount() {
         return dsCauHoi.size();

@@ -109,8 +109,6 @@ w
 G.idea/sonarlint/issuestore/9/0/909762385fc6eb20f922a91c6865741308b57f2c,c\e\ce7799643a95553c6bee1d403d6cb738907a7f2c
 Å
 Q.idea/sonarlint/securityhotspotstore/f/6/f6d4e5b28be9bd7fab7a9737037a5249d6991b1a,a\d\ad63e5c46f87259d658ce55ac133d2e37ee9ab29
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 ~
 Napp/src/main/java/com/example/OnThiBangLaiXe/Adapter/TheLoaiCauHoiAdapter.java,7\b\7b6ad34e5226d759fa173d7a654df0d7270055d7
 p

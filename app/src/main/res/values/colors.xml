@@ -11,4 +11,14 @@
     <color name="red">#AE0000</color>
     <color name="TEXT">#FF000000</color>
     <color name="box">#E2E0E0</color>
+    <color name="aqua">#00FFFF</color>
+    <color name="fuchsia">#FF00FF</color>
+    <color name="text_shadow">#7F000000</color>
+    <color name="dodger_blue">#1E90FF</color>
+    <color name="dark_violet">#9400d3</color>
+    <color name="radio_box">#969696</color>
+    <color name="light_green">#90EE90</color>
+    <color name="cherry">#D2042D</color>
+    <color name="celadon">#BFAFE1AF</color>
+    <color name="paster_red">#BFFAA0A0</color>
 </resources>
