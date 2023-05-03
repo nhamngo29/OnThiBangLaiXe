@@ -1,13 +1,9 @@
 package com.example.OnThiBangLaiXe;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
@@ -31,14 +27,14 @@ public class CauHoiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cau_hoi);
         txtTitle = findViewById(R.id.txtTitle);
         txtTitle.setText("Câu hỏi ôn thi");
-        toolbarBack =findViewById(R.id.toolbarBack);
+        toolbarBack = findViewById(R.id.toolbarBack);
 
         // Mã loại câu hỏi
         int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 1);
         bnv = findViewById(R.id.bottomNavigationView);
 
         vp = findViewById(R.id.vp);
-        DBHandler db=new DBHandler(this);
+        DBHandler db = new DBHandler(this);
         List<CauHoi> dsCauHoi = new ArrayList<>();
 
         for(CauHoi a:DanhSach.getDsCauHoi())
@@ -55,8 +51,6 @@ public class CauHoiActivity extends AppCompatActivity {
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
 
         Menu menu = bnv.getMenu();
-        MenuItem menuItem = menu.findItem(R.id.tiSummit);
-        menuItem.setVisible(false);
 
         bnv.setOnNavigationItemSelectedListener(item ->
         {
@@ -78,8 +72,6 @@ public class CauHoiActivity extends AppCompatActivity {
         });
 
         menu.setGroupCheckable(0, false, true);
-
-        // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
     }
 
     @Override

@@ -94,8 +94,6 @@ public class ThiThuActivity extends AppCompatActivity {
                         vp.setCurrentItem(vp.getCurrentItem() + 1, true);
                     }
                     break;
-                case R.id.tiSummit:
-                    nopBai();
             }
             return false;
         });

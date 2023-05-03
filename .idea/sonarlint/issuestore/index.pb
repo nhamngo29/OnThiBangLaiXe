@@ -25,26 +25,16 @@ r
 Bapp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiCauHoi.java,d\1\d1cd715bfd10baae99ef00c00d23eed7ccb7bc5f
 s
 Capp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiBienBao.java,c\6\c68e9baeee73326052ce98f30e3015627b96518d
-j
-:app/src/main/java/com/example/OnThiBangLaiXe/function.java,f\6\f6d4e5b28be9bd7fab7a9737037a5249d6991b1a
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/Model/CauTraLoi.java,f\b\fb959b0a8af579292b4f05af4cc3bb58dc9adfa3
 m
 =app/src/main/java/com/example/OnThiBangLaiXe/Model/DeThi.java,0\b\0bb20fd6e956328cd132ab372bb2a18fe87fc6cc
-|
-Lapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/LoaiBienBaoAdapter.java,a\e\ae51b1743c0bb8eb6cc5f47ceb789118503dda1f
 Å
 Qapp/src/main/java/com/example/OnThiBangLaiXe/Interface/RecyclerViewInterface.java,d\5\d5a2361513e8be21acbd6feeda50627fd41dec7b
 n
->app/src/main/java/com/example/OnThiBangLaiXe/MainActivity.java,e\4\e42347e06d4309b0733df4a8d0b7814004e2f5dc
-n
 >app/src/main/java/com/example/OnThiBangLaiXe/Model/CauHoi.java,f\e\feb1e187d62eec967952453c6bf136a1bbd9bdf6
-m
-=app/src/main/java/com/example/OnThiBangLaiXe/ThiActivity.java,c\4\c4a1a0268e2518c56525db209f25efdb36d23b94
 Å
 Q.idea/sonarlint/securityhotspotstore/6/4/64876b8bea138a82803d0008198401e04ab468aa,a\5\a5fd33cdefef73f893557e24a010c7f884013f96
-Å
-Q.idea/sonarlint/securityhotspotstore/6/7/677fb92e1aac78acb2bb11fd9e36f1bcb5155dd0,8\6\86e587236f2ad3abc12edaf6d07d82c4752f375d
 w
 G.idea/sonarlint/issuestore/a/e/ae9ddf453f55affea2d6b9e3973cac1eb2efb4e1,6\2\6248197ca7a44d8bc42b5bd6cd80cd6e99143261
 Å
@@ -59,8 +49,6 @@ Q.idea/sonarlint/securityhotspotstore/9/0/909762385fc6eb20f922a91c6865741308b57f
 Q.idea/sonarlint/securityhotspotstore/a/e/ae51b1743c0bb8eb6cc5f47ceb789118503dda1f,7\b\7bd59e10cc246921da1fb883703c8cbfd55d1613
 Å
 Q.idea/sonarlint/securityhotspotstore/a/e/ae9ddf453f55affea2d6b9e3973cac1eb2efb4e1,e\3\e36d3b35b0aa033dfcf067b2cd16117a306b1e80
-Å
-Q.idea/sonarlint/securityhotspotstore/a/2/a233877b2d2d2f2cecf70ebc71d38858f0913f9d,3\4\349210f36a53f11991a553e714803f2abb7f8f32
 w
 G.idea/sonarlint/issuestore/f/0/f0e0f9cec86fe4b939ae22be5264c758801eb28f,5\0\50e216b4439d2538168c3ddca9c0c2fe23bd1c02
 Å
@@ -71,8 +59,6 @@ w
 G.idea/sonarlint/issuestore/0/3/030ed2ccb712537825891dfda283154162e458a8,0\c\0c3c05c2b18505590a392e5404b4d055f24cf3dd
 w
 G.idea/sonarlint/issuestore/f/0/f07866736216be0ee2aba49e392191aeae700a35,b\f\bfb9453d49af9bc40f5f7a5f034be3c7ef8fa6bf
-Å
-Q.idea/sonarlint/securityhotspotstore/b/b/bb51483630e06240e2b6267575153cc92c8c5142,0\b\0ba48a4302a58036680c52ff1b184268bce9aee3
 w
 G.idea/sonarlint/issuestore/f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164,3\1\31073cf3a12b082ef2fe0f9403916a4db3811c89
 Å
@@ -107,5 +93,7 @@ Q.idea/sonarlint/securityhotspotstore/f/6/f6d4e5b28be9bd7fab7a9737037a5249d6991b
 Napp/src/main/java/com/example/OnThiBangLaiXe/Adapter/TheLoaiCauHoiAdapter.java,7\b\7b6ad34e5226d759fa173d7a654df0d7270055d7
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
-q
-Aapp/src/main/java/com/example/OnThiBangLaiXe/BienBaoActivity.java,b\2\b27892a5f2665ac8b7b54db4683d171602fd8699
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+k
+;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d

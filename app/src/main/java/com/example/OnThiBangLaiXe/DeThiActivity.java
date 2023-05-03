@@ -1,13 +1,11 @@
 package com.example.OnThiBangLaiXe;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.OnThiBangLaiXe.Adapter.DeThiAdapter;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -25,7 +23,6 @@ public class DeThiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_de_thi);
-
         dsDeThi = new ArrayList<>();
         toolbarBack =findViewById(R.id.toolbarBack);
         dtAdapter = new DeThiAdapter(DanhSach.getDsDeThi(), this);
@@ -34,7 +31,6 @@ public class DeThiActivity extends AppCompatActivity {
         rv.setAdapter(dtAdapter);
         init();
         event();
-
     }
     void event()
     {

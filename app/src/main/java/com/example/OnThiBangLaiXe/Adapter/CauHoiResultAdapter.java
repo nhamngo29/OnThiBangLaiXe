@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.ChiTietKetQuaActivity;
-import com.example.OnThiBangLaiXe.ThiThuActivity;
 import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;

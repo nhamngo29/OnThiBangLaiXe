@@ -11,11 +11,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.OnThiBangLaiXe.ThiThuActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
+import com.example.OnThiBangLaiXe.ThiThuActivity;
 
 import java.util.List;
 
@@ -61,19 +61,9 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
         holder.btnCauHoi.setText(String.valueOf(text));
     }
 
-    @Override
-    public long getItemId(int position) {
-        return super.getItemId(position);
-    }
-
     public void setColorSelected(int position)
     {
 
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
     }
 
     @Override
@@ -87,10 +77,6 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             btnCauHoi = itemView.findViewById(R.id.btnCauHoi);
-        }
-
-        public Button getBtnCauHoi() {
-            return btnCauHoi;
         }
     }
 }

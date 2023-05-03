@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Locale;
 
 public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHolder>
 {

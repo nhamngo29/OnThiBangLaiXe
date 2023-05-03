@@ -15,13 +15,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.OnThiBangLaiXe.ThiThuActivity;
 import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.KetQuaActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.R;
+import com.example.OnThiBangLaiXe.ThiThuActivity;
 
 import java.util.List;
 
@@ -78,21 +78,18 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
         }
         int finalCauTraLoiDung = CauTraLoiDung;
         int finalCauTraLoiSai = CauTraLoiSai;
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(finalCauTraLoiDung !=0|| finalCauTraLoiSai !=0)
-                {
-                    Intent intent = new Intent(context, KetQuaActivity.class);
-                    intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
-                    context.startActivity(intent);
-                }
-                else
-                {
-                    Intent intent = new Intent(context, ThiThuActivity.class);
-                    intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
-                    context.startActivity(intent);
-                }
+        holder.itemView.setOnClickListener(view -> {
+            if(finalCauTraLoiDung !=0|| finalCauTraLoiSai !=0)
+            {
+                Intent intent = new Intent(context, KetQuaActivity.class);
+                intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
+                context.startActivity(intent);
+            }
+            else
+            {
+                Intent intent = new Intent(context, ThiThuActivity.class);
+                intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
+                context.startActivity(intent);
             }
         });
 
