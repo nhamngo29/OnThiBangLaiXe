@@ -22,4 +22,5 @@
     <color name="celadon">#BFAFE1AF</color>
     <color name="paster_red">#BFFAA0A0</color>
     <color name="background">#FFFFFF</color>
+    <color name="checked">#C0C0C0</color>
 </resources>

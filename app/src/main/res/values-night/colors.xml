@@ -4,4 +4,5 @@
     <color name="box">#1c1c1e</color>
     <color name="text">#FFFFFFFF</color>
     <color name="background">#000000</color>
+    <color name="checked">#C0C0C0</color>
 </resources>

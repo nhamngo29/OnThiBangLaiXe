@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -113,7 +111,7 @@ public class KetQuaActivity extends AppCompatActivity {
         ThiLai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(KetQuaActivity.this,CauTraLoiActivity.class);
+                Intent intent=new Intent(KetQuaActivity.this, ThiThuActivity.class);
                 intent.putExtra("MaDeThi",MaDeThi);
                 startActivity(intent);
                 finish();

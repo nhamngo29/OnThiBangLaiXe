@@ -25,18 +25,12 @@ r
 Bapp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiCauHoi.java,d\1\d1cd715bfd10baae99ef00c00d23eed7ccb7bc5f
 s
 Capp/src/main/java/com/example/OnThiBangLaiXe/Model/LoaiBienBao.java,c\6\c68e9baeee73326052ce98f30e3015627b96518d
-q
-Aapp/src/main/java/com/example/OnThiBangLaiXe/FunctionAdapter.java,6\7\677fb92e1aac78acb2bb11fd9e36f1bcb5155dd0
 j
 :app/src/main/java/com/example/OnThiBangLaiXe/function.java,f\6\f6d4e5b28be9bd7fab7a9737037a5249d6991b1a
 m
 =app/src/main/java/com/example/OnThiBangLaiXe/Model/DeThi.java,0\b\0bb20fd6e956328cd132ab372bb2a18fe87fc6cc
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/Model/CauTraLoi.java,f\b\fb959b0a8af579292b4f05af4cc3bb58dc9adfa3
-k
-;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d
-x
-Happ/src/main/java/com/example/OnThiBangLaiXe/ChiTietBienBaoActivity.java,b\b\bb51483630e06240e2b6267575153cc92c8c5142
 |
 Lapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/LoaiBienBaoAdapter.java,a\e\ae51b1743c0bb8eb6cc5f47ceb789118503dda1f
 Å
@@ -115,17 +109,5 @@ p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/BienBaoActivity.java,b\2\b27892a5f2665ac8b7b54db4683d171602fd8699
-x
-Happ/src/main/java/com/example/OnThiBangLaiXe/Adapter/BienBaoAdapter.java,e\7\e7a2d83bc402d6460a24dcb838f3d904d622390f
-v
-Fapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/DeThiAdapter.java,c\0\c0f2d9ab3c6c942929a9fa7919e3f8468e180259
-o
-?app/src/main/java/com/example/OnThiBangLaiXe/DeThiActivity.java,8\f\8f7e1ceddf74703142262438939531cab4e78234
-{
-Kapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/menuCauHoiAdapter.java,b\1\b1959d3481220015288f7575086978630bcd09f0
 w
 Gapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/KetQuaAdapter.java,b\7\b71d475827850553870c0e7e1376a5a024b4a4fb
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-p
-@app/src/main/java/com/example/OnThiBangLaiXe/KetQuaActivity.java,c\c\cc6fd62ba04438a40aa94e5d3ed537a176acaebb

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     style="@style/SCREEN"
-    tools:context=".CauTraLoiActivity">
+    tools:context=".ThiThuActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarBack"

@@ -1,5 +1,12 @@
 package com.example.OnThiBangLaiXe;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,26 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
 import com.example.OnThiBangLaiXe.Adapter.CauTraLoiAdapter;
 import com.example.OnThiBangLaiXe.Adapter.menuCauHoiAdapter;
-import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
-import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -34,7 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CauTraLoiActivity extends AppCompatActivity {
+public class ThiThuActivity extends AppCompatActivity {
     public static ViewPager2 vp;
     public static RecyclerView rvCauHoi;
     private CountDownTimer countDownTimer;
@@ -75,10 +66,10 @@ public class CauTraLoiActivity extends AppCompatActivity {
             if(ctl.getMaDeThi()==maDeThi)
                 dsCauTraLoi.add(new CauTraLoi(ctl.getMaDeThi(),ctl.getMaCH(),null));
         }
-        toolbarBack.setNavigationOnClickListener(view -> CauTraLoiActivity.this.onBackPressed());
+        toolbarBack.setNavigationOnClickListener(view -> ThiThuActivity.this.onBackPressed());
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
 
-        ctlApdater = new CauTraLoiAdapter(dsCauTraLoi, this);
+        ctlApdater = new CauTraLoiAdapter(dsCauTraLoi, this, false);
         vp.setAdapter(ctlApdater);
         tabLayout = findViewById(R.id.tab_layout);
 
@@ -129,7 +120,7 @@ public class CauTraLoiActivity extends AppCompatActivity {
 
     private void nopBai()
     {
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(ThiThuActivity.this);
         alertDialog.setTitle("Thông báo");
         alertDialog.setMessage("Bạn có chắn chắn muốn nộp bài không ?");
         alertDialog.setPositiveButton("Có", (dialogInterface, i) -> ketThuc());
@@ -149,7 +140,7 @@ public class CauTraLoiActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 txtTitle.setText("Hết giờ");
-                final AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+                final AlertDialog.Builder alertDialog=new AlertDialog.Builder(ThiThuActivity.this);
                 alertDialog.setTitle("Thông báo");
                 alertDialog.setMessage("Hết giờ");
                 alertDialog.setPositiveButton("Xem kết quả", (dialogInterface, i) -> ketThuc());
@@ -160,7 +151,7 @@ public class CauTraLoiActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(CauTraLoiActivity.this);
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(ThiThuActivity.this);
         alertDialog.setTitle("Thông báo");
         alertDialog.setMessage("Dữ liệu bài thi đang làm sẽ không được lưu lại, bạn có chắc chắn muốn thoát?");
         alertDialog.setPositiveButton("Có", (dialogInterface, i) -> {

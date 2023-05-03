@@ -15,16 +15,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.OnThiBangLaiXe.CauTraLoiActivity;
+import com.example.OnThiBangLaiXe.ThiThuActivity;
 import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.KetQuaActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
-import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
@@ -91,7 +89,7 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
                 }
                 else
                 {
-                    Intent intent = new Intent(context, CauTraLoiActivity.class);
+                    Intent intent = new Intent(context, ThiThuActivity.class);
                     intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
                     context.startActivity(intent);
                 }

@@ -9,18 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.OnThiBangLaiXe.CauTraLoiActivity;
-import com.example.OnThiBangLaiXe.Model.BienBao;
+import com.example.OnThiBangLaiXe.ThiThuActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
-import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 import com.example.OnThiBangLaiXe.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.ViewHolder>
@@ -60,7 +56,7 @@ public class menuCauHoiAdapter extends RecyclerView.Adapter<menuCauHoiAdapter.Vi
             Log.d("Ma CH", ch.getMaCH()+"");
         }
         int text = position + 1;
-        holder.btnCauHoi.setOnClickListener(v -> CauTraLoiActivity.vp.setCurrentItem(position, false));
+        holder.btnCauHoi.setOnClickListener(v -> ThiThuActivity.vp.setCurrentItem(position, false));
         Log.d("Test", String.valueOf(text));
         holder.btnCauHoi.setText(String.valueOf(text));
     }
