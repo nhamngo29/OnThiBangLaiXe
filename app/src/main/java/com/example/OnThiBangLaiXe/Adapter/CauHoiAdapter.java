@@ -167,7 +167,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
 
         if (ch.getDapAnDung().equals(value))
         {
-            holder.ivDungSai.setImageResource(R.drawable.ico_true);
+            holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_24);
 
             switch (value)
             {
@@ -195,7 +195,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         }
         else
         {
-            holder.ivDungSai.setImageResource(R.drawable.ico_false);
+            holder.ivDungSai.setImageResource(R.drawable.baseline_cancel_24);
 
             switch (value)
             {

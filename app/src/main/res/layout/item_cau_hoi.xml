@@ -38,7 +38,6 @@
             android:id="@+id/txtDungSai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đúng sai"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/white"

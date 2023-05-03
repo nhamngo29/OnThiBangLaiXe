@@ -109,5 +109,3 @@ p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/BienBaoActivity.java,b\2\b27892a5f2665ac8b7b54db4683d171602fd8699
-w
-Gapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/KetQuaAdapter.java,b\7\b71d475827850553870c0e7e1376a5a024b4a4fb

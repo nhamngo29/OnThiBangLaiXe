@@ -70,11 +70,34 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
                 ch = cauHoi;
             }
         }
+
         if(ch.getLuu()==1)
         {
             holder.ivSave.setImageResource(R.drawable.ico_save_gree);
             holder.ivSave.setTag(R.drawable.ico_save_gree);
         }
+
+        if (daThi)
+        {
+            if (ctl.getDapAnChon() != null)
+            {
+                if (Objects.equals(ctl.getDapAnChon(), ch.getDapAnDung()))
+                {
+                    holder.txtDungSai.setText("Đúng");
+                    holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_24);
+                }
+                else
+                {
+                    holder.txtDungSai.setText("Sai");
+                    holder.ivDungSai.setImageResource(R.drawable.baseline_cancel_24);
+                }
+            }
+            else
+            {
+                holder.txtDungSai.setText("Chưa trả lời");
+            }
+        }
+
         CauHoi finalCh = ch;
         holder.ivSave.setOnClickListener(view -> {
             ImageView imageView = (ImageView) view;
@@ -108,14 +131,13 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 
             if (daThi)
             {
-                if (ctl.getDapAnChon() == null || (Objects.equals(ctl.getDapAnChon(), "A")
-                        && Objects.equals(ch.getDapAnDung(), "A")))
+                if (Objects.equals(ch.getDapAnDung(), "A"))
                 {
                     holder.rbA.setBackground(AppCompatResources.getDrawable(context,
                             R.drawable.radio_button_background_shape_correct));
                     holder.rbA.setTextColor(context.getColor(R.color.black));
                 }
-                else if (Objects.equals(ctl.getDapAnChon(), "A"))
+                else if (ctl.getDapAnChon() != null && Objects.equals(ctl.getDapAnChon(), "A"))
                 {
                     holder.rbA.setBackground(AppCompatResources.getDrawable(context,
                             R.drawable.radio_button_background_shape_wrong));
@@ -126,12 +148,21 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbA.setOnCheckedChangeListener((compoundButton, b) -> {
                 if(b)
                 {
-                    dsCauTraLoi.get(position).setDapAnChon("A");
+                    for (CauTraLoi check : DanhSach.getDsCauTraLoi())
+                    {
+                        if (check.getMaDeThi() == dsCauTraLoi.get(position).getMaDeThi()
+                                && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
+                        {
+                            check.setDapAnChon("A");
+                            List<CauTraLoi> temp = DanhSach.getDsCauTraLoi();
+                            break;
+                        }
+                    }
+
                     setBackGround(holder);
                     holder.rbA.setBackground(AppCompatResources.getDrawable(context,
                             R.drawable.radio_button_background_shape_checked));
                 }
-
             });
         }
 
@@ -140,10 +171,35 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbB.setText(ch.getDapAnB());
             holder.rbB.setVisibility(View.VISIBLE);
             holder.rbB.setEnabled(!daThi);
+
+            if (daThi)
+            {
+                if (Objects.equals(ch.getDapAnDung(), "B"))
+                {
+                    holder.rbB.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbB.setTextColor(context.getColor(R.color.black));
+                }
+                else if (ctl.getDapAnChon() != null && Objects.equals(ctl.getDapAnChon(), "B"))
+                {
+                    holder.rbB.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbB.setTextColor(context.getColor(R.color.black));
+                }
+            }
+
             holder.rbB.setOnCheckedChangeListener((compoundButton, b) -> {
                 if(b)
                 {
-                    dsCauTraLoi.get(position).setDapAnChon("B");
+                    for (CauTraLoi check : DanhSach.getDsCauTraLoi())
+                    {
+                        if (check.getMaDeThi() == dsCauTraLoi.get(position).getMaDeThi()
+                                && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
+                        {
+                            check.setDapAnChon("B");
+                            break;
+                        }
+                    }
                     setBackGround(holder);
                     holder.rbB.setBackground(AppCompatResources.getDrawable(context,
                             R.drawable.radio_button_background_shape_checked));
@@ -156,10 +212,35 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbC.setText(ch.getDapAnC());
             holder.rbC.setVisibility(View.VISIBLE);
             holder.rbC.setEnabled(!daThi);
+
+            if (daThi)
+            {
+                if (Objects.equals(ch.getDapAnDung(), "C"))
+                {
+                    holder.rbC.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbC.setTextColor(context.getColor(R.color.black));
+                }
+                else if (ctl.getDapAnChon() != null && Objects.equals(ctl.getDapAnChon(), "C"))
+                {
+                    holder.rbC.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbC.setTextColor(context.getColor(R.color.black));
+                }
+            }
+
             holder.rbC.setOnCheckedChangeListener((compoundButton, b) -> {
                 if(b)
                 {
-                    dsCauTraLoi.get(position).setDapAnChon("C");
+                    for (CauTraLoi check : DanhSach.getDsCauTraLoi())
+                    {
+                        if (check.getMaDeThi() == dsCauTraLoi.get(position).getMaDeThi()
+                                && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
+                        {
+                            check.setDapAnChon("C");
+                            break;
+                        }
+                    }
                     setBackGround(holder);
                     holder.rbC.setBackground(AppCompatResources.getDrawable(context,
                             R.drawable.radio_button_background_shape_checked));
@@ -172,8 +253,33 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.rbD.setText(ch.getDapAnD());
             holder.rbD.setVisibility(View.VISIBLE);
             holder.rbD.setEnabled(!daThi);
+
+            if (daThi)
+            {
+                if (Objects.equals(ch.getDapAnDung(), "D"))
+                {
+                    holder.rbD.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_correct));
+                    holder.rbD.setTextColor(context.getColor(R.color.black));
+                }
+                else if (ctl.getDapAnChon() != null && Objects.equals(ctl.getDapAnChon(), "D"))
+                {
+                    holder.rbD.setBackground(AppCompatResources.getDrawable(context,
+                            R.drawable.radio_button_background_shape_wrong));
+                    holder.rbD.setTextColor(context.getColor(R.color.black));
+                }
+            }
+
             holder.rbD.setOnCheckedChangeListener((compoundButton, b) -> {
-                dsCauTraLoi.get(position).setDapAnChon("D");
+                for (CauTraLoi check : DanhSach.getDsCauTraLoi())
+                {
+                    if (check.getMaDeThi() == dsCauTraLoi.get(position).getMaDeThi()
+                            && check.getMaCH() == dsCauTraLoi.get(position).getMaCH())
+                    {
+                        check.setDapAnChon("D");
+                        break;
+                    }
+                }
                 setBackGround(holder);
                 holder.rbD.setBackground(AppCompatResources.getDrawable(context,
                         R.drawable.radio_button_background_shape_checked));
@@ -185,7 +291,6 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
             holder.ivCauHoi.setVisibility(View.VISIBLE);
             try {
                 File f = new File(context.getDataDir() + "/app_images/", ch.getHinhAnh());
-
                 Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
                 holder.ivCauHoi.setImageBitmap(b);
             } catch (FileNotFoundException e) {
@@ -213,14 +318,16 @@ public class CauTraLoiAdapter extends RecyclerView.Adapter<CauTraLoiAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
-        private final TextView txtNoiDungCauHoi, txtSoCauHoi;
+        private final TextView txtNoiDungCauHoi, txtSoCauHoi, txtDungSai;
         private final RadioButton rbA, rbB, rbC, rbD;
-        private final ImageView  ivCauHoi,ivSave;;
+        private final ImageView  ivCauHoi, ivSave, ivDungSai;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtSoCauHoi = itemView.findViewById(R.id.txtSoCauHoi);
             txtNoiDungCauHoi = itemView.findViewById(R.id.txtNoiDungCauHoi);
+            txtDungSai = itemView.findViewById(R.id.txtDungSai);
             ivCauHoi = itemView.findViewById(R.id.ivCauHoi);
+            ivDungSai = itemView.findViewById(R.id.ivDungSai);
             ivSave=itemView.findViewById(R.id.ivSave);
             rbA = itemView.findViewById(R.id.rbA);
             rbB = itemView.findViewById(R.id.rbB);

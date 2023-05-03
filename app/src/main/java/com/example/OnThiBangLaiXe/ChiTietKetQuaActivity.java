@@ -44,11 +44,14 @@ public class ChiTietKetQuaActivity extends AppCompatActivity {
         List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
 
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
-        for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
+
+        for (CauTraLoi ctl : db.getListCauTraLoiByMaDeThi(maDeThi))
         {
-            if(ctl.getMaDeThi()==maDeThi)
-                dsCauTraLoi.add(new CauTraLoi(ctl.getMaDeThi(),ctl.getMaCH(),null));
+            if (ctl.getMaDeThi() == maDeThi)
+                dsCauTraLoi.add(ctl);
         }
+
+        List<CauTraLoi> temp = DanhSach.getDsCauTraLoi();
 
         vp.setAdapter(new CauTraLoiAdapter(dsCauTraLoi, this, true));
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );

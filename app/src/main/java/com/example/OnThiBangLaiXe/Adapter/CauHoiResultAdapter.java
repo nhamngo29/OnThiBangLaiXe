@@ -65,9 +65,9 @@ public class CauHoiResultAdapter extends RecyclerView.Adapter<CauHoiResultAdapte
             holder.image.setImageResource(R.drawable.ico_error_40);
         }
         else if(ctl.getDapAnChon()==a.getDapAnDung()||ctl.getDapAnChon().equals(a.getDapAnDung()))
-            holder.image.setImageResource(R.drawable.ico_true);
+            holder.image.setImageResource(R.drawable.baseline_check_circle_24);
         else
-            holder.image.setImageResource(R.drawable.ico_false);
+            holder.image.setImageResource(R.drawable.baseline_cancel_24);
         if(a.getNoiDung()!=null)
         {
             holder.noidung.setText(a.getNoiDung());

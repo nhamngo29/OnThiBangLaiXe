@@ -110,7 +110,15 @@ public class ThiThuActivity extends AppCompatActivity {
 
     private void ketThuc()
     {
-        db.updateCauTraLoi(dsCauTraLoi);
+        List<CauTraLoi> temp = new ArrayList<>();
+
+        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+        {
+            if(ctl.getMaDeThi() == maDeThi)
+                temp.add(ctl);
+        }
+
+        db.updateCauTraLoi(temp);
         DeThiActivity.dtAdapter.notifyDataSetChanged();
         Intent intent = new Intent(this, KetQuaActivity.class);
         intent.putExtra("MaDeThi", maDeThi);

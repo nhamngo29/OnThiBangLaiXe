@@ -37,5 +37,6 @@
         android:id="@+id/rvDeThi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbarBack" />
+        android:layout_below="@+id/toolbarBack"
+        android:padding="5dp"/>
 </RelativeLayout>
