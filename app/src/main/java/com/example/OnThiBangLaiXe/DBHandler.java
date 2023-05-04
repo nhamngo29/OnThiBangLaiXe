@@ -243,13 +243,13 @@ public class DBHandler extends SQLiteOpenHelper {
     Boolean findBBByID(String MaBB)
     {
         mDatabase=this.getWritableDatabase();
-        Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE TRIM(MaBB) = '"+MaBB+"'",null);
+        Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE MaBB = '"+MaBB+"'",null);
         cursor3.moveToFirst();
         if(cursor3!=null&&cursor3.getCount()>0)
         {
             if(MaBB==cursor3.getString(0))
             {
-                cursor3.close();
+
                 return true;
             }
         }

@@ -97,15 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         khoiTaoSuKien();
 
 
-        // Setup RecycleView
-        dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
-        dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
-        dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
-        dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
-        dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
-        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
 
-        List<CauHoi> temp = DanhSach.getDsCauHoi();
+
 
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
 
@@ -196,6 +189,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
         DanhSach.setDsDeThi(dbHandler.docDeThi());
         DanhSach.setDsCauTraLoi(dbHandler.docCauTraLoi());
+        // Setup RecycleView
+        dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
+        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
     }
     private void stop()
     {
@@ -230,7 +230,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         if (!existed)
                         {
-                            DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
                             tlchAdapter.notifyDataSetChanged();
                         }
                     }
@@ -261,7 +260,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         {
                             dbHandler.insertBB(tlbb);
                         }
-                        DanhSach.getDsBienBao().add(tlbb);
                     }
                 }
             }
