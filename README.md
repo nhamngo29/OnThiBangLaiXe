@@ -1,10 +1,8 @@
 **App ôn thi bằng lái xe** <br>
-Thành viên
+Member
 1. Nguyễn Nhâm Ngọ
-2. Nguyễn Thành Phát
-3. Nguyễn Hữu Trung
-4. Nguyễn Huỳnh Đức
-5. Trần Đức Nhật Nam <br>
+2. Nguyễn Hữu Trung
+3. Trần Đức Nhật Nam <br>
 **===================================UI===================================** <br>
 * Main  <br>
 ![image](https://user-images.githubusercontent.com/107678223/232269071-37211bbd-715a-4de5-81e6-932fdc8d2d68.png)
