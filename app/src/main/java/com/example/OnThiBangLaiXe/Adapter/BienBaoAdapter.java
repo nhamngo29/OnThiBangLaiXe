@@ -42,6 +42,7 @@ public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         BienBao bb = dsBienBao.get(position);
 
         try {
@@ -82,7 +83,6 @@ public class BienBaoAdapter extends RecyclerView.Adapter<BienBaoAdapter.ViewHold
         private final TextView txtNoiDungBienBao;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             ivBienBao = itemView.findViewById(R.id.ivBienBao);
             txtMaBienBao = itemView.findViewById(R.id.txtMaBienBao);
             txtTieuDeBienBao = itemView.findViewById(R.id.txtTieuDeBienBao);

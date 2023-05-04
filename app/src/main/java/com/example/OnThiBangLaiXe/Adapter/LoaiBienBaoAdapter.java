@@ -38,6 +38,7 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int maLoaiBB = dsLoaiBienBao.get(position).getMaLoaiBB();
+
         List<BienBao> dsBienBaoTheoLoai = new ArrayList<>();
 
         for (BienBao bb : dsBienBao)
@@ -49,7 +50,10 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
         }
 
         holder.rvBienBao.setAdapter(new BienBaoAdapter(dsBienBaoTheoLoai, context));
-        holder.rvBienBao.setLayoutManager(new LinearLayoutManager(context));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        holder.rvBienBao.setLayoutManager(layoutManager);
     }
 
     @Override
@@ -62,7 +66,9 @@ public class LoaiBienBaoAdapter extends RecyclerView.Adapter<LoaiBienBaoAdapter.
         private final RecyclerView rvBienBao;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             rvBienBao = itemView.findViewById(R.id.rvBienBao);
+
         }
     }
 }

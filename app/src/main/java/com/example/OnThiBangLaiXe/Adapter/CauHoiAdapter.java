@@ -55,7 +55,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauHoi.size() + " câu |");
         if(ch.getLuu()==1)
         {
-            holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24_green);
+            holder.ivSave.setImageResource(R.drawable.baseline_check_circle_24);
             holder.ivSave.setTag(1);
         }
         if (ch.getDaTraLoiDung()!=0)
@@ -157,8 +157,8 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             setBackGround(holder, R.drawable.radio_button_background_shape_wrong, value);
         }
 
-        DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(Boolean.TRUE.equals(value) ? 1 : 2);
-        db.updateDaTraLoi(ch.getMaCH(), Boolean.TRUE.equals(value) ? 1 : 2);
+        DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(ch.getDapAnDung().equals(value) ? 1 : 2);
+        db.updateDaTraLoi(ch.getMaCH(), ch.getDapAnDung().equals(value) ? 1 : 2);
     }
 
     private void setBackGround(CauHoiAdapter.ViewHolder holder, int backgroundID, String value)

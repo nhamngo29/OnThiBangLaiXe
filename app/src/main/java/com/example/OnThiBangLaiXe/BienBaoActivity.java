@@ -27,6 +27,7 @@ public class BienBaoActivity extends AppCompatActivity {
         ViewPager2 vp = findViewById(R.id.vp);
         LoaiBienBaoAdapter lbbAdapter = new LoaiBienBaoAdapter(DanhSach.getDsLoaiBienBao(), this, getDsBienBao());
         vp.setAdapter(lbbAdapter);
+
         new TabLayoutMediator(tabLayout, vp, (tab, position)
                 -> tab.setText(DanhSach.getDsLoaiBienBao().get(position).getTenLoaiBB())).attach();
     }
