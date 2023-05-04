@@ -1,4 +1,10 @@
-**App ôn thi bằng lái xe** <br>
+##**App ôn thi bằng lái xe** <br>
+
+Language:Java
+
+Database:SQLite,Firebase
+
+
 Member
 1. Nguyễn Nhâm Ngọ
 2. Nguyễn Hữu Trung
