@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else
         {
-            txtSafety.setText(((correct / (float) progess) * 100) + "%");
+            txtSafety.setText((int)((correct / (float) progess) * 100) + "%");
         }
     }
     private boolean isNetworkConnected() {

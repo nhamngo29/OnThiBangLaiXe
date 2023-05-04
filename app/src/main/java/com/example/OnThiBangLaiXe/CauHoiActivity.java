@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -32,14 +33,12 @@ public class CauHoiActivity extends AppCompatActivity {
         // Mã loại câu hỏi
         int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 1);
         bnv = findViewById(R.id.bottomNavigationView);
-
         vp = findViewById(R.id.vp);
         DBHandler db = new DBHandler(this);
+        DanhSach.setDsCauHoi(db.docCauHoi());
         List<CauHoi> dsCauHoi = new ArrayList<>();
-
         for(CauHoi a:DanhSach.getDsCauHoi())
         {
-
             if(a.getMaLoaiCH()==maLoaiCH)
             {
                 dsCauHoi.add(a);
@@ -76,6 +75,7 @@ public class CauHoiActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Log.e("Back","back");
         MainActivity.tlchAdapter.notifyDataSetChanged();
         super.onBackPressed();
     }

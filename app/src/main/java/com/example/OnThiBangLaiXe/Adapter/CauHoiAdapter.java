@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.DBHandler;
@@ -53,9 +54,10 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
     public void onBindViewHolder(@NonNull CauHoiAdapter.ViewHolder holder, int position) {
         CauHoi ch = dsCauHoi.get(position);
         holder.txtSoCauHoi.setText("Câu " + (position + 1) + "/" + dsCauHoi.size() + " câu |");
+        holder.ivSave.setTag(0);
         if(ch.getLuu()==1)
         {
-            holder.ivSave.setImageResource(R.drawable.baseline_check_circle_24);
+            holder.ivSave.setImageResource(R.drawable.ico_save_gree);
             holder.ivSave.setTag(1);
         }
         if (ch.getDaTraLoiDung()!=0)
@@ -78,11 +80,11 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         holder.txtNoiDungCauHoi.setText(ch.getNoiDung());
         holder.ivSave.setOnClickListener(view -> {
             if ((int) holder.ivSave.getTag() == 1) {
-                holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24);
+                holder.ivSave.setImageResource(R.drawable.ico_save);
                 holder.ivSave.setTag(0);
                 db.updateLuuLaiCauHoi(ch.getMaCH(), 0);
             } else {
-                holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24_green);
+                holder.ivSave.setImageResource(R.drawable.ico_save_gree);
                 holder.ivSave.setTag(1);
                 db.updateLuuLaiCauHoi(ch.getMaCH(), 1);
             }
@@ -127,6 +129,10 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             holder.rbD.setVisibility(View.VISIBLE);
             holder.rbD.setOnCheckedChangeListener((i, v) -> setDapAn(holder, position, "D"));
         }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        holder.rvCauHoi.setLayoutManager(layoutManager);
 
     }
 

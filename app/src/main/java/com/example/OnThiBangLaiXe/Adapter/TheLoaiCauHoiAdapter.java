@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.CauHoiActivity;
+import com.example.OnThiBangLaiXe.DBHandler;
 import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -28,11 +29,18 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
     private final RecyclerViewInterface recyclerViewInterface;
     private List<LoaiCauHoi> dsLoaiCauHoi;
     private Context context;
+    private DBHandler db;
 
-    public TheLoaiCauHoiAdapter(List<LoaiCauHoi> dsLoaiCauHoi, Context context,RecyclerViewInterface recyclerViewInterface) {
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    public TheLoaiCauHoiAdapter(List<LoaiCauHoi> dsLoaiCauHoi, Context context, RecyclerViewInterface recyclerViewInterface) {
         this.dsLoaiCauHoi = dsLoaiCauHoi;
         this.context = context;
         this.recyclerViewInterface=recyclerViewInterface;
+        db=new DBHandler(context);
     }
 
     @NonNull
@@ -46,8 +54,7 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         LoaiCauHoi tlch = dsLoaiCauHoi.get(position);
         List<CauHoi> cauHoiList=new ArrayList<>();
         int soCauDaTraLoi=0,soCauDaTraLoiDung=0,soCauDaTraLoiSai=0;
-        Log.e("DsCauHoi",DanhSach.getDsCauHoi().size()+"");
-        for(CauHoi dsCauHoi: DanhSach.getDsCauHoi())
+        for(CauHoi dsCauHoi: db.docCauHoi())
         {
 
             if(dsCauHoi.getMaLoaiCH()== tlch.getMaLoaiCH())
@@ -66,6 +73,7 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
                         soCauDaTraLoiSai+=1;
                     }
                 }
+
             }
         }
         try {
@@ -84,9 +92,11 @@ public class TheLoaiCauHoiAdapter extends RecyclerView.Adapter<TheLoaiCauHoiAdap
         holder.pbKetQua.setProgress(soCauDaTraLoi);
 
         holder.itemView.setOnClickListener(v -> {
+            Log.e("Ma laoi ch",tlch.getMaLoaiCH()+"");
             Intent intent = new Intent(context, CauHoiActivity.class);
             intent.putExtra("MaLoaiCH", tlch.getMaLoaiCH());
             context.startActivity(intent);
+
         });
     }
 
