@@ -1,24 +1,55 @@
-#App ôn thi bằng lái xe
-
-Language:Java
-
-Database:SQLite,Firebase
-
+# APP ÔN THI BẰNG LÁI XE
+<p>Language: Java</p>
+<p>Database: SQLite,Firebase (web service)</p>
 <hr/>
+<p>Member<p> 
+<ul>
+  <li>Nguyễn Nhâm Ngọ (https://github.com/nhamngo29)</li>
+  <li>Trần Đức Nhật Nam (https://github.com/Tran-Duc-Nhat-Nam)</li>
+  <li>Nguyễn Hưu Trung</li>
+</ul>
 
-Member
-1. Nguyễn Nhâm Ngọ
-2. Nguyễn Hữu Trung
-3. Trần Đức Nhật Nam <br>
-**===================================UI===================================** <br>
-* Main  <br>
-![image](https://user-images.githubusercontent.com/107678223/232269071-37211bbd-715a-4de5-81e6-932fdc8d2d68.png)
+### Mục lục
+[I. Mở đầu](#Modau)
 
-* Biển báo <br>
-![image](https://user-images.githubusercontent.com/107678223/232269752-2bead077-2944-4d5a-ad1b-0f364284b663.png)
+[III. Tổng kết](#TongKet)
+<a name="Modau"></a>
+## I. Mở đầu
+- Tên phần mềm: `Ôn thi bằng lái xe`
+- Ứng dụng:
+    - Giống như tên gọi, ứng dụng hỗ trợ người dùng ôn thi lái xe qua việc thi theo các đề thi và đọc lí thuyết. Việc bổ sung, thêm sửa xóa, tạo mới các câu hỏi, cập nhập lí thuyết sẽ do các admin quản lí thông qua web service.</br>
+    ============== **Giao diện** =============
+- ``` **Main** ``` </br>
+![image](https://user-images.githubusercontent.com/107678223/236499497-322e2356-6495-44ff-9373-8c2802d5ad15.png)
+- ``` Biển báo ``` </br>
+![image](https://user-images.githubusercontent.com/107678223/236499799-edf9d85b-6e23-4e00-8834-a4470da721e4.png)
+- ``` Mẹo ôn thi ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236499969-9f4aa046-48a3-47c0-b9f8-90f27c0e87c0.png)
+- ``` Sa hình ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236500047-90d1744c-3984-48b8-9454-c0cff479720e.png) <br>
+![image](https://user-images.githubusercontent.com/107678223/236500540-4260bc3b-c61b-4769-84e4-c8b8928d694c.png)
 
-* Sa hình <br>
-![image](https://user-images.githubusercontent.com/107678223/232274655-70b9f26e-4141-4b28-8028-f372ba8bca43.png)
+- ``` Facebook ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236500692-050a1f07-07ea-4402-a8a5-babcbccd2825.png)
+- ``` Thi thử (Đề thi) ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236501362-21cedf43-e599-472a-8f1a-1c46a2672c65.png)
+- ``` Thi thử (kết quả nếu đề đó đã được thi rồi) ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236501467-f0106e29-ce5c-4863-b878-f4d14f0c3cf4.png)
+- ``` Thi thử ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236501603-22dc8fc4-0b46-4714-8f51-1b4d8a9f40a9.png)
+-  ``` Câu hỏi ôn tập theo chủ đề ```</br>
+![image](https://user-images.githubusercontent.com/107678223/236501778-8805853f-f19d-4ac2-a4ae-9af485ac1f8f.png)
 
-* Mẹo <br>
-![image](https://user-images.githubusercontent.com/107678223/232274663-17e2594e-08cf-426a-998d-dfe0184040df.png)
+## III. Tổng kết
+<a name="TongKet"></a>
+- Tự đánh giá việc triển khai bài tập nhóm, tự nhận xét kết quả đạt được:
+
+  - Nhóm đã hoàn thành được hầu hết mọi tính năng chính đã đặt ra từ đầu và bổ sung thêm các tính năng mới.
+
+  - Thành viên trong nhóm khá hài lòng với sản phẩm của nhóm xây dựng (mặc dù còn một số phần chưa hài lòng VD: tốc độ load bị ảnh hưởng do ảnh, giao diện hơi đơn giản, còn lỗi khi chạy ...).
+
+  - Công việc trong nhóm nhiều lúc còn bị chậm. Việc liên lạc và phối hợp giữa các thành viên nhiều lúc còn không chặt chẽ.
+- Nêu bài học kinh nghiệm rút ra từ bài tập dự án của nhóm:
+
+  - Học được về lập trình android Java biết thêm về nhưng thư viện hay.
+  - Học được thêm về làm việc theo nhóm, sử dụng các công cụ hỗ trợ (GitHub, GitBook...) để hoàn thành 1 dự án.
