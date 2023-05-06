@@ -146,8 +146,6 @@ Q.idea/sonarlint/securityhotspotstore/2/5/25f6469773b9f3ebb994178c1114a60412389f
 
 Q.idea/sonarlint/securityhotspotstore/a/d/ad63e5c46f87259d658ce55ac133d2e37ee9ab29,e\9\e92740381e97668d23eb05a104dfe6cdd52b3837
 
-Q.idea/sonarlint/securityhotspotstore/7/b/7b6ad34e5226d759fa173d7a654df0d7270055d7,d\1\d11548bc6789fefb67f299466909864584a59a95
-
 Q.idea/sonarlint/securityhotspotstore/9/b/9bb32d3029f8dd884e5fae4c15a76553ac4394ae,c\3\c314501a8df80031c559ea437394eb99b59e1e68
 
 Q.idea/sonarlint/securityhotspotstore/3/1/31073cf3a12b082ef2fe0f9403916a4db3811c89,3\6\369a509158e87272e795636ab433967b2072f401
@@ -225,3 +223,9 @@ m
 Mapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/CauHoiResultAdapter.java,e\5\e5ea0e99f4cb577fe77618b77854314809715a00
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/KetQuaActivity.java,c\c\cc6fd62ba04438a40aa94e5d3ed537a176acaebb
+o
+?app/src/main/java/com/example/OnThiBangLaiXe/DeThiActivity.java,8\f\8f7e1ceddf74703142262438939531cab4e78234
+n
+>app/src/main/java/com/example/OnThiBangLaiXe/Model/CauHoi.java,f\e\feb1e187d62eec967952453c6bf136a1bbd9bdf6
+k
+;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d

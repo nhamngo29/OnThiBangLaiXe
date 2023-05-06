@@ -155,7 +155,6 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         if (ch.getDapAnDung().equals(value))
         {
             holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_24);
-            setBackGround(holder, R.drawable.radio_button_background_shape_correct, value);
         }
         else
         {
@@ -163,6 +162,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             setBackGround(holder, R.drawable.radio_button_background_shape_wrong, value);
         }
 
+        setBackGround(holder, R.drawable.radio_button_background_shape_correct, ch.getDapAnDung());
         DanhSach.getDsCauHoi().get(position).setDaTraLoiDung(ch.getDapAnDung().equals(value) ? 1 : 2);
         db.updateDaTraLoi(ch.getMaCH(), ch.getDapAnDung().equals(value) ? 1 : 2);
     }

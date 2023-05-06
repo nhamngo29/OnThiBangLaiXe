@@ -77,6 +77,7 @@ public class CauHoiActivity extends AppCompatActivity {
     public void onBackPressed() {
         Log.e("Back","back");
         MainActivity.tlchAdapter.notifyDataSetChanged();
+        MainActivity.setProgress();
         super.onBackPressed();
     }
 }

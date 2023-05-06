@@ -75,7 +75,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String DATABASE_NAME= "db.db";
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference=storage.getReference();
-
+    static ProgressBar pbTienDo;
+    static TextView txtSoCau;
+    static TextView txtKetQua;
+    static TextView txtSafety;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,16 +99,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView.setCheckedItem(R.id.item_Home);
         khoiTaoSuKien();
 
-
-
-
-
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
-
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
 
-        ProgressBar pbTienDo = findViewById(R.id.pbTheLoaiCauHoi);
+        pbTienDo = findViewById(R.id.pbTheLoaiCauHoi);
+        txtSoCau = findViewById(R.id.txtSoCau);
+        txtKetQua = findViewById(R.id.txtKetQua);
+        txtSafety = findViewById(R.id.txtSafety);
+        setProgress();
+    }
+    public static void setProgress()
+    {
         pbTienDo.setMax(DanhSach.getDsCauHoi().size());
 
         int progess = 0;
@@ -125,14 +130,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         pbTienDo.setProgress(progess);
-
-        TextView txtSoCau = findViewById(R.id.txtSoCau);
         txtSoCau.setText(progess + "/" + DanhSach.getDsCauHoi().size() + " câu");
-
-        TextView txtKetQua = findViewById(R.id.txtKetQua);
         txtKetQua.setText(correct + " câu đúng, " + (progess - correct) + " câu sai");
 
-        TextView txtSafety = findViewById(R.id.txtSafety);
         if (progess == 0)
         {
             txtSafety.setText("0%");
