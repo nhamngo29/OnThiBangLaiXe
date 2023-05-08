@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".OnBoardingActivity">
+    <TextView
+        android:id="@+id/tvSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        android:textSize="18sp"
+        android:textColor="@color/text"
+        android:layout_alignParentEnd="true"
+        android:padding="16dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvSkip"
+        android:layout_above="@+id/lyBottom"
+        />
+    <RelativeLayout
+        android:id="@+id/lyBottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:padding="12dp"
+        android:layout_height="wrap_content">
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/CircleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            app:ci_drawable="@drawable/bg_circle_red"
+            android:layout_height="30dp"/>
+        <LinearLayout
+            android:id="@+id/layout_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_next"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
