@@ -240,7 +240,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
     //Tìm kiểm Biển báo theo ID
-    Boolean findBBByID(String MaBB)
+    public Boolean findBBByID(String MaBB)
     {
         mDatabase=this.getWritableDatabase();
         Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE MaBB = '"+MaBB+"'",null);
@@ -257,7 +257,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     //Tìm kiếm câu hỏi theo ID
-    Boolean findCHByID(int ID)
+    public Boolean findCHByID(int ID)
     {
         mDatabase=this.getWritableDatabase();
 //        Cursor cursor3= mDatabase.rawQuery("select MaCH FROM CauHoi where MaCH="+1 ,null);
@@ -279,7 +279,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     //Tìm kiếm Ccau tra loi theo ID
-    Boolean findCauTraLoiByID(int idDeThi,int idCauHoi)
+    public Boolean findCauTraLoiByID(int idDeThi, int idCauHoi)
     {
         mDatabase=this.getWritableDatabase();
         String selection = "MaDeThi="+idDeThi+" AND "+"MaCauHoi="+idCauHoi;
@@ -296,7 +296,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor3.close();
         return false;
     }
-    Boolean finDDeThiByID(int ID)
+    public Boolean finDDeThiByID(int ID)
     {
         mDatabase=this.getWritableDatabase();
         String selection = "MaDeThi="+ID;
