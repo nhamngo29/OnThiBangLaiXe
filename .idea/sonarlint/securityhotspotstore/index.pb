@@ -30,8 +30,6 @@ m
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/Model/CauTraLoi.java,f\b\fb959b0a8af579292b4f05af4cc3bb58dc9adfa3
 
-Qapp/src/main/java/com/example/OnThiBangLaiXe/Interface/RecyclerViewInterface.java,d\5\d5a2361513e8be21acbd6feeda50627fd41dec7b
-
 Q.idea/sonarlint/securityhotspotstore/6/4/64876b8bea138a82803d0008198401e04ab468aa,a\5\a5fd33cdefef73f893557e24a010c7f884013f96
 w
 G.idea/sonarlint/issuestore/a/e/ae9ddf453f55affea2d6b9e3973cac1eb2efb4e1,6\2\6248197ca7a44d8bc42b5bd6cd80cd6e99143261
@@ -85,8 +83,6 @@ G.idea/sonarlint/issuestore/9/0/909762385fc6eb20f922a91c6865741308b57f2c,c\e\ce
 Q.idea/sonarlint/securityhotspotstore/f/6/f6d4e5b28be9bd7fab7a9737037a5249d6991b1a,a\d\ad63e5c46f87259d658ce55ac133d2e37ee9ab29
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/BienBaoActivity.java,b\2\b27892a5f2665ac8b7b54db4683d171602fd8699
 x
@@ -213,8 +209,6 @@ G.idea/sonarlint/issuestore/4/8/4863281891d32ef796d6f680d78cb100e7c940be,d\8\d8
 Q.idea/sonarlint/securityhotspotstore/a/5/a5fd33cdefef73f893557e24a010c7f884013f96,1\5\155fa7ffe43d75832222c56e929851eff4342c6a
 v
 Fapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/DeThiAdapter.java,c\0\c0f2d9ab3c6c942929a9fa7919e3f8468e180259
-}
-Mapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/CauHoiResultAdapter.java,e\5\e5ea0e99f4cb577fe77618b77854314809715a00
 w
 Gapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/KetQuaAdapter.java,b\7\b71d475827850553870c0e7e1376a5a024b4a4fb
 x
@@ -227,5 +221,11 @@ o
 ?app/src/main/java/com/example/OnThiBangLaiXe/DeThiActivity.java,8\f\8f7e1ceddf74703142262438939531cab4e78234
 n
 >app/src/main/java/com/example/OnThiBangLaiXe/Model/CauHoi.java,f\e\feb1e187d62eec967952453c6bf136a1bbd9bdf6
-k
-;app/src/main/java/com/example/OnThiBangLaiXe/DBHandler.java,a\2\a233877b2d2d2f2cecf70ebc71d38858f0913f9d
+|
+Lapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/LoaiBienBaoAdapter.java,a\e\ae51b1743c0bb8eb6cc5f47ceb789118503dda1f
+{
+Kapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/menuCauHoiAdapter.java,b\1\b1959d3481220015288f7575086978630bcd09f0
+p
+@app/src/main/java/com/example/OnThiBangLaiXe/ThiThuActivity.java,6\2\627261d3d36868abe62c8f277c719e65e35e803d
+~
+Napp/src/main/java/com/example/OnThiBangLaiXe/Adapter/TheLoaiCauHoiAdapter.java,7\b\7b6ad34e5226d759fa173d7a654df0d7270055d7
