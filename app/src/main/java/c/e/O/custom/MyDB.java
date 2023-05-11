@@ -2,6 +2,7 @@ package c.e.O.custom;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
@@ -18,6 +19,9 @@ import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
+import com.example.OnThiBangLaiXe.SplashActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,12 +38,17 @@ public class MyDB {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference=storage.getReference();
+    DatabaseReference csdlVersion = database.getReference("Version");
+    public static ProgressDialog progressDialog;
     DBHandler dbHandler;
+    ValueEventListener vel;
     Context context;
 
     public MyDB(Context context) {
         dbHandler=new DBHandler(context);
         this.context=context;
+        dbHandler=new DBHandler(context);
+
     }
 
     public void capNhatDatabase()
@@ -73,8 +82,11 @@ public class MyDB {
 //            }
 //        });
         DatabaseReference csdlBienBao = database.getReference("BienBao");
+        Task<DataSnapshot> task = csdlBienBao.get();
+
         //Đọc loại câu hỏi
         csdlBienBao.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
@@ -93,12 +105,14 @@ public class MyDB {
                         }
                     }
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
         DatabaseReference csdlCauHoi = database.getReference("CauHoi");
         csdlCauHoi.addValueEventListener(new ValueEventListener() {
@@ -183,12 +197,17 @@ public class MyDB {
                         }
                     }
                 }
-            }
+                if(snapshot.getValue() != null)
+                {
 
+
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
     }
     public void downloadWithBytes(String type){
@@ -223,14 +242,46 @@ public class MyDB {
             }
         }
     }
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if(ni != null && ni.isConnected()) {
-            return true;
+//    private boolean isNetworkConnected() {
+//        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo ni = cm.getActiveNetworkInfo();
+//        if(ni != null && ni.isConnected()) {
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//    }
+public boolean kiemTraPhienBan()
+{
+    final boolean[] isLastestVersion = {true};
+    final int[] ver = {0};
+    vel = csdlVersion.addValueEventListener(new ValueEventListener() {
+
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+            if (!isLastestVersion[0])
+            {
+                Log.e("Có phiên bản mới","");
+                capNhatDatabase();
+                downloadWithBytes("BienBao");
+                downloadWithBytes("CauHoi");
+                dbHandler.UpdateVersion(snapshot.getValue(int.class));
+            }
+
+            stop();
         }
-        else {
-            return false;
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            isLastestVersion[0] = true;
         }
+    });
+    return isLastestVersion[0];
+}
+    private void stop()
+    {
+        csdlVersion.removeEventListener(vel);
     }
 }

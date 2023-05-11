@@ -1,5 +1,6 @@
 package com.example.OnThiBangLaiXe;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -86,9 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myDB=new MyDB(getApplicationContext());
         khoiTaoControl();
         dbHandler = new DBHandler(this);
-        if(isNetworkConnected()) {
-            kiemTraPhienBan();
-        }
         loadDBToDanhSach();
 
         setSupportActionBar(toolbar);
@@ -98,7 +97,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navView.setCheckedItem(R.id.item_Home);
         khoiTaoSuKien();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                switch(item.getItemId())
+                {
+                    case R.id.item_HoTro:
+                        Uri number =Uri.parse("tel:0336669999");
+                        Intent callIntent=new Intent(Intent.ACTION_DIAL,number);
+                        startActivity(callIntent);
+                        return true;
+                    case R.id.item_OnThiLyThuyet:
+                        //chuyển đến tất các các câu trong ôn thi
+                        return true;
+                    case R.id.item_ThongTin:
+                        //Thông tin ứng dụng
+                        return true;
+                    case R.id.item_Home:
+                        drawer.closeDrawers();
+                        navView.isLaidOut();
+                        return true;
+                }
+
+                return false;
+            }
+        });
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
@@ -142,48 +167,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             txtSafety.setText((int)((correct / (float) progess) * 100) + "%");
         }
     }
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if(ni != null && ni.isConnected()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    private boolean kiemTraPhienBan()
-    {
-        final boolean[] isLastestVersion = {true};
-        final int[] ver = {0};
-        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
-                if (!isLastestVersion[0])
-                {
-                    Log.e("Có phiên bản mới","");
-                    myDB.capNhatDatabase();
-                    myDB.downloadWithBytes("BienBao");
-                    myDB.downloadWithBytes("CauHoi");
-//                    capNhatDatabase();
-//                    downloadWithBytes("BienBao");
-//                    downloadWithBytes("CauHoi");
-                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
-                }
-
-                stop();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                isLastestVersion[0] = true;
-            }
-        });
-
-        return isLastestVersion[0];
-    }
+//    private boolean kiemTraPhienBan()
+//    {
+//        final boolean[] isLastestVersion = {true};
+//        final int[] ver = {0};
+//        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+//                if (!isLastestVersion[0])
+//                {
+//                    Log.e("Có phiên bản mới","");
+//                    myDB.capNhatDatabase();
+//                    myDB.downloadWithBytes("BienBao");
+//                    myDB.downloadWithBytes("CauHoi");
+////                    capNhatDatabase();
+////                    downloadWithBytes("BienBao");
+////                    downloadWithBytes("CauHoi");
+//                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
+//                }
+//
+//                stop();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                isLastestVersion[0] = true;
+//            }
+//        });
+//
+//        return isLastestVersion[0];
+//    }
     //Load db vaof danh danh sach
     private void loadDBToDanhSach()
     {
@@ -200,10 +216,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
         tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
     }
-    private void stop()
-    {
-        csdlVersion.removeEventListener(vel);
-    }
+//    private void stop()
+//    {
+//        csdlVersion.removeEventListener(vel);
+//    }
     private void khoiTaoSuKien()
     {
         loBienBao.setOnClickListener(view -> {
@@ -257,31 +273,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onItemClick(int postion) {
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        return true;
-    }
-    //sự kiên cho nav menu item
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id=item.getItemId();
 
-        if(id==R.id.item_HoTro)
-        {
-            Uri number =Uri.parse("tel:0336669999");
-            Intent callIntent=new Intent(Intent.ACTION_DIAL,number);
-            startActivity(callIntent);
-        }
-        if(id==R.id.item_OnThiLyThuyet)
-        {
-            //chuyển đến tất các các câu trong ôn thi
-
-        }
-        if(id==R.id.item_ThongTin)
-        {
-            //Thông tin ứng dụng
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

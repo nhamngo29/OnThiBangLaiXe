@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,21 +34,11 @@ public class OnBoardingActivity extends AppCompatActivity {
     private CircleIndicator circleIndicator;
     private LinearLayout layoutNext;
     private ViewWelcomeAdapter viewWelcomeAdapter;
-    String DB_PATH_SUFFIX="/databases/";
-
-    String DATABASE_NAME= "db.db";
-    MyDB myDB;
-    DBHandler dbHandler;
     List<Fragment> lstFrm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_boarding);
-        processCopy();
-        myDB=new MyDB(getApplicationContext());
-        myDB.capNhatDatabase();
-        myDB.downloadWithBytes("BienBao");
-        myDB.downloadWithBytes("CauHoi");
         lstFrm=new ArrayList<>();
         lstFrm.add(new OnboardingFragment(R.drawable.ico_car_welcome,"1. Ngày đầu tiên","Bạn nên dành 8 tiếng đề học hết tất cả các loại biển báo hay gặp. Tập trung vào các loại biển báo hay gặp.Tập trung vào các loại biển báo cấm, biển báo hiệu lệnh, biển bảo chỉ dẫn, biển báo nguy hiểm..."));
         lstFrm.add(new OnboardingFragment(R.drawable.ico_moto_welcome,"2. Ngày thứ hai","Bạn hãy vào phần học 450 câu lý thuyết, học đi học lại các câu lý thuyết này và các mẹo làm của từng câu, nhớ các định nghĩa cơ bản như nồng độ cồn, tốc độ cho phép...và học mẹp làm bài các câu hỏi sa hinh..."));
@@ -104,45 +95,5 @@ public class OnBoardingActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-    private void processCopy() {
-        File dbFile = getDatabasePath(DATABASE_NAME);
-        if (!dbFile.exists())
-        {
-            try{CopyDataBaseFromAsset();
-                Log.e("SQL","Đã Coppy đến database");
-            }
-            catch (Exception e){
-                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        }
-        Log.e("SQL","Đã tồn tại");
-
-    }
-    private String getDatabasePath() {
-        return getApplicationInfo().dataDir + DB_PATH_SUFFIX+ DATABASE_NAME;
-    }
-    //Coppy db vao database cua mays
-    public void CopyDataBaseFromAsset() {
-
-        try {
-            InputStream myInput;
-            myInput = getAssets().open(DATABASE_NAME);
-            String outFileName = getDatabasePath();
-            File f = new File(getApplicationInfo().dataDir + DB_PATH_SUFFIX);
-            if (!f.exists())
-                f.mkdir();
-            OutputStream myOutput = new FileOutputStream(outFileName);
-            int size = myInput.available();
-            byte[] buffer = new byte[size];
-            myInput.read(buffer);
-            myOutput.write(buffer);
-            myOutput.flush();
-            myOutput.close();
-            myInput.close();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
     }
 }

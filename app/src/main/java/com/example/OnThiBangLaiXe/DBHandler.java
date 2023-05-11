@@ -1,5 +1,6 @@
 package com.example.OnThiBangLaiXe;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,10 +20,12 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
     private SQLiteDatabase mDatabase;
 
+    Context context;
     private static final String DB_NAME = "db.db";
     private static final int DB_VERSION = 1;
     public DBHandler(Context context) {
         super(context, DB_NAME, null, 2);
+        this.context=context;
         context.openOrCreateDatabase(DB_NAME, context.MODE_PRIVATE, null);
         this.mDatabase = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
     }
@@ -38,6 +41,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //Kiêm,r tra vervsion
     public boolean isLastestVersion(int version)
     {
+
         mDatabase=this.getWritableDatabase();
         Cursor cursor = mDatabase.rawQuery("select GiaTri from ThongTin where TenThongTin='PB'", null);
 
@@ -53,7 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return pb == version;
     }
     //Upodate version
-    void UpdateVersion(int version)
+    public void UpdateVersion(int version)
     {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
