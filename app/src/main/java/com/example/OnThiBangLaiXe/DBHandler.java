@@ -1,5 +1,6 @@
 package com.example.OnThiBangLaiXe;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,10 +20,12 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
     private SQLiteDatabase mDatabase;
 
+    Context context;
     private static final String DB_NAME = "db.db";
     private static final int DB_VERSION = 1;
     public DBHandler(Context context) {
         super(context, DB_NAME, null, 2);
+        this.context=context;
         context.openOrCreateDatabase(DB_NAME, context.MODE_PRIVATE, null);
         this.mDatabase = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
     }
@@ -38,6 +41,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //Kiêm,r tra vervsion
     public boolean isLastestVersion(int version)
     {
+
         mDatabase=this.getWritableDatabase();
         Cursor cursor = mDatabase.rawQuery("select GiaTri from ThongTin where TenThongTin='PB'", null);
 
@@ -53,7 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return pb == version;
     }
     //Upodate version
-    void UpdateVersion(int version)
+    public void UpdateVersion(int version)
     {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
@@ -240,7 +244,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
     //Tìm kiểm Biển báo theo ID
-    Boolean findBBByID(String MaBB)
+    public Boolean findBBByID(String MaBB)
     {
         mDatabase=this.getWritableDatabase();
         Cursor cursor3= mDatabase.rawQuery("select MaBB FROM BienBao WHERE MaBB = '"+MaBB+"'",null);
@@ -257,7 +261,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     //Tìm kiếm câu hỏi theo ID
-    Boolean findCHByID(int ID)
+    public Boolean findCHByID(int ID)
     {
         mDatabase=this.getWritableDatabase();
 //        Cursor cursor3= mDatabase.rawQuery("select MaCH FROM CauHoi where MaCH="+1 ,null);
@@ -279,7 +283,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return false;
     }
     //Tìm kiếm Ccau tra loi theo ID
-    Boolean findCauTraLoiByID(int idDeThi,int idCauHoi)
+    public Boolean findCauTraLoiByID(int idDeThi, int idCauHoi)
     {
         mDatabase=this.getWritableDatabase();
         String selection = "MaDeThi="+idDeThi+" AND "+"MaCauHoi="+idCauHoi;
@@ -296,7 +300,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor3.close();
         return false;
     }
-    Boolean finDDeThiByID(int ID)
+    public Boolean finDDeThiByID(int ID)
     {
         mDatabase=this.getWritableDatabase();
         String selection = "MaDeThi="+ID;

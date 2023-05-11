@@ -1,15 +1,30 @@
 package com.example.OnThiBangLaiXe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.OnThiBangLaiXe.Adapter.ViewWelcomeAdapter;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import c.e.O.custom.MyDB;
 import me.relex.circleindicator.CircleIndicator;
 
 public class OnBoardingActivity extends AppCompatActivity {
@@ -19,12 +34,17 @@ public class OnBoardingActivity extends AppCompatActivity {
     private CircleIndicator circleIndicator;
     private LinearLayout layoutNext;
     private ViewWelcomeAdapter viewWelcomeAdapter;
+    List<Fragment> lstFrm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_boarding);
+        lstFrm=new ArrayList<>();
+        lstFrm.add(new OnboardingFragment(R.drawable.ico_car_welcome,"1. Ngày đầu tiên","Bạn nên dành 8 tiếng đề học hết tất cả các loại biển báo hay gặp. Tập trung vào các loại biển báo hay gặp.Tập trung vào các loại biển báo cấm, biển báo hiệu lệnh, biển bảo chỉ dẫn, biển báo nguy hiểm..."));
+        lstFrm.add(new OnboardingFragment(R.drawable.ico_moto_welcome,"2. Ngày thứ hai","Bạn hãy vào phần học 450 câu lý thuyết, học đi học lại các câu lý thuyết này và các mẹo làm của từng câu, nhớ các định nghĩa cơ bản như nồng độ cồn, tốc độ cho phép...và học mẹp làm bài các câu hỏi sa hinh..."));
+        lstFrm.add(new OnboardingFragment(R.drawable.ico_license_welcome,"3. Ngày thứ ba","Bạn hãy vào làm hết các bộ đề thi của từng hạn bằng lái xe. Sau khi làm xong tất các đề mặc định(đều đạt > 28 câu trơ lên). Bạn hãy trợn 1 đề ngẫu nhiên và làm đến khi nào điểm thi của bạn đều đạt thì chúc mừng bạn đã hoàn thành quá trình ôn luyện",true));
         init();
-        viewWelcomeAdapter=new ViewWelcomeAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        viewWelcomeAdapter=new ViewWelcomeAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,lstFrm);
         viewPager.setAdapter(viewWelcomeAdapter);
         circleIndicator.setViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

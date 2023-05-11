@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout loThiThu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-    boolean done = false;
     ArrayList<function> arrayList;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DBHandler dbHandler;
@@ -68,8 +67,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     List<CauHoi> dsCauHoi=new ArrayList<>();
     static TheLoaiCauHoiAdapter tlchAdapter;
     DatabaseReference csdlVersion = database.getReference("Version");
+
+
     ValueEventListener vel;
     String DB_PATH_SUFFIX="/databases/";
+
     String DATABASE_NAME= "db.db";
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference=storage.getReference();
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static TextView txtSoCau;
     static TextView txtKetQua;
     static TextView txtSafety;
-    RecyclerView rv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -88,11 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         processCopy();
         khoiTaoControl();
         dbHandler = new DBHandler(this);
-
         if(isNetworkConnected()) {
             kiemTraPhienBan();
         }
-
         loadDBToDanhSach();
 
         setSupportActionBar(toolbar);
@@ -103,8 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView.setCheckedItem(R.id.item_Home);
         khoiTaoSuKien();
 
-        rv = findViewById(R.id.rvTheLoaiCauHoi);
+        RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(tlchAdapter);
 
         pbTienDo = findViewById(R.id.pbTheLoaiCauHoi);
         txtSoCau = findViewById(R.id.txtSoCau);
@@ -193,6 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DanhSach.setDsDeThi(dbHandler.docDeThi());
         DanhSach.setDsCauTraLoi(dbHandler.docCauTraLoi());
         // Setup RecycleView
+        dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
+        dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
         tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
     }
     private void stop()
@@ -209,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
                 {
+
                     LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
                     if (tlch != null)
                     {
@@ -228,7 +234,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (!existed)
                         {
                             tlchAdapter.notifyDataSetChanged();
-                            setProgress();
                         }
                     }
                 }
@@ -274,7 +279,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 for (int i = 0; i < snapshot.getChildrenCount(); i++)
                 {
                     CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
-                    Log.d("Firebase", "Đọc câu hỏi " + tlbb.getMaCH() + " tình trạng: " + tlbb.getDaTraLoiDung());
                     if(tlbb != null)
                     {
                         if(dbHandler.findCHByID(tlbb.getMaCH()))
@@ -333,7 +337,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (int i = 0; i < snapshot.getChildrenCount(); i++)
                 {
+
                     CauTraLoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauTraLoi.class);
+
                     if(tlbb != null)
                     {
 
@@ -348,17 +354,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         }
                     }
-                    if (i == snapshot.getChildrenCount() - 1)
-                    {
-                        Toast.makeText(MainActivity.this, "Done", Toast.LENGTH_LONG).show();
-                        dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
-                        dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
-                        dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
-                        dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
-                        dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
-                        tlchAdapter.notifyDataSetChanged();
-                        rv.setAdapter(tlchAdapter);
-                    }
                 }
             }
 
@@ -366,8 +361,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
-
         });
         loadDBToDanhSach();
     }
