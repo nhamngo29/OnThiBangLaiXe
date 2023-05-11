@@ -1,10 +1,9 @@
 package c.e.O.custom;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -14,13 +13,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.OnThiBangLaiXe.DBHandler;
+import com.example.OnThiBangLaiXe.MainActivity;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DeThi;
-import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
-import com.example.OnThiBangLaiXe.SplashActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -196,6 +193,11 @@ public class MyDB {
 
                         }
                     }
+
+                    if (i == snapshot.getChildrenCount() - 1)
+                    {
+                        context.startActivity(new Intent(context, MainActivity.class));
+                    }
                 }
                 if(snapshot.getValue() != null)
                 {
@@ -242,16 +244,16 @@ public class MyDB {
             }
         }
     }
-//    private boolean isNetworkConnected() {
-//        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo ni = cm.getActiveNetworkInfo();
-//        if(ni != null && ni.isConnected()) {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if(ni != null && ni.isConnected()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 public boolean kiemTraPhienBan()
 {
     final boolean[] isLastestVersion = {true};

@@ -1,7 +1,5 @@
 package com.example.OnThiBangLaiXe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,16 +45,22 @@ public class SplashActivity extends AppCompatActivity {
                 {
                     Log.e("SQL","123");
                     if(isNetworkConnected()) {
-                        myDB.kiemTraPhienBan();
+                        if (myDB.kiemTraPhienBan())
+                        {
+                            startActivity(MainActivity.class);
+                        }
                     }
-                    startActivity(MainActivity.class);
+
                 }
                 else {
                     if(isNetworkConnected())
                     {
+                        Log.e("SQL","Tải");
                         myDB.kiemTraPhienBan();
-                            startActivity(OnBoardingActivity.class);
-                            mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL,true);
+                        Log.e("SQL","Tải 2");
+                        startActivity(OnBoardingActivity.class);
+                        Log.e("SQL","Tải 3");
+                        mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL,true);
                     }else
                     {
                         Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();
