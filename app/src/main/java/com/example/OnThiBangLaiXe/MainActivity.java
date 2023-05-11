@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DBHandler dbHandler;
     MyDB myDB;
+
+
+
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
     List<BienBao> dsBienBao = new ArrayList<>();
     List<CauHoi> dsCauHoi=new ArrayList<>();
@@ -252,5 +256,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onItemClick(int postion) {
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+    //sự kiên cho nav menu item
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+
+        if(id==R.id.item_HoTro)
+        {
+            Uri number =Uri.parse("tel:0336669999");
+            Intent callIntent=new Intent(Intent.ACTION_DIAL,number);
+            startActivity(callIntent);
+        }
+        if(id==R.id.item_OnThiLyThuyet)
+        {
+            //chuyển đến tất các các câu trong ôn thi
+
+        }
+        if(id==R.id.item_ThongTin)
+        {
+            //Thông tin ứng dụng
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
