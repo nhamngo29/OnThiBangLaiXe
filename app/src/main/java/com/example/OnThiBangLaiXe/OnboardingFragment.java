@@ -1,5 +1,6 @@
 package com.example.OnThiBangLaiXe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,11 +25,12 @@ public class OnboardingFragment extends Fragment {
     Boolean a=false;
     MyDB myDB;
     public Button btnNext;
-    public OnboardingFragment(int img, String title, String content,Boolean a) {
+    public OnboardingFragment(int img, String title, String content, Boolean a, Context context) {
         this.img=img;
         this.title=title;
         this.content=content;
         this.a=a;
+        myDB=new MyDB(context);
     }
 
     public OnboardingFragment(int img, String title, String content) {
@@ -58,7 +60,7 @@ public class OnboardingFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(),MainActivity.class));
+                myDB.kiemTraPhienBan();
             }
         });
         imgV.setImageResource(img);

@@ -43,19 +43,14 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
                 {
-                    Log.e("SQL","123");
                     if(isNetworkConnected()) {
-                        if (myDB.kiemTraPhienBan())
-                        {
-                            startActivity(MainActivity.class);
-                        }
+                        myDB.kiemTraPhienBan();
                     }
 
                 }
                 else {
                     if(isNetworkConnected())
                     {
-                        myDB.kiemTraPhienBan();
                         startActivity(OnBoardingActivity.class);
                         mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL,true);
                     }else
