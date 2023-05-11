@@ -196,7 +196,9 @@ public class MyDB {
 
                     if (i == snapshot.getChildrenCount() - 1)
                     {
-                        context.startActivity(new Intent(context, MainActivity.class));
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intent);
                     }
                 }
                 if(snapshot.getValue() != null)

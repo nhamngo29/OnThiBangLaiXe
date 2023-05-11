@@ -55,11 +55,8 @@ public class SplashActivity extends AppCompatActivity {
                 else {
                     if(isNetworkConnected())
                     {
-                        Log.e("SQL","Tải");
                         myDB.kiemTraPhienBan();
-                        Log.e("SQL","Tải 2");
                         startActivity(OnBoardingActivity.class);
-                        Log.e("SQL","Tải 3");
                         mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL,true);
                     }else
                     {
