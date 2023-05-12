@@ -79,8 +79,6 @@ Q.idea/sonarlint/securityhotspotstore/f/d/fd8d34b142d02ec743a8efefefd2c097961666
 Q.idea/sonarlint/securityhotspotstore/f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164,9\b\9b9af03329b517cdd460b1ee115f2bb0ec341883
 w
 G.idea/sonarlint/issuestore/9/0/909762385fc6eb20f922a91c6865741308b57f2c,c\e\ce7799643a95553c6bee1d403d6cb738907a7f2c
-Å
-Q.idea/sonarlint/securityhotspotstore/f/6/f6d4e5b28be9bd7fab7a9737037a5249d6991b1a,a\d\ad63e5c46f87259d658ce55ac133d2e37ee9ab29
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/Model/DanhSach.java,0\f\0facfc2e61dd68f23dc34528968e35e8f75ebcfd
 q
@@ -93,8 +91,6 @@ q
 Aapp/src/main/java/com/example/OnThiBangLaiXe/FunctionAdapter.java,6\7\677fb92e1aac78acb2bb11fd9e36f1bcb5155dd0
 w
 Gapp/src/main/java/com/example/OnThiBangLaiXe/ChiTietKetQuaActivity.java,3\3\330ccce594b90198817304a835d8e778610241d5
-p
-@app/src/main/java/com/example/OnThiBangLaiXe/ResultFragment.java,a\1\a1f09417f17d5bc5c841cff48f8d0933aea5178f
 w
 G.idea/sonarlint/issuestore/6/f/6fe3cede01184696db3d94dd3d5ef73b4d95a9ba,7\9\7993a6396c34bd14b0cec829ac5e8aab664790e4
 Å
@@ -175,8 +171,6 @@ G.idea/sonarlint/issuestore/2/e/2eff36c1f7e804d5ff3d50f9f26d58da27834004,8\9\89
 Q.idea/sonarlint/securityhotspotstore/0/c/0c3c05c2b18505590a392e5404b4d055f24cf3dd,c\b\cba0168a78bfbee1a397d02f20dccc330bd55026
 w
 G.idea/sonarlint/issuestore/b/8/b865a30afc0ea49246217e641d4693db7d27c76a,1\4\14574e2aeb316010f6252a44baa64a7de36b9100
-Å
-Q.idea/sonarlint/securityhotspotstore/d/5/d5a2361513e8be21acbd6feeda50627fd41dec7b,1\d\1dafbc832a2d8a431f5d34857e7a0df0e77c2e52
 w
 G.idea/sonarlint/issuestore/b/f/bfb9453d49af9bc40f5f7a5f034be3c7ef8fa6bf,8\6\86e8db510ff6fc8d28a5e38849fe0e9eacae62ae
 w

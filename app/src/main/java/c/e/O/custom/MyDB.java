@@ -273,6 +273,12 @@ public boolean kiemTraPhienBan()
                 downloadWithBytes("CauHoi");
                 dbHandler.UpdateVersion(snapshot.getValue(int.class));
             }
+            else
+            {
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
+            }
 
             stop();
         }

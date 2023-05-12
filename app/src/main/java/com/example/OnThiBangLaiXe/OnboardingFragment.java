@@ -1,10 +1,6 @@
 package com.example.OnThiBangLaiXe;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import c.e.O.custom.MyDB;
+import c.e.O.custom.MySharedPreferences;
 
 
 public class OnboardingFragment extends Fragment {
@@ -58,7 +57,10 @@ public class OnboardingFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(),MainActivity.class));
+                myDB = new MyDB(mView.getContext());
+                myDB.kiemTraPhienBan();
+                MySharedPreferences mySharedPreferences = new MySharedPreferences(mView.getContext());
+                mySharedPreferences.putBooleanValue("KEY_FIRST_INSTALL",true);
             }
         });
         imgV.setImageResource(img);

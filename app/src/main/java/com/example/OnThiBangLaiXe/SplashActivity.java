@@ -38,30 +38,27 @@ public class SplashActivity extends AppCompatActivity {
         myDB=new MyDB(this);
         MySharedPreferences mySharedPreferences=new MySharedPreferences(this);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
+        new Handler().postDelayed(() -> {
+            if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
+            {
+                if (isNetworkConnected())
                 {
-                    Log.e("SQL","123");
-                    if(isNetworkConnected()) {
-                        if (myDB.kiemTraPhienBan())
-                        {
-                            startActivity(MainActivity.class);
-                        }
-                    }
-
+                    myDB.kiemTraPhienBan();
                 }
-                else {
-                    if(isNetworkConnected())
-                    {
-                        myDB.kiemTraPhienBan();
-                        startActivity(OnBoardingActivity.class);
-                        mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL,true);
-                    }else
-                    {
-                        Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();
-                    }
+                else
+                {
+                    Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else {
+                if(isNetworkConnected())
+                {
+                    startActivity(OnBoardingActivity.class);
+                }
+                else
+                {
+                    Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();
                 }
             }
         },50);
