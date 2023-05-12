@@ -395,4 +395,21 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.update("CauTraLoi",contentValues,"MaCauHoi=? AND MaDeThi=?", new String[]{String.valueOf(ctl.getMaCH()),String.valueOf(ctl.getMaDeThi())});
         mDatabase.close();
     }
+    //Tao de ngau nhien
+    public void RandomQuizz()
+    {
+        //Lấy row cuối cùng
+        String lastRow ="SELECT * FROM table_name ORDER BY column_name DESC LIMIT 1";
+        mDatabase=this.getWritableDatabase();
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM DeThi ORDER BY MaDeThi DESC LIMIT 1", null);
+        DeThi DeThi = new DeThi(cursor.getInt(0), cursor.getString(1));
+        cursor.close();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaDeThi",DeThi.getMaDeThi()+1);
+        DeThi.setTenDeThi("Đề "+DeThi.getMaDeThi()+1);
+        contentValues.put("MaDeThi",DeThi.getMaDeThi());
+        contentValues.put("TenDeThi",DeThi.getTenDeThi());
+        insert("DeThi",contentValues);
+        mDatabase.close();
+    }
 }

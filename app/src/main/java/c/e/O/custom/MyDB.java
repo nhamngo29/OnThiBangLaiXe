@@ -49,11 +49,7 @@ public class MyDB {
 
     public void capNhatDatabase()
     {
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setTitle("Loading....");
-        progressDialog.setMessage("quá trình này có thể mất vài phút,yêu cầu phải kết nối mạng...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
 //        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
 //        //Đọc loại câu hỏi
 //        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
@@ -189,7 +185,6 @@ public class MyDB {
                         if(dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(),tlbb.getMaCH()))
                         {
                             dbHandler.updateCauTraLoi(tlbb);
-
                         }
                         else
                         {
@@ -202,6 +197,8 @@ public class MyDB {
                     {
                         progressDialog.dismiss();
                         Intent intent = new Intent(context, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intent);
                     }
@@ -269,15 +266,26 @@ public boolean kiemTraPhienBan()
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
-            Log.e("Phien ban",isLastestVersion[0]+" dung sai");
+            Log.e("Có cap nhat hay khong",isLastestVersion[0]+"");
             if (!isLastestVersion[0])
             {
+                progressDialog = new ProgressDialog(context);
+                progressDialog.setTitle("Loading....");
+                progressDialog.setMessage("quá trình này có thể mất vài phút,yêu cầu phải kết nối mạng...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
                 Log.e("Có phiên bản mới","");
-                capNhatDatabase();
                 downloadWithBytes("BienBao");
                 downloadWithBytes("CauHoi");
+                capNhatDatabase();
                 dbHandler.UpdateVersion(snapshot.getValue(int.class));
-                isLastestVersion[0]=false;
+                isLastestVersion[0]=true;
+            }
+            else
+            {
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
             }
 
             stop();
@@ -285,10 +293,9 @@ public boolean kiemTraPhienBan()
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-            isLastestVersion[0] = false;
+            isLastestVersion[0] = true;
         }
     });
-    Log.e("Phien ban",isLastestVersion[0]+" dung sai");
     return isLastestVersion[0];
 }
     private void stop()

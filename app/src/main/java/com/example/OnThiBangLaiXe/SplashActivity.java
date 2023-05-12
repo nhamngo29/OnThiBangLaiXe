@@ -24,7 +24,6 @@ import c.e.O.custom.MySharedPreferences;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL";
-    public static ProgressDialog progressDialog;
     String DB_PATH_SUFFIX="/databases/";
 
     String DATABASE_NAME= "db.db";
@@ -41,17 +40,14 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
                 {
-                    if(isNetworkConnected()&&!myDB.kiemTraPhienBan()) {
-                        Log.e("123","123");
-                       return;
+                    if(isNetworkConnected()){
+                        myDB.kiemTraPhienBan();
                     }
-                    else
+                    else if(!isNetworkConnected())
                     {
-                        Log.e("321","321");
-                        startActivity(intent);
+                        startActivity(MainActivity.class);
                     }
 
                 }
@@ -82,6 +78,9 @@ public class SplashActivity extends AppCompatActivity {
     private void startActivity(Class<?> cls)
     {
         Intent intent=new Intent(this,cls);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
