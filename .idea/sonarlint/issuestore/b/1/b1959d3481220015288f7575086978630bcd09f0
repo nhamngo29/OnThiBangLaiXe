@@ -1,0 +1,7 @@
+
+n	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¯Ã´Æûÿÿÿÿ8ÁãĞÁû0
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¼»°˜üÿÿÿÿ8ÄãĞÁû0
+]
+java:S22595"@A "NullPointerException" could be thrown; "ch" is nullable here.(¬æ¨8„«¬•ü0
+G
+java:S1068"+Remove this unused "context" private field.(êİç8€äĞÁû0

@@ -1,0 +1,10 @@
+
+F
+java:S1604"(Make this anonymous inner class a lambda(Ö¹™º8æ¢»÷ı0
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¼»°˜üÿÿÿÿ8€öæİü0
+o
+java:S3776D"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ÑÏÊ8Ğ¥»÷ı0
+¤
+java:S1186’"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ğ¸™áúÿÿÿÿ8ß¥»÷ı0
+J
+java:S1068!"-Remove this unused "dsDungSai" private field.(˜ÓÔÂ8ã¥»÷ı0

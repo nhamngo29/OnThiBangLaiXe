@@ -1,0 +1,12 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¼»°˜üÿÿÿÿ8˜Ğ”ş0
+p
+java:S37769"SRefactor this method to reduce its Cognitive Complexity from 103 to the 15 allowed.(ùÿÌñ8›Ò”ş0
+f
+java:S1659Ä"HDeclare "txtSoCauHoi" and all following declarations on a separate line.(±®”ş8´Ò”ş0
+c
+java:S1659Å"@Declare "rbB" and all following declarations on a separate line.(œµ£½üÿÿÿÿ8´Ò”ş0
+f
+java:S1659Æ"CDeclare "ivSave" and all following declarations on a separate line.(¿¯çşÿÿÿÿ8öÖ›ş0
+ä
+java:S65419"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 226 to 64, Complexity from 33 to 14, Nesting Level from 5 to 2, Number of Variables from 24 to 6.(ùÿÌñ8·Ò”ş0

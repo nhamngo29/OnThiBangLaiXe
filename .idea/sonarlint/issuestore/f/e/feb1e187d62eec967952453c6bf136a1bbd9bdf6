@@ -1,0 +1,22 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ϊ―¨Ρ
+i	java:S116"ORename this field "MaCH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‘¬ΐόÿÿÿÿ
+m	java:S116"SRename this field "MaLoaiCH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‘¬ΐόÿÿÿÿ
+o	java:S116"URename this field "MaLoaiBang" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‘¬ΐόÿÿÿÿ
+r	java:S116"QRename this field "HaySai" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‘¬ΐόÿÿÿÿ8υ’ϋ0
+o	java:S116"NRename this field "Luu" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‘¬ΐόÿÿÿÿ8υ’ϋ0
+x	java:S116"WRename this field "DaTraLoiDung" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‘¬ΐόÿÿÿÿ8ρύΖµό0
+s	java:S116"RRename this field "NoiDung" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8υ’ϋ0
+s	java:S116"RRename this field "HinhAnh" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+r	java:S116"QRename this field "DapAnA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+r	java:S116"QRename this field "DapAnB" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+r	java:S116"QRename this field "DapAnC" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+r	java:S116"QRename this field "DapAnD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+u	java:S116"TRename this field "DapAnDung" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+u	java:S116"TRename this field "GiaiThich" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(μƒο­ÿÿÿÿÿ8φ’ϋ0
+`
+java:S1659"EDeclare "MaLoaiCH" and all following declarations on a separate line.(€‘¬ΐόÿÿÿÿ
+f
+java:S1659"DDeclare "HinhAnh" and all following declarations on a separate line.(μƒο­ÿÿÿÿÿ8ϋ’ϋ0
+^	java:S107x"BConstructor has 14 parameters, which is greater than 7 authorized.(ΰΘΤ8χύΖµό0
+_	java:S107"BConstructor has 13 parameters, which is greater than 7 authorized.(•Θ™8ό’ϋ0

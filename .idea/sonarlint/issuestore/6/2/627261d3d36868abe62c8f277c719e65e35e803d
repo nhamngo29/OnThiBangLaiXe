@@ -1,0 +1,45 @@
+
+j
+java:S1192„"LDefine a constant instead of duplicating this literal "ThÃ´ng bÃ¡o" 3 times.(‚Şóƒ8îüş0
+h
+java:S1301T"KReplace this "switch" statement by "if" statements to increase readability.(ºÓ©¦8îüş0
+k
+java:S1104"NMake vp a static final constant or non-public and provide accessors if needed.(¶»ú¥8ïüş0
+v
+java:S1104"TMake rvCauHoi a static final constant or non-public and provide accessors if needed.(ÚùÌöùÿÿÿÿ8ïüş0
+y
+java:S1104("WMake dsCauTraLoi a static final constant or non-public and provide accessors if needed.(¥ú¾†üÿÿÿÿ8ïüş0
+x
+java:S1104)"VMake ctlApdater a static final constant or non-public and provide accessors if needed.(£ûå³øÿÿÿÿ8ïüş0
+y
+java:S1104*"WMake menuAdapter a static final constant or non-public and provide accessors if needed.(ˆÄ¨äûÿÿÿÿ8ïüş0
+E
+java:S1444"(Make this "public static vp" field final(¶»ú¥8ïüş0
+P
+java:S1444".Make this "public static rvCauHoi" field final(ÚùÌöùÿÿÿÿ8ïüş0
+S
+java:S1444("1Make this "public static dsCauTraLoi" field final(¥ú¾†üÿÿÿÿ8ïüş0
+R
+java:S1444)"0Make this "public static ctlApdater" field final(£ûå³øÿÿÿÿ8ïüş0
+S
+java:S1444*"1Make this "public static menuAdapter" field final(ˆÄ¨äûÿÿÿÿ8ïüş0
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(í•Ä8ğüş0
+C
+java:S1659""'Declare "txtNopBai" on a separate line.(øçƒ8¡ış0
+X
+java:S2696="6Make the enclosing method "static" or remove this set.(ëá¸Ëûÿÿÿÿ8®ış0
+S
+java:S2696>"6Make the enclosing method "static" or remove this set.(Èë÷±8®ış0
+H
+java:S2386?"&Make member "dsCauTraLoi" "protected".(Ü¯à¶ûÿÿÿÿ8¸ış0
+X
+java:S2696?"6Make the enclosing method "static" or remove this set.(Ü¯à¶ûÿÿÿÿ8Èış0
+X
+java:S2696H"6Make the enclosing method "static" or remove this set.(şÓŒüÿÿÿÿ8Êış0
+S
+java:S2696L"6Make the enclosing method "static" or remove this set.(“Ş»¹8Ì¦ş0
+m
+java:S1874R"KRemove this use of "setOnNavigationItemSelectedListener"; it is deprecated.(Æ×ğüşÿÿÿÿ8Îış0
+>	java:S131T""Add a default case to this switch.(ºÓ©¦8Îış0
+m
+java:S1874¡"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(œƒƒ©ùÿÿÿÿ8Úış0

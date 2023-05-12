@@ -1,0 +1,11 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¼»°˜üÿÿÿÿ8úô»÷þ0
+t
+java:S37766"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(©¬ýÿÿÿÿ8Ü÷»÷þ0
+>	java:S131¬""Add a default case to this switch.(±‘¼-8ÈÂ¾÷þ0
+r
+java:S1659È"ODeclare "txtGiaiThichCauHoi" and all following declarations on a separate line.(¼Ü¢Ãüÿÿÿÿ8ò÷»÷þ0
+c
+java:S1659É"@Declare "rbB" and all following declarations on a separate line.(œµ£½üÿÿÿÿ8ÍÂ¾÷þ0
+h
+java:S1659Ì"EDeclare "ivCauHoi" and all following declarations on a separate line.(üÿ‘Âúÿÿÿÿ8ÍÂ¾÷þ0

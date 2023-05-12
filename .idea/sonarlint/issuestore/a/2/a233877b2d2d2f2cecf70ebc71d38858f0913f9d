@@ -1,0 +1,57 @@
+
+m
+java:S1192Õ"JDefine a constant instead of duplicating this literal "CauTraLoi" 5 times.(Òëˆûÿÿÿÿ8¤Ã‹Ñ€1
+f
+java:S1192¸"HDefine a constant instead of duplicating this literal "MaDeThi" 5 times.(ëæã”8¤Ã‹Ñ€1
+j
+java:S1192ê"GDefine a constant instead of duplicating this literal "MaCH=?" 3 times.(å‡­şÿÿÿÿ8¤Ã‹Ñ€1
+l
+java:S1192Ô"IDefine a constant instead of duplicating this literal "MaCauHoi" 3 times.(ŞÓ—½ûÿÿÿÿ8¤Ã‹Ñ€1
+e
+java:S1192Í"GDefine a constant instead of duplicating this literal "CauHoi" 5 times.(Ê³£8¤Ã‹Ñ€1
+k
+java:S1192¯"HDefine a constant instead of duplicating this literal "NoiDung" 4 times.(¤œ„æúÿÿÿÿ8¤Ã‹Ñ€1
+k
+java:S1192°"HDefine a constant instead of duplicating this literal "HinhAnh" 4 times.(©Ìäıùÿÿÿÿ8¤Ã‹Ñ€1
+d
+java:S1192º"FDefine a constant instead of duplicating this literal "DeThi" 3 times.(ºè±º8¥Ã‹Ñ€1
+M
+java:S1066ş"/Merge this if statement with the enclosing one.(ßÒ×É8àÒƒÑ€1
+M
+java:S1066”"/Merge this if statement with the enclosing one.(Ê£€Ã8¥Ã‹Ñ€1
+R
+java:S1066§"/Merge this if statement with the enclosing one.(¼ÜÌ”ûÿÿÿÿ8¥Ã‹Ñ€1
+M
+java:S1066¸"/Merge this if statement with the enclosing one.(Ê£€Ã8¥Ã‹Ñ€1
+s	java:S117ä"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈŸ¬ëıÿÿÿÿ8¦Ã‹Ñ€1
+s	java:S117ä"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈŸ¬ëıÿÿÿÿ8¦Ã‹Ñ€1
+m	java:S117î"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊİÒ^8¦Ã‹Ñ€1
+m	java:S117î"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊİÒ^8§Ã‹Ñ€1
+m	java:S117÷"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ù¯8§Ã‹Ñ€1
+n	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø¬ù•8àÒƒÑ€1
+n	java:S117¯"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÙğò8§Ã‹Ñ€1
+Z
+java:S4973ş"<Strings and Boxed types should be compared using "equals()".(ßÒ×É8©Ã‹Ñ€1
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(í•Ä
+Z
+java:S2589"7Remove this expression which always evaluates to "true"(¾†¬õÿÿÿÿÿ8ƒÑ€1
+Z
+java:S2589ü"7Remove this expression which always evaluates to "true"(¾†¬õÿÿÿÿÿ8ØÃ‹Ñ€1
+Z
+java:S2589¶"7Remove this expression which always evaluates to "true"(¾†¬õÿÿÿÿÿ8ØÃ‹Ñ€1
+Z
+java:S2589¥"7Remove this expression which always evaluates to "true"(¾†¬õÿÿÿÿÿ8ØÃ‹Ñ€1
+£
+java:S1186'"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¸†£êıÿÿÿÿ8ÙÃ‹Ñ€1
+R
+java:S2209"5Change this instance-reference to a static reference.(úî´8àÃ‹Ñ€1
+j	java:S100<"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Ñæ8âÃ‹Ñ€1
+S
+java:S1854 "5Remove this useless assignment to local variable "s".(¾•ˆ8ëÃ‹Ñ€1
+D
+java:S1481"&Remove this unused "s" local variable.(Ì¶«ê8ìÃ‹Ñ€1
+X	java:S125‹"<This block of commented-out lines of code should be removed.(˜š“p8öÃ‹Ñ€1
+T
+java:S1128"7Remove this unused import 'android.app.ProgressDialog'.(¶ÍÔÓ8üÃ‹Ñ€1
+K
+java:S1068".Remove this unused "DB_VERSION" private field.(¸İÈ²8Ä‹Ñ€1

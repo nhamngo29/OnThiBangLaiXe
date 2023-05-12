@@ -1,0 +1,12 @@
+
+Q
+java:S1066:"/Merge this if statement with the enclosing one.(¹Ì“ƒıÿÿÿÿ8³Üƒş0
+p
+java:S1104"NMake vp a static final constant or non-public and provide accessors if needed.(¤Ù›àøÿÿÿÿ8çÓ‘ıı0
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(í•Ä8çÓ‘ıı0
+i
+java:S2095!"GUse try-with-resources or close this "DBHandler" in a "finally" clause.(õÌ şÿÿÿÿ8úé‡ƒş0
+m
+java:S18741"KRemove this use of "setOnNavigationItemSelectedListener"; it is deprecated.(Æ×ğüşÿÿÿÿ8•Ô‘ıı0
+l
+java:S1874H"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(œƒƒ©ùÿÿÿÿ8çê‡ƒş0
