@@ -81,19 +81,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static TextView txtSafety;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        processCopy();
         khoiTaoControl();
         dbHandler = new DBHandler(this);
-        if(isNetworkConnected()) {
-            kiemTraPhienBan();
-        }
+//        if(isNetworkConnected()) {
+//            kiemTraPhienBan();
+//        }
         loadDBToDanhSach();
-
         setSupportActionBar(toolbar);
         navView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -155,35 +150,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return false;
         }
     }
-    private boolean kiemTraPhienBan()
-    {
-        final boolean[] isLastestVersion = {true};
-        final int[] ver = {0};
-        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
-                if (!isLastestVersion[0])
-                {
-                    Log.e("Có phiên bản mới","");
-                    capNhatDatabase();
-                    downloadWithBytes("BienBao");
-                    downloadWithBytes("CauHoi");
-                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
-                }
-
-                stop();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                isLastestVersion[0] = true;
-            }
-        });
-
-        return isLastestVersion[0];
-    }
+//    private boolean kiemTraPhienBan()
+//    {
+//        final boolean[] isLastestVersion = {true};
+//        final int[] ver = {0};
+//        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+//                if (!isLastestVersion[0])
+//                {
+//                    Log.e("Có phiên bản mới","");
+//                    capNhatDatabase();
+//                    downloadWithBytes("BienBao");
+//                    downloadWithBytes("CauHoi");
+//                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
+//                }
+//
+//                stop();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                isLastestVersion[0] = true;
+//            }
+//        });
+//
+//        return isLastestVersion[0];
+//    }
     //Load db vaof danh danh sach
     private void loadDBToDanhSach()
     {
@@ -205,165 +200,165 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         csdlVersion.removeEventListener(vel);
     }
 
-    private void capNhatDatabase()
-    {
-        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
-        //Đọc loại câu hỏi
-        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-                {
-
-                    LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
-                    if (tlch != null)
-                    {
-                        boolean existed = false;
-
-                        for (LoaiCauHoi check : dsLoaiCauHoi)
-                        {
-                            if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
-                            {
-                                check.setTenLoaiCauHoi(tlch.getTenLoaiCauHoi());
-                                Log.d("Firebase", "Value is existed: " + tlch.getMaLoaiCH());
-                                existed = true;
-                                break;
-                            }
-                        }
-
-                        if (!existed)
-                        {
-                            tlchAdapter.notifyDataSetChanged();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        DatabaseReference csdlBienBao = database.getReference("BienBao");
-        //Đọc loại câu hỏi
-        csdlBienBao.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-                {
-                    BienBao tlbb = dataSnapshot.child(String.valueOf(i)).getValue(BienBao.class);
-
-                    if (tlbb != null)
-                    {
-                        if(dbHandler.findBBByID(tlbb.getMaBB()))
-                        {
-                            dbHandler.updateBB(tlbb);
-                        }
-                        else
-                        {
-                            dbHandler.insertBB(tlbb);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        DatabaseReference csdlCauHoi = database.getReference("CauHoi");
-        csdlCauHoi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
-                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
-                    if(tlbb != null)
-                    {
-                        if(dbHandler.findCHByID(tlbb.getMaCH()))
-                        {
-                            dbHandler.updateCauHoi(tlbb);
-
-                        }
-                        else
-                        {
-                            dbHandler.insertCauHoi(tlbb);
-
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        DatabaseReference csdlDeThi= database.getReference("DeThi");
-        csdlDeThi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
-
-                    DeThi tlbb =snapshot.child(String.valueOf(i)).getValue(DeThi.class);
-                    Log.e("DE de thi",tlbb.getMaDeThi()+"");
-                    if(tlbb != null)
-                    {
-
-                        if(dbHandler.finDDeThiByID(tlbb.getMaDeThi()))
-                        {
-                            dbHandler.updateDeThi(tlbb);
-
-                        }
-                        else
-                        {
-                            dbHandler.insertDeThi(tlbb);
-
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        DatabaseReference csdlCauTraLoi= database.getReference("CauTraLoi");
-        csdlCauTraLoi.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
-
-                    CauTraLoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauTraLoi.class);
-
-                    if(tlbb != null)
-                    {
-
-                        if(dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(),tlbb.getMaCH()))
-                        {
-                            dbHandler.updateCauTraLoi(tlbb);
-
-                        }
-                        else
-                        {
-                            dbHandler.insertCauTraLoi(tlbb);
-
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        loadDBToDanhSach();
-    }
+//    private void capNhatDatabase()
+//    {
+//        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
+//        //Đọc loại câu hỏi
+//        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+//                {
+//
+//                    LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
+//                    if (tlch != null)
+//                    {
+//                        boolean existed = false;
+//
+//                        for (LoaiCauHoi check : dsLoaiCauHoi)
+//                        {
+//                            if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
+//                            {
+//                                check.setTenLoaiCauHoi(tlch.getTenLoaiCauHoi());
+//                                Log.d("Firebase", "Value is existed: " + tlch.getMaLoaiCH());
+//                                existed = true;
+//                                break;
+//                            }
+//                        }
+//
+//                        if (!existed)
+//                        {
+//                            tlchAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        DatabaseReference csdlBienBao = database.getReference("BienBao");
+//        //Đọc loại câu hỏi
+//        csdlBienBao.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+//                {
+//                    BienBao tlbb = dataSnapshot.child(String.valueOf(i)).getValue(BienBao.class);
+//
+//                    if (tlbb != null)
+//                    {
+//                        if(dbHandler.findBBByID(tlbb.getMaBB()))
+//                        {
+//                            dbHandler.updateBB(tlbb);
+//                        }
+//                        else
+//                        {
+//                            dbHandler.insertBB(tlbb);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        DatabaseReference csdlCauHoi = database.getReference("CauHoi");
+//        csdlCauHoi.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (int i = 0; i < snapshot.getChildrenCount(); i++)
+//                {
+//                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
+//                    if(tlbb != null)
+//                    {
+//                        if(dbHandler.findCHByID(tlbb.getMaCH()))
+//                        {
+//                            dbHandler.updateCauHoi(tlbb);
+//
+//                        }
+//                        else
+//                        {
+//                            dbHandler.insertCauHoi(tlbb);
+//
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        DatabaseReference csdlDeThi= database.getReference("DeThi");
+//        csdlDeThi.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (int i = 0; i < snapshot.getChildrenCount(); i++)
+//                {
+//
+//                    DeThi tlbb =snapshot.child(String.valueOf(i)).getValue(DeThi.class);
+//                    Log.e("DE de thi",tlbb.getMaDeThi()+"");
+//                    if(tlbb != null)
+//                    {
+//
+//                        if(dbHandler.finDDeThiByID(tlbb.getMaDeThi()))
+//                        {
+//                            dbHandler.updateDeThi(tlbb);
+//
+//                        }
+//                        else
+//                        {
+//                            dbHandler.insertDeThi(tlbb);
+//
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        DatabaseReference csdlCauTraLoi= database.getReference("CauTraLoi");
+//        csdlCauTraLoi.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (int i = 0; i < snapshot.getChildrenCount(); i++)
+//                {
+//
+//                    CauTraLoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauTraLoi.class);
+//
+//                    if(tlbb != null)
+//                    {
+//
+//                        if(dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(),tlbb.getMaCH()))
+//                        {
+//                            dbHandler.updateCauTraLoi(tlbb);
+//
+//                        }
+//                        else
+//                        {
+//                            dbHandler.insertCauTraLoi(tlbb);
+//
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        loadDBToDanhSach();
+//    }
     public void downloadWithBytes(String type){
         StorageReference imageRefl = storageReference.child(type);
         imageRefl.listAll().addOnSuccessListener(listResult -> {
@@ -456,46 +451,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
-    }
-    private void processCopy() {
-        File dbFile = getDatabasePath(DATABASE_NAME);
-        if (!dbFile.exists())
-        {
-            try{CopyDataBaseFromAsset();
-                Log.e("SQL","Đã Coppy đến database");
-            }
-            catch (Exception e){
-                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
-            }
-        }
-        Log.e("SQL","Đã tồn tại");
-
-    }
-    private String getDatabasePath() {
-        return getApplicationInfo().dataDir + DB_PATH_SUFFIX+ DATABASE_NAME;
-    }
-    //Coppy db vao database cua mays
-    public void CopyDataBaseFromAsset() {
-
-        try {
-            InputStream myInput;
-            myInput = getAssets().open(DATABASE_NAME);
-            String outFileName = getDatabasePath();
-            File f = new File(getApplicationInfo().dataDir + DB_PATH_SUFFIX);
-            if (!f.exists())
-                f.mkdir();
-            OutputStream myOutput = new FileOutputStream(outFileName);
-            int size = myInput.available();
-            byte[] buffer = new byte[size];
-            myInput.read(buffer);
-            myOutput.write(buffer);
-            myOutput.flush();
-            myOutput.close();
-            myInput.close();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
     }
 
     @Override

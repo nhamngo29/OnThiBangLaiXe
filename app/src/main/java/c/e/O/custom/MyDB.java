@@ -269,6 +269,7 @@ public boolean kiemTraPhienBan()
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+            Log.e("Phien ban",isLastestVersion[0]+" dung sai");
             if (!isLastestVersion[0])
             {
                 Log.e("Có phiên bản mới","");
@@ -276,6 +277,7 @@ public boolean kiemTraPhienBan()
                 downloadWithBytes("BienBao");
                 downloadWithBytes("CauHoi");
                 dbHandler.UpdateVersion(snapshot.getValue(int.class));
+                isLastestVersion[0]=false;
             }
 
             stop();
@@ -283,9 +285,10 @@ public boolean kiemTraPhienBan()
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-            isLastestVersion[0] = true;
+            isLastestVersion[0] = false;
         }
     });
+    Log.e("Phien ban",isLastestVersion[0]+" dung sai");
     return isLastestVersion[0];
 }
     private void stop()

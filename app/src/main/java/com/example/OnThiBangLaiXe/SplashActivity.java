@@ -41,10 +41,17 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
                 {
-                    if(isNetworkConnected()) {
-                        myDB.kiemTraPhienBan();
+                    if(isNetworkConnected()&&!myDB.kiemTraPhienBan()) {
+                        Log.e("123","123");
+                       return;
+                    }
+                    else
+                    {
+                        Log.e("321","321");
+                        startActivity(intent);
                     }
 
                 }

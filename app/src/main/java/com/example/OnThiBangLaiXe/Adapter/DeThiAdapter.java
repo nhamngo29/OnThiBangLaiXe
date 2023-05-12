@@ -48,13 +48,12 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
         holder.txtTenDeThi.setText(dsDeThi.get(position).getTenDeThi());
         int CauTraLoiDung=0,CauTraLoiSai=0;
         List<CauTraLoi> dsCTL= db.getListCauTraLoiByMaDeThi(dsDeThi.get(position).getMaDeThi());
-        Log.e("size",dsCTL.size()+"");
         for(CauTraLoi ctl:dsCTL)
         {
             CauHoi a=db.getCauHoiByID(ctl.getMaCH());
             if(a.getDapAnDung().equals(ctl.getDapAnChon()))
                 CauTraLoiDung++;
-            else if(ctl.getDapAnChon()==null||!a.getDapAnDung().equals(ctl.getDapAnChon()))
+            else if(!a.getDapAnDung().equals(ctl.getDapAnChon())&&ctl.getDapAnChon()!=null)
                 CauTraLoiSai++;
         }
         if(CauTraLoiSai>=5)
