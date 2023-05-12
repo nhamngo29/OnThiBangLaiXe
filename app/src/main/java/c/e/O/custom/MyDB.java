@@ -42,14 +42,18 @@ public class MyDB {
     Context context;
 
     public MyDB(Context context) {
-        dbHandler=new DBHandler(context);
+
         this.context=context;
         dbHandler=new DBHandler(context);
-
     }
 
     public void capNhatDatabase()
     {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("Loading....");
+        progressDialog.setMessage("quá trình này có thể mất vài phút,yêu cầu phải kết nối mạng...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 //        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
 //        //Đọc loại câu hỏi
 //        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
@@ -196,6 +200,7 @@ public class MyDB {
 
                     if (i == snapshot.getChildrenCount() - 1)
                     {
+                        progressDialog.dismiss();
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intent);
@@ -203,7 +208,6 @@ public class MyDB {
                 }
                 if(snapshot.getValue() != null)
                 {
-
 
                 }
             }
@@ -265,6 +269,7 @@ public boolean kiemTraPhienBan()
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+            Log.e("Phien ban",isLastestVersion[0]+" dung sai");
             if (!isLastestVersion[0])
             {
                 Log.e("Có phiên bản mới","");
@@ -272,6 +277,7 @@ public boolean kiemTraPhienBan()
                 downloadWithBytes("BienBao");
                 downloadWithBytes("CauHoi");
                 dbHandler.UpdateVersion(snapshot.getValue(int.class));
+                isLastestVersion[0]=false;
             }
 
             stop();
@@ -279,9 +285,10 @@ public boolean kiemTraPhienBan()
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-            isLastestVersion[0] = true;
+            isLastestVersion[0] = false;
         }
     });
+    Log.e("Phien ban",isLastestVersion[0]+" dung sai");
     return isLastestVersion[0];
 }
     private void stop()
