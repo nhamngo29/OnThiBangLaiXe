@@ -3,6 +3,7 @@ package com.example.OnThiBangLaiXe;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -399,17 +400,31 @@ public class DBHandler extends SQLiteOpenHelper {
     public void RandomQuizz()
     {
         //Lấy row cuối cùng
-        String lastRow ="SELECT * FROM table_name ORDER BY column_name DESC LIMIT 1";
+        List<CauHoi> dsCauHoiRanDom=new ArrayList<>();
         mDatabase=this.getWritableDatabase();
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM DeThi ORDER BY MaDeThi DESC LIMIT 1", null);
+        cursor.moveToFirst();
+        Log.e("MaDeThi",cursor.getInt(0)+"");
         DeThi DeThi = new DeThi(cursor.getInt(0), cursor.getString(1));
+        DeThi.setTenDeThi("Đề "+(DeThi.getMaDeThi()+1));
+        DeThi.setMaDeThi(DeThi.getMaDeThi()+1);
+        insertDeThi(DeThi);
+        mDatabase=this.getWritableDatabase();
+        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 ORDER BY RANDOM() LIMIT 2;", null);
+        while (cursor.moveToNext())
+        {
+            dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
+        }
+        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH!=1 ORDER BY RANDOM() LIMIT 22;", null);
+        while (cursor.moveToNext())
+        {
+            dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
+        }
         cursor.close();
-        ContentValues contentValues  = new ContentValues();
-        contentValues.put("MaDeThi",DeThi.getMaDeThi()+1);
-        DeThi.setTenDeThi("Đề "+DeThi.getMaDeThi()+1);
-        contentValues.put("MaDeThi",DeThi.getMaDeThi());
-        contentValues.put("TenDeThi",DeThi.getTenDeThi());
-        insert("DeThi",contentValues);
+        for(CauHoi ch:dsCauHoiRanDom)
+        {
+            insertCauTraLoi(new CauTraLoi(DeThi.getMaDeThi(),ch.getMaCH()));
+        }
         mDatabase.close();
     }
 }
