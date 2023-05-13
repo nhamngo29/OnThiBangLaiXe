@@ -123,12 +123,10 @@ public class MyDB {
                         if(dbHandler.findCHByID(tlbb.getMaCH()))
                         {
                             dbHandler.updateCauHoi(tlbb);
-
                         }
                         else
                         {
                             dbHandler.insertCauHoi(tlbb);
-
                         }
                     }
                 }

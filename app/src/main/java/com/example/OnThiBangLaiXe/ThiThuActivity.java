@@ -118,8 +118,12 @@ public class ThiThuActivity extends AppCompatActivity {
                 temp.add(ctl);
         }
 
-        db.updateCauTraLoi(temp);
-        DeThiActivity.dtAdapter.notifyDataSetChanged();
+        if (maDeThi != 0)
+        {
+            db.updateCauTraLoi(temp);
+            DeThiActivity.dtAdapter.notifyDataSetChanged();
+        }
+
         Intent intent = new Intent(this, KetQuaActivity.class);
         intent.putExtra("MaDeThi", maDeThi);
         startActivity(intent);

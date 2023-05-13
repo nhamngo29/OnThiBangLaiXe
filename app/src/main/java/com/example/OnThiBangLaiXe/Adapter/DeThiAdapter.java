@@ -5,7 +5,6 @@ import static android.view.View.VISIBLE;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.DBHandler;
-import com.example.OnThiBangLaiXe.DeThiActivity;
 import com.example.OnThiBangLaiXe.KetQuaActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.R;
 import com.example.OnThiBangLaiXe.ThiThuActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
@@ -87,15 +87,26 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
             }
             else
             {
+                if (position == 0)
+                {
+                    List<CauTraLoi> temp = new ArrayList<>();
+                    for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+                    {
+                        if (ctl.getMaDeThi() == 0)
+                        {
+                            temp.add(ctl);
+                        }
+                    }
+                    DanhSach.getDsCauTraLoi().removeAll(temp);
+                    db.RandomQuizz();
+                }
+
                 Intent intent = new Intent(context, ThiThuActivity.class);
                 intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
                 context.startActivity(intent);
             }
-            if(dsDeThi.get(position).getMaDeThi()==0)
-            {
-                db.RandomQuizz();
 
-            }
+
         });
 
     }

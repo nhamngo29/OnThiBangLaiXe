@@ -1,9 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -12,10 +10,12 @@ import android.util.Log;
 import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -406,25 +406,29 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         Log.e("MaDeThi",cursor.getInt(0)+"");
         DeThi DeThi = new DeThi(cursor.getInt(0), cursor.getString(1));
-        DeThi.setTenDeThi("Đề "+(DeThi.getMaDeThi()+1));
-        DeThi.setMaDeThi(DeThi.getMaDeThi()+1);
-        insertDeThi(DeThi);
+        DeThi.setTenDeThi("Random");
+        DeThi.setMaDeThi(0);
+        DanhSach.getDsDeThi().set(0, DeThi);
         mDatabase=this.getWritableDatabase();
         cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 ORDER BY RANDOM() LIMIT 2;", null);
         while (cursor.moveToNext())
         {
             dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
         }
-        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH!=1 ORDER BY RANDOM() LIMIT 22;", null);
+        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH!=1 ORDER BY RANDOM() LIMIT 23;", null);
         while (cursor.moveToNext())
         {
             dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
         }
         cursor.close();
-        for(CauHoi ch:dsCauHoiRanDom)
+        List<CauTraLoi> dsCTL = new ArrayList<>();
+        for (CauHoi ch:dsCauHoiRanDom)
         {
-            insertCauTraLoi(new CauTraLoi(DeThi.getMaDeThi(),ch.getMaCH()));
+            dsCTL.add(new CauTraLoi(DeThi.getMaDeThi(),ch.getMaCH()));
         }
+
+        Collections.shuffle(dsCTL);
+        DanhSach.getDsCauTraLoi().addAll(dsCTL);
         mDatabase.close();
     }
 }
