@@ -1,4 +1,4 @@
-package com.example.OnThiBangLaiXe;
+package com.example.OnThiBangLaiXe.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.OnThiBangLaiXe.R;
+import com.example.OnThiBangLaiXe.function;
 
 import java.util.List;
 

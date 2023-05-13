@@ -113,6 +113,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     //Get list CauTraLoi By Id ma de thi
     public List<CauTraLoi> getListCauTraLoiByMaDeThi(int id)
+    //Get list CauHoi by id loai cau hoi
     {
         mDatabase=this.getWritableDatabase();
         List<CauTraLoi> dsCTL = new ArrayList<>();
@@ -124,6 +125,19 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         return dsCTL;
+    }
+    public List<CauHoi> getListCauHoiByMaCH(int id)
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauHoi> ds = new ArrayList<>();
+        Cursor cursor=mDatabase.rawQuery("select * from CauHoi where MaLoaiCH=?",new String[] {String.valueOf(id)});
+        if (cursor.moveToFirst()&&cursor.getCount()>0) {
+            do {
+                ds.add(getCauHoiByID(cursor.getInt(0)));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return ds;
     }
     public CauHoi getCauHoiByID(int id)
     {
@@ -148,6 +162,7 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         return dsLoaiBienBao;
     }
+
     //Get list câu hỏi
     public List<CauHoi> docCauHoi()
     {
@@ -402,15 +417,12 @@ public class DBHandler extends SQLiteOpenHelper {
         //Lấy row cuối cùng
         List<CauHoi> dsCauHoiRanDom=new ArrayList<>();
         mDatabase=this.getWritableDatabase();
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM DeThi ORDER BY MaDeThi DESC LIMIT 1", null);
-        cursor.moveToFirst();
-        Log.e("MaDeThi",cursor.getInt(0)+"");
-        DeThi DeThi = new DeThi(cursor.getInt(0), cursor.getString(1));
+        DeThi DeThi = new DeThi();
         DeThi.setTenDeThi("Random");
         DeThi.setMaDeThi(0);
         DanhSach.getDsDeThi().set(0, DeThi);
         mDatabase=this.getWritableDatabase();
-        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 ORDER BY RANDOM() LIMIT 2;", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 ORDER BY RANDOM() LIMIT 2;", null);
         while (cursor.moveToNext())
         {
             dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));

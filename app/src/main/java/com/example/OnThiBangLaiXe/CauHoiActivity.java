@@ -22,6 +22,7 @@ public class CauHoiActivity extends AppCompatActivity {
     TextView txtTitle;
     BottomNavigationView bnv;
     Toolbar toolbarBack;
+    List<CauHoi> dsCauHoi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +32,24 @@ public class CauHoiActivity extends AppCompatActivity {
         toolbarBack = findViewById(R.id.toolbarBack);
 
         // Mã loại câu hỏi
-        int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 1);
+        int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 0);
         bnv = findViewById(R.id.bottomNavigationView);
         vp = findViewById(R.id.vp);
         DBHandler db = new DBHandler(this);
         DanhSach.setDsCauHoi(db.docCauHoi());
-        List<CauHoi> dsCauHoi = new ArrayList<>();
-        for(CauHoi a:DanhSach.getDsCauHoi())
+        dsCauHoi = new ArrayList<>();
+        if(maLoaiCH==0)
         {
-            if(a.getMaLoaiCH()==maLoaiCH)
+            dsCauHoi=DanhSach.getDsCauHoi();
+        }
+        else
+        {
+            for(CauHoi a:DanhSach.getDsCauHoi())
             {
-                dsCauHoi.add(a);
+                if(a.getMaLoaiCH()==maLoaiCH)
+                {
+                    dsCauHoi.add(a);
+                }
             }
         }
 

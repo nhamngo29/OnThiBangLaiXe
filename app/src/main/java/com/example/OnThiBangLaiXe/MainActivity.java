@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout loFb;
     LinearLayout loSaHinh;
     LinearLayout loMeo;
+    LinearLayout loTienDoOnTap;
     LinearLayout loThiThu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         startActivity(callIntent);
                         return true;
                     case R.id.item_OnThiLyThuyet:
-                        //chuyển đến tất các các câu trong ôn thi
+                        loTienDoOnTap.callOnClick();
                         return true;
                     case R.id.item_ThongTin:
                         //Thông tin ứng dụng
@@ -190,7 +191,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent init=new Intent(this, DeThiActivity.class);
             startActivity(init);
         });
-
+        loTienDoOnTap.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CauHoiActivity.class);
+            startActivity(intent);
+        });
     }
     private void khoiTaoControl()
     {
@@ -203,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loSaHinh = findViewById(R.id.lo_sahinh);
         loMeo = findViewById(R.id.lo_meo);
         loThiThu=findViewById(R.id.loThiThu);
+        loTienDoOnTap=findViewById(R.id.layout_tienDoOnTap);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
