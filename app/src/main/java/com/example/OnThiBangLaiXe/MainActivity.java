@@ -1,10 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -14,7 +11,6 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,28 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
 import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
-import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
-import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
-import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
@@ -60,19 +43,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     DBHandler dbHandler;
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
-    List<BienBao> dsBienBao = new ArrayList<>();
-    List<CauHoi> dsCauHoi=new ArrayList<>();
     static TheLoaiCauHoiAdapter tlchAdapter;
-    DatabaseReference csdlVersion = database.getReference("Version");
 
-
-    ValueEventListener vel;
-    String DB_PATH_SUFFIX="/databases/";
-
-    String DATABASE_NAME= "db.db";
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference=storage.getReference();
     static ProgressBar pbTienDo;
@@ -85,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         khoiTaoControl();
         dbHandler = new DBHandler(this);
-//        if(isNetworkConnected()) {
-//            kiemTraPhienBan();
-//        }
         loadDBToDanhSach();
         setSupportActionBar(toolbar);
         navView.bringToFront();
@@ -96,7 +67,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navView.setCheckedItem(R.id.item_Home);
         khoiTaoSuKien();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                switch(item.getItemId())
+                {
+                    case R.id.item_HoTro:
+                        Uri number =Uri.parse("tel:0336669999");
+                        Intent callIntent=new Intent(Intent.ACTION_DIAL,number);
+                        startActivity(callIntent);
+                        return true;
+                    case R.id.item_OnThiLyThuyet:
+                        //chuyển đến tất các các câu trong ôn thi
+                        return true;
+                    case R.id.item_ThongTin:
+                        //Thông tin ứng dụng
+                        return true;
+                    case R.id.item_Home:
+                        drawer.closeDrawers();
+                        navView.isLaidOut();
+                        return true;
+                }
+
+                return false;
+            }
+        });
         RecyclerView rv = findViewById(R.id.rvTheLoaiCauHoi);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(tlchAdapter);
@@ -150,36 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return false;
         }
     }
-//    private boolean kiemTraPhienBan()
-//    {
-//        final boolean[] isLastestVersion = {true};
-//        final int[] ver = {0};
-//        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
-//                if (!isLastestVersion[0])
-//                {
-//                    Log.e("Có phiên bản mới","");
-//                    capNhatDatabase();
-//                    downloadWithBytes("BienBao");
-//                    downloadWithBytes("CauHoi");
-//                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
-//                }
-//
-//                stop();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                isLastestVersion[0] = true;
-//            }
-//        });
-//
-//        return isLastestVersion[0];
-//    }
-    //Load db vaof danh danh sach
     private void loadDBToDanhSach()
     {
         DanhSach.setDsCauHoi(dbHandler.docCauHoi());
@@ -195,216 +162,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
         tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
     }
-    private void stop()
-    {
-        csdlVersion.removeEventListener(vel);
-    }
-
-//    private void capNhatDatabase()
-//    {
-//        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
-//        //Đọc loại câu hỏi
-//        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-//                {
-//
-//                    LoaiCauHoi tlch = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
-//                    if (tlch != null)
-//                    {
-//                        boolean existed = false;
-//
-//                        for (LoaiCauHoi check : dsLoaiCauHoi)
-//                        {
-//                            if (tlch.getMaLoaiCH() == check.getMaLoaiCH())
-//                            {
-//                                check.setTenLoaiCauHoi(tlch.getTenLoaiCauHoi());
-//                                Log.d("Firebase", "Value is existed: " + tlch.getMaLoaiCH());
-//                                existed = true;
-//                                break;
-//                            }
-//                        }
-//
-//                        if (!existed)
-//                        {
-//                            tlchAdapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        DatabaseReference csdlBienBao = database.getReference("BienBao");
-//        //Đọc loại câu hỏi
-//        csdlBienBao.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-//                {
-//                    BienBao tlbb = dataSnapshot.child(String.valueOf(i)).getValue(BienBao.class);
-//
-//                    if (tlbb != null)
-//                    {
-//                        if(dbHandler.findBBByID(tlbb.getMaBB()))
-//                        {
-//                            dbHandler.updateBB(tlbb);
-//                        }
-//                        else
-//                        {
-//                            dbHandler.insertBB(tlbb);
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        DatabaseReference csdlCauHoi = database.getReference("CauHoi");
-//        csdlCauHoi.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-//                {
-//                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
-//                    if(tlbb != null)
-//                    {
-//                        if(dbHandler.findCHByID(tlbb.getMaCH()))
-//                        {
-//                            dbHandler.updateCauHoi(tlbb);
-//
-//                        }
-//                        else
-//                        {
-//                            dbHandler.insertCauHoi(tlbb);
-//
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        DatabaseReference csdlDeThi= database.getReference("DeThi");
-//        csdlDeThi.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-//                {
-//
-//                    DeThi tlbb =snapshot.child(String.valueOf(i)).getValue(DeThi.class);
-//                    Log.e("DE de thi",tlbb.getMaDeThi()+"");
-//                    if(tlbb != null)
-//                    {
-//
-//                        if(dbHandler.finDDeThiByID(tlbb.getMaDeThi()))
-//                        {
-//                            dbHandler.updateDeThi(tlbb);
-//
-//                        }
-//                        else
-//                        {
-//                            dbHandler.insertDeThi(tlbb);
-//
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        DatabaseReference csdlCauTraLoi= database.getReference("CauTraLoi");
-//        csdlCauTraLoi.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-//                {
-//
-//                    CauTraLoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauTraLoi.class);
-//
-//                    if(tlbb != null)
-//                    {
-//
-//                        if(dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(),tlbb.getMaCH()))
-//                        {
-//                            dbHandler.updateCauTraLoi(tlbb);
-//
-//                        }
-//                        else
-//                        {
-//                            dbHandler.insertCauTraLoi(tlbb);
-//
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        loadDBToDanhSach();
-//    }
-    public void downloadWithBytes(String type){
-        StorageReference imageRefl = storageReference.child(type);
-        imageRefl.listAll().addOnSuccessListener(listResult -> {
-            List<StorageReference> srtList=listResult.getItems();
-            for (StorageReference sr : srtList)
-            {
-                long SIZE=500*500;
-                sr.getBytes(SIZE).addOnSuccessListener(bytes -> {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                    storeImage(bitmap, sr.getName());
-                    Log.e("Img",sr.getName());
-                });
-            }
-        });
-
-    }
-    private void removeAllImage()
-    {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("images", Context.MODE_PRIVATE);
-        if (directory.exists()) {
-            if (directory.delete()) {
-                Log.e("-->", "file Deleted :");
-            } else {
-                Log.e("-->", "file not Deleted :");
-            }
-        }
-    }
-    private void storeImage(Bitmap bitmap, String name) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("images", Context.MODE_PRIVATE);
-        File file = new File(directory, name);
-        if (!file.exists()) {
-            Log.d("path", file.toString());
-            FileOutputStream fos = null;
-            try {
-                fos = new FileOutputStream(file);
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                fos.flush();
-                fos.close();
-            } catch (java.io.IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private void khoiTaoSuKien()
     {
         loBienBao.setOnClickListener(view -> {
@@ -452,9 +209,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
-
     @Override
     public void onItemClick(int postion) {
 
     }
+
 }

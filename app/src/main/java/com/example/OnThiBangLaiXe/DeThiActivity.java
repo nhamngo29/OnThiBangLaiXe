@@ -24,9 +24,9 @@ public class DeThiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_de_thi);
-        dsDeThi = new ArrayList<>();
+        dsDeThi=DanhSach.getDsDeThi();
         toolbarBack =findViewById(R.id.toolbarBack);
-        dtAdapter = new DeThiAdapter(DanhSach.getDsDeThi(), this);
+        dtAdapter = new DeThiAdapter(dsDeThi, this);
         RecyclerView rv = findViewById(R.id.rvDeThi);
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.setAdapter(dtAdapter);

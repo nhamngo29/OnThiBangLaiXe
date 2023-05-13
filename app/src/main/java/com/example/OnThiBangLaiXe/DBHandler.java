@@ -3,6 +3,7 @@ package com.example.OnThiBangLaiXe;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -393,6 +394,37 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues contentValues  = new ContentValues();
         contentValues.put("DapAnChon",ctl.getDapAnChon());
         mDatabase.update("CauTraLoi",contentValues,"MaCauHoi=? AND MaDeThi=?", new String[]{String.valueOf(ctl.getMaCH()),String.valueOf(ctl.getMaDeThi())});
+        mDatabase.close();
+    }
+    //Tao de ngau nhien
+    public void RandomQuizz()
+    {
+        //Lấy row cuối cùng
+        List<CauHoi> dsCauHoiRanDom=new ArrayList<>();
+        mDatabase=this.getWritableDatabase();
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM DeThi ORDER BY MaDeThi DESC LIMIT 1", null);
+        cursor.moveToFirst();
+        Log.e("MaDeThi",cursor.getInt(0)+"");
+        DeThi DeThi = new DeThi(cursor.getInt(0), cursor.getString(1));
+        DeThi.setTenDeThi("Đề "+(DeThi.getMaDeThi()+1));
+        DeThi.setMaDeThi(DeThi.getMaDeThi()+1);
+        insertDeThi(DeThi);
+        mDatabase=this.getWritableDatabase();
+        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 ORDER BY RANDOM() LIMIT 2;", null);
+        while (cursor.moveToNext())
+        {
+            dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
+        }
+        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH!=1 ORDER BY RANDOM() LIMIT 22;", null);
+        while (cursor.moveToNext())
+        {
+            dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
+        }
+        cursor.close();
+        for(CauHoi ch:dsCauHoiRanDom)
+        {
+            insertCauTraLoi(new CauTraLoi(DeThi.getMaDeThi(),ch.getMaCH()));
+        }
         mDatabase.close();
     }
 }
