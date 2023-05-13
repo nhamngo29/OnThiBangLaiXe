@@ -207,8 +207,6 @@ w
 G.idea/sonarlint/issuestore/4/8/4863281891d32ef796d6f680d78cb100e7c940be,d\8\d83eba5ea733cb5c0531ef72186b1c1f282329c8
 
 Q.idea/sonarlint/securityhotspotstore/a/5/a5fd33cdefef73f893557e24a010c7f884013f96,1\5\155fa7ffe43d75832222c56e929851eff4342c6a
-v
-Fapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/DeThiAdapter.java,c\0\c0f2d9ab3c6c942929a9fa7919e3f8468e180259
 w
 Gapp/src/main/java/com/example/OnThiBangLaiXe/Adapter/KetQuaAdapter.java,b\7\b71d475827850553870c0e7e1376a5a024b4a4fb
 x
@@ -217,8 +215,6 @@ m
 =app/src/main/java/com/example/OnThiBangLaiXe/WebActivity.java,0\7\0785ab12d67a4d74058096cfdcc2977775cc43c8
 p
 @app/src/main/java/com/example/OnThiBangLaiXe/KetQuaActivity.java,c\c\cc6fd62ba04438a40aa94e5d3ed537a176acaebb
-o
-?app/src/main/java/com/example/OnThiBangLaiXe/DeThiActivity.java,8\f\8f7e1ceddf74703142262438939531cab4e78234
 n
 >app/src/main/java/com/example/OnThiBangLaiXe/Model/CauHoi.java,f\e\feb1e187d62eec967952453c6bf136a1bbd9bdf6
 |

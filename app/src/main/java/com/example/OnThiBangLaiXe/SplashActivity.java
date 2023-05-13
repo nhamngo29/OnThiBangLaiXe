@@ -1,6 +1,5 @@
 package com.example.OnThiBangLaiXe;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -22,10 +21,8 @@ import c.e.O.custom.MyDB;
 import c.e.O.custom.MySharedPreferences;
 
 public class SplashActivity extends AppCompatActivity {
-
     private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL";
     String DB_PATH_SUFFIX="/databases/";
-
     String DATABASE_NAME= "db.db";
     MyDB myDB;
     @Override
@@ -42,10 +39,11 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
                 {
-                    if(isNetworkConnected()){
+                    if (isNetworkConnected())
+                    {
                         myDB.kiemTraPhienBan();
                     }
-                    else if(!isNetworkConnected())
+                    else
                     {
                         startActivity(MainActivity.class);
                     }
@@ -55,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                     if(isNetworkConnected())
                     {
                         startActivity(OnBoardingActivity.class);
-                        mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL,true);
+                        mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL, true);
                     }else
                     {
                         Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();
