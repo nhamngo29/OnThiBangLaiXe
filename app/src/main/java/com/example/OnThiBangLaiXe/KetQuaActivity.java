@@ -47,7 +47,16 @@ public class KetQuaActivity extends AppCompatActivity {
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
         init();
         int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
-        dsCTL = db.getListCauTraLoiByMaDeThi(maDeThi);
+        dsCTL = new ArrayList<>();
+
+        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+        {
+            if (ctl.getMaDeThi() == maDeThi)
+            {
+                dsCTL.add(ctl);
+            }
+        }
+
         for (CauTraLoi ctl:dsCTL)
         {
                 if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
