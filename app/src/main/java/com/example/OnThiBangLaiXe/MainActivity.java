@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static TextView txtSoCau;
     static TextView txtKetQua;
     static TextView txtSafety;
+    TextView txtCauSai;
+    TextView txtThiThu;
+    TextView txtLuu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,9 +107,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         txtSafety = findViewById(R.id.txtSafety);
         setProgress();
 
+        txtThiThu = findViewById(R.id.txtThiThu);
+        txtCauSai = findViewById(R.id.txtCauSai);
+        txtLuu = findViewById(R.id.txtLuu);
 
-        TextView txtThiThu = findViewById(R.id.txtThiThu);
         txtThiThu.setText(DanhSach.getDsDeThi().size() - 1 + " đề");
+
+        int luu = 0;
+
+        for (CauHoi ch : DanhSach.getDsCauHoi())
+        {
+            if (ch.getLuu() == 1)
+            {
+                luu++;
+            }
+        }
+
+        txtLuu.setText(luu + " câu");
+
+
+
+        int sai = 0;
+
+        for (CauHoi ch : DanhSach.getDsCauHoi())
+        {
+            if (ch.getDaTraLoiDung() == 2)
+            {
+                sai++;
+            }
+        }
+
+        txtCauSai.setText(sai + " câu");
     }
     public static void setProgress()
     {
@@ -222,4 +253,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        txtThiThu.setText(DanhSach.getDsDeThi().size() - 1 + " đề");
+
+        int luu = 0;
+        for (CauHoi ch : DanhSach.getDsCauHoi())
+        {
+            if (ch.getLuu() == 1)
+            {
+                luu++;
+            }
+        }
+
+        txtLuu.setText(luu + " câu");
+        int sai = 0;
+        for (CauHoi ch : DanhSach.getDsCauHoi())
+        {
+            if (ch.getDaTraLoiDung() == 2)
+            {
+                sai++;
+            }
+        }
+        txtCauSai.setText(sai + " câu");
+    }
 }

@@ -57,7 +57,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         holder.ivSave.setTag(0);
         if(ch.getLuu()==1)
         {
-            holder.ivSave.setImageResource(R.drawable.ico_save_gree);
+            holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24_green);
             holder.ivSave.setTag(1);
         }
         if (ch.getDaTraLoiDung()!=0)
@@ -65,11 +65,11 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
             holder.txtDungSai.setText("Đã học");
             if (ch.getDaTraLoiDung()==1)
             {
-                holder.ivDungSai.setImageResource(R.drawable.ico_true);
+                holder.ivDungSai.setImageResource(R.drawable.baseline_check_circle_24);
             }
             else if(ch.getDaTraLoiDung()==2)
             {
-                holder.ivDungSai.setImageResource(R.drawable.ico_false);
+                holder.ivDungSai.setImageResource(R.drawable.baseline_cancel_24);
             }
         }
         else
@@ -80,11 +80,11 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
         holder.txtNoiDungCauHoi.setText(ch.getNoiDung());
         holder.ivSave.setOnClickListener(view -> {
             if ((int) holder.ivSave.getTag() == 1) {
-                holder.ivSave.setImageResource(R.drawable.ico_save);
+                holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24);
                 holder.ivSave.setTag(0);
                 db.updateLuuLaiCauHoi(ch.getMaCH(), 0);
             } else {
-                holder.ivSave.setImageResource(R.drawable.ico_save_gree);
+                holder.ivSave.setImageResource(R.drawable.baseline_bookmark_24_green);
                 holder.ivSave.setTag(1);
                 db.updateLuuLaiCauHoi(ch.getMaCH(), 1);
             }
