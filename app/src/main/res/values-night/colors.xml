@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="radio_box">#323232</color>
-    <color name="box">#1c1c1e</color>
+    <color name="box">#141414</color>
     <color name="text">#FFFFFFFF</color>
     <color name="background">#000000</color>
     <color name="checked">#C0C0C0</color>
+    <color name="nav_text">#0FD719</color>
 </resources>

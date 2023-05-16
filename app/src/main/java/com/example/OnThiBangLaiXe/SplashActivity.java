@@ -53,7 +53,6 @@ public class SplashActivity extends AppCompatActivity {
                     if(isNetworkConnected())
                     {
                         startActivity(OnBoardingActivity.class);
-                        mySharedPreferences.putBooleanValue(KEY_FIRST_INSTALL, true);
                     }else
                     {
                         Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();

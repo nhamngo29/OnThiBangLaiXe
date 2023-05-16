@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -29,9 +28,9 @@ import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
-import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
@@ -104,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         txtKetQua = findViewById(R.id.txtKetQua);
         txtSafety = findViewById(R.id.txtSafety);
         setProgress();
+
+
+        TextView txtThiThu = findViewById(R.id.txtThiThu);
+        txtThiThu.setText(DanhSach.getDsDeThi().size() - 1 + " đề");
     }
     public static void setProgress()
     {

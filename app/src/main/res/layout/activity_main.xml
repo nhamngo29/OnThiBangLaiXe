@@ -12,12 +12,13 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_Main"
+        android:backgroundTint="@color/background"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/layout_header_banner"
         app:itemIconTint="#0091EA"
-        app:itemTextColor="#2E7D32"
+        app:itemTextColor="@color/nav_text"
         app:menu="@menu/main_menu"/>
 
     <LinearLayout
@@ -38,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:paddingVertical="15dp"
+            android:paddingVertical="25dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/border_layout"
             android:orientation="vertical">
@@ -47,7 +48,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="25dp"
                 android:weightSum="4">
 
                 <LinearLayout
@@ -77,6 +78,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtThiThu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

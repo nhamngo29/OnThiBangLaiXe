@@ -197,6 +197,8 @@ public class MyDB {
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intent);
+                        MySharedPreferences mySharedPreferences=new MySharedPreferences(context);
+                        mySharedPreferences.putBooleanValue("KEY_FIRST_INSTALL", true);
                     }
                 }
                 if(snapshot.getValue() != null)
