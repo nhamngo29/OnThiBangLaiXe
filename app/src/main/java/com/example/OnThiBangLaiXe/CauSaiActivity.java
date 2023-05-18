@@ -1,13 +1,13 @@
 package com.example.OnThiBangLaiXe;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.OnThiBangLaiXe.Adapter.CauHoiAdapter;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CauHoiActivity extends AppCompatActivity {
+public class CauSaiActivity extends AppCompatActivity {
     public ViewPager2 vp;
     TextView txtTitle;
     BottomNavigationView bnv;
@@ -26,39 +26,20 @@ public class CauHoiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cau_hoi);
+        setContentView(R.layout.activity_cau_sai);
         txtTitle = findViewById(R.id.txtTitle);
-        txtTitle.setText("Câu hỏi ôn thi");
+        txtTitle.setText("Câu sai");
         toolbarBack = findViewById(R.id.toolbarBack);
-
-        // Mã loại câu hỏi
-        int maLoaiCH = getIntent().getIntExtra("MaLoaiCH", 0);
+        toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
         bnv = findViewById(R.id.bottomNavigationView);
         vp = findViewById(R.id.vp);
         DBHandler db = new DBHandler(this);
         DanhSach.setDsCauHoi(db.docCauHoi());
         dsCauHoi = new ArrayList<>();
-        if(maLoaiCH==0)
-        {
-            dsCauHoi=DanhSach.getDsCauHoi();
-        }
-        else
-        {
-            for(CauHoi a:DanhSach.getDsCauHoi())
-            {
-                if(a.getMaLoaiCH()==maLoaiCH)
-                {
-                    dsCauHoi.add(a);
-                }
-            }
-        }
-
-
+        dsCauHoi=db.docCauHoiSai();
         vp.setAdapter(new CauHoiAdapter(dsCauHoi, this));
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
-
         Menu menu = bnv.getMenu();
-
         bnv.setOnNavigationItemSelectedListener(item ->
         {
             switch (item.getItemId())
@@ -80,13 +61,11 @@ public class CauHoiActivity extends AppCompatActivity {
 
         menu.setGroupCheckable(0, false, true);
     }
-
     @Override
     public void onBackPressed() {
         Log.e("Back","back");
         MainActivity.tlchAdapter.notifyDataSetChanged();
         MainActivity.setProgress();
         super.onBackPressed();
-
     }
 }

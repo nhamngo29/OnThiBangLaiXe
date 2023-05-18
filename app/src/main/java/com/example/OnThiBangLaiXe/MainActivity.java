@@ -34,28 +34,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
-    LinearLayout loBienBao;
-    LinearLayout loFb;
-    LinearLayout loSaHinh;
-    LinearLayout loMeo;
-    LinearLayout loTienDoOnTap;
-    LinearLayout loThiThu;
+    LinearLayout loBienBao,loCauSai,loFb,loSaHinh,loMeo,loTienDoOnTap,loThiThu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
     DBHandler dbHandler;
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
     static TheLoaiCauHoiAdapter tlchAdapter;
-
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference=storage.getReference();
     static ProgressBar pbTienDo;
-    static TextView txtSoCau;
-    static TextView txtKetQua;
-    static TextView txtSafety;
-    TextView txtCauSai;
-    TextView txtThiThu;
-    TextView txtLuu;
+    static TextView txtSoCau,txtKetQua,txtSafety;
+    TextView txtCauSai,txtLuu,txtThiThu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,30 +106,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         txtThiThu.setText(DanhSach.getDsDeThi().size() - 1 + " đề");
 
-        int luu = 0;
-
-        for (CauHoi ch : DanhSach.getDsCauHoi())
-        {
-            if (ch.getLuu() == 1)
-            {
-                luu++;
-            }
-        }
-
+        int luu = dbHandler.docCauHoiLuu().size();
         txtLuu.setText(luu + " câu");
-
-
-
-        int sai = 0;
-
-        for (CauHoi ch : DanhSach.getDsCauHoi())
-        {
-            if (ch.getDaTraLoiDung() == 2)
-            {
-                sai++;
-            }
-        }
-
+        int sai = dbHandler.docCauHoiSai().size();
         txtCauSai.setText(sai + " câu");
     }
     public static void setProgress()
@@ -192,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
         DanhSach.setDsDeThi(dbHandler.docDeThi());
         DanhSach.setDsCauTraLoi(dbHandler.docCauTraLoi());
+
         // Setup RecycleView
         dsLoaiCauHoi.add(new LoaiCauHoi(1, "ico_fire", "Câu hỏi điểm liệt"));
         dsLoaiCauHoi.add(new LoaiCauHoi(2, "ico_car", "Kỹ thuật lái xe"));
@@ -232,6 +202,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, CauHoiActivity.class);
             startActivity(intent);
         });
+        loCauSai.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CauSaiActivity.class);
+            startActivity(intent);
+        });
     }
     private void khoiTaoControl()
     {
@@ -245,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loMeo = findViewById(R.id.lo_meo);
         loThiThu=findViewById(R.id.loThiThu);
         loTienDoOnTap=findViewById(R.id.layout_tienDoOnTap);
+        loCauSai=findViewById(R.id.loCauSai);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

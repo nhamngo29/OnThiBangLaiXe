@@ -97,6 +97,34 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.close();
         return dsCauTraLoi;
     }
+    public List<CauHoi> docCauHoiSai()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauHoi> dsCauHoiSai = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where DaTraLoiDung=2", null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsCauHoiSai.add(getCauHoiByID(cursor.getInt(0)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsCauHoiSai;
+    }
+    public List<CauHoi> docCauHoiLuu()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauHoi> dsCauHoiSai = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where Luu=1", null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsCauHoiSai.add(getCauHoiByID(cursor.getInt(0)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsCauHoiSai;
+    }
     //get list loại biển báo
     public List<LoaiBienBao> docLoaiBienBao()
     {
