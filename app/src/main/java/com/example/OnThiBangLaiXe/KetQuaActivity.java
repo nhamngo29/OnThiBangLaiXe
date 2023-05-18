@@ -11,10 +11,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
-import com.example.OnThiBangLaiXe.Model.DanhSach;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import c.e.Fragment.ResultFragment;
 
 public class KetQuaActivity extends AppCompatActivity {
     DBHandler db;
@@ -48,15 +49,7 @@ public class KetQuaActivity extends AppCompatActivity {
         init();
         int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
         dsCTL = new ArrayList<>();
-
-        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
-        {
-            if (ctl.getMaDeThi() == maDeThi)
-            {
-                dsCTL.add(ctl);
-            }
-        }
-
+        dsCTL=db.getListCauTraLoiByMaDeThi(maDeThi);
         for (CauTraLoi ctl:dsCTL)
         {
                 if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))

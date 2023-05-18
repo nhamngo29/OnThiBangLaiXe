@@ -1,4 +1,4 @@
-package com.example.OnThiBangLaiXe;
+package c.e.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.CauHoiResultAdapter;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
+import com.example.OnThiBangLaiXe.R;
 
 import java.util.List;
 

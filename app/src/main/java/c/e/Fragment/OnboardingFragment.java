@@ -1,4 +1,4 @@
-package com.example.OnThiBangLaiXe;
+package c.e.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.OnThiBangLaiXe.R;
 
 import c.e.O.custom.MyDB;
 

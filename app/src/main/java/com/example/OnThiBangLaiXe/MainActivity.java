@@ -86,7 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         loTienDoOnTap.callOnClick();
                         return true;
                     case R.id.item_ThongTin:
-                        //Thông tin ứng dụng
+                        Intent init = new Intent(MainActivity.this, WebActivity.class);
+                        init.putExtra("URL", "file:///android_asset/html/ChinhSach.html");
+                        init.putExtra("Name", "Sa hình");
+                        startActivity(init);
                         return true;
                     case R.id.item_Home:
                         drawer.closeDrawers();

@@ -6,7 +6,7 @@
     android:gravity="center"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".OnboardingFragment"
+    tools:context="c.e.Fragment.OnboardingFragment"
     >
     <ImageView
         android:id="@+id/img"

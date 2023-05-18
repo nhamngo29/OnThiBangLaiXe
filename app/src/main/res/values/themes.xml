@@ -12,16 +12,29 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#FFFFFF</item>
     </style>
+
     <style name="SCREEN">
-        <item name="android:background">#C7C7C8</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
+
     <style name="BoxDailog">
         <item name="android:background">#fefefe</item>
     </style>
+
     <style name="TEXT">
         <item name="android:textColor">#000</item>
     </style>
+
     <style name="Toolbar">
         <item name="android:background">#FFFFFF</item>
     </style>
+
+    <style name="Theme.ÔnThiBằngLáiXe.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ÔnThiBằngLáiXe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ÔnThiBằngLáiXe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
