@@ -34,7 +34,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
-    LinearLayout loBienBao,loCauSai,loFb,loSaHinh,loMeo,loTienDoOnTap,loThiThu;
+    LinearLayout loBienBao,loCauSai,loFb,loSaHinh,loMeo,loTienDoOnTap,loThiThu,lo_save;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
@@ -206,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, CauSaiActivity.class);
             startActivity(intent);
         });
+        lo_save.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CauLuuActivity.class);
+            startActivity(intent);
+        });
     }
     private void khoiTaoControl()
     {
@@ -220,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loThiThu=findViewById(R.id.loThiThu);
         loTienDoOnTap=findViewById(R.id.layout_tienDoOnTap);
         loCauSai=findViewById(R.id.loCauSai);
+        lo_save=findViewById(R.id.lo_save);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

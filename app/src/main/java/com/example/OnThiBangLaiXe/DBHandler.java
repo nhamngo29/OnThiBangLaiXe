@@ -111,11 +111,15 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.close();
         return dsCauHoiSai;
     }
+    public Cursor getData(String sql) {
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql, null);
+    }
     public List<CauHoi> docCauHoiLuu()
     {
         mDatabase=this.getWritableDatabase();
         List<CauHoi> dsCauHoiSai = new ArrayList<>();
-        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where Luu=1", null);
+        Cursor cursor = mDatabase.rawQuery("Select * from CauHoi where luu = 1", null);
         if (cursor.moveToFirst()) {
             do {
                 dsCauHoiSai.add(getCauHoiByID(cursor.getInt(0)));
