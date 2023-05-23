@@ -59,13 +59,13 @@ public class CauHoiResultAdapter extends RecyclerView.Adapter<CauHoiResultAdapte
             }
         }
 
-        if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
+        if(ctl.getDapAnChon().equals("0"))
         {
             holder.image.setImageResource(R.drawable.ico_error_40);
         }
         else if(ctl.getDapAnChon()==a.getDapAnDung()||ctl.getDapAnChon().equals(a.getDapAnDung()))
             holder.image.setImageResource(R.drawable.baseline_check_circle_24);
-        else
+        else if(ctl.getDapAnChon()!=a.getDapAnDung()||!ctl.getDapAnChon().equals(a.getDapAnDung()))
             holder.image.setImageResource(R.drawable.baseline_cancel_24);
         if(a.getNoiDung()!=null)
         {

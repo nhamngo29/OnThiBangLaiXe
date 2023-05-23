@@ -54,21 +54,13 @@ public class KetQuaActivity extends AppCompatActivity {
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
         init();
         int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
-        dsCTL = new ArrayList<>();
-
-        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
-        {
-            if (ctl.getMaDeThi() == maDeThi)
-            {
-                dsCTL.add(ctl);
-            }
-        }
+        dsCTL=db.getListCauTraLoiByMaDeThi(maDeThi);
 
         for (CauTraLoi ctl:dsCTL)
         {
-                if(ctl.getDapAnChon()==null || ctl.getDapAnChon().equals("null"))
+                if(ctl.getDapAnChon().equals("0"))
                     soCauChuaTraLoi++;
-                else if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()) || Objects.equals(ctl.getDapAnChon(), db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
+                else if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
                     soCauDung++;
                 else
                     soCauSai++;
@@ -108,7 +100,7 @@ public class KetQuaActivity extends AppCompatActivity {
                 {
                     if(ctl!=null&&ctl.getDapAnChon()!=null)
                     {
-                        if(!ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
+                        if(!ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())&&!ctl.getDapAnChon().equals("0"))
                             a.add(ctl);
                     }
                 }
@@ -121,7 +113,7 @@ public class KetQuaActivity extends AppCompatActivity {
                 List<CauTraLoi> a=new ArrayList<>();
                 for (CauTraLoi ctl:dsCTL)
                 {
-                    if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
+                    if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("0"))
                         a.add(ctl);
                 }
                 senDataToFrm(a);

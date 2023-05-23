@@ -115,7 +115,13 @@ public class ThiThuActivity extends AppCompatActivity {
         for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
         {
             if(ctl.getMaDeThi() == maDeThi)
+            {
+                if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
+                {
+                    ctl.setDapAnChon("0");
+                }
                 temp.add(ctl);
+            }
         }
 
         if (maDeThi != 0)

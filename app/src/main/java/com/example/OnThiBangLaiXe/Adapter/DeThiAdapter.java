@@ -52,12 +52,16 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
         for(CauTraLoi ctl:dsCTL)
         {
             CauHoi a=db.getCauHoiByID(ctl.getMaCH());
-            if(a.getDapAnDung().equals(ctl.getDapAnChon()))
-                CauTraLoiDung++;
-            else if(!a.getDapAnDung().equals(ctl.getDapAnChon())&&ctl.getDapAnChon()!=null)
-                CauTraLoiSai++;
+            if(ctl.getDapAnChon()!=null)
+            {
+                if(a.getDapAnDung().equals(ctl.getDapAnChon()))
+                    CauTraLoiDung++;
+                else if(!a.getDapAnDung().equals(ctl.getDapAnChon())||ctl.getDapAnChon().equals("0"))
+                    CauTraLoiSai++;
+            }
+
         }
-        if(CauTraLoiSai>=5)
+        if(CauTraLoiSai>=5||CauTraLoiDung>5)
         {
             holder.txtTenDeThi.setText("Rớt");
             holder.txtTenDeThi.setTextColor(Color.RED);
