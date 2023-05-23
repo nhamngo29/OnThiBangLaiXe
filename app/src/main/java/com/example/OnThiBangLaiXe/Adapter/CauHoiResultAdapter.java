@@ -88,6 +88,7 @@ public class CauHoiResultAdapter extends RecyclerView.Adapter<CauHoiResultAdapte
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChiTietKetQuaActivity.class);
                 intent.putExtra("MaDeThi", dsCTL.get(position).getMaDeThi());
+                intent.putExtra("ViTri", position);
                 context.startActivity(intent);
             }
         });

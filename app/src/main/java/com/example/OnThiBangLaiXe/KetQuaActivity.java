@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import c.e.Fragment.ResultFragment;
 
@@ -21,7 +25,7 @@ public class KetQuaActivity extends AppCompatActivity {
     DBHandler db;
     int type=0, maDeThi;
     Button btnAll,btnTrue,btnFalse,btnNull;
-    public TextView ThiLai;
+    public TextView ThiLai, txtlyDo, txtKetQua;
     List<CauTraLoi> dsCTL;
     public int getType() {
         return type;
@@ -35,6 +39,8 @@ public class KetQuaActivity extends AppCompatActivity {
         btnNull=findViewById(R.id.btnNull);
         ThiLai=findViewById(R.id.txtThiLai);
         ThiLai.setVisibility(View.VISIBLE);
+        txtlyDo = findViewById(R.id.txtLyDo);
+        txtKetQua = findViewById(R.id.txtResult);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +55,25 @@ public class KetQuaActivity extends AppCompatActivity {
         init();
         int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
         dsCTL = new ArrayList<>();
-        dsCTL=db.getListCauTraLoiByMaDeThi(maDeThi);
+
+        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+        {
+            if (ctl.getMaDeThi() == maDeThi)
+            {
+                dsCTL.add(ctl);
+            }
+        }
+
         for (CauTraLoi ctl:dsCTL)
         {
-                if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
+                if(ctl.getDapAnChon()==null || ctl.getDapAnChon().equals("null"))
                     soCauChuaTraLoi++;
-                else if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())||ctl.getDapAnChon()==db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())
+                else if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()) || Objects.equals(ctl.getDapAnChon(), db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
                     soCauDung++;
                 else
                     soCauSai++;
         }
+
         btnTrue.setText(soCauDung+"");
         btnFalse.setText(soCauSai+"");
         btnNull.setText(soCauChuaTraLoi+"");
@@ -121,6 +136,34 @@ public class KetQuaActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        if (soCauDung >= 21)
+        {
+            txtlyDo.setText("");
+            txtKetQua.setText("ĐẬU");
+            txtKetQua.setTextColor(Color.GREEN);
+        }
+        else
+        {
+            for (CauTraLoi ctl : dsCTL)
+            {
+                for (CauHoi ch : DanhSach.getDsCauHoi())
+                {
+                    if (ch.getMaCH() == ctl.getMaCH())
+                    {
+                        if (ch.getDapAnDung().equals(ctl.getDapAnChon()))
+                        {
+                            if (ch.getMaLoaiCH() == 1)
+                            {
+                                txtlyDo.setText("Sai câu điểm liệt");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
     void senDataToFrm(List<CauTraLoi> a)
     {

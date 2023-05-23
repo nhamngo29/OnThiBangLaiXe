@@ -34,6 +34,7 @@ public class ChiTietKetQuaActivity extends AppCompatActivity {
         List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
 
         int maDeThi = getIntent().getIntExtra("MaDeThi", 0);
+        int viTri = getIntent().getIntExtra("ViTri", 0);
 
         for (CauTraLoi ctl : db.getListCauTraLoiByMaDeThi(maDeThi))
         {
@@ -64,6 +65,8 @@ public class ChiTietKetQuaActivity extends AppCompatActivity {
         });
 
         menu.setGroupCheckable(0, false, true);
+
+        vp.setCurrentItem(viTri, true);
 
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
     }
