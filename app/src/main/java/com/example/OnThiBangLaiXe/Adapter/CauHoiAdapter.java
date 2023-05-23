@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.DBHandler;
+import com.example.OnThiBangLaiXe.MainActivity;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
@@ -88,6 +89,7 @@ public class CauHoiAdapter extends RecyclerView.Adapter<CauHoiAdapter.ViewHolder
                 holder.ivSave.setTag(1);
                 db.updateLuuLaiCauHoi(ch.getMaCH(), 1);
             }
+
         });
 
         if(ch.getHinhAnh()!=null&&!ch.getHinhAnh().equals("null"))

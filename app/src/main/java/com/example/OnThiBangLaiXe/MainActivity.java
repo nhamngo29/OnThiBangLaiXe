@@ -2,17 +2,25 @@ package com.example.OnThiBangLaiXe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -34,18 +42,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
-    LinearLayout loBienBao,loCauSai,loFb,loSaHinh,loMeo,loTienDoOnTap,loThiThu,lo_save;
+    LinearLayout loBienBao, loCauSai, loFb, loSaHinh, loMeo, loTienDoOnTap, loThiThu, lo_save;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
     DBHandler dbHandler;
     List<LoaiCauHoi> dsLoaiCauHoi = new ArrayList<>();
     static TheLoaiCauHoiAdapter tlchAdapter;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference=storage.getReference();
     static ProgressBar pbTienDo;
-    static TextView txtSoCau,txtKetQua,txtSafety;
-    TextView txtCauSai,txtLuu,txtThiThu;
+    static TextView txtSoCau, txtKetQua, txtSafety;
+    TextView txtCauSai, txtLuu, txtThiThu;
+    static private int luu, sai;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +73,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch(item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.item_HoTro:
-                        Uri number =Uri.parse("tel:0336669999");
-                        Intent callIntent=new Intent(Intent.ACTION_DIAL,number);
+                        Uri number = Uri.parse("tel:0336669999");
+                        Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                         startActivity(callIntent);
                         return true;
                     case R.id.item_OnThiLyThuyet:
@@ -111,19 +118,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int sai = dbHandler.docCauHoiSai().size();
         txtCauSai.setText(sai + " câu");
     }
-    public static void setProgress()
-    {
+
+    public static void setProgress() {
         pbTienDo.setMax(DanhSach.getDsCauHoi().size());
 
         int progess = 0;
         int correct = 0;
 
-        for (CauHoi ch : DanhSach.getDsCauHoi())
-        {
-            if (ch.getDaTraLoiDung() != 0)
-            {
-                if (ch.getDaTraLoiDung() == 1)
-                {
+        for (CauHoi ch : DanhSach.getDsCauHoi()) {
+            if (ch.getDaTraLoiDung() != 0) {
+                if (ch.getDaTraLoiDung() == 1) {
                     correct++;
                 }
 
@@ -135,27 +139,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         txtSoCau.setText(progess + "/" + DanhSach.getDsCauHoi().size() + " câu");
         txtKetQua.setText(correct + " câu đúng, " + (progess - correct) + " câu sai");
 
-        if (progess == 0)
-        {
+        if (progess == 0) {
             txtSafety.setText("0%");
-        }
-        else
-        {
-            txtSafety.setText((int)((correct / (float) progess) * 100) + "%");
+        } else {
+            txtSafety.setText((int) ((correct / (float) progess) * 100) + "%");
         }
     }
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        if(ni != null && ni.isConnected()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    private void loadDBToDanhSach()
-    {
+
+    private void loadDBToDanhSach() {
         DanhSach.setDsCauHoi(dbHandler.docCauHoi());
         DanhSach.setDsBienBao(dbHandler.docBienBao());
         DanhSach.setDsLoaiBienBao(dbHandler.docLoaiBienBao());
@@ -168,16 +159,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dsLoaiCauHoi.add(new LoaiCauHoi(3, "ico_trafficligh", "Khái niệm và quy tăc"));
         dsLoaiCauHoi.add(new LoaiCauHoi(4, "ico_account", "Văn hóa và đạo đức"));
         dsLoaiCauHoi.add(new LoaiCauHoi(5, "ico_truck", "Nghiệp vụ vận tải"));
-        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this,this);
+        tlchAdapter = new TheLoaiCauHoiAdapter(dsLoaiCauHoi, this, this);
     }
-    private void khoiTaoSuKien()
-    {
+
+    private void khoiTaoSuKien() {
         loBienBao.setOnClickListener(view -> {
             Intent init = new Intent(this, BienBaoActivity.class);
             startActivity(init);
         });
         loFb.setOnClickListener(view -> {
-            Intent intent=new Intent();
+            Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://www.facebook.com/nhamngoo.29/"));
             startActivity(intent);
@@ -189,48 +180,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(init);
         });
         loMeo.setOnClickListener(view -> {
-            Intent init=new Intent(this, WebActivity.class);
+            Intent init = new Intent(this, WebActivity.class);
             init.putExtra("URL", "file:///android_asset/html/tips600.html");
             init.putExtra("Name", "Mẹo ôn thi");
             startActivity(init);
         });
         loThiThu.setOnClickListener(view -> {
-            Intent init=new Intent(this, DeThiActivity.class);
+            Intent init = new Intent(this, DeThiActivity.class);
             startActivity(init);
         });
         loTienDoOnTap.setOnClickListener(view -> {
             Intent intent = new Intent(this, CauHoiActivity.class);
             startActivity(intent);
         });
+
         loCauSai.setOnClickListener(view -> {
-            Intent intent = new Intent(this, CauSaiActivity.class);
-            startActivity(intent);
+            if (sai != 0) {
+                Intent intent = new Intent(this, CauSaiActivity.class);
+                startActivity(intent);
+            } else {
+                dailog("Thông báo", "Bạn chưa có câu sai nào.!");
+            }
         });
+
+
         lo_save.setOnClickListener(view -> {
-            Intent intent = new Intent(this, CauLuuActivity.class);
-            startActivity(intent);
+            if (luu != 0) {
+                Intent intent = new Intent(this, CauLuuActivity.class);
+                startActivity(intent);
+            } else {
+                dailog("Thông báo", "Bạn chưa có câu hỏi nào đã lưu.!");
+            }
         });
     }
-    private void khoiTaoControl()
-    {
+
+    private void khoiTaoControl() {
         drawerLayout = findViewById(R.id.drawerlayout);
         navView = findViewById(R.id.nav_Main);
         toolbar = findViewById(R.id.toolbar);
-        arrayList=new ArrayList<>();
+        arrayList = new ArrayList<>();
         loBienBao = findViewById(R.id.lo_BienBao);
         loFb = findViewById(R.id.lo_fb);
         loSaHinh = findViewById(R.id.lo_sahinh);
         loMeo = findViewById(R.id.lo_meo);
-        loThiThu=findViewById(R.id.loThiThu);
-        loTienDoOnTap=findViewById(R.id.layout_tienDoOnTap);
-        loCauSai=findViewById(R.id.loCauSai);
-        lo_save=findViewById(R.id.lo_save);
+        loThiThu = findViewById(R.id.loThiThu);
+        loTienDoOnTap = findViewById(R.id.layout_tienDoOnTap);
+        loCauSai = findViewById(R.id.loCauSai);
+        lo_save = findViewById(R.id.lo_save);
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
+
     @Override
     public void onItemClick(int postion) {
 
@@ -240,25 +244,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         txtThiThu.setText(DanhSach.getDsDeThi().size() - 1 + " đề");
-
-        int luu = 0;
-        for (CauHoi ch : DanhSach.getDsCauHoi())
-        {
-            if (ch.getLuu() == 1)
-            {
-                luu++;
-            }
-        }
+        luu = dbHandler.docCauHoiLuu().size();
 
         txtLuu.setText(luu + " câu");
-        int sai = 0;
-        for (CauHoi ch : DanhSach.getDsCauHoi())
-        {
-            if (ch.getDaTraLoiDung() == 2)
-            {
-                sai++;
-            }
-        }
+        sai = dbHandler.docCauHoiSai().size();
+
         txtCauSai.setText(sai + " câu");
+    }
+
+    void dailog(String Titel, String Content) {
+
+        View alerCustomDailog = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_alter_dailog, null);
+        AlertDialog.Builder alertDailog = new AlertDialog.Builder(MainActivity.this);
+        alertDailog.setView(alerCustomDailog);
+        Button btn_ok;
+        TextView tvTitlte, tvContent;
+        btn_ok = alerCustomDailog.findViewById(R.id.btn_ok);
+        tvTitlte = alerCustomDailog.findViewById(R.id.tv_title);
+        tvContent = alerCustomDailog.findViewById(R.id.tv_content);
+        tvTitlte.setText(Titel);
+        tvContent.setText(Content);
+        final AlertDialog dialog = alertDailog.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+        btn_ok.setOnClickListener(view -> dialog.cancel());
     }
 }
