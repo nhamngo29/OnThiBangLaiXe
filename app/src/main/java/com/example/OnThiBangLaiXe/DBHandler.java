@@ -82,7 +82,20 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         mDatabase.close();
         return dsDeThi;
-
+    }
+    public List<LoaiCauHoi> docLoaiCauHoi()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<LoaiCauHoi> dsCauTraLoi = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from LoaiCauHoi", null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsCauTraLoi.add(new LoaiCauHoi(cursor.getInt(0), cursor.getString(1)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsCauTraLoi;
     }
     public List<CauTraLoi> docCauTraLoi()
     {

@@ -33,6 +33,11 @@ public class LoaiCauHoi {
     public LoaiCauHoi() {
     }
 
+    public LoaiCauHoi(int maLoaiCH, String tenLoaiCauHoi) {
+        MaLoaiCH = maLoaiCH;
+        TenLoaiCauHoi = tenLoaiCauHoi;
+    }
+
     public LoaiCauHoi(int maLoaiCH, String hinh, String TenLoaiCauHoi) {
         this.MaLoaiCH = maLoaiCH;
         this.hinh = hinh;
