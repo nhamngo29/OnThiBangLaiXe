@@ -334,7 +334,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public Boolean findLCHByID(int MLCH)
     {
         mDatabase=this.getWritableDatabase();
-        Cursor cursor3= mDatabase.rawQuery("select MaLoaiCH FROM LoaiCauHoi WHERE MaLoaiCH = MLCH",null);
+        Cursor cursor3= mDatabase.rawQuery("select MaLoaiCH FROM LoaiCauHoi WHERE MaLoaiCH = "+MLCH,null);
         cursor3.moveToFirst();
         if(cursor3!=null&&cursor3.getCount()>0)
         {

@@ -1,6 +1,7 @@
 package com.example.OnThiBangLaiXe.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DanhSach {
@@ -9,6 +10,18 @@ public class DanhSach {
     private static List<CauHoi> dsCauHoi = new ArrayList<>();
     private static List<DeThi> dsDeThi = new ArrayList<>();
     private static List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
+    private static List<String> dsBang=new ArrayList<>();
+
+    public static List<String> getDsBang() {
+        String[] item={"A1","A2","B1","B2"};
+        dsBang.addAll(Arrays.asList(item));
+        return dsBang;
+    }
+
+    public static void setDsBang(List<String> dsBang) {
+        DanhSach.dsBang = dsBang;
+    }
+
     public static List<DeThi> getDsDeThi() {
         return dsDeThi;
     }
@@ -47,4 +60,5 @@ public class DanhSach {
     public static void setDsCauHoi(List<CauHoi> dsCauHoi) {
         DanhSach.dsCauHoi = dsCauHoi;
     }
+
 }

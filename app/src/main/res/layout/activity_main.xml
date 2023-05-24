@@ -408,9 +408,11 @@
             android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
+
             android:id="@+id/rvTheLoaiCauHoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             android:paddingBottom="15dp"/>
     </LinearLayout>
     </ScrollView>

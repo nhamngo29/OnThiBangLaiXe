@@ -9,13 +9,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import c.e.O.custom.MyDB;
+import c.e.O.custom.MySharedPreferences;
 
 
 public class OnboardingFragment extends Fragment {
@@ -25,6 +32,9 @@ public class OnboardingFragment extends Fragment {
     String title,content;
     View mView;
     Boolean a=false;
+    AutoCompleteTextView autoCompleteTextView;
+    TextInputLayout textInputLayout;
+    ArrayAdapter<String> adapter;
     MyDB myDB;
     public Button btnNext;
     public OnboardingFragment(int img, String title, String content, Boolean a, Context context) {
@@ -54,17 +64,32 @@ public class OnboardingFragment extends Fragment {
         imgV=mView.findViewById(R.id.img);
         titleV=mView.findViewById(R.id.title);
         contentV=mView.findViewById(R.id.conntent);
-        btnNext=mView.findViewById(R.id.btn_next);
+
         if(a)
         {
+            btnNext=mView.findViewById(R.id.btn_next);
+            autoCompleteTextView=mView.findViewById(R.id.auto_complete_txt);
+            textInputLayout=mView.findViewById(R.id.TextInputLayout);
+            textInputLayout.setVisibility(View.VISIBLE);
             btnNext.setVisibility(View.VISIBLE);
+            adapter=new ArrayAdapter<String>(mView.getContext(),R.layout.list_item_loai_bang, DanhSach.getDsBang());
+            autoCompleteTextView.setAdapter(adapter);
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(autoCompleteTextView.getText().toString()==null||autoCompleteTextView.getText().toString().equals(""))
+                    {
+                        Toast.makeText(mView.getContext(),"Vui lòng chọn loại bằng",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Toast.makeText(mView.getContext(),autoCompleteTextView.getText(),Toast.LENGTH_SHORT).show();
+                    myDB.kiemTraPhienBan();
+                    MySharedPreferences mySharedPreferences=new MySharedPreferences(mView.getContext());
+                    mySharedPreferences.putStringValue("LOAI_GPLX",autoCompleteTextView.getText().toString());
+                }
+            });
         }
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDB.kiemTraPhienBan();
-            }
-        });
+
         imgV.setImageResource(img);
         titleV.setText(title);
         contentV.setText(content);
