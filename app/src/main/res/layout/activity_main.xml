@@ -20,7 +20,9 @@
         app:itemIconTint="#0091EA"
         app:itemTextColor="@color/nav_text"
         app:menu="@menu/main_menu"/>
-
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         style="@style/SCREEN"
         android:layout_width="match_parent"
@@ -410,6 +412,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"/>
-
     </LinearLayout>
+    </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>
