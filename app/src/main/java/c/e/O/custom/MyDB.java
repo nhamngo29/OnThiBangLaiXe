@@ -18,6 +18,7 @@ import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DeThi;
+import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,34 +51,34 @@ public class MyDB {
     public void capNhatDatabase()
     {
 
-//        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
-//        //Đọc loại câu hỏi
-//        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-//                {
-//                    LoaiCauHoi tlbb = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
-//
-//                    if (tlbb != null)
-//                    {
-//                        if(dbHandler.findBBByID(tlbb.getMaBB()))
-//                        {
-//                            dbHandler.updateBB(tlbb);
-//                        }
-//                        else
-//                        {
-//                            dbHandler.insertBB(tlbb);
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
+        //Đọc loại câu hỏi
+        csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
+                {
+                    LoaiCauHoi tlbb = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
+
+                    if (tlbb != null)
+                    {
+                        if(dbHandler.findLCHByID(tlbb.getMaLoaiCH()))
+                        {
+                            dbHandler.updateLoaiCauHoi(tlbb);
+                        }
+                        else
+                        {
+                            dbHandler.insertLoaiCauHoi(tlbb);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         DatabaseReference csdlBienBao = database.getReference("BienBao");
         Task<DataSnapshot> task = csdlBienBao.get();
 

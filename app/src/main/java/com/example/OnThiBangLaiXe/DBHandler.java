@@ -13,6 +13,7 @@ import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.DeThi;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
+import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -252,6 +253,14 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("HaySai",ch.getHaySai());
         insert("CauHoi",contentValues);
     }
+    public void insertLoaiCauHoi(LoaiCauHoi lch)
+    {
+
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaLoaiCH",lch.getMaLoaiCH());
+        contentValues.put("TenLoaiCauHoi",lch.getTenLoaiCauHoi());
+        insert("LoaiCauHoi",contentValues);
+    }
     //insert cau tra loi
     public void insertCauTraLoi(CauTraLoi ctl)
     {
@@ -300,6 +309,23 @@ public class DBHandler extends SQLiteOpenHelper {
         if(cursor3!=null&&cursor3.getCount()>0)
         {
             if(MaBB==cursor3.getString(0))
+            {
+
+                return true;
+            }
+        }
+        cursor3.close();
+        return false;
+    }
+    //Tìm kiếm loại câu hỏi by id
+    public Boolean findLCHByID(int MLCH)
+    {
+        mDatabase=this.getWritableDatabase();
+        Cursor cursor3= mDatabase.rawQuery("select MaLoaiCH FROM LoaiCauHoi WHERE MaLoaiCH = MLCH",null);
+        cursor3.moveToFirst();
+        if(cursor3!=null&&cursor3.getCount()>0)
+        {
+            if(MLCH==cursor3.getInt(0))
             {
 
                 return true;
@@ -383,6 +409,17 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         mDatabase.close();
     }
+    //Update loai câu hỏi
+    public void updateLoaiCauHoi(LoaiCauHoi lch)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaLoaiCH",lch.getMaLoaiCH());
+        contentValues.put("TenLoaiCauHoi",lch.getTenLoaiCauHoi());
+        mDatabase.update("LoaiCauHoi",contentValues,"MaLoaiCH=?", new String[]{String.valueOf(lch.getMaLoaiCH())});
+        mDatabase.close();
+    }
+    //Update beeirn báo
     public void updateBB(BienBao bb)
     {
         mDatabase=this.getWritableDatabase();
