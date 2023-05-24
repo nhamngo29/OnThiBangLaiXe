@@ -45,7 +45,7 @@ import c.e.O.custom.MySharedPreferences;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewInterface {
     NavigationView navView;
-    LinearLayout loBienBao, loCauSai, loFb, loSaHinh, loMeo, loTienDoOnTap, loThiThu, lo_save;
+    LinearLayout loBienBao, loCauSai, loFb, loSaHinh, loMeo, loTienDoOnTap, loThiThu, lo_save,lo_HaySai;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ArrayList<function> arrayList;
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static TheLoaiCauHoiAdapter tlchAdapter;
     static ProgressBar pbTienDo;
     static TextView txtSoCau, txtKetQua, txtSafety;
-    TextView txtCauSai, txtLuu, txtThiThu;
-    static private int luu, sai;
+    TextView txtCauSai, txtLuu, txtThiThu,txtHaySai;
+    static private int luu, sai,haysai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +114,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         txtThiThu = findViewById(R.id.txtThiThu);
         txtCauSai = findViewById(R.id.txtCauSai);
         txtLuu = findViewById(R.id.txtLuu);
-
+        txtHaySai=findViewById(R.id.txtHaySai);
         txtThiThu.setText(DanhSach.getDsDeThi().size() - 1 + " đề");
 
-        int luu = dbHandler.docCauHoiLuu().size();
+        luu = dbHandler.docCauHoiLuu().size();
         txtLuu.setText(luu + " câu");
-        int sai = dbHandler.docCauHoiSai().size();
+        sai = dbHandler.docCauHoiSai().size();
         txtCauSai.setText(sai + " câu");
+        haysai=dbHandler.docCauHaySai().size();
+        txtHaySai.setText(haysai+" câu");
     }
 
     public static void setProgress() {
@@ -216,6 +218,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 dailog("Thông báo", "Bạn chưa có câu hỏi nào đã lưu.!");
             }
         });
+        lo_HaySai.setOnClickListener(view -> {
+            if (haysai != 0) {
+                Intent intent = new Intent(this, HaySaiActivity.class);
+                startActivity(intent);
+            } else {
+                dailog("Thông báo", "Bạn chưa có câu hỏi.!");
+            }
+        });
     }
 
     private void khoiTaoControl() {
@@ -231,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loTienDoOnTap = findViewById(R.id.layout_tienDoOnTap);
         loCauSai = findViewById(R.id.loCauSai);
         lo_save = findViewById(R.id.lo_save);
+        lo_HaySai=findViewById(R.id.lo_HaySai);
     }
 
     @Override

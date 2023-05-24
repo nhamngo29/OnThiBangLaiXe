@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CauSaiActivity extends AppCompatActivity {
+public class HaySaiActivity extends AppCompatActivity {
     public ViewPager2 vp;
     TextView txtTitle;
     BottomNavigationView bnv;
@@ -28,14 +28,14 @@ public class CauSaiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cau_sai);
         txtTitle = findViewById(R.id.txtTitle);
-        txtTitle.setText("Câu sai");
+        txtTitle.setText("Câu hay sai");
         toolbarBack = findViewById(R.id.toolbarBack);
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
         bnv = findViewById(R.id.bottomNavigationView);
         vp = findViewById(R.id.vp);
         DBHandler db = new DBHandler(this);
         dsCauHoi = new ArrayList<>();
-        dsCauHoi=db.docCauHoiSai();
+        dsCauHoi=db.docCauHaySai();
         vp.setAdapter(new CauHoiAdapter(dsCauHoi, this));
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed() );
         Menu menu = bnv.getMenu();

@@ -111,6 +111,22 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase.close();
         return dsCauTraLoi;
     }
+    //Get danh sách câu hay sai
+    public List<CauHoi> docCauHaySai()
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauHoi> dsCauHoi = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where HaySai=1", null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsCauHoi.add(getCauHoiByID(cursor.getInt(0)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsCauHoi;
+    }
+    //Get danh sách câu hỏi sai
     public List<CauHoi> docCauHoiSai()
     {
         mDatabase=this.getWritableDatabase();

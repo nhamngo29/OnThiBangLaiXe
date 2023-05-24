@@ -19,6 +19,9 @@
         android:theme="@style/Theme.ÔnThiBằngLáiXe"
         tools:targetApi="31">
         <activity
+            android:name=".HaySaiActivity"
+            android:exported="false" />
+        <activity
             android:name=".CauLuuActivity"
             android:exported="false" />
         <activity
