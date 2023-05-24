@@ -1,4 +1,5 @@
 package com.example.OnThiBangLaiXe;
+import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +10,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,7 +35,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+// Xử lý push tin nhắn
+        getToken();
         processCopy();
         myDB=new MyDB(this);
         MySharedPreferences mySharedPreferences=new MySharedPreferences(this);
@@ -120,5 +127,19 @@ public class SplashActivity extends AppCompatActivity {
 
             e.printStackTrace();
         }
+    }
+    private  void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                }
+                // Get new FCM registration token
+                String token = task.getResult();
+                // Log and toast
+                Log.d(TAG, "thanh cong :"+token);
+            }
+        });
     }
 }
