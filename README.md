@@ -10,7 +10,9 @@
   <li>NguyễThành Phát</li>
   <li>Huỳnh Hữu Đức</li>
 </ul>
+
 > **App có tích hợp 1 services của google**
+
 - google.firebase.MESSAGING_EVENT
 <div align="center">
 # PHÂN CÔNG CÔNG VIỆC
