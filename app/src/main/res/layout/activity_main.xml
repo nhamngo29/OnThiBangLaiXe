@@ -20,8 +20,7 @@
         app:itemIconTint="#0091EA"
         app:itemTextColor="@color/nav_text"
         app:menu="@menu/main_menu"/>
-
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -35,7 +34,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_menu"/>
+            app:navigationIcon="@drawable/ic_menu" />
 
         <LinearLayout
             android:id="@+id/ln_header"
@@ -418,5 +417,5 @@
             android:nestedScrollingEnabled="false"
             android:paddingBottom="15dp"/>
     </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>
