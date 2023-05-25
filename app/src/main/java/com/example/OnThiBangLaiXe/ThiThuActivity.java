@@ -3,6 +3,7 @@ package com.example.OnThiBangLaiXe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class ThiThuActivity extends AppCompatActivity {
     Toolbar toolbarBack;
     BottomNavigationView bnv;
     private DBHandler db;
-    public static List<CauTraLoi> dsCauTraLoi;
+    public static List<CauTraLoi> dsCauTraLoi=new ArrayList<>();
     public static CauTraLoiAdapter ctlApdater;
     public static menuCauHoiAdapter menuAdapter;
     @Override
@@ -49,6 +50,7 @@ public class ThiThuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cau_hoi);
+        dsCauTraLoi.clear();
         txtTitle = findViewById(R.id.txtTitle);
         txtNopBai=findViewById(R.id.txtThiLai);
         txtNopBai.setVisibility(View.VISIBLE);
@@ -60,12 +62,17 @@ public class ThiThuActivity extends AppCompatActivity {
         db=new DBHandler(this);
         vp = findViewById(R.id.vp);
         rvCauHoi = findViewById(R.id.rvCauHoi);
-        dsCauTraLoi=new ArrayList<>();
-        for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
+        if(maDeThi==0)
         {
-            if(ctl.getMaDeThi()==maDeThi)
-                dsCauTraLoi.add(new CauTraLoi(ctl.getMaDeThi(),ctl.getMaCH(),null));
+            dsCauTraLoi.addAll(DanhSach.getDsCauTLRandom());
         }
+        else
+            dsCauTraLoi.addAll(db.getListCauTraLoiByMaDeThi(maDeThi));
+//        for (CauTraLoi ctl:DanhSach.getDsCauTraLoi())
+//        {
+//            if(ctl.getMaDeThi()==maDeThi)
+//                dsCauTraLoi.add(new CauTraLoi(ctl.getMaDeThi(),ctl.getMaCH(),null));
+//        }
         toolbarBack.setNavigationOnClickListener(view -> ThiThuActivity.this.onBackPressed());
         // Thêm vòng lặp hoặc phương thức để lấy ds câu hỏi của loại câu hỏi này ra
 
@@ -112,16 +119,16 @@ public class ThiThuActivity extends AppCompatActivity {
     {
         List<CauTraLoi> temp = new ArrayList<>();
 
-        for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+        for (CauTraLoi ctl : dsCauTraLoi)
         {
-            if(ctl.getMaDeThi() == maDeThi)
-            {
+
                 if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
                 {
                     ctl.setDapAnChon("0");
+
                 }
+
                 temp.add(ctl);
-            }
         }
 
         if (maDeThi != 0)
@@ -129,10 +136,15 @@ public class ThiThuActivity extends AppCompatActivity {
             db.updateCauTraLoi(temp);
             DeThiActivity.dtAdapter.notifyDataSetChanged();
         }
+        else {
+            DanhSach.getDsCauTLRandom().clear();
+            DanhSach.getDsCauTLRandom().addAll(temp);
+        }
 
         Intent intent = new Intent(this, KetQuaActivity.class);
         intent.putExtra("MaDeThi", maDeThi);
         startActivity(intent);
+
         finish();
     }
 

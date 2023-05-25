@@ -30,7 +30,6 @@ public class DeThiActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.rvDeThi);
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.setAdapter(dtAdapter);
-        TextView txtTilte = findViewById(R.id.txtTitle);
         init();
         event();
     }

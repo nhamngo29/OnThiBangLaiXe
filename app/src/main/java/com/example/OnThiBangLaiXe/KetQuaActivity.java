@@ -3,6 +3,7 @@ package com.example.OnThiBangLaiXe;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -48,12 +49,19 @@ public class KetQuaActivity extends AppCompatActivity {
         Intent intent = getIntent();
         maDeThi =intent.getIntExtra("MaDeThi",1);
         db=new DBHandler(this);
+        dsCTL=new ArrayList<>();
         Toolbar toolbarBack;
         toolbarBack = findViewById(R.id.toolbarBack);
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
         init();
         int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
-        dsCTL=db.getListCauTraLoiByMaDeThi(maDeThi);
+        if(maDeThi==0)
+        {
+            dsCTL.addAll(DanhSach.getDsCauTLRandom());
+        }
+        else {
+            dsCTL=db.getListCauTraLoiByMaDeThi(maDeThi);
+        }
 
         for (CauTraLoi ctl:dsCTL)
         {

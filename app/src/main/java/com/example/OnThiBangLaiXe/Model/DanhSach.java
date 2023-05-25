@@ -11,6 +11,16 @@ public class DanhSach {
     private static List<DeThi> dsDeThi = new ArrayList<>();
     private static List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
     private static List<String> dsBang=new ArrayList<>();
+    private static List<CauTraLoi> dsCauTLRandom=new ArrayList<>();
+
+
+    public static List<CauTraLoi> getDsCauTLRandom() {
+        return dsCauTLRandom;
+    }
+
+    public static void setDsCauTLRandom(List<CauTraLoi> dsCauTLRandom) {
+        DanhSach.dsCauTLRandom = dsCauTLRandom;
+    }
 
     public static List<String> getDsBang() {
         String[] item={"A1","A2","B1","B2"};

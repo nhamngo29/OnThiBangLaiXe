@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
             }
 
         }
-        if(CauTraLoiSai>=5||CauTraLoiDung>5)
+        if(CauTraLoiSai>=5&&CauTraLoiDung<21)
         {
             holder.txtTenDeThi.setText("Rớt");
             holder.txtTenDeThi.setTextColor(Color.RED);
@@ -93,18 +94,8 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
             {
                 if (position == 0)
                 {
-                    List<CauTraLoi> temp = new ArrayList<>();
-                    for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
-                    {
-                        if (ctl.getMaDeThi() == 0)
-                        {
-                            temp.add(ctl);
-                        }
-                    }
-                    DanhSach.getDsCauTraLoi().removeAll(temp);
                     db.RandomQuizz();
                 }
-
                 Intent intent = new Intent(context, ThiThuActivity.class);
                 intent.putExtra("MaDeThi", dsDeThi.get(position).getMaDeThi());
                 context.startActivity(intent);

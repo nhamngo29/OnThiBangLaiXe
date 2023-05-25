@@ -145,6 +145,22 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql, null);
     }
+    //Doc cau trả lời by madethi
+    public List<CauTraLoi> docCauTraLoiByMaDe(int md)
+    {
+        mDatabase=this.getWritableDatabase();
+        List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
+        Cursor cursor = mDatabase.rawQuery("select * from CauTraLoi where MaDeThi="+md, null);
+        if (cursor.moveToFirst()) {
+            do {
+                dsCauTraLoi.add(new CauTraLoi(cursor.getInt(0), cursor.getInt(1)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        mDatabase.close();
+        return dsCauTraLoi;
+    }
+    //Doc Cau hoi luu
     public List<CauHoi> docCauHoiLuu()
     {
         mDatabase=this.getWritableDatabase();
@@ -538,7 +554,8 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         Collections.shuffle(dsCTL);
-        DanhSach.getDsCauTraLoi().addAll(dsCTL);
+        DanhSach.getDsCauTLRandom().clear();
+        DanhSach.setDsCauTLRandom(dsCTL);
         mDatabase.close();
     }
 }
