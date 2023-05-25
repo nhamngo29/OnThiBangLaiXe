@@ -125,7 +125,6 @@ public class ThiThuActivity extends AppCompatActivity {
                 if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("null"))
                 {
                     ctl.setDapAnChon("0");
-
                 }
 
                 temp.add(ctl);
