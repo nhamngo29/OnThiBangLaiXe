@@ -7,6 +7,8 @@
   <li>Nguyễn Nhâm Ngọ (https://github.com/nhamngo29)</li>
   <li>Trần Đức Nhật Nam (https://github.com/Tran-Duc-Nhat-Nam)</li>
   <li>Nguyễn Hưu Trung</li>
+  <li>NguyễThành Phát</li>
+  <li>Huỳnh Hữu Đức</li>
 </ul>
 <div align="center">
 
