@@ -8,7 +8,19 @@
   <li>Trần Đức Nhật Nam (https://github.com/Tran-Duc-Nhat-Nam)</li>
   <li>Nguyễn Hưu Trung</li>
 </ul>
+<div align="center">
 
+# PHÂN CÔNG CÔNG VIỆC
+
+</div>
+
+| STT | Họ tên  | Nôi dung công việc | Ghi chú |
+|--------------|-------|------|-------|
+| 1 | Nguyễn Nhâm Ngọ | - Thiết kệ CSDL,nhập liêu,proc,trigger nhập liệu bảng </br> - Form quản lý thực đơn , from nhập xuất kho , from hóa đơn , from nhân viên , from bàn ăn ,from tài khoản frm main , from đặt bàn, from order xử lý nghiệp vụ tất cả các form | Hoàn thành 100%  |
+| 2 | Trần Đức Nhật Nam |  | Hoàn thành 100% |
+| 3  | Nguyễn Hữu Trung |  |  |
+| 4  | Nguyễn Thành Phát |  |  |
+| 5  | Huỳnh Hữu Đức |  |  |
 ### Mục lục
 [I. Mở đầu](#Modau)
 
