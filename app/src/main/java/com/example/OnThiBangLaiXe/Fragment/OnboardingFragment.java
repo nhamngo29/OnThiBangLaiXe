@@ -1,7 +1,6 @@
-package c.e.Fragment;
+package com.example.OnThiBangLaiXe.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,8 +19,8 @@ import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-import c.e.O.custom.MyDB;
-import c.e.O.custom.MySharedPreferences;
+import com.example.OnThiBangLaiXe.Custom.MyDB;
+import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
 
 
 public class OnboardingFragment extends Fragment {

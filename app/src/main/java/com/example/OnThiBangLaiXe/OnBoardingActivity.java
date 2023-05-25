@@ -16,8 +16,8 @@ import com.example.OnThiBangLaiXe.Adapter.ViewWelcomeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import c.e.Fragment.OnboardingFragment;
-import c.e.O.custom.MyDB;
+import com.example.OnThiBangLaiXe.Fragment.OnboardingFragment;
+import com.example.OnThiBangLaiXe.Custom.MyDB;
 import me.relex.circleindicator.CircleIndicator;
 
 public class OnBoardingActivity extends AppCompatActivity {

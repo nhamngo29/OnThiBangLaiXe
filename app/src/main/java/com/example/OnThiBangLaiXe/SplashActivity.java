@@ -23,8 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import c.e.O.custom.MyDB;
-import c.e.O.custom.MySharedPreferences;
+import com.example.OnThiBangLaiXe.Custom.MyDB;
+import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
 
 public class SplashActivity extends AppCompatActivity {
     private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL";

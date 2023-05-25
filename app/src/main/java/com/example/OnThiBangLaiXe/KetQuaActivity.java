@@ -17,9 +17,8 @@ import com.example.OnThiBangLaiXe.Model.DanhSach;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import c.e.Fragment.ResultFragment;
+import com.example.OnThiBangLaiXe.Fragment.ResultFragment;
 
 public class KetQuaActivity extends AppCompatActivity {
     DBHandler db;
