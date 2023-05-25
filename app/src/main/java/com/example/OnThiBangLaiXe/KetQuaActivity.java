@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.OnThiBangLaiXe.Fragment.ResultFragment;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.OnThiBangLaiXe.Fragment.ResultFragment;
 
 public class KetQuaActivity extends AppCompatActivity {
     DBHandler db;
@@ -46,14 +45,30 @@ public class KetQuaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ket_qua);
         Intent intent = getIntent();
-        maDeThi =intent.getIntExtra("MaDeThi",1);
-        db=new DBHandler(this);
+        maDeThi = intent.getIntExtra("MaDeThi",1);
+        db = new DBHandler(this);
         Toolbar toolbarBack;
         toolbarBack = findViewById(R.id.toolbarBack);
         toolbarBack.setNavigationOnClickListener(view -> onBackPressed());
         init();
-        int soCauDung=0,soCauSai=0,soCauChuaTraLoi=0;
-        dsCTL=db.getListCauTraLoiByMaDeThi(maDeThi);
+        int soCauDung = 0, soCauSai = 0, soCauChuaTraLoi = 0;
+
+        dsCTL = new ArrayList<>();
+
+        if (maDeThi == 0)
+        {
+            for (CauTraLoi ctl : DanhSach.getDsCauTraLoi())
+            {
+                if (ctl.getMaDeThi() == maDeThi)
+                {
+                    dsCTL.add(ctl);
+                }
+            }
+        }
+        else
+        {
+            dsCTL = db.getListCauTraLoiByMaDeThi(maDeThi);
+        }
 
         for (CauTraLoi ctl:dsCTL)
         {
@@ -69,63 +84,49 @@ public class KetQuaActivity extends AppCompatActivity {
         btnFalse.setText(soCauSai+"");
         btnNull.setText(soCauChuaTraLoi+"");
         senDataToFrm(dsCTL);
-        btnAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                senDataToFrm(dsCTL);
-            }
-        });
-        btnTrue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnAll.setOnClickListener(view -> senDataToFrm(dsCTL));
 
-                List<CauTraLoi> a=new ArrayList<>();
-                for (CauTraLoi ctl:dsCTL)
+        btnTrue.setOnClickListener(view -> {
+            List<CauTraLoi> a=new ArrayList<>();
+            for (CauTraLoi ctl:dsCTL)
+            {
+                if(ctl!=null&&ctl.getDapAnChon()!=null)
                 {
-                    if(ctl!=null&&ctl.getDapAnChon()!=null)
-                    {
-                            if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
-                                a.add(ctl);
-                    }
-                }
-                senDataToFrm(a);
-            }
-        });
-        btnFalse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<CauTraLoi> a=new ArrayList<>();
-                for (CauTraLoi ctl:dsCTL)
-                {
-                    if(ctl!=null&&ctl.getDapAnChon()!=null)
-                    {
-                        if(!ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())&&!ctl.getDapAnChon().equals("0"))
+                        if(ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung()))
                             a.add(ctl);
-                    }
                 }
-                senDataToFrm(a);
             }
+            senDataToFrm(a);
         });
-        btnNull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<CauTraLoi> a=new ArrayList<>();
-                for (CauTraLoi ctl:dsCTL)
+
+        btnFalse.setOnClickListener(view -> {
+            List<CauTraLoi> a=new ArrayList<>();
+            for (CauTraLoi ctl:dsCTL)
+            {
+                if(ctl!=null&&ctl.getDapAnChon()!=null)
                 {
-                    if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("0"))
+                    if(!ctl.getDapAnChon().equals(db.getCauHoiByID(ctl.getMaCH()).getDapAnDung())&&!ctl.getDapAnChon().equals("0"))
                         a.add(ctl);
                 }
-                senDataToFrm(a);
             }
+            senDataToFrm(a);
         });
-        ThiLai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(KetQuaActivity.this, ThiThuActivity.class);
-                intent.putExtra("MaDeThi", maDeThi);
-                startActivity(intent);
-                finish();
+
+        btnNull.setOnClickListener(view -> {
+            List<CauTraLoi> a=new ArrayList<>();
+            for (CauTraLoi ctl:dsCTL)
+            {
+                if(ctl.getDapAnChon()==null||ctl.getDapAnChon().equals("0"))
+                    a.add(ctl);
             }
+            senDataToFrm(a);
+        });
+
+        ThiLai.setOnClickListener(view -> {
+            Intent intent1 =new Intent(KetQuaActivity.this, ThiThuActivity.class);
+            intent1.putExtra("MaDeThi", maDeThi);
+            startActivity(intent1);
+            finish();
         });
 
         if (soCauDung >= 21)
@@ -140,16 +141,12 @@ public class KetQuaActivity extends AppCompatActivity {
             {
                 for (CauHoi ch : DanhSach.getDsCauHoi())
                 {
-                    if (ch.getMaCH() == ctl.getMaCH())
-                    {
-                        if (ch.getDapAnDung().equals(ctl.getDapAnChon()))
+                    if (ch.getMaCH() == ctl.getMaCH() && (ch.getMaLoaiCH() == 1
+                            && !ch.getDapAnDung().equals(ctl.getDapAnChon())))
                         {
-                            if (ch.getMaLoaiCH() == 1)
-                            {
-                                txtlyDo.setText("Sai câu điểm liệt");
-                                return;
-                            }
-                        }
+                            txtlyDo.setText("Sai câu điểm liệt");
+                            return;
+
                     }
                 }
             }
