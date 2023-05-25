@@ -2,8 +2,15 @@
 <p>Language: Java</p>
 <p>Database: SQLite,Firebase </p>
 <p>Web service: PHP </p>
+
+>**Môn học: Phát triển ứng dụng di động HUFI**
+
 <hr/>
-<p>Member<p> 
+<p>Giảng viên hướng dẫn:</p>
+<ul>
+  <li>Nguyễn Thị Bích Ngân</li>
+</ul>
+<p>Member:</p> 
 <ul>
   <li>Nguyễn Nhâm Ngọ (https://github.com/nhamngo29)</li>
   <li>Trần Đức Nhật Nam (https://github.com/Tran-Duc-Nhat-Nam)</li>
