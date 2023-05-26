@@ -19,9 +19,10 @@
   <li>Huỳnh Hữu Đức</li>
 </ul>
 
-> **App có tích hợp 1 services của google**
+> **App có tích hợp 2 services của google**
 
 - google.firebase.MESSAGING_EVENT
+- play-services-ads (AdMob)
 
 <div align="center">
 
