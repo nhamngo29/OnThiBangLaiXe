@@ -73,7 +73,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         List<DeThi> dsDeThi = new ArrayList<>();
-        Cursor cursor = mDatabase.rawQuery("select * from DeThi", null);
+        Cursor cursor = mDatabase.rawQuery("select * from DeThi where MaLoaiBang='"+DanhSach.getLoaiBang()+"' OR MaLoaiBang IS NULL", null);
         if (cursor.moveToFirst()) {
             do {
                 dsDeThi.add(new DeThi(cursor.getInt(0), cursor.getString(1)));
@@ -261,6 +261,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaDeThi",dt.getMaDeThi());
         contentValues.put("TenDeThi","Đề "+dt.getMaDeThi());
+        contentValues.put("MaLoaiBang",dt.getMaLoaiBang());
         insert("DeThi",contentValues);
     }
     //Insert câu hỏi
@@ -467,6 +468,7 @@ public class DBHandler extends SQLiteOpenHelper {
         mDatabase=this.getWritableDatabase();
         ContentValues contentValues  = new ContentValues();
         contentValues.put("TenDeThi","Đề "+dt.getMaDeThi());
+        contentValues.put("MaLoaiBang",dt.getMaLoaiBang());
         mDatabase.update("DeThi",contentValues,"MaDeThi=?",new String[]{String.valueOf(dt.getMaDeThi())});
         mDatabase.close();
     }

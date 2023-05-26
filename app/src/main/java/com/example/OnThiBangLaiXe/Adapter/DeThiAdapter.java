@@ -61,7 +61,7 @@ public class DeThiAdapter extends RecyclerView.Adapter<DeThiAdapter.ViewHolder>
             }
 
         }
-        if(CauTraLoiSai>=5||CauTraLoiDung>5)
+        if(CauTraLoiSai>=5||CauTraLoiDung<=20)
         {
             holder.txtTenDeThi.setText("Rớt");
             holder.txtTenDeThi.setTextColor(Color.RED);
