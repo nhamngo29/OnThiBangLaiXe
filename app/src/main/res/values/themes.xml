@@ -14,11 +14,11 @@
     </style>
 
     <style name="SCREEN">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#CCCCCC</item>
     </style>
 
     <style name="BoxDailog">
-        <item name="android:background">#fefefe</item>
+        <item name="android:background">#F8F8F8</item>
     </style>
 
     <style name="TEXT">
