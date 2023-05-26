@@ -84,6 +84,7 @@ public class OnboardingFragment extends Fragment {
                     myDB.kiemTraPhienBan();
                     MySharedPreferences mySharedPreferences=new MySharedPreferences(mView.getContext());
                     mySharedPreferences.putStringValue("LOAI_GPLX",autoCompleteTextView.getText().toString());
+                    DanhSach.setLoaiBang(mySharedPreferences.getStringValue("LOAI_GPLX"));
                 }
             });
         }

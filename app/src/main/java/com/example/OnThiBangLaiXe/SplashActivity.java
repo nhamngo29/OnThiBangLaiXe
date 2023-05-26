@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -27,7 +28,8 @@ import com.example.OnThiBangLaiXe.Custom.MyDB;
 import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
 
 public class SplashActivity extends AppCompatActivity {
-    private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL";
+    private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL",GPLX="LOAI_GPLX";
+
     String DB_PATH_SUFFIX="/databases/";
     String DATABASE_NAME= "db.db";
     MyDB myDB;
@@ -46,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
                 {
+                    DanhSach.setLoaiBang(mySharedPreferences.getStringValue(GPLX));
                     if (isNetworkConnected())
                     {
                         myDB.kiemTraPhienBan();
@@ -60,6 +63,7 @@ public class SplashActivity extends AppCompatActivity {
                     if(isNetworkConnected())
                     {
                         startActivity(OnBoardingActivity.class);
+
                     }else
                     {
                         Toast.makeText(SplashActivity.this, "vui lòng kết nội mạng để tải dữ liệu về sau khi tại về bạn có thể ngắt mạng để sự dụng ứng dụng.!", Toast.LENGTH_SHORT).show();

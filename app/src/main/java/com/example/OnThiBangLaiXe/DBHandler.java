@@ -116,7 +116,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         List<CauHoi> dsCauHoi = new ArrayList<>();
-        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where HaySai=1", null);
+        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where HaySai=1 and MaLoaiBang='"+DanhSach.getLoaiBang()+"'", null);
         if (cursor.moveToFirst()) {
             do {
                 dsCauHoi.add(getCauHoiByID(cursor.getInt(0)));
@@ -131,7 +131,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         List<CauHoi> dsCauHoiSai = new ArrayList<>();
-        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where DaTraLoiDung=2", null);
+        Cursor cursor = mDatabase.rawQuery("select * from CauHoi Where DaTraLoiDung=2 and MaLoaiBang='"+DanhSach.getLoaiBang()+"'", null);
         if (cursor.moveToFirst()) {
             do {
                 dsCauHoiSai.add(getCauHoiByID(cursor.getInt(0)));
@@ -149,7 +149,7 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         List<CauHoi> dsCauHoiSai = new ArrayList<>();
-        Cursor cursor = mDatabase.rawQuery("Select * from CauHoi where luu = 1", null);
+        Cursor cursor = mDatabase.rawQuery("Select * from CauHoi where luu = 1 and MaLoaiBang='"+DanhSach.getLoaiBang()+"'", null);
         if (cursor.moveToFirst()) {
             do {
                 dsCauHoiSai.add(getCauHoiByID(cursor.getInt(0)));
@@ -207,7 +207,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor=mDatabase.rawQuery("select * from CauHoi where MaCH=?",new String[] {String.valueOf(id)});
         cursor.moveToFirst();
         if(cursor.getCount()>0)
-            return new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13));
+            return new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13));
         cursor.close();
         return null;
     }
@@ -230,14 +230,14 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         mDatabase=this.getWritableDatabase();
         List<CauHoi> dsCauHoi = new ArrayList<>();
-        Cursor cursor=mDatabase.rawQuery("select * from CauHoi",null);
+        Cursor cursor=mDatabase.rawQuery("select * from CauHoi where MaLoaiBang='"+DanhSach.getLoaiBang()+"'",null);
         while (cursor.moveToNext())
         {
             Boolean s=true;
             if(cursor.getInt(13)==0)
                 s=false;
 
-            dsCauHoi.add(new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13)));
+            dsCauHoi.add(new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13)));
         }
         cursor.close();
 
@@ -520,12 +520,12 @@ public class DBHandler extends SQLiteOpenHelper {
         DeThi.setMaDeThi(0);
         DanhSach.getDsDeThi().set(0, DeThi);
         mDatabase=this.getWritableDatabase();
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 ORDER BY RANDOM() LIMIT 2;", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH=1 and MaLoaiBang='"+DanhSach.getLoaiBang()+"' ORDER BY RANDOM() LIMIT 2;", null);
         while (cursor.moveToNext())
         {
             dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));
         }
-        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH!=1 ORDER BY RANDOM() LIMIT 23;", null);
+        cursor = mDatabase.rawQuery("SELECT * FROM CauHoi WHERE MaLoaiCH!=1 and MaLoaiBang='"+DanhSach.getLoaiBang()+"' ORDER BY RANDOM() LIMIT 23;", null);
         while (cursor.moveToNext())
         {
             dsCauHoiRanDom.add(getCauHoiByID(cursor.getInt(0)));

@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
+import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
 import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
@@ -47,11 +48,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView txtCauSai, txtLuu, txtThiThu,txtHaySai;
     static private int luu, sai,haysai;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        System.out.println(DanhSach.getLoaiBang());
         khoiTaoControl();
         dbHandler = new DBHandler(this);
         loadDBToDanhSach();
@@ -85,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.item_Home:
                         drawer.closeDrawers();
                         navView.isLaidOut();
+                        return true;
+                    case R.id.item_BienBao:
+                        loBienBao.callOnClick();
+                        return true;
+                    case R.id.item_Meo:
+                        loMeo.callOnClick();
+                        return true;
+                    case R.id.item_SaHinh:
+                        loSaHinh.callOnClick();
                         return true;
                 }
 

@@ -1,8 +1,8 @@
 package com.example.OnThiBangLaiXe.Model;
 
 public class CauHoi {
-    int MaCH,MaLoaiCH,MaLoaiBang,HaySai,Luu, DaTraLoiDung;
-    String NoiDung,HinhAnh,DapAnA,DapAnB,DapAnC,DapAnD,DapAnDung,GiaiThich;
+    int MaCH,MaLoaiCH,HaySai,Luu, DaTraLoiDung;
+    String NoiDung,HinhAnh,DapAnA,DapAnB,DapAnC,DapAnD,DapAnDung,GiaiThich,MaLoaiBang;
 
 
     public int getMaCH() {
@@ -21,11 +21,11 @@ public class CauHoi {
         MaLoaiCH = maLoaiCH;
     }
 
-    public int getMaLoaiBang() {
+    public String getMaLoaiBang() {
         return MaLoaiBang;
     }
 
-    public void setMaLoaiBang(int maLoaiBang) {
+    public void setMaLoaiBang(String maLoaiBang) {
         MaLoaiBang = maLoaiBang;
     }
 
@@ -117,7 +117,7 @@ public class CauHoi {
         DaTraLoiDung = daTraLoiDung;
     }
 
-    public CauHoi(int maCH, int maLoaiCH, int maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, int luu, int haySai, int daTraLoi) {
+    public CauHoi(int maCH, int maLoaiCH, String maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, int luu, int haySai, int daTraLoi) {
         MaCH = maCH;
         MaLoaiCH = maLoaiCH;
         MaLoaiBang = maLoaiBang;
@@ -137,7 +137,7 @@ public class CauHoi {
     public CauHoi() {
     }
 
-    public CauHoi(int maCH, int maLoaiCH, int maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, int luu, int haySai) {
+    public CauHoi(int maCH, int maLoaiCH, String maLoaiBang, String noiDung, String hinhAnh, String dapAnA, String dapAnB, String dapAnC, String dapAnD, String dapAnDung, String giaiThich, int luu, int haySai) {
         MaCH = maCH;
         MaLoaiCH = maLoaiCH;
         MaLoaiBang = maLoaiBang;

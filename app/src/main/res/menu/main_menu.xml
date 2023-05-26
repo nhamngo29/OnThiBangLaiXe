@@ -9,6 +9,18 @@
             android:title="Ôn thi lý thuyết"
             android:icon="@drawable/ic_nav_onthi"
             android:id="@+id/item_OnThiLyThuyet"/>
+        <item
+            android:title="Sa hình"
+            android:icon="@drawable/ico_nav_triangle"
+            android:id="@+id/item_SaHinh"/>
+        <item
+            android:title="Mẹo"
+            android:icon="@drawable/ico_nav_tips"
+            android:id="@+id/item_Meo"/>
+        <item
+            android:title="Biển báo"
+            android:icon="@drawable/ico_nav_traffic"
+            android:id="@+id/item_BienBao"/>
 
     </group>
     <item android:title="Ứng dụng">

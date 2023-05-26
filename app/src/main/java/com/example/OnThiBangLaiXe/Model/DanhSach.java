@@ -11,6 +11,15 @@ public class DanhSach {
     private static List<DeThi> dsDeThi = new ArrayList<>();
     private static List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
     private static List<String> dsBang=new ArrayList<>();
+    private static String LoaiBang;
+
+    public static String getLoaiBang() {
+        return LoaiBang;
+    }
+
+    public static void setLoaiBang(String loaiBang) {
+        LoaiBang = loaiBang;
+    }
 
     public static List<String> getDsBang() {
         String[] item={"A1","A2","B1","B2"};
