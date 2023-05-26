@@ -30,9 +30,7 @@
         <activity
             android:name=".ChiTietKetQuaActivity"
             android:exported="false" />
-        <activity
-            android:name=".ThiActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ThiThuActivity"
             android:exported="false" />
@@ -71,6 +69,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4384743339570615~9005080600"/>
     </application>
 
 </manifest>
