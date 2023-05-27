@@ -44,7 +44,7 @@ public class CauLuuActivity extends AppCompatActivity {
         while(cursor.moveToNext()) {
             int maCauHoi = Integer.parseInt(cursor.getString(0));
             int maLoaiCauHoi = Integer.parseInt(cursor.getString(1));
-            String maLoaiBang = cursor.getString(2);
+            int maLoaiBang = cursor.getInt(2);
             String noiDung = cursor.getString(3);
             String hinhAnh = cursor.getString(4);
             String dapAnA = cursor.getString(5);

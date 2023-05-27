@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
                 {
-                    DanhSach.setLoaiBang(mySharedPreferences.getStringValue(GPLX));
+                    DanhSach.setLoaiBang(mySharedPreferences.getIntValue(GPLX));
                     if (isNetworkConnected())
                     {
                         myDB.kiemTraPhienBan();

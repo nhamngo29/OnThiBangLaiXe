@@ -4,21 +4,21 @@ public class DeThi {
     private int MaDeThi;
     private String TenDeThi;
 
-    public DeThi(int maDeThi, String tenDeThi, String maLoaiBang) {
+    public DeThi(int maDeThi, String tenDeThi, int maLoaiBang) {
         MaDeThi = maDeThi;
         TenDeThi = tenDeThi;
         MaLoaiBang = maLoaiBang;
     }
 
-    public String getMaLoaiBang() {
+    public int getMaLoaiBang() {
         return MaLoaiBang;
     }
 
-    public void setMaLoaiBang(String maLoaiBang) {
+    public void setMaLoaiBang(int maLoaiBang) {
         MaLoaiBang = maLoaiBang;
     }
 
-    private String MaLoaiBang;
+    private int MaLoaiBang;
 
     public int getMaDeThi() {
         return MaDeThi;

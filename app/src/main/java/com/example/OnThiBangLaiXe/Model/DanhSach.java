@@ -11,13 +11,13 @@ public class DanhSach {
     private static List<DeThi> dsDeThi = new ArrayList<>();
     private static List<CauTraLoi> dsCauTraLoi = new ArrayList<>();
     private static List<String> dsBang=new ArrayList<>();
-    private static String LoaiBang;
+    private static int LoaiBang;
 
-    public static String getLoaiBang() {
+    public static int getLoaiBang() {
         return LoaiBang;
     }
 
-    public static void setLoaiBang(String loaiBang) {
+    public static void setLoaiBang(int loaiBang) {
         LoaiBang = loaiBang;
     }
 

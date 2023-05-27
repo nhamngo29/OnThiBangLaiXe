@@ -83,8 +83,11 @@ public class OnboardingFragment extends Fragment {
                     Toast.makeText(mView.getContext(),autoCompleteTextView.getText(),Toast.LENGTH_SHORT).show();
                     myDB.kiemTraPhienBan();
                     MySharedPreferences mySharedPreferences=new MySharedPreferences(mView.getContext());
-                    mySharedPreferences.putStringValue("LOAI_GPLX",autoCompleteTextView.getText().toString());
-                    DanhSach.setLoaiBang(mySharedPreferences.getStringValue("LOAI_GPLX"));
+                    if(autoCompleteTextView.getText().toString().equals("A1"))
+                        mySharedPreferences.puttIntValue("LOAI_GPLX",1);
+                    else if(autoCompleteTextView.getText().toString().equals("A2"))
+                        mySharedPreferences.puttIntValue("LOAI_GPLX",2);
+                    DanhSach.setLoaiBang(mySharedPreferences.getIntValue("LOAI_GPLX"));
                 }
             });
         }

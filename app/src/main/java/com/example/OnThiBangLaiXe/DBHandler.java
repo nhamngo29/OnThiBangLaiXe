@@ -207,7 +207,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor=mDatabase.rawQuery("select * from CauHoi where MaCH=?",new String[] {String.valueOf(id)});
         cursor.moveToFirst();
         if(cursor.getCount()>0)
-            return new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13));
+            return new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13));
         cursor.close();
         return null;
     }
@@ -237,7 +237,7 @@ public class DBHandler extends SQLiteOpenHelper {
             if(cursor.getInt(13)==0)
                 s=false;
 
-            dsCauHoi.add(new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13)));
+            dsCauHoi.add(new CauHoi(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),cursor.getString(10),cursor.getInt(11),cursor.getInt(12),cursor.getInt(13)));
         }
         cursor.close();
 
