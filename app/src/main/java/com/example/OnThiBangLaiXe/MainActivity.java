@@ -24,14 +24,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.OnThiBangLaiXe.Adapter.TheLoaiCauHoiAdapter;
-import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
 import com.example.OnThiBangLaiXe.Interface.RecyclerViewInterface;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
