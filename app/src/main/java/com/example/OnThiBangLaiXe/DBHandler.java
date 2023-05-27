@@ -267,7 +267,6 @@ public class DBHandler extends SQLiteOpenHelper {
     //Insert câu hỏi
     public void insertCauHoi(CauHoi ch)
     {
-
         ContentValues contentValues  = new ContentValues();
         contentValues.put("MaCH",ch.getMaCH());
         contentValues.put("MaLoaiCH",ch.getMaLoaiCH());

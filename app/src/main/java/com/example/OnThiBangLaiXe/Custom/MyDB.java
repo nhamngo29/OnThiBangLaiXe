@@ -116,9 +116,8 @@ public class MyDB {
         csdlCauHoi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
-                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    CauHoi tlbb =ds.getValue(CauHoi.class);
                     if(tlbb != null)
                     {
                         if(dbHandler.findCHByID(tlbb.getMaCH()))
@@ -131,6 +130,24 @@ public class MyDB {
                         }
                     }
                 }
+//                for (int i = 0; i <= snapshot.getChildrenCount(); i++)
+//                {
+//
+//                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
+//                    Log.e(snapshot.getChildren().toString(),"test");
+//                    if(tlbb != null)
+//                    {
+//
+//                        if(dbHandler.findCHByID(tlbb.getMaCH()))
+//                        {
+//                            dbHandler.updateCauHoi(tlbb);
+//                        }
+//                        else
+//                        {
+//                            dbHandler.insertCauHoi(tlbb);
+//                        }
+//                    }
+//                }
             }
 
             @Override
