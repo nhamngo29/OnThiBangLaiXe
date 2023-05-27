@@ -18,6 +18,7 @@ import com.example.OnThiBangLaiXe.Model.BienBao;
 import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DeThi;
+import com.example.OnThiBangLaiXe.Model.LoaiBang;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +36,7 @@ import java.util.List;
 public class MyDB {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference=storage.getReference();
+    StorageReference storageReference = storage.getReference();
     DatabaseReference csdlVersion = database.getReference("Version");
     public static ProgressDialog progressDialog;
     DBHandler dbHandler;
@@ -44,30 +45,25 @@ public class MyDB {
 
     public MyDB(Context context) {
 
-        this.context=context;
-        dbHandler=new DBHandler(context);
+        this.context = context;
+        dbHandler = new DBHandler(context);
     }
 
-    public void capNhatDatabase()
-    {
+    public void capNhatDatabase() {
 
         DatabaseReference csdlLoaiCauHoi = database.getReference("LoaiCauHoi");
         //Đọc loại câu hỏi
         csdlLoaiCauHoi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-                {
-                    LoaiCauHoi tlbb = dataSnapshot.child(String.valueOf(i)).getValue(LoaiCauHoi.class);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                    if (tlbb != null)
-                    {
-                        if(dbHandler.findLCHByID(tlbb.getMaLoaiCH()))
-                        {
+                    LoaiCauHoi tlbb = ds.getValue(LoaiCauHoi.class);
+
+                    if (tlbb != null) {
+                        if (dbHandler.findLCHByID(tlbb.getMaLoaiCH())) {
                             dbHandler.updateLoaiCauHoi(tlbb);
-                        }
-                        else
-                        {
+                        } else {
                             dbHandler.insertLoaiCauHoi(tlbb);
                         }
                     }
@@ -81,34 +77,24 @@ public class MyDB {
         });
         DatabaseReference csdlBienBao = database.getReference("BienBao");
         Task<DataSnapshot> task = csdlBienBao.get();
-
         //Đọc loại câu hỏi
         csdlBienBao.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (int i = 0; i < dataSnapshot.getChildrenCount(); i++)
-                {
-                    BienBao tlbb = dataSnapshot.child(String.valueOf(i)).getValue(BienBao.class);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    BienBao tlbb = ds.getValue(BienBao.class);
 
-                    if (tlbb != null)
-                    {
-                        if(dbHandler.findBBByID(tlbb.getMaBB()))
-                        {
+                    if (tlbb != null) {
+                        if (dbHandler.findBBByID(tlbb.getMaBB())) {
                             dbHandler.updateBB(tlbb);
-                        }
-                        else
-                        {
+                        } else {
                             dbHandler.insertBB(tlbb);
                         }
                     }
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
 
         });
@@ -116,38 +102,17 @@ public class MyDB {
         csdlCauHoi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) {
-                    CauHoi tlbb =ds.getValue(CauHoi.class);
-                    if(tlbb != null)
-                    {
-                        if(dbHandler.findCHByID(tlbb.getMaCH()))
-                        {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    CauHoi tlbb = ds.getValue(CauHoi.class);
+
+                    if (tlbb != null) {
+                        if (dbHandler.findCHByID(tlbb.getMaCH())) {
                             dbHandler.updateCauHoi(tlbb);
-                        }
-                        else
-                        {
+                        } else {
                             dbHandler.insertCauHoi(tlbb);
                         }
                     }
                 }
-//                for (int i = 0; i <= snapshot.getChildrenCount(); i++)
-//                {
-//
-//                    CauHoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauHoi.class);
-//                    Log.e(snapshot.getChildren().toString(),"test");
-//                    if(tlbb != null)
-//                    {
-//
-//                        if(dbHandler.findCHByID(tlbb.getMaCH()))
-//                        {
-//                            dbHandler.updateCauHoi(tlbb);
-//                        }
-//                        else
-//                        {
-//                            dbHandler.insertCauHoi(tlbb);
-//                        }
-//                    }
-//                }
             }
 
             @Override
@@ -155,103 +120,98 @@ public class MyDB {
 
             }
         });
-        DatabaseReference csdlDeThi= database.getReference("DeThi");
+        DatabaseReference csdlDeThi = database.getReference("DeThi");
         csdlDeThi.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    DeThi tlbb = ds.getValue(DeThi.class);
 
-                    DeThi tlbb =snapshot.child(String.valueOf(i)).getValue(DeThi.class);
-                    Log.e("DE de thi",tlbb.getMaDeThi()+"");
-                    if(tlbb != null)
-                    {
+                    if (tlbb != null) {
 
-                        if(dbHandler.finDDeThiByID(tlbb.getMaDeThi()))
-                        {
+                        if (dbHandler.finDDeThiByID(tlbb.getMaDeThi())) {
                             dbHandler.updateDeThi(tlbb);
 
-                        }
-                        else
-                        {
+                        } else {
                             dbHandler.insertDeThi(tlbb);
 
                         }
                     }
                 }
-            }
 
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-        DatabaseReference csdlCauTraLoi= database.getReference("CauTraLoi");
+        DatabaseReference csdlCauTraLoi = database.getReference("CauTraLoi");
         csdlCauTraLoi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < snapshot.getChildrenCount(); i++)
-                {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    CauTraLoi tlbb = ds.getValue(CauTraLoi.class);
+                    if (tlbb != null) {
 
-                    CauTraLoi tlbb =snapshot.child(String.valueOf(i)).getValue(CauTraLoi.class);
-
-                    if(tlbb != null)
-                    {
-
-                        if(dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(),tlbb.getMaCH()))
-                        {
+                        if (dbHandler.findCauTraLoiByID(tlbb.getMaDeThi(), tlbb.getMaCH())) {
                             dbHandler.updateCauTraLoi(tlbb);
-                        }
-                        else
-                        {
+                        } else {
                             dbHandler.insertCauTraLoi(tlbb);
-
                         }
-                    }
-
-                    if (i == snapshot.getChildrenCount() - 1)
-                    {
-                        progressDialog.dismiss();
-                        Intent intent = new Intent(context, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        context.startActivity(intent);
-                        MySharedPreferences mySharedPreferences=new MySharedPreferences(context);
-                        mySharedPreferences.putBooleanValue("KEY_FIRST_INSTALL", true);
                     }
                 }
-                if(snapshot.getValue() != null)
-                {
+                progressDialog.dismiss();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
+                MySharedPreferences mySharedPreferences = new MySharedPreferences(context);
+                mySharedPreferences.putBooleanValue("KEY_FIRST_INSTALL", true);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
 
+        });
+        DatabaseReference cdslLoaiBang = database.getReference("Loaibang");
+        cdslLoaiBang.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    LoaiBang tlbb = ds.getValue(LoaiBang.class);
+                    if (tlbb != null) {
+                        if (dbHandler.findLoaiBang(tlbb.getMaLoaiBang())) {
+                            dbHandler.updateLoaiBang(tlbb);
+                        } else {
+                            dbHandler.insertLoaiBang(tlbb);
+                        }
+                    }
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
 
         });
     }
-    public void downloadWithBytes(String type){
+    public void downloadWithBytes(String type) {
         StorageReference imageRefl = storageReference.child(type);
         imageRefl.listAll().addOnSuccessListener(listResult -> {
-            List<StorageReference> srtList=listResult.getItems();
-            for (StorageReference sr : srtList)
-            {
-                long SIZE=500*500;
+            List<StorageReference> srtList = listResult.getItems();
+            for (StorageReference sr : srtList) {
+                long SIZE = 500 * 500;
                 sr.getBytes(SIZE).addOnSuccessListener(bytes -> {
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     storeImage(bitmap, sr.getName());
-                    Log.e("Img",sr.getName());
                 });
             }
         });
     }
+
     private void storeImage(Bitmap bitmap, String name) {
         ContextWrapper cw = new ContextWrapper(context);
         File directory = cw.getDir("images", Context.MODE_PRIVATE);
         File file = new File(directory, name);
         if (!file.exists()) {
-            Log.d("path", file.toString());
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(file);
@@ -263,59 +223,56 @@ public class MyDB {
             }
         }
     }
+
     private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
-        if(ni != null && ni.isConnected()) {
+        if (ni != null && ni.isConnected()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
-public boolean kiemTraPhienBan()
-{
-    final boolean[] isLastestVersion = {true};
-    final int[] ver = {0};
-    vel = csdlVersion.addValueEventListener(new ValueEventListener() {
 
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
-            Log.e("Có cap nhat hay khong",isLastestVersion[0]+"");
-            if (!isLastestVersion[0])
-            {
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setTitle("Loading....");
-                progressDialog.setMessage("quá trình này có thể mất vài phút,yêu cầu phải kết nối mạng...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-                Log.e("Có phiên bản mới","");
-                downloadWithBytes("BienBao");
-                downloadWithBytes("CauHoi");
-                capNhatDatabase();
-                dbHandler.UpdateVersion(snapshot.getValue(int.class));
-                isLastestVersion[0]=true;
+    public boolean kiemTraPhienBan() {
+        final boolean[] isLastestVersion = {true};
+        final int[] ver = {0};
+        vel = csdlVersion.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                isLastestVersion[0] = dbHandler.isLastestVersion(snapshot.getValue(int.class));
+                Log.e("Có cap nhat hay khong", isLastestVersion[0] + "");
+                if (!isLastestVersion[0]) {
+                    progressDialog = new ProgressDialog(context);
+                    progressDialog.setTitle("Loading....");
+                    progressDialog.setMessage("quá trình này có thể mất vài phút,yêu cầu phải kết nối mạng...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                    Log.e("Có phiên bản mới", "");
+                    downloadWithBytes("BienBao");
+                    downloadWithBytes("CauHoi");
+                    capNhatDatabase();
+                    dbHandler.UpdateVersion(snapshot.getValue(int.class));
+                    isLastestVersion[0] = true;
+                } else {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }
+
+                stop();
             }
-            else
-            {
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                isLastestVersion[0] = true;
             }
+        });
+        return isLastestVersion[0];
+    }
 
-            stop();
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-            isLastestVersion[0] = true;
-        }
-    });
-    return isLastestVersion[0];
-}
-    private void stop()
-    {
+    private void stop() {
         csdlVersion.removeEventListener(vel);
     }
 }

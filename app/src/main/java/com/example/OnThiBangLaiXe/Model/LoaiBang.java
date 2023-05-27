@@ -1,29 +1,30 @@
 package com.example.OnThiBangLaiXe.Model;
 
 public class LoaiBang {
-    int ten,ma;
+    int MaLoaiBang;
+    String TenLoaiBang;
 
-    public int getTen() {
-        return ten;
+    public String getTenLoaiBang() {
+        return TenLoaiBang;
     }
 
-    public void setTen(int ten) {
-        this.ten = ten;
+    public void setTenLoaiBang(String tenLoaiBang) {
+        this.TenLoaiBang = tenLoaiBang;
     }
 
-    public int getMa() {
-        return ma;
+    public int getMaLoaiBang() {
+        return MaLoaiBang;
     }
 
-    public void setMa(int ma) {
-        this.ma = ma;
+    public void setMaLoaiBang(int maLoaiBang) {
+        this.MaLoaiBang = maLoaiBang;
     }
 
     public LoaiBang() {
     }
 
-    public LoaiBang(int ten, int ma) {
-        this.ten = ten;
-        this.ma = ma;
+    public LoaiBang(String ten, int ma) {
+        this.TenLoaiBang = ten;
+        this.MaLoaiBang = ma;
     }
 }

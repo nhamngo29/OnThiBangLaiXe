@@ -12,6 +12,7 @@ import com.example.OnThiBangLaiXe.Model.CauHoi;
 import com.example.OnThiBangLaiXe.Model.CauTraLoi;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.example.OnThiBangLaiXe.Model.DeThi;
+import com.example.OnThiBangLaiXe.Model.LoaiBang;
 import com.example.OnThiBangLaiXe.Model.LoaiBienBao;
 import com.example.OnThiBangLaiXe.Model.LoaiCauHoi;
 
@@ -243,6 +244,15 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return dsCauHoi;
     }
+    //Insert loai bang
+    public void insertLoaiBang(LoaiBang lb)
+    {
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("MaLoaiBang",lb.getMaLoaiBang());
+        contentValues.put("TenLoaiBang",lb.getTenLoaiBang());
+        insert("LoaiBang",contentValues);
+
+    }
     //Insert biển báo
     public void insertBB(BienBao bb)
     {
@@ -328,6 +338,23 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("Luu",Luu);
         mDatabase.update("CauHoi",contentValues,"MaCH=?", new String[]{String.valueOf(MaCH)});
 
+    }
+    //Tim kiếm loại băng
+    public Boolean findLoaiBang(int MaLB)
+    {
+        mDatabase=this.getWritableDatabase();
+        Cursor cursor3= mDatabase.rawQuery("select MaLoaiBang FROM LoaiBang WHERE MaLoaiBang = '"+MaLB+"'",null);
+        cursor3.moveToFirst();
+        if(cursor3!=null&&cursor3.getCount()>0)
+        {
+            if(MaLB==cursor3.getInt(0))
+            {
+
+                return true;
+            }
+        }
+        cursor3.close();
+        return false;
     }
     //Tìm kiểm Biển báo theo ID
     public Boolean findBBByID(String MaBB)
@@ -425,6 +452,15 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
         db.setVersion(newVersion);
+    }
+    //Update loai bang
+    public void updateLoaiBang(LoaiBang lch)
+    {
+        mDatabase=this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("TenLoaiBang",lch.getTenLoaiBang());
+        mDatabase.update("LoaiBang",contentValues,"MaLoaiBang=?", new String[]{String.valueOf(lch.getMaLoaiBang())});
+        mDatabase.close();
     }
     //Update biển báo
     public void updateCauTraLoi(List<CauTraLoi> ctl)
