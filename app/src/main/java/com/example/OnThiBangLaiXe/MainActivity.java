@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         loSaHinh.callOnClick();
                         return true;
                     case R.id.item_loaiBang:
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ThiThuActivity.this);
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
                         alertDialog.setTitle("Thông báo");
                         alertDialog.setMessage("Bạn có chắn chắn muốn đổi loại bằng và khởi động lại ứng dụng không?");
                         alertDialog.setPositiveButton("Có", (dialogInterface, i) -> {
