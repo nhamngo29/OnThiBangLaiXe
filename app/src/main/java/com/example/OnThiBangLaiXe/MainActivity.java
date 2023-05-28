@@ -97,8 +97,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.item_SaHinh:
                         loSaHinh.callOnClick();
                         return true;
+                    case R.id.item_loaiBang:
+                        startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                        MainActivity.this.finish();
+                        return true;
                 }
-
                 return false;
             }
         });

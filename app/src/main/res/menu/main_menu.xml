@@ -21,6 +21,10 @@
             android:title="Biển báo"
             android:icon="@drawable/ico_nav_traffic"
             android:id="@+id/item_BienBao"/>
+        <item
+            android:title="Loại bằng"
+            android:icon="@drawable/ico_nav_traffic"
+            android:id="@+id/item_loaiBang"/>
 
     </group>
     <item android:title="Ứng dụng">
