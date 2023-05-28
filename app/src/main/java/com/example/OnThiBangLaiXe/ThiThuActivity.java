@@ -138,7 +138,7 @@ public class ThiThuActivity extends AppCompatActivity {
 
     private void nopBai()
     {
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(ThiThuActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ThiThuActivity.this);
         alertDialog.setTitle("Thông báo");
         alertDialog.setMessage("Bạn có chắn chắn muốn nộp bài không ?");
         alertDialog.setPositiveButton("Có", (dialogInterface, i) -> ketThuc());

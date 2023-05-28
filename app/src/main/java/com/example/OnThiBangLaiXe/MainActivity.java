@@ -98,8 +98,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         loSaHinh.callOnClick();
                         return true;
                     case R.id.item_loaiBang:
-                        startActivity(new Intent(MainActivity.this, SplashActivity.class));
-                        MainActivity.this.finish();
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ThiThuActivity.this);
+                        alertDialog.setTitle("Thông báo");
+                        alertDialog.setMessage("Bạn có chắn chắn muốn đổi loại bằng và khởi động lại ứng dụng không?");
+                        alertDialog.setPositiveButton("Có", (dialogInterface, i) -> {
+                            startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                            MainActivity.this.finish();
+                        });
+                        alertDialog.setNegativeButton("Không", (dialogInterface, i) -> {});
+                        alertDialog.show();
                         return true;
                 }
                 return false;
@@ -209,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, CauSaiActivity.class);
                 startActivity(intent);
             } else {
-                dailog("Thông báo", "Bạn chưa có câu sai nào.!");
+                dialog("Thông báo", "Bạn chưa có câu sai nào!");
             }
         });
 
@@ -219,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, CauLuuActivity.class);
                 startActivity(intent);
             } else {
-                dailog("Thông báo", "Bạn chưa có câu hỏi nào đã lưu.!");
+                dialog("Thông báo", "Bạn chưa có câu hỏi nào đã lưu!");
             }
         });
         lo_HaySai.setOnClickListener(view -> {
@@ -227,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, HaySaiActivity.class);
                 startActivity(intent);
             } else {
-                dailog("Thông báo", "Bạn chưa có câu hỏi.!");
+                dialog("Thông báo", "Bạn chưa có câu hỏi!");
             }
         });
     }
@@ -271,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         txtCauSai.setText(sai + " câu");
     }
 
-    void dailog(String Titel, String Content) {
+    void dialog(String Titel, String Content) {
 
         View alerCustomDailog = LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_alter_dailog, null);
         AlertDialog.Builder alertDailog = new AlertDialog.Builder(MainActivity.this);
