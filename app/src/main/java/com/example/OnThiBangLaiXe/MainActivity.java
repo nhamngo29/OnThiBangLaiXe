@@ -102,7 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         alertDialog.setTitle("Thông báo");
                         alertDialog.setMessage("Bạn có chắn chắn muốn đổi loại bằng và khởi động lại ứng dụng không?");
                         alertDialog.setPositiveButton("Có", (dialogInterface, i) -> {
-                            startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                            Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+                            intent.putExtra("reset", true);
+                            startActivity(intent);
                             MainActivity.this.finish();
                         });
                         alertDialog.setNegativeButton("Không", (dialogInterface, i) -> {});

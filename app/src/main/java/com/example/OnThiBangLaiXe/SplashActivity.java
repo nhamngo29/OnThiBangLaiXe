@@ -1,4 +1,5 @@
 package com.example.OnThiBangLaiXe;
+
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 import android.content.Context;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.OnThiBangLaiXe.Custom.MyDB;
+import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
 import com.example.OnThiBangLaiXe.Model.DanhSach;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,11 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.example.OnThiBangLaiXe.Custom.MyDB;
-import com.example.OnThiBangLaiXe.Custom.MySharedPreferences;
-
 public class SplashActivity extends AppCompatActivity {
-    private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL",GPLX="LOAI_GPLX";
+    private static final String KEY_FIRST_INSTALL="KEY_FIRST_INSTALL", GPLX="LOAI_GPLX";
 
     String DB_PATH_SUFFIX="/databases/";
     String DATABASE_NAME= "db.db";
@@ -37,16 +37,19 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-// Xử lý push tin nhắn
+        // Xử lý push tin nhắn
         getToken();
         processCopy();
-        myDB=new MyDB(this);
+
+        boolean reset = getIntent().getBooleanExtra("reset", false);
+
+        myDB = new MyDB(this);
         MySharedPreferences mySharedPreferences=new MySharedPreferences(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL))
+                if(mySharedPreferences.getBooleanValue(KEY_FIRST_INSTALL) && !reset)
                 {
                     DanhSach.setLoaiBang(mySharedPreferences.getIntValue(GPLX));
                     if (isNetworkConnected())
