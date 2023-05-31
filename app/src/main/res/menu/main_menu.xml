@@ -23,7 +23,7 @@
             android:id="@+id/item_BienBao"/>
         <item
             android:title="Loại bằng"
-            android:icon="@drawable/ico_nav_traffic"
+            android:icon="@drawable/ico_select"
             android:id="@+id/item_loaiBang"/>
 
     </group>

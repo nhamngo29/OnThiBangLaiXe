@@ -22,7 +22,7 @@ public class DanhSach {
     }
 
     public static List<String> getDsBang() {
-        String[] item={"A1","A2","B1","B2"};
+        String[] item={"A1","B1"};
         dsBang.clear();
         dsBang.addAll(Arrays.asList(item));
         return dsBang;

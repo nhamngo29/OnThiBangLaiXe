@@ -85,7 +85,7 @@ public class OnboardingFragment extends Fragment {
                     MySharedPreferences mySharedPreferences=new MySharedPreferences(mView.getContext());
                     if(autoCompleteTextView.getText().toString().equals("A1"))
                         mySharedPreferences.puttIntValue("LOAI_GPLX",1);
-                    else if(autoCompleteTextView.getText().toString().equals("A2"))
+                    else if(autoCompleteTextView.getText().toString().equals("B1"))
                         mySharedPreferences.puttIntValue("LOAI_GPLX",2);
                     DanhSach.setLoaiBang(mySharedPreferences.getIntValue("LOAI_GPLX"));
                 }
